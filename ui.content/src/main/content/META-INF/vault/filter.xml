@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workspaceFilter version="1.0">
+    <filter root="/conf/csuf-cloud-project" mode="merge"/>
+    <filter root="/content/csuf-cloud-project" mode="merge"/>
+    <filter root="/content/dam/csuf-cloud-project" mode="merge">
+        <exclude pattern="/content/dam/csuf-cloud-project(/.*)?"/>
+        <include pattern="/content/dam/csuf-cloud-project/jcr:content(/.*)?"/>
+    </filter>
+    <filter root="/content/dam/csuf-cloud-project/asset.jpg" mode="merge"/>
+    <filter root="/content/experience-fragments/csuf-cloud-project" mode="merge"/>
+    <filter root="/content/dam/formsanddocuments-themes/csuf-cloud-project" mode="merge"/>
+    <filter root="/content/dam/formsanddocuments-fdm/csuf-cloud-project" mode="merge"/>
+    <filter root="/content/dam/csuf-cloud-project/sample_logo.png" mode="merge"/>
+    <filter root="/content/dam/csuf-cloud-project/sample_terms.png" mode="merge"/>
+    <filter root="/content/dam/csuf-cloud-project/wknd_logo.png" mode="merge"/>
+    <filter root="/content/dam/csuf-cloud-project/af_model_sample.json" mode="merge"/>
+</workspaceFilter>
