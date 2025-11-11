@@ -1,0 +1,228 @@
+:root {
+    --icon-image-url: url('');
+    --margin-right: 50px;
+    --margin-bottom: 15px;
+
+    --primary-color: #0D75B0;
+    --secondary-color: #2ecc71;
+    --font-size: 16px;
+
+    --frame-width: 60vw;
+    --frame-height: 80vh;
+    --frame-margin-right: 50px;
+    --frame-bottom-margin: 20px;
+    --frame-large-width: 80vw;
+    --frame-large-height: 90vh;
+    --frame-border-radius: 24px;
+    --frame-border: 6px solid red;
+
+    --frame-bg-gradient-1: #C0c0c0;
+    --frame-bg-gradient-2: #c0c0c0;
+
+    --control-icon-color: #FFFFFF;
+    --control-icon-hover-color: #00FF00;
+    --control-icon-size: '30px';
+
+    --icon-border-radius: '50%';
+
+    --icon-width: 68px;
+    --icon-height: 68px;
+
+}
+
+.yana-chat-app-wrapper {
+    position: fixed;
+    bottom: var(--frame-bottom-margin);
+    right: var(--frame-margin-right);
+    width: var(--frame-width);
+    height: var(--frame-height);
+    background: linear-gradient(var(--frame-bg-gradient-1), var(--frame-bg-gradient-2));
+    border: 0px solid #EBEBEB;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: var(--frame-border-radius);
+    overflow: hidden;
+    z-index: 9997;
+}
+.yana-chat-app-wrapper.rtl {
+    right: unset;
+    left: var(--frame-margin-right);
+}
+
+.yana-chat-app-wrapper.maximized {
+    width: var(--frame-large-width);
+    height: var(--frame-large-height);
+}
+
+.y-hidden {
+    display: none !important;
+}
+
+/* Media queries for different screen sizes */
+/* @media (min-width: 768px) {
+    .yana-chat-app-wrapper:not(.maximized) {
+        width: 60%;
+        max-width: 350px;
+    }
+}
+
+@media (min-width: 1024px) {
+    .yana-chat-app-wrapper:not(.maximized) {
+        width: 30%;
+        max-width: 500px;
+    }
+} */
+
+.yana-iframe {
+    position: absolute;
+    bottom: 0 !important;
+    height: 100%;
+    width: 100%;
+    border: var(--frame-border);
+    transition: visibility 3s, opacity 0.5s linear;
+    border-radius: var(--frame-border-radius);
+    box-sizing: border-box;
+}
+
+
+.yana-iframe-header {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    height: 35px;
+    width: 100%;
+}
+
+.yana-text-btn {
+    background-color: var(--primary-color);
+    color: var(--secondary-color);
+    height: 35px;
+    width: 131px;
+    border-radius: 4px 4px 0 0;
+}
+
+.circular {
+    height: var(--icon-height);
+    width: var(--icon-width);
+    border-radius: var(--icon-border-radius);
+}
+
+.yana-icon-btn-positioned {
+    position: fixed;
+    right: var(--margin-right);
+    bottom: var(--margin-bottom);
+    z-index: 9999;
+}
+
+.yana-icon-btn-positioned.rtl {
+    position: fixed;
+    right: unset;
+    left: var(--margin-right);
+    bottom: var(--margin-bottom);
+    z-index: 9999;
+}
+
+.yana-icon-btn-effect {
+    cursor: pointer;
+}
+
+.yana-icon-btn-effect:hover {
+    box-shadow: 0 1px 15px rgba(0, 0, 0, 0.25), 0 1px 1px rgba(0, 0, 0, 0.22);
+}
+
+.yana-icon-btn-wrapper {
+    background-color: var(--primary-color);
+    display: flex;
+    border: none;
+    align-items: center;
+    justify-items: center;
+    align-content: center;
+    justify-content: center;
+    text-align: center;
+    transition: ease-in-out 2s;
+}
+
+
+/* .yana-icon-btn-wrapper:focus {
+    outline: auto rgba(0, 150, 255, 1)
+} */
+
+.yana-icon-btn {
+    height: 100%;
+    width: 100%;
+    cursor: pointer;
+    background-color: transparent;
+    background-image: var(--icon-image-url);
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    border: none !important;
+    outline: none !important;
+}
+
+.yana-icon-btn.circular {
+    border-radius: var(--icon-border-radius);
+}
+
+.yana-icon-btn-tooltip {
+    position: absolute;
+    visibility: hidden;
+    opacity: 0;
+    width: 200px;
+    overflow-y: visible;
+    background-color: var(--primary-color);
+    color: white;
+    text-align: center;
+    border-radius: 12px;
+    padding: 10px 10px;
+    text-wrap: wrap;
+    bottom: 100%;
+    right: 10px;
+    transition: visibility 0.05s, opacity 0.2s linear;
+    z-index: inherit;
+}
+
+
+.yana-cic-wrapper-ag1:hover .yana-icon-btn-tooltip,
+.yana-cic-wrapper-ag1:focus .yana-icon-btn-tooltip,
+.yana-icon-btn:hover .yana-icon-btn-tooltip,
+.yana-icon-btn:focus .yana-icon-btn-tooltip {
+    visibility: visible;
+    opacity: 1;
+}
+
+
+/** custom ag1 styles **/
+.yana-cic-wrapper-ag1 {
+    width: var(--icon-width);
+    height: var(--icon-height);
+    background-color: var(--primary-color);
+    padding: 12px 16px;
+    border-radius: 18px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    color: #FFFFFF;
+    transition: cubic-bezier(0.445, 0.05, 0.55, 0.95);
+}
+
+.yana-cic-bt-c {
+    border-radius: 50%;
+    cursor: pointer;
+    background-color: transparent;
+    width: var(--control-icon-size);
+    height: var(--control-icon-size);
+    color: var(--control-icon-color);
+    stroke: var(--control-icon-color);
+    border: none !important;
+    outline: none !important;
+}
+
+.yana-cic-bt-c:hover,
+.yana-cic-bt-c:focus {
+    color: var(--control-icon-hover-color);
+    stroke: var(--control-icon-hover-color);
+    border: none !important;
+    outline: none !important;
+}
+
+/**custom ag1 styles ends **/

@@ -1,0 +1,9 @@
+{
+"datasource.name": "AEMDBDEV",
+"url": "oracle:thin://$[env:DB_HOST]:$[env:DB_PORT]/AEMDBDEV",
+"username": "$[env:DB_USER]",
+"password": "$[env:DB_PASS]",
+"driverClassName": "oracle.jdbc.OracleDriver",
+"maxActive": 100
+
+}

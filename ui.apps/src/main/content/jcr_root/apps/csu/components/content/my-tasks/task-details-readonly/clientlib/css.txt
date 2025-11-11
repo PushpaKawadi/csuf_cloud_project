@@ -1,0 +1,3 @@
+#base=css
+
+task-details-readonly.css

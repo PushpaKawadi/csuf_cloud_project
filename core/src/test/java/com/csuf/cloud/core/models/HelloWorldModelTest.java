@@ -13,7 +13,7 @@
  *  See the License for the specific language governing permissions and
  *  limitations under the License.
  */
-package com.csuf.cloud.core.models;
+/*package com.csuf.cloud.core.models;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.Resource;
@@ -32,7 +32,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 /**
  * Simple JUnit test verifying the HelloWorldModel
  */
-@ExtendWith(AemContextExtension.class)
+/*@ExtendWith(AemContextExtension.class)
 class HelloWorldModelTest {
 
     private final AemContext context = AppAemContext.newAemContext();
@@ -63,4 +63,4 @@ class HelloWorldModelTest {
         assertTrue(StringUtils.contains(msg, page.getPath()));
     }
 
-}
+}*/

@@ -1,0 +1,24 @@
+.inboxpage-task-title {
+	display: block;
+	position: relative;
+	font-weight: 700;
+	text-align: center;
+	font-size: 16px;
+	border-bottom: 1px solid #ddd;
+    padding-top: .5rem;
+}
+
+#frame {
+    height: 77vh;
+}
+
+.details-tab-content {
+    height: 100%;
+    border: 1px solid #ddd;
+}
+
+@media (max-width:991px) {
+    #container-required {	
+	   margin-top: 3rem;
+    }
+}

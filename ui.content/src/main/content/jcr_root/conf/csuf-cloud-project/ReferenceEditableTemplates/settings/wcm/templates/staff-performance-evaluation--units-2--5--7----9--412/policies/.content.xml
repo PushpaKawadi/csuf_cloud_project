@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="cq:Page">
+    <jcr:content
+        cq:lastModified="{Date}2020-03-25T10:37:33.394-07:00"
+        cq:lastModifiedBy="admin"
+        cq:lastReplicated="{Date}2024-01-13T23:00:26.218-08:00"
+        cq:lastReplicatedBy="replication-service"
+        cq:lastReplicationAction="Activate"
+        cq:policy="fd/af/components/page2/aftemplatedpage/default"
+        jcr:isCheckedOut="{Boolean}true"
+        jcr:mixinTypes="[cq:ReplicationStatus,mix:versionable]"
+        jcr:primaryType="nt:unstructured"
+        jcr:uuid="3a09e2ab-aaba-450f-a119-a6aac8af14f8"
+        sling:resourceType="wcm/core/components/policies/mappings">
+        <parsys1
+            cq:policy="wcm/foundation/components/responsivegrid/afpolicy"
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wcm/core/components/policies/mapping"/>
+        <guideContainer
+            cq:policy="fd/af/components/guideContainer/default"
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wcm/core/components/policies/mapping">
+            <rootPanel jcr:primaryType="nt:unstructured">
+                <items jcr:primaryType="nt:unstructured"/>
+            </rootPanel>
+        </guideContainer>
+        <guideContainer2
+            cq:policy="fd/af/components/guideContainer/default"
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wcm/core/components/policies/mapping">
+            <rootPanel jcr:primaryType="nt:unstructured">
+                <items jcr:primaryType="nt:unstructured"/>
+            </rootPanel>
+        </guideContainer2>
+        <parsys2
+            cq:policy="wcm/foundation/components/responsivegrid/afpolicy"
+            jcr:primaryType="nt:unstructured"
+            sling:resourceType="wcm/core/components/policies/mapping"/>
+    </jcr:content>
+</jcr:root>

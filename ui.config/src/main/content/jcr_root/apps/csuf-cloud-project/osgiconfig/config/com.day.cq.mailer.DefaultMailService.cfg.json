@@ -1,0 +1,10 @@
+{
+  "smtp.host": "$[env:AEM_HOST;default=proxy.tunnel]",
+  "smtp.port": "30465",
+  "smtp.user": "$[env:SMTP_USER]",
+  "smtp.password": "$[secret:SMTP_PASSWORD]",
+  "from.address": "erpimaging@fullerton.edu",
+  "smtp.starttls": false,
+  "smtp.ssl": false,
+  "debug.email": false
+}

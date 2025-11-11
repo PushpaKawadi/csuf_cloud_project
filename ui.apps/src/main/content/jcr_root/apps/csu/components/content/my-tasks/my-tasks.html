@@ -1,0 +1,138 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.js @ categories='granite.csrf.standalone'}" />
+<sly data-sly-call="${clientlib.js @ categories='csu.my-tasks'}" />
+<sly data-sly-call="${clientlib.css @ categories='csu.my-tasks'}" />
+
+<pre data-sly-use.taskModel="com.csuf.cloud.core.models.TaskDetailsModel"></pre>
+<sly data-sly-use.tasks="${'fetchJson.js' @ jsonString=taskModel.tasks}" />
+<div id="container-required" class="px-2">
+<div class="d-flex identifier" data-identifier='mytasks'>  
+    
+    <!-- Page Content -->
+    <div id="page-content-wrapper">
+        <div class="clearfix my-2">
+                <div class="my-task px-2"><div id="dataTable_filter" class="dataTables_filter"><input type="search" class="" placeholder="Type here to search" aria-controls="dataTable"></div></div>    
+       
+                <div class="well well-sm float-right px-2 mytask-well">
+                <div class="btn-group">
+                    <a id="btn-display-table" href="#div-inbox-table" class="btn btn-default active">
+                        <span class="fas fa-th-list"></span></a>
+                    <a id="btn-display-grid" href="#inbox-grid" class="btn btn-default">
+                        <span class="fa fa-th"></span></a>
+                </div>
+             </div>
+            
+        </div>
+        
+        <!-- task grid start-->          
+        <sly data-sly-include="grid-view.html"></sly>
+        <!-- task grid end-->
+
+        <div class="container-fluid">
+            <!-- task table start -->
+          <div id="div-inbox-table" class="modified-table modified-table-details">
+            <table class="table item mytask-table-list" id="inbox-dataTable" >
+               <thead class="thead-light">
+                  <tr>
+                     <th></th>
+                     <th scope="col" class="modified-table-col-min-width">Title</th>
+                     <th scope="col">Priority</th>
+                     <th scope="col">Description</th>
+                     <th scope="col">Assignee</th>             
+                     <th scope="col" class="modified-table-col-min-width">Workflow</th>
+                     <th scope="col">Status</th>
+                     <th scope="col" style="min-width: 93px;">Start Date</th>
+                     <th scope="col" style="min-width: 63px;">Due Date</th>                  
+                  </tr>
+               </thead>
+               <tbody>
+                   <sly data-sly-list="${tasks}">                  
+                       <tr class="clickable-row" data-sly-test="${item.isViewTaskAllowed}" data-id="${item.workitem_id}" data-iscurrentuseradmin="${item.isCurrentUserAdmin}" data-isviewtaskdetailsallowed="${item.isViewTaskDetailsAllowed}" data-isassigneeagroup="${item.isAssigneeAGroup}" data-currentuserid="${item.currentUserId}" data-routesdata="${item.routes_data}" data-showsubmit="${item.show_submit}" data-showsave="${item.show_save}" data-showreset="${item.show_reset}" data-lastactiontaken="${item.action_taken}" data-lastactioncomment="${item.task_submit_comment}" data-taskassignee="${item.assignee}">
+                         <td scope="row">
+                            <div class="checkbox-wrapper my-tasks-checkbox">
+                                <input type="checkbox" class="chb" name="mytaskscheckbox" value="${itemList.count}">
+                            </div>
+                         </td>
+                         <td>${item.task_title}</td>
+                           <td> <span class="status Priority-${item.priority}-list">${item.priority}</span></td>
+                         <td><div class="description" data-description="${item.task_description}">${item.task_description}</div></td>
+                         <td>${item.assignee}</td>             
+                         <td>${item.workflow_model}</td>
+                           <td><span class="status stable">${item.status}</span></td>
+                         <td>${item.start_date}</td>
+                         <td>${item.due_date}</td>
+                       </tr>
+                   </sly>
+                </tbody>
+            </table>
+          </div>
+          <!-- task table end -->      
+        </div>
+    </div> 
+</div>
+<!-- /#page-content-wrapper -->
+
+<!-- Modal Select Delegatee  Action -->
+<div class="modal fade" id="modal-select-delegatee-action" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Delegate Item</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <form>
+          <div class="form-group">
+            <label for="recipient-name" class="col-form-label">User</label>
+            <select class="custom-select cls-dropdown-delegatee" id="dropdown-delegatee"></select>
+          </div>
+          <div class="form-group">
+            <label for="message-text" class="col-form-label">Comments(Optional)</label>
+            <textarea class="form-control" id="comment-dashboard-delegate-action"></textarea>
+          </div>
+        </form>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-danger" data-dismiss="modal">CANCEL</button>
+        <button type="button" class="btn btn-primary cls-delegate-ok">SUBMIT</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Error Delegate Action -->
+<div class="modal fade" id="modal-error-delegate-action" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title"><i class="fas fa-times"></i></h5>
+	  </div>
+	  <div class="modal-body">
+		<p>An error occurred while delegating the task.</p>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-outline-danger" data-dismiss="modal">OK</button>
+	  </div>
+	</div>
+  </div>
+</div>
+
+<!-- Modal Not Delegate Action -->
+<div class="modal fade" id="modal-do-not-delegate-action" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title"><i class="fas fa-times"></i></h5>
+	  </div>
+	  <div class="modal-body">		
+		<p>The selected task cannot be delegated.</p>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-outline-danger" data-dismiss="modal">OK</button>
+	  </div>
+	</div>
+  </div>
+</div>
+</div>

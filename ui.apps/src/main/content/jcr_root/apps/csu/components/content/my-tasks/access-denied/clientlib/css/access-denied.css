@@ -1,0 +1,64 @@
+  .access {
+    text-align: center;
+    position: relative;
+    font-size: 10px;
+    font-weight: 500;
+    background-color: #f58468 !important;
+}
+
+  .searchfile {
+    font-size: 20px;
+    text-align: center;
+  }
+
+  .paragraph {
+    text-align: center;
+  }
+
+  .p1 {
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .p2 {
+    text-align: center;
+    color: #535353;
+  }
+
+  .fa-exclamation-triangle:before {
+    content: "\f071";
+    color:black;
+}
+
+/* ------------------------------------------- changes 2 --------------------------------------------------------- */
+.fixed-top {
+  display: none;
+}
+
+/*#container-required {
+  display: none;
+}*/
+
+.footer-main {
+  display: none !important;
+}
+
+.access {
+  height: 100% !important;
+}
+
+.searchfile {
+  margin-top: 15rem;
+}
+
+.p1 {
+  font-weight: bold;
+  margin-bottom: 16px;
+  font-family: 'Open Sans Condensed', sans-serif;
+}
+
+.p2 {
+  font-weight: 400;
+  font-family: 'Open Sans Condensed', sans-serif;
+
+}

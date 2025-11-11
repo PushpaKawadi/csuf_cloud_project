@@ -1,0 +1,3 @@
+#base=js
+
+task-details-readonly.js

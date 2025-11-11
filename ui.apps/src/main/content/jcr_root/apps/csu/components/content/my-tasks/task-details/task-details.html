@@ -1,0 +1,370 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.js @ categories='granite.csrf.standalone'}" />
+<!--<sly data-sly-call="${clientlib.all @ categories='coralui3'}" />-->
+<sly data-sly-call="${clientlib.js @ categories='csu.my-tasks'}" />
+<sly data-sly-call="${clientlib.all @ categories='csu.task-details'}" />
+
+<div id="container-required" class="pt-1">
+    <!-- Task Details Page Content start -->
+
+    <div class="inboxpage-task-title">
+        <p id="label-task-title" class="inboxpage-task-title-para"></p>
+    </div>
+
+    <div class="d-flex">
+        <div class="bg-light border-right" id="sidebar-wrapper">
+            <div class="list-group list-group-flush">
+                <ul class="inbox-left-menu-taskdetail">
+                    <li class="inboxpage-sidemenu-details" id="dv-last-action-taken">
+                        <h6>LAST ACTION TAKEN</h6>
+                        <p class="left-menu-text" id="last-action-taken"></p>
+                    </li>
+
+                    <li class="inboxpage-sidemenu-details" id="dv-last-action-comment">
+                        <h6>COMMENT</h6>
+                        <p class="left-menu-text" id="last-action-comment"></p>
+                    </li>
+
+                    <li class="task-row">
+                        <h6>Description</h6>
+                        <p class="left-menu-text" id="current-task-desc"></p>
+                    </li>
+
+                    <li class="task-row">
+                        <h6>Status</h6>
+                        <p class="left-menu-text" id="current-task-status"></p>
+                    </li>
+
+                    <li class="task-row">
+                        <h6>Start Date</h6>
+                        <p class="left-menu-text" id="current-task-start-date"></p>
+                    </li>
+
+                    <li class="task-row">
+                        <h6>Workflow</h6>
+                        <p class="left-menu-text" id="current-task-workflow"></p>
+                    </li>
+
+                    <li class="task-row cls-supporting-documents">
+                        <h6>Supporting Documents</h6>
+                        <table class="table" id="attachments-table">
+                            <thead class="thead-light">
+                                <tr>
+                                    <th scope="col" style="width:70%">File Name</th>
+                                    <th scope="col" style="text-align:center;">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                            </tbody>
+                        </table>
+                    </li>
+                    <li class="task-row cls-task-attachments">
+                        <h6>Task Attachments</h6>
+                        <button type="button" class="btn header-dropdown-btn">
+                            <a id="btn-attach-file" href="#">Upload File(s)</a>
+                        </button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <div id="page-content-wrapper" class="task-details-right-section">
+
+            <nav class="navbar navbar-expand-lg navbar-light mytask-rightsection-detail details-tab-head">
+                <ul class="d-flex mytask-body-topdetails nav nav-tabs" id="nav-tab-items">
+                    <li>
+                        <span class="mytask-sliding-button" id="menu-toggle"><i class="fas fa-angle-double-right"></i></span>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active task-details-tab-link" href="#frame">Form</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link task-details-tab-link" id="workflow-history-tab-link" href="#workflow">Workflow Details</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <div class="container-fluid task-details-container-fluid">
+                <!-- Workflow Details Table start -->
+
+
+                <div class="details-tab-content tab-content">
+                    <div id="frame" class="tab-pane active">
+                        <iframe id="task-iframe" src="" style="border:none;"></iframe>
+                    </div>
+                    <div id="workflow" class="tab-pane fade">
+                        <div class="custom-table">
+                            <sly data-sly-use.wfHistoryModel="${'com.csuf.cloud.core.models.WorkflowHistoryModel' @ colour='red', path=resource.path}"></sly>
+                            <table class="table" id="tb-workflow-history">
+                                <thead class="thead-light">
+                                    <tr>
+                                        <th scope="col">Task Title</th>
+                                        <th scope="col">Stage</th>
+                                        <th scope="col">Asignee</th>
+                                        <th scope="col">Start Date</th>
+                                        <th scope="col">End Date</th>
+                                        <th scope="col">Action</th>
+                                        <th scope="col">Comment</th>
+                                        <th scope="col"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <!-- Workflow Details Table end -->
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Task Self-Assign Modal -->
+<div class="modal" tabindex="-1" id="modal-self-assign-action" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-exclamation-triangle"></i>Assign To Self</h5>
+                <button type="button" class="close btn-task-details-delegate-cancel" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>By proceeding further, you are agreeing to assign this task to yourself.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger btn-task-details-delegate-cancel">Cancel</button>
+                <button type="button" class="btn btn-primary btn-task-details-delegate" data-dismiss="modal">Proceed</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Confirm Submit Action -->
+<div class="modal fade" id="modal-confirm-submit-action" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-items modal-sm" role="document">
+        <div class="modal-content" id="modal-content-items">
+            <div class="modal-header" id="modal-header-items">
+                <h5 class="modal-title" id="exampleModalLabel">CONFIRM</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body-items">
+                    <p>You are going to perform the following action:</p>
+                    <h5 class="action-selected"></h5>
+                    <input style="display:none;" id="hiddenselectedaction" name="hiddeninputname" value="" />
+                    <form>
+                        <div class="form-group">
+                            <!--<p class="modal-form-text">Comments(Optional)</p>-->
+                            <p class="modal-form-text">Comments entered here will only be visible to staff/faculty that are part of the workflow process and are OPTIONAL.</p>
+							<textarea placeholder="Type your comments here" class="form-control" id="comment-dashboard-task-submit" placeholder="Only 250 characters are allowed" maxlength="250"></textarea>
+                            <!--<textarea placeholder="Type your comments here" class="form-control" id="comment-dashboard-task-submit"></textarea>-->
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer" id="modal-footer-items">
+                <button type="button" class="btn btn-outline-danger button1" data-dismiss="modal">CANCEL</button>
+
+                <button data-toggle="modal" type="button" class="btn btn-primary cls-submit-confirm">CONFIRM</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Select Delegatee  Action -->
+<div class="modal fade" id="modal-select-delegatee-action" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Delegate Item</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="recipient-name" class="col-form-label">User</label>
+                        <select class="custom-select cls-dropdown-delegatee" id="dropdown-delegatee"></select>
+                    </div>
+                    <div class="form-group">
+                        <label for="message-text" class="col-form-label">Comments(Optional)</label>
+                        <textarea class="form-control" id="comment-dashboard-delegate-action"></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">CANCEL</button>
+                <button type="button" class="btn btn-primary cls-delegate-ok">SUBMIT</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Success Submit Action -->
+<div class="modal fade" id="modal-success-submit-action" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-check"></i></h5>
+            </div>
+            <div class="modal-body">
+                <h5>Submitted</h5>
+                <p>This task has been successfully submitted</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary btn-submit-success-ok" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Error Submit Action -->
+<div class="modal fade" id="modal-error-submit-action" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-times"></i></h5>
+            </div>
+            <div class="modal-body">
+                <p>An error occurred while submitting the task.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Success Save Action -->
+<div class="modal fade" id="modal-success-save-action" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-check"></i></h5>
+            </div>
+            <div class="modal-body">
+                <h5>Saved</h5>
+                <p>This task has been successfully saved</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Error Save Action -->
+<div class="modal fade" id="modal-error-save-action" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-times"></i></h5>
+            </div>
+            <div class="modal-body">
+                <p>An error occurred while saving the form data.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Not Delegate Action -->
+<div class="modal fade" id="modal-do-not-delegate-action" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-times"></i></h5>
+            </div>
+            <div class="modal-body">
+                <p>The selected task cannot be delegated.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Error Delegate Action -->
+<div class="modal fade" id="modal-error-delegate-action" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-times"></i></h5>
+            </div>
+            <div class="modal-body">
+                <p>An error occurred while delegating the task.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Error Cache Deleted Action -->
+<div class="modal fade" id="modal-error-cache-deleted-action" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-times"></i></h5>
+            </div>
+            <div class="modal-body">
+                <p>An error occured, please open the task again</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Error Access Denied Action -->
+<div class="modal fade" id="modal-error-access-denied-action" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title"><i class="fas fa-times"></i></h5>
+            </div>
+            <div class="modal-body">
+                <p>You do not have the permission to access this task.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Upload Task Attachments -->
+<div class="modal fade" id="modal-upload-attachments-action" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-items modal-lg" role="document">
+        <div class="modal-content" id="modal-content-items">
+            <div class="modal-header" id="modal-header-items">
+                <h5 class="modal-title" id="exampleModalLabel">UPLOAD FILE(S)</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-body-items">
+                    <form>
+                        <div class="form-group">
+                            <sly data-sly-resource="${'task-attachments-container' @ resourceType='csu/components/content/upload-task-attachments'}"></sly>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer" id="modal-footer-items">
+                <button type="button" class="btn btn-outline-danger btn-close-upload-widget" data-dismiss="modal">CLOSE</button>  
+            </div>
+        </div>
+    </div>
+</div>

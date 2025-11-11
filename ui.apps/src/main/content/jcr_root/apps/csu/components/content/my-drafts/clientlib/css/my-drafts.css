@@ -1,0 +1,68 @@
+.fa-eye:before {    
+    margin-right: 10px;
+}
+
+.fa-plus:before {    
+    margin-right: 10px;
+}
+
+#confirm-del-modal .modal-header {
+  background-color: #00407f;
+  color: #ffffff;
+  padding: 2rem;
+}
+ 
+#confirm-del-modal .modal-header .close {
+  color: #fff;
+  opacity: 1;
+}
+ 
+#confirm-del-modal .modal-body label{
+  display: block;
+  font-size: 13px;
+}
+ 
+#confirm-del-modal .modal-footer .btn-primary {
+  background-color: #00407f;
+}
+ 
+#confirm-del-modal .modal-footer {
+  justify-content: center;
+  border-top: 0;
+}
+
+#modal-error-delete-draft .modal-header {
+	background-color: #00407f;
+	color: #ffffff;
+	justify-content: center;
+}
+
+#modal-error-delete-draft .modal-header .fa-times {
+	font-size: 50px;
+}
+
+#modal-error-delete-draft .modal-header .close {
+	color: #fff;
+	opacity: 1;
+}
+
+#modal-error-delete-draft .modal-body {
+	color: #818181;
+	text-align: center;
+}
+
+#modal-error-delete-draft .modal-footer {
+	display: block;
+	text-align: center;
+	border-top: none;
+}
+
+#modal-error-delete-draft .modal-footer .btn-primary {
+	background-color: #00407f;
+}
+
+@media (max-width: 992px) { 
+    #container-required {
+        margin-top: 4.5rem;
+    }
+}

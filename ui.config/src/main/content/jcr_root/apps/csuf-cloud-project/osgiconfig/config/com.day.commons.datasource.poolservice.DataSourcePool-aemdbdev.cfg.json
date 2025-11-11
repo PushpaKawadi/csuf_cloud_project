@@ -1,0 +1,12 @@
+{
+  "datasource.name": "AEMDBDEV",
+  "jdbc.driver.class": "oracle.jdbc.driver.OracleDriver",
+  "jdbc.connection.uri": "jdbc:oracle:thin:@ERPODADEV.fullerton.edu:1521/AEMDBDEV",
+  "jdbc.username": "frm_user",
+  "jdbc.password": "frm#user##",
+  "jdbc.validation.query": "SELECT 1 FROM DUAL",
+  "jdbc.pool.initial": 5,
+  "jdbc.pool.max": 20,
+  "jdbc.pool.min": 5,
+  "jdbc.pool.timeout": 10000
+}

@@ -88,7 +88,7 @@
                             <artifactId>core-forms-components-af-core</artifactId>
                             <target>/apps/csuf-cloud-project-vendor-packages/application/install</target>
                         </embedded>
-                                                                </embeddeds>
+                      </embeddeds>
                 </configuration>
             </plugin>
             <plugin>
@@ -194,6 +194,21 @@
             <artifactId>csuf-cloud-project.ui.apps</artifactId>
             <version>${project.version}</version>
             <type>zip</type>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ojdbc8</artifactId>
+            <version>19.21.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.database.jdbc</groupId>
+            <artifactId>ucp</artifactId>
+            <version>19.21.0.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.oracle.database.xml</groupId>
+            <artifactId>xdb</artifactId>
+            <version>19.21.0.0</version>
         </dependency>
         <dependency>
             <groupId>com.csuf.cloud</groupId>

@@ -1,0 +1,56 @@
+.afHeader {
+
+  	color: white;
+    background-color: #00274C;
+  }
+
+    .customHeaderText{
+
+    	text-align: center;
+		font-size: 28px;
+        font-weight: bold;
+    	overflow: hidden;
+        margin-top: auto;
+        padding-top: 15px
+
+}
+
+.customImage{
+    padding-left: 25px;
+  float: left;
+  width: 25%;
+  overflow: hidden;
+   }
+.cq-dd-image {
+   /* height: 69px;*/
+    padding-top: 10px;
+    width: 7rem;
+    height: 3rem;
+    margin-left: 10%;
+    margin-top: 4%;
+}
+/*.cq-dd-image {
+   height: 69px;
+    padding-top: 10px;
+}*/
+
+
+
+/*.afHeader{
+    padding: 6px 0;
+	}
+	
+	.afHeader:after{
+  content:'';
+  clear:both;
+  display:table;
+	}
+	
+.afHeader .customImage div{
+width: 50px;
+}
+
+.afHeader .customImage div img{
+width: 100%;
+    display: block;
+}*/

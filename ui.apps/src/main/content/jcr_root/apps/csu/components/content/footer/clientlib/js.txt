@@ -1,0 +1,2 @@
+js/landingpage.js
+js/sidebarNavigation.js

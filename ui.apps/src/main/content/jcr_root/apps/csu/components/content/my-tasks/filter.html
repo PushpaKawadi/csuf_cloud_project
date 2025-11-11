@@ -1,0 +1,157 @@
+<div class="left-section-wrapper">
+  <nav class="navbar navbar-expand-md navbar-light fixed-top justify-content-center navbar-slide-nav">
+    <button class="navbar-toggler toggle-items pull-right" type="button" data-toggle="collapse"
+      data-target="#navbar">
+      <!--<span class="showfilter-text">Show Filters</span>-->
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="navbar-collapse collapse" id="navbar">
+      <ul class="nav navbar-nav justify-content-center">
+        <li class="nav-item">
+          <div class="hidefilters">
+            <a href="#" class="toggle-back"
+              onclick="getElementById('hidden-div').style.display = 'block';">Hide Filters<span>
+                < </span></a>
+            <a href="#" class="filter-clearall">Clear All</a>
+          </div>
+
+          <div class="input-group payload mb-2">
+            <div class="input-group-prepend">
+              <input type="text" class="form-control" id="inlineFormInputGroup"
+                placeholder="Select Payload">
+              <div class="input-group-text"><input type="checkbox"></div>
+            </div>
+          </div>
+
+          <div class="workflow-model dropdown">
+
+            <select class="dropbtn" id="workflowDropdown">
+              <option value="" disabled="disabled" selected="selected">Select Workflow-model</option>
+              <option value="taskType">Type</option>
+              <option value="taskStatus">Task Status</option>
+              <option value="startDate">Start Date</option>
+            </select>
+
+          </div>
+
+          <div class="panel-group" id="accordion">
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h6 class="panel-title">
+                  <a class="accordion-toggle collapsible-link" data-toggle="collapse" href="#type">
+                    Type
+                  </a>
+                </h6>
+              </div>
+              <div id="type" class="panel-collapse collapse in">
+                <div class="checkbox-wrapper">
+                  <input id="taskCB" name="taskType" type="checkbox" class="chbc" value="task">
+                  <label for="taskCB">Task</label>
+                  <span></span>
+                </div>
+                <div class="checkbox-wrapper">
+                  <input id="workflowItem" name="taskType" type="checkbox" class="chbc"
+                    value="workflowItem">
+                  <label for="workflowItem">Workflow Item</label>
+                  <span></span>
+                </div>
+                <div class="checkbox-wrapper">
+                  <input id="workflowFailure" name="taskType" type="checkbox" class="chbc"
+                    value="workflowFailure">
+                  <label for="workflowFailure">Workflow Failure</label>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h6 class="panel-title">
+                  <a class="accordion-toggle collapsible-link" data-toggle="collapse" href="#taskStatus">
+                    Task Status
+                  </a>
+                </h6>
+              </div>
+              <div id="taskStatus" class="panel-collapse collapse">
+
+                <div class="checkbox-wrapper">
+                  <input id="activeTask" name='taskStatus' type="checkbox" class="chbc" value="activeTask">
+                  <label for="activeTask">Active</label>
+                  <span></span>
+                </div>
+                <div class="checkbox-wrapper">
+                  <input id="completeTask" name='taskStatus' type="checkbox" class="chbc"
+                    value="completeTask">
+                  <label for="completeTask">Complete</label>
+                  <span></span>
+                </div>
+                <div class="checkbox-wrapper">
+                  <input id="terminatedTask" name='taskStatus' type="checkbox" class="chbc"
+                    value="terminatedTask">
+                  <label for="terminatedTask">Terminated</label>
+                  <span></span>
+                </div>
+              </div>
+            </div>
+            <div class="panel panel-default">
+              <div class="panel-heading">
+                <h6 class="panel-title">
+                  <a class="accordion-toggle collapsible-link" data-toggle="collapse" href="#startDate">
+                    Start Date
+                  </a>
+                </h6>
+              </div>
+              <div id="startDate" class="panel-collapse collapse">
+                <label>Start Date after</label>
+                <div class="input-group date" id="datepicker" data-provide="datepicker">
+                  <input type="text" class="form-control" name="taskStartDateAfter">
+                  <div class="input-group-addon">
+                    <div class="input-group-text"><span class="far fa-calendar-alt"></span></div>
+                  </div>
+                </div>
+                <label>Start Date Before</label>
+                <div class="input-group date" id="datepicker" data-provide="datepicker">
+                  <input type="text" class="form-control" name="taskStartDateBefore">
+                  <div class="input-group-addon">
+                    <div class="input-group-text"><span class="far fa-calendar-alt"></span></div>
+                  </div>
+                </div>
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="taskStartDate" id="taskStartHour"
+                    value="taskStartHour" checked>
+                  <label class="form-check-label" for="taskStartHour">
+                    In last 2 Hours
+                  </label>
+                </div>
+
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="taskStartDate" id="taskStartWeek"
+                    value="taskStartWeek">
+                  <label class="form-check-label" for="taskStartWeek">
+                    In last Week
+                  </label>
+                </div>
+
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="taskStartDate" id="taskStartMonth"
+                    value="taskStartMonth">
+                  <label class="form-check-label" for="taskStartMonth">
+                    In last Month
+                  </label>
+                </div>
+
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="taskStartDate" id="taskStartYear"
+                    value="taskStartYear">
+                  <label class="form-check-label" for="taskStartYear">
+                    In last Year
+                  </label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </nav>
+</div>

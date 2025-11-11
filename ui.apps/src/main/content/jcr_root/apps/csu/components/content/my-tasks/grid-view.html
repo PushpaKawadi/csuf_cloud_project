@@ -1,0 +1,36 @@
+<pre data-sly-use.taskModel="com.csuf.cloud.core.models.TaskDetailsModel"></pre>
+<sly data-sly-use.tasks="${'fetchJson.js' @ jsonString=taskModel.tasks}" />
+
+<div class="search-grid hide-inbox-panel" id="div-inbox-grid">
+    <div class="row my-4">
+       <sly data-sly-list="${tasks}">
+           <div class="col-lg-3 col-md-6 col-sm-12 grid-main col-sm d-flex" data-id="${item.workitem_id}">
+             <div class="card w-100 mb-3">   
+                   <div class="round">
+                    <input id="${itemList.count}" type="checkbox" class="chb" value="${itemList.count}">
+                    <label for="${itemList.count}">&nbsp;</label>
+                    <span></span>
+                   </div>
+                   <div class="card-header bg-transparent">                       
+                       <p class="card-header-text text-truncate">${item.task_title}</p>
+                       <span class="status Priority-${item.priority}-grid">${item.priority}</span>
+                   </div>
+                   <div class="card-body text-secondary image-item">
+                       <p class="card-text text-truncate">${item.task_description}</p>
+                       <div class="row">
+                            <img class="grid-user-img" src="/content/dam/csu/generic_user.png"  alt="Person Photograpgh">                            
+                            <p class="grid-text text-truncate">${item.assignee}</p>
+                       </div>
+                   </div>
+                   <div class="card-footer footer-grid-data" id="card-footer-items">
+                        <p class="card-footer-text text-truncate">${item.start_date}</p>
+                        <span class="status stable-grid">${item.status}</span>
+                   </div>
+             </div>
+            </div>
+        </sly>
+    </div>
+</div>
+     
+
+      

@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:rep="internal"
+    jcr:mixinTypes="[rep:AccessControllable]"
+    jcr:primaryType="cq:Page">
+    <rep:policy/>
+    <blank/>
+    <basic/>
+    <basic-with-adobe-sign/>
+    <staff-performance-evaluation--units-2--5--7----9--4/>
+    <staff-performance-evaluation--units-2--5--7----9--2/>
+    <staff-performance-evaluation--units-2--5--7----9--1/>
+    <type-a-template/>
+    <staff-performance-evaluation--units-2--5--7----9--411/>
+    <staff-performance-evaluation--units-2--5--7----9--41/>
+    <staff-performance-evaluation--units-2--5--7----9--412/>
+    <staff-performance-evaluation--units-2--5--7----9--/>
+    <staff-performance-evaluation--units-2--5--7----9--3/>
+    <type-b-template/>
+    <print_only_form_template/>
+    <vision-life-ltd-enrollment/>
+    <timesheet_forms_template/>
+</jcr:root>

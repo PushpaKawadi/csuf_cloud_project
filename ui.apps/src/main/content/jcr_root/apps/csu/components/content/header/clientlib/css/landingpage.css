@@ -1,0 +1,288 @@
+.wrapper {
+    height: 100%;
+}
+
+header {
+    background: #00274c;
+}
+
+footer {
+    background: #00274c;
+    height: 120px;
+}
+
+body.startpoint {
+    display: none;
+}
+
+body.startpoint {
+    display: block !important;
+    position: relative;
+}
+
+.footer-verticalline {
+    border-left: 1px solid rgba(221, 230, 243, 0.925);
+    height: 40px;
+    position: absolute;
+    left: 176px;
+    top: 7px;
+}
+
+.footer-fixed {
+    padding: 15px 0;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+}
+
+.footer-logo-main {
+    position: relative;
+    width: 175px;
+    padding: 0 16px;
+}
+
+.footer-wrapper {
+    padding: 4px 15px;
+}
+
+.footer-logo-main:after {
+    content: '';
+    height: 40px;
+    width: 1px;
+    position: absolute;
+    right: 0;
+    top: 6px;
+    background-color: #fff;
+}
+
+.footer-fixed .footer-logo {
+    width: 100%;
+    margin: 5px 0;
+}
+
+.footer-para {
+    color: #fff;
+    font-size: 12px;
+}
+
+.footer-para-second {
+    margin-top: 13px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.footer-para p,
+.footer-para-second p {
+    margin: 0;
+    color: #fff;
+    font-size: 12px;
+}
+
+.footer-para p-line {
+    text-decoration: underline;
+}
+
+.spacing {
+    letter-spacing: 3px;
+}
+
+.rounded-circle {
+    width: 100%;
+    border-radius: initial;
+}
+
+.catalog-title {
+    margin: 10px 0 10px 16px;
+    font-weight: 700;
+    padding-top: 15px;
+}
+
+.search-input {
+    margin-bottom: 1.5rem;
+    margin-top: 7px;
+}
+
+.search-input #dataTable_filter {
+    float: none;
+    text-align: inherit;
+}
+
+.search-input label {
+    width: 100%;
+    position: relative;
+}
+
+.search-input input {
+    width: 100%;
+    margin: 0 !important;
+    border: 1px solid #ddd;
+    padding: 10px 10px;
+    background-color: #f8f9fa;
+    border-radius: 17px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
+
+.search-input input:focus {
+    outline: 0;
+    box-shadow: none;
+}
+
+.fa-eye {
+    color: #1685ff;
+}
+
+.status {
+    padding: 0 6px 3px 6px;
+    border-radius: 4px;
+}
+
+.status.stable {
+    background-color: #d9fce1;
+    color: green;
+}
+
+.status.unstable {
+    background-color: #fddbdb;
+    color: red;
+}
+
+.daysago {
+    color: #818181;
+    font-size: 10px;
+}
+
+table.dataTable tbody th, table.dataTable tbody td {
+    padding: 7px 7px !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+    color: #ffffff !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.disabled, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:hover, .dataTables_wrapper .dataTables_paginate .paginate_button.disabled:active {
+    color: #ddd !important;
+    background: #f8f9fa !important;
+    border: 1px solid #ddd !important;
+}
+
+.dataTables_wrapper .dataTables_paginate {
+	/*color: white !important;*/
+	font-size: 12px;
+	padding: 8px 16px;
+	text-decoration: none;
+	border: 0px solid #ddd;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button {
+	border-radius: 3px !important;
+	border: 1px solid #00407f !important;
+	color: #00407f !important;
+	font-size: 11px;
+	margin-top: 10px;
+}
+
+.dataTables_wrapper .dataTables_paginate a.paginate_button.current {
+	color: #ffffff !important;
+    background: #00274c;   
+}
+
+.dataTables_wrapper .dataTables_paginate a.paginate_button:hover, .dataTables_paginate .paginate_button.current:hover {	
+    border-radius: 3px !important;
+	border: 1px solid #00407f !important;
+	color: #00407f !important;
+    background: #ffffff !important;
+}
+
+.dataTables_wrapper .dataTables_paginate .paginate_button:active {
+	color: white !important;
+}
+
+.show-result, .dataTables_length{
+    font-size: 11px !important;
+}
+.dataTables_wrapper .dataTables_info{
+    float: none !important;
+    text-align: center !important;
+}
+
+.catalog-table-sm {
+    min-width: 350px iimportant;
+}
+
+.table-col-form-name {
+    min-width: 200px;
+}
+
+.table-col-min-width {
+    min-width: 100px;
+}
+
+.modified-table .clickable-row {
+    cursor: pointer;
+}
+
+.modified-table .clickable-row:hover,
+.table-row:hover {
+    background-color: #f6f6f6;
+}
+
+@media (max-width: 769px) {    
+    .footer-para-second {
+        display: none;
+    }
+    .side-nav {
+        padding: 0 !important;
+        height: 0px;
+    }
+    .dataTables_scrollHeadInner {
+        margin: 0 auto;
+    }
+}
+
+@media (max-width: 576px) {
+    .fixed-bottom {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        display: table;
+    }
+    
+
+}
+
+@media (max-width: 992px) {    
+    .side-nav {
+        padding: 0 !important;
+        height: 0px;
+    }
+}
+
+/* This is for logo,hamburger-button from 1601px to 2560px */
+@media only screen and (max-width: 2560px) and (min-width: 1601px) {
+    button.navbar-toggle.collapsed.header-toggler-button {
+        display: none;
+    }
+  /*  img.new-header-logo {
+        display: none;
+    }*/
+}
+ 
+/* This is for popup vertically center alligned with css */
+.modal-dialog {
+    min-height: calc(100vh - 60px);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    overflow: auto;
+}
+@media(max-width: 768px) {
+  .modal-dialog {
+    min-height: calc(100vh - 20px);
+  }
+}
+/* media queries end */

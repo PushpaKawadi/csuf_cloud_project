@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:Template">
+    <jcr:content
+        cq:lastModified="{Date}2019-12-25T20:36:26.914-08:00"
+        cq:lastModifiedBy="admin"
+        cq:lastReplicated="{Date}2021-07-11T08:31:13.000-07:00"
+        cq:lastReplicatedBy="replication-service"
+        cq:lastReplicationAction="Activate"
+        cq:templateType="/libs/settings/wcm/template-types/afpage"
+        jcr:primaryType="cq:PageContent"
+        jcr:title="dependent_fee_waiver"
+        status="enabled"/>
+</jcr:root>

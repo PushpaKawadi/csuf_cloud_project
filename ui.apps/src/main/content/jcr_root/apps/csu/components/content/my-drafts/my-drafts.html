@@ -1,0 +1,63 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.all @ categories='csu.my-drafts'}" />
+
+<div id="container-required" class="px-4 py-1">
+<div id="pills-drafts" class="tab-pane fade show active identifier" data-identifier='drafts'>
+    <div class="modified-table">
+      <table class="table" id="dataTable" >
+         <thead class="thead-light">
+            <tr>
+               <th scope="col" class="table-col-form-name">Form Name</th>
+               <th scope="col" class="table-col-min-width">Description</th>
+               <th scope="col" class="table-col-min-width">Date Modified</th>
+               <th scope="col" class="table-col-min-width" style="text-align:center;">Actions</th>
+            </tr>
+         </thead>
+         <tbody>         
+        </tbody>
+    </table>
+    </div>
+</div>
+
+<div class="modal fade" id="confirm-del-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-sm" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">CONFIRM</h5>
+          <button type="button" class="close modal-success-close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+
+        <div class="modal-body">
+          <div class="modal-body-items">          
+            <p>Are you sure, you want to delete?</p>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-danger modal-success-close col-sm-4" data-dismiss="modal">CANCEL</button>
+          <button id="del-draft-cnf-btn" type="button" class="btn btn-primary cls-submit-confirm col-sm-4">OK</button>
+        </div>
+      </div>
+    </div>
+</div>
+
+<!-- Modal Error Delete Action -->
+<div class="modal fade" id="modal-error-delete-draft" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title"><i class="fas fa-times"></i></h5>
+	  </div>
+	  <div class="modal-body">
+		<p>An error occurred while deleting the draft.</p>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+	  </div>
+	</div>
+  </div>
+</div>
+</div>
+
+

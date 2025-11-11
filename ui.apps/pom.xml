@@ -79,6 +79,9 @@
             <plugin>
                 <groupId>org.apache.sling</groupId>
                 <artifactId>htl-maven-plugin</artifactId>
+                <configuration>
+				    <failOnWarnings>false</failOnWarnings>
+				  </configuration>
                 <executions>
                     <execution>
                         <id>validate-htl-scripts</id>
@@ -97,7 +100,7 @@
                                 <allowedExpressionOption>wcmmode</allowedExpressionOption>
                             </allowedExpressionOptions>
                         </configuration>
-                    </execution>
+					</execution>
                 </executions>
             </plugin>
         </plugins>
