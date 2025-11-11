@@ -1,4 +1,5 @@
-package com.csuf.cloud.core.service;
+package com.csuf.cloud.core.services;
+
 
 import java.io.IOException;
 import java.util.ResourceBundle;

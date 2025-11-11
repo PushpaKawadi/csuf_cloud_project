@@ -1,0 +1,36 @@
+<header class="fixed-top">
+  <nav class="navbar navbar-expand-md sticky-top navbar-dark">
+    <a class="navbar-brand" href="#">
+      <!--<img class="newlogo" alt="newlogo" src="./images/newlogo.png"></img>-->
+      <div class="newlogo" data-sly-resource="${'newlogo' @ resourceType='csu/components/content/image'}"></div>
+      <div class="header-verticalline"></div>
+      <span class="nav-title">MY TASKS</span>
+    </a>
+
+    <div class="action-menu-items">
+      <ul class="action-main-menu">
+
+        <li class="action-items">
+          <a href="#" id="open-details">
+            <i class="fas fa-pen-fancy"></i>
+            <span class="action-items-text">OPEN</span>
+          </a>
+        </li>
+
+        <li class="action-items">
+          <a href="#">
+            <i class="fas fa-user-friends"></i>
+            <span class="action-items-text">DELEGATE</span>
+          </a>
+        </li>
+      </ul>
+
+      <button type="button" class="btn close action-menu-closet" id="button-close" data-dismiss="alert"
+        aria-label="Close">
+        <span aria-hidden="true">×</span>
+      </button>
+    </div>   
+
+  </nav>
+
+</header>

@@ -21,7 +21,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import com.csuf.cloud.core.service.JDBCConnectionHelperService;
+import com.csuf.cloud.core.services.JDBCConnectionHelperService;
 
 @Component(service = Servlet.class, property = {
         Constants.SERVICE_DESCRIPTION + "=Get CA County City List Servlet",
@@ -50,7 +50,7 @@ public class CACountyCityListServlet extends SlingSafeMethodsServlet {
 
         try {
             // Get database connection
-            dbConn = jdbcConnectionService.getDBConn();
+            dbConn = jdbcConnectionService.getDBConn("AEMDBDEV");
             log.error("Database connection is null=="+dbConn);
             log.debug("Database connection is null=="+dbConn);
 

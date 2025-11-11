@@ -8,7 +8,7 @@ import org.apache.sling.api.servlets.SlingSafeMethodsServlet;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import com.csuf.cloud.core.service.GlobalConfigCSUFService;
+import com.csuf.cloud.core.services.GlobalConfigCSUFService;
 
 @Component(service = { Servlet.class }, property = { "sling.servlet.resourceTypes=sling/servlet/default",
 		"sling.servlet.methods=GET", "sling.servlet.selectors=config", "sling.servlet.extensions=json" })

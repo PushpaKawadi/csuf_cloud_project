@@ -19,7 +19,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.google.gson.JsonArray;
-import com.csuf.cloud.core.service.TaskService;
+import com.csuf.cloud.core.services.TaskService;
 
 @Model(adaptables = Resource.class)
 public class TaskDetailsModel {

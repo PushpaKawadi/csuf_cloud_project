@@ -1,0 +1,52 @@
+<header class="fixed-top">
+
+  <nav class="navbar navbar-expand-md sticky-top navbar-dark">
+
+    <a class="navbar-brand" href="#">
+      <!--<img class="newlogo" alt="newlogo" src="./images/newlogo.png"></img>-->
+      <div class="newlogo" data-sly-resource="${'newlogo' @ resourceType='csu/components/content/image'}"></div>
+      <div class="header-verticalline"></div>
+      <span class="nav-title">Inbox</span>
+    </a>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+
+      <div class="nav-end action-menus">
+        <!-- <a href="#" class="toggle-task-detail"><<<span class="hidden-sm-down">Task Details</span></a> -->
+
+        <ul class="action-menu-mains mr-auto">
+
+          <li class="action-items-menus">
+            <a href="#" data-toggle="modal" data-target="#exampleModal">
+              <i class="fas fa-paper-plane fa-icon"></i>
+              <span class="action-item-text-detail">Submit</span>
+            </a>
+          </li>
+          <li class="action-items-menus">
+            <a href="#" data-toggle="modal" data-target="#exampleModal12">
+              <i class="fas fa-save fa-icon"></i>
+              <span class="action-item-text-detail">Save</span>
+            </a>
+          </li>
+          <li class="action-items-menus">
+            <a href="#">
+              <i class="fas fa-undo-alt fa-icon"></i>
+              <span class="action-item-text-detail">Reset</span>
+            </a>
+          </li>
+          <li class="action-items-menus">
+            <a href="#">
+              <i class="fas fa-user-friends fa-icon"></i>
+              <span class="action-item-text-detail">Delegate</span>
+            </a>
+          </li>        
+        </ul>
+
+        <button type="button" class="btn close" id="button-close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">×</span>
+        </button>
+
+      </div>
+    </div>
+  </nav>
+</header>
