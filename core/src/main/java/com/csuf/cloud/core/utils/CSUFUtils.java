@@ -16,6 +16,9 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.security.SecureRandom;
 import java.security.cert.X509Certificate;
 import java.text.ParseException;
@@ -212,37 +215,38 @@ public class CSUFUtils {
 		return null;
 	}*/
 
+
     public static File getFileFromCRXPath(String filePath) {
         try {
-            if (filePath == null || filePath.isBlank()) {
+            if (StringUtils.isBlank(filePath)) {
                 throw new IllegalArgumentException("Invalid file path");
             }
 
-            String[] filePathArray = filePath.split("\\.");
-            String tempPath = filePathArray[0];
-            int lastSlashIndex = tempPath.lastIndexOf("/");
+            // Extract only the safe file name part
+            String safeName = Paths.get(filePath).getFileName().toString();
 
-            String fileName = (lastSlashIndex >= 0)
-                    ? tempPath.substring(lastSlashIndex + 1)
-                    : tempPath;
+            // Sanitize to prevent any traversal or shell metacharacters
+            safeName = safeName.replaceAll("[^a-zA-Z0-9-_\\.]", "_");
 
-            if (fileName == null || fileName.isBlank()) {
-                fileName = "default";
-            } else {
-                fileName = fileName.replaceAll("[^a-zA-Z0-9-_]", "_");
+            // Extract base name and extension
+            int dotIndex = safeName.lastIndexOf('.');
+            String prefix = (dotIndex > 0 ? safeName.substring(0, dotIndex) : "file");
+            String suffix = (dotIndex > 0 ? safeName.substring(dotIndex) : ".tmp");
+
+            // Enforce prefix length (required by createTempFile)
+            if (prefix.length() < 3) {
+                prefix = "tmp_" + prefix;
             }
 
-            String fileExtension = (filePathArray.length > 1)
-                    ? filePathArray[1].replaceAll("[^a-zA-Z0-9]", "")
-                    : "tmp";
+            // Always use system temp directory — constant and trusted
+            Path tempFile = Files.createTempFile(prefix + "_", suffix);
 
-            File tempDir = new File(System.getProperty("java.io.tmpdir"));
-            return File.createTempFile(fileName + "_", "." + fileExtension, tempDir);
+            return tempFile.toFile();
 
         } catch (IOException e) {
-            log.error("Error creating temp file from CRX path: {}", e.getMessage(), e);
+            log.error("Error creating temp file safely: {}", e.getMessage(), e);
+            return null;
         }
-        return null;
     }
 
     private static String sanitizePrefix(String prefix) {
