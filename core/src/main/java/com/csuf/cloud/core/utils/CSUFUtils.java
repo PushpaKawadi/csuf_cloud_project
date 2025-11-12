@@ -197,8 +197,14 @@ public class CSUFUtils {
 			String[] filePathArray = filePath.split("\\.");
 			String tempPath = filePathArray[0];
 			int lastSlashIndex = tempPath.lastIndexOf("/");
-			String fileName = sanitizePrefix(tempPath.substring(lastSlashIndex + 1, tempPath.length()));
-			String fileExtension = filePathArray[1];
+			String fileName = tempPath.substring(lastSlashIndex + 1, tempPath.length());
+            if (fileName == null || fileName.isBlank()) {
+                fileName = "default";
+            }else {
+                fileName =  fileName.replaceAll("[^a-zA-Z0-9-_]", "_");
+            }
+
+            String fileExtension = filePathArray[1];
 			return File.createTempFile(fileName, ".".concat(fileExtension));
 		} catch (IOException e) {
 			log.error(ArrayUtils.toString(e.getStackTrace()));

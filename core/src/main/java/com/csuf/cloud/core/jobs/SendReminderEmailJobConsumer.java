@@ -234,7 +234,7 @@ public class SendReminderEmailJobConsumer implements JobConsumer {
 		}
 	}
 
-	private void addAttachments(EmailServiceVO emailVO, Session session, JsonObject json) {
+	/*private void addAttachments(EmailServiceVO emailVO, Session session, JsonObject json) {
 		EmailAttachmentVO attachVO = new EmailAttachmentVO();
 		try {
 			String path = json.get("path").getAsString();
@@ -247,7 +247,7 @@ public class SendReminderEmailJobConsumer implements JobConsumer {
             if (attachmentSource.isAbsolute()) {
                 throw new SecurityException("Absolute paths not allowed: " + path);
             }
-            
+
 			String attachmentMimeType = Files.probeContentType(attachmentSource);
 			attachVO.setContentType(attachmentMimeType);
 			attachVO.setName(fileName);
@@ -260,7 +260,7 @@ public class SendReminderEmailJobConsumer implements JobConsumer {
 		} catch (IOException e) {
 			log.error(Arrays.toString(e.getStackTrace()));
 		}
-	}
+	}*/
 
 	private String getElementValue(String elem, WorkItem wItem, ResourceResolver resolver) {
 		String val = null;
