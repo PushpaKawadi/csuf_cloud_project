@@ -218,40 +218,6 @@ public class CSUFUtils {
 
 
 
-    public static File getFileFromCRXPath(String filePath) {
-        if (StringUtils.isBlank(filePath)) {
-            log.warn("getFileFromCRXPath :: empty CRX path supplied");
-            return null;
-        }
-
-        String normalizedPath = FilenameUtils.normalize(filePath);
-        if (normalizedPath == null) {
-            log.warn("getFileFromCRXPath :: normalization failed for {}", filePath);
-            return null;
-        }
-
-        int lastDot = normalizedPath.lastIndexOf('.');
-        if (lastDot < 0 || lastDot == normalizedPath.length() - 1) {
-            log.warn("getFileFromCRXPath :: missing extension in {}", normalizedPath);
-            return null;
-        }
-
-        String extension = normalizedPath.substring(lastDot + 1);
-        String safeSuffix = "." + extension.replaceAll("[^A-Za-z0-9]", "");
-        if (safeSuffix.length() == 1) {
-            safeSuffix = ".bin";
-        }
-
-        Path tempDir = Paths.get(System.getProperty("java.io.tmpdir"));
-        try {
-            Path tempFile = Files.createTempFile(tempDir, "csuf_asset_", safeSuffix);
-            return tempFile.toFile();
-        } catch (IOException ex) {
-            log.error("getFileFromCRXPath :: unable to create temp file", ex);
-            return null;
-        }
-    }
-
 
     /*
 	 * public static void main(String[] args) { String imagePath =

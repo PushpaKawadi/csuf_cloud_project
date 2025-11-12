@@ -176,15 +176,15 @@ public final class EmailServiceImpl implements EmailService {
 			}
 
 			if (emailBean.hasEmbeddedImage()) {
-				File image = CSUFUtils.getFileFromCRXPath(emailBean.getEmbeddedImagePath());
-				InputStream imageStream = assetService.getFileStreamFromCRX(session != null ? session : globalConfigService.getAdminSession(), emailBean.getEmbeddedImagePath());
-				image = CSUFUtils.copyInputStreamToFile(imageStream, image);
-				String cid = email.embed(image, emailBean.getEmbeddedImageDescription());
+				//File image = CSUFUtils.getFileFromCRXPath(emailBean.getEmbeddedImagePath());
+				//InputStream imageStream = assetService.getFileStreamFromCRX(session != null ? session : globalConfigService.getAdminSession(), emailBean.getEmbeddedImagePath());
+				//image = CSUFUtils.copyInputStreamToFile(imageStream, image);
+				//String cid = email.embed(image, emailBean.getEmbeddedImageDescription());
 
 				InputStream templateStream = assetService.getFileStreamFromCRX(session != null ? session : globalConfigService.getAdminSession(), emailBean.getTemplatePath());
 				byte[] encodedTemplate = IOUtils.toByteArray(templateStream);
 				String htmlMessage = new String(encodedTemplate, StandardCharsets.UTF_8);
-				htmlMessage = htmlMessage.replace("cid:", "cid:".concat(cid));
+				//htmlMessage = htmlMessage.replace("cid:", "cid:".concat(cid));
 				Map<String, String> templateVariables = emailBean.getTemplateVariables();
 				for (String tempateVariable : templateVariables.keySet()) {
 					htmlMessage = htmlMessage.replaceAll("\\$".concat(tempateVariable),
