@@ -17,7 +17,7 @@ public class CloudSampleServlet extends SlingSafeMethodsServlet {
 	private static final long serialVersionUID = 1L;
 	
 	@Reference
-	private GlobalConfigCSUFService globalConfigFilenetService;
+	transient private GlobalConfigCSUFService globalConfigFilenetService;
 
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws IOException {

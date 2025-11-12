@@ -30,8 +30,8 @@ public class DbTestServlet extends SlingAllMethodsServlet {
 
 
     @Reference
-    private DatabaseQueryService databaseQueryService;
-    JsonArray userDetails = null;
+    transient private DatabaseQueryService databaseQueryService;
+    transient JsonArray userDetails = null;
     @Override
     protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws IOException {
     	logger.error("DBTestServlet");

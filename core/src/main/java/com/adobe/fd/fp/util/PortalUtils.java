@@ -359,6 +359,9 @@ public class PortalUtils {
 						+ attachmentKey);
 				break;
 			}
+            case default:{
+                break;
+            }
 			}
 			attachmentUrlList.append("\n");
 		}

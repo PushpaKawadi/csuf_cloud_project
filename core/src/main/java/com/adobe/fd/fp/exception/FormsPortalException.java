@@ -36,7 +36,7 @@ public class FormsPortalException extends Exception {
 	 */
 	private static final long serialVersionUID = -7363820328483991171L;
 	/** Default log. */
-	private final Logger log = LoggerFactory
+	transient private final Logger log = LoggerFactory
 			.getLogger(FormsPortalException.class);
 
 	/** Resources for this class. */
@@ -45,7 +45,7 @@ public class FormsPortalException extends Exception {
 
 	private String code;
 
-	private Object[] messageArgs;
+	transient private Object[] messageArgs;
 
 	public FormsPortalException() {
 	}

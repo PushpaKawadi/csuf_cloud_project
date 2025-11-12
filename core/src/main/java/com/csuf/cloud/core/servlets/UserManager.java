@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 @Component(service = Servlet.class, property = { Constants.SERVICE_DESCRIPTION + "=Loggedin User Servlet",
         "sling.servlet.methods=" + HttpConstants.METHOD_GET, "sling.servlet.paths=" + "/bin/getLoggedUserId" })
 public class UserManager extends SlingSafeMethodsServlet {
-    private final Logger logger = LoggerFactory.getLogger(getClass());
+    transient private final Logger logger = LoggerFactory.getLogger(getClass());
     private static final long serialVersionUID = 1L;
 
     @Override

@@ -38,8 +38,6 @@ public class GlobalConfigServiceImpl implements GlobalConfigService {
 	private static final String SYSTEM_MAINTENANCE_PROPERTY = "isSystemUnderMaintenance";
 	private static final String SYSTEM_MAINTENANCE_PROPERTY_YES_VALUE = "yes";
 
-	private ResourceResolver resolver;
-
 	private GlobalConfigAEMCSU configNew;
 
 	// Inject a Sling ResourceResolverFactory
@@ -48,6 +46,7 @@ public class GlobalConfigServiceImpl implements GlobalConfigService {
 
 	@Override
 	public ResourceResolver getResourceResolver() throws LoginException {
+        ResourceResolver resolver = null;
 		return resolver = resolverFactory.getServiceResourceResolver(
 				Collections.singletonMap(ResourceResolverFactory.SUBSERVICE, (Object) SUB_SERVICE_NAME));
 	}
@@ -58,8 +57,7 @@ public class GlobalConfigServiceImpl implements GlobalConfigService {
         Session session = null;
 		Map<String, Object> param = new HashMap<>();
 		param.put(ResourceResolverFactory.SUBSERVICE, SUB_SERVICE_NAME);
-		try {
-			resolver = resolverFactory.getServiceResourceResolver(param);
+		try(ResourceResolver resolver = resolverFactory.getServiceResourceResolver(param) {
 
 			session = resolver.adaptTo(Session.class);
 			if (null != session)
@@ -73,16 +71,18 @@ public class GlobalConfigServiceImpl implements GlobalConfigService {
 
 	@Override
 	public ResourceResolver getFormsServiceResolver() {
+        ResourceResolver resolver = null;
 		HashMap<String, Object> param = new HashMap<>();
 		param.put("sling.service.subservice", "getformsresourceresolver");
 
 		try {
-			resolver = this.resolverFactory.getServiceResourceResolver(param);
+            resolver = resolverFactory.getServiceResourceResolver(param)
 		} catch (LoginException e) {
 			log.error(Arrays.toString(e.getStackTrace()));
 		}
-		return resolver;
-	}
+        return resolver;
+
+    }
 
 	@Override
 	public Boolean isSystemUnderMaintenance(Session session) {
