@@ -38,9 +38,7 @@ public class GlobalConfigServiceImpl implements GlobalConfigService {
 	private static final String SYSTEM_MAINTENANCE_PROPERTY = "isSystemUnderMaintenance";
 	private static final String SYSTEM_MAINTENANCE_PROPERTY_YES_VALUE = "yes";
 
-	private ResourceResolver resolver = null;
-
-	private Session session = null;
+	private ResourceResolver resolver;
 
 	private GlobalConfigAEMCSU configNew;
 
@@ -56,7 +54,8 @@ public class GlobalConfigServiceImpl implements GlobalConfigService {
 
 	@Override
 	public Session getAdminSession() {
-
+ 
+        Session session = null;
 		Map<String, Object> param = new HashMap<>();
 		param.put(ResourceResolverFactory.SUBSERVICE, SUB_SERVICE_NAME);
 		try {
