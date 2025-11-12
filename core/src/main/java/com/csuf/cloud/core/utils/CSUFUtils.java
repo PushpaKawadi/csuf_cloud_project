@@ -223,30 +223,29 @@ public class CSUFUtils {
             log.warn("getFileFromCRXPath :: empty CRX path supplied");
             return null;
         }
+
         String normalizedPath = FilenameUtils.normalize(filePath);
         if (normalizedPath == null) {
             log.warn("getFileFromCRXPath :: normalization failed for {}", filePath);
             return null;
         }
+
         int lastDot = normalizedPath.lastIndexOf('.');
         if (lastDot < 0 || lastDot == normalizedPath.length() - 1) {
             log.warn("getFileFromCRXPath :: missing extension in {}", normalizedPath);
             return null;
         }
-        String nameSegment = normalizedPath.substring(0, lastDot);
+
         String extension = normalizedPath.substring(lastDot + 1);
-        String safeBasename = FilenameUtils.getName(nameSegment);
-        if (StringUtils.isBlank(safeBasename)) {
-            safeBasename = "asset";
-        }
-        String safePrefix = StringUtils.left(StringUtils.rightPad(safeBasename, 3, '_'), 50);
         String safeSuffix = "." + extension.replaceAll("[^A-Za-z0-9]", "");
         if (safeSuffix.length() == 1) {
             safeSuffix = ".bin";
         }
-        File tempDir = new File(System.getProperty("java.io.tmpdir"));
+
+        Path tempDir = Paths.get(System.getProperty("java.io.tmpdir"));
         try {
-            return File.createTempFile(safePrefix, safeSuffix, tempDir);
+            Path tempFile = Files.createTempFile(tempDir, "csuf_asset_", safeSuffix);
+            return tempFile.toFile();
         } catch (IOException ex) {
             log.error("getFileFromCRXPath :: unable to create temp file", ex);
             return null;
