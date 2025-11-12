@@ -197,7 +197,7 @@ public class CSUFUtils {
 			String[] filePathArray = filePath.split("\\.");
 			String tempPath = filePathArray[0];
 			int lastSlashIndex = tempPath.lastIndexOf("/");
-			String fileName = tempPath.substring(lastSlashIndex + 1, tempPath.length());
+			String fileName = sanitizePrefix(tempPath.substring(lastSlashIndex + 1, tempPath.length()));
 			String fileExtension = filePathArray[1];
 			return File.createTempFile(fileName, ".".concat(fileExtension));
 		} catch (IOException e) {
@@ -206,7 +206,16 @@ public class CSUFUtils {
 		return null;
 	}
 
-	/*
+    private static String sanitizePrefix(String prefix) {
+        if (prefix == null || prefix.isBlank()) {
+            return "default";
+        }
+        // Remove dangerous characters
+        return prefix.replaceAll("[^a-zA-Z0-9-_]", "_");
+    }
+
+
+    /*
 	 * public static void main(String[] args) { String imagePath =
 	 * "/content/dam/csuf/CSUF_Mailer_logo.gif"; String[] imagePathArray =
 	 * imagePath.split("\\."); String tempPath = imagePathArray[0]; int

@@ -238,8 +238,16 @@ public class SendReminderEmailJobConsumer implements JobConsumer {
 		EmailAttachmentVO attachVO = new EmailAttachmentVO();
 		try {
 			String path = json.get("path").getAsString();
-			String fileName = json.get("fileName").getAsString();
-			Path attachmentSource = Paths.get(path);
+            if (path == null || path.isBlank()) {
+                throw new IllegalArgumentException("Invalid attachment path");
+            }
+
+            String fileName = json.get("fileName").getAsString();
+			Path attachmentSource = Paths.get(path).normalize();
+            if (attachmentSource.isAbsolute()) {
+                throw new SecurityException("Absolute paths not allowed: " + path);
+            }
+            
 			String attachmentMimeType = Files.probeContentType(attachmentSource);
 			attachVO.setContentType(attachmentMimeType);
 			attachVO.setName(fileName);
