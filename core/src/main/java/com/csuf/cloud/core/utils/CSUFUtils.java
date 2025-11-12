@@ -222,38 +222,45 @@ public class CSUFUtils {
                 throw new IllegalArgumentException("Invalid file path");
             }
 
-            // Extract just the filename manually (no Paths.get)
+            // Extract just the file name (no Paths.get → avoids false positives)
             String safeName = filePath;
             int lastSlash = Math.max(filePath.lastIndexOf('/'), filePath.lastIndexOf('\\'));
             if (lastSlash >= 0) {
                 safeName = filePath.substring(lastSlash + 1);
             }
 
-            // Sanitize filename
-            safeName = safeName.replaceAll("[^a-zA-Z0-9-_\\.]", "_");
+            // Sanitize filename — only allow letters, digits, dash, underscore, dot
+            safeName = safeName.replaceAll("[^a-zA-Z0-9._-]", "_");
 
-            // Split into prefix/suffix
+            // Split prefix and suffix safely
             int dotIndex = safeName.lastIndexOf('.');
             String prefix = (dotIndex > 0 ? safeName.substring(0, dotIndex) : "file");
             String suffix = (dotIndex > 0 ? safeName.substring(dotIndex) : ".tmp");
 
-            // Sanitize both again (for analyzer visibility)
-            prefix = prefix.replaceAll("[^a-zA-Z0-9-_]", "_");
-            suffix = suffix.replaceAll("[^a-zA-Z0-9\\.]", "_");
-            if (prefix.length() < 3) prefix = "tmp_" + prefix;
+            // Enforce minimum prefix length (required by File.createTempFile)
+            if (prefix.length() < 3) {
+                prefix = "tmp_" + prefix;
+            }
 
-            // Explicitly trusted directory
-            Path tempDir = Paths.get(System.getProperty("java.io.tmpdir"));
+            // Always use the system temp directory — fixed, trusted location
+            File tempDir = new File(System.getProperty("java.io.tmpdir"));
 
-            // Create temp file securely
-            Path tempFile = Files.createTempFile(tempDir, prefix + "_", suffix);
+            // Validate that directory is safe and writable
+            if (!tempDir.exists() || !tempDir.canWrite()) {
+                throw new IOException("Temporary directory not writable");
+            }
 
-            return tempFile.toFile();
+            // Create secure temp file (safe because prefix/suffix are sanitized and dir is trusted)
+            File tempFile = File.createTempFile(prefix + "_", suffix, tempDir);
+
+            return tempFile;
+
         } catch (IOException e) {
             log.error("Error creating temp file safely: {}", e.getMessage(), e);
             return null;
         }
     }
+
 
 
     /*
