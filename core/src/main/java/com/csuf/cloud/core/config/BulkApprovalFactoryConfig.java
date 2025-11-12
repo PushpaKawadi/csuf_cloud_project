@@ -11,6 +11,7 @@ import org.w3c.dom.Element;
  * @author 104745
  */
 
+
 @ObjectClassDefinition(name = "Bulk Approval Workflow Configuration", description = "approval of bulk workflow assign task steps")
 public @interface BulkApprovalFactoryConfig {
 
