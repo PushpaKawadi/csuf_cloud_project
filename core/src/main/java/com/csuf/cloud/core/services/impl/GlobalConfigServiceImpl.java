@@ -57,7 +57,7 @@ public class GlobalConfigServiceImpl implements GlobalConfigService {
         Session session = null;
 		Map<String, Object> param = new HashMap<>();
 		param.put(ResourceResolverFactory.SUBSERVICE, SUB_SERVICE_NAME);
-		try(ResourceResolver resolver = resolverFactory.getServiceResourceResolver(param) {
+		try(ResourceResolver resolver = resolverFactory.getServiceResourceResolver(param)) {
 
 			session = resolver.adaptTo(Session.class);
 			if (null != session)
@@ -76,7 +76,7 @@ public class GlobalConfigServiceImpl implements GlobalConfigService {
 		param.put("sling.service.subservice", "getformsresourceresolver");
 
 		try {
-            resolver = resolverFactory.getServiceResourceResolver(param)
+            resolver = resolverFactory.getServiceResourceResolver(param);
 		} catch (LoginException e) {
 			log.error(Arrays.toString(e.getStackTrace()));
 		}

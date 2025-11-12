@@ -359,7 +359,8 @@ public class PortalUtils {
 						+ attachmentKey);
 				break;
 			}
-            case default:{
+            default:{
+                log.info("This is default case");
                 break;
             }
 			}
