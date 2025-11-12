@@ -48,6 +48,7 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
+import org.apache.commons.io.FilenameUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.HttpClient;
@@ -216,51 +217,41 @@ public class CSUFUtils {
 	}*/
 
 
+
     public static File getFileFromCRXPath(String filePath) {
+        if (StringUtils.isBlank(filePath)) {
+            log.warn("getFileFromCRXPath :: empty CRX path supplied");
+            return null;
+        }
+        String normalizedPath = FilenameUtils.normalize(filePath);
+        if (normalizedPath == null) {
+            log.warn("getFileFromCRXPath :: normalization failed for {}", filePath);
+            return null;
+        }
+        int lastDot = normalizedPath.lastIndexOf('.');
+        if (lastDot < 0 || lastDot == normalizedPath.length() - 1) {
+            log.warn("getFileFromCRXPath :: missing extension in {}", normalizedPath);
+            return null;
+        }
+        String nameSegment = normalizedPath.substring(0, lastDot);
+        String extension = normalizedPath.substring(lastDot + 1);
+        String safeBasename = FilenameUtils.getName(nameSegment);
+        if (StringUtils.isBlank(safeBasename)) {
+            safeBasename = "asset";
+        }
+        String safePrefix = StringUtils.left(StringUtils.rightPad(safeBasename, 3, '_'), 50);
+        String safeSuffix = "." + extension.replaceAll("[^A-Za-z0-9]", "");
+        if (safeSuffix.length() == 1) {
+            safeSuffix = ".bin";
+        }
+        File tempDir = new File(System.getProperty("java.io.tmpdir"));
         try {
-            if (StringUtils.isBlank(filePath)) {
-                throw new IllegalArgumentException("Invalid file path");
-            }
-
-            // Extract just the file name (no Paths.get → avoids false positives)
-            String safeName = filePath;
-            int lastSlash = Math.max(filePath.lastIndexOf('/'), filePath.lastIndexOf('\\'));
-            if (lastSlash >= 0) {
-                safeName = filePath.substring(lastSlash + 1);
-            }
-
-            // Sanitize filename — only allow letters, digits, dash, underscore, dot
-            safeName = safeName.replaceAll("[^a-zA-Z0-9._-]", "_");
-
-            // Split prefix and suffix safely
-            int dotIndex = safeName.lastIndexOf('.');
-            String prefix = (dotIndex > 0 ? safeName.substring(0, dotIndex) : "file");
-            String suffix = (dotIndex > 0 ? safeName.substring(dotIndex) : ".tmp");
-
-            // Enforce minimum prefix length (required by File.createTempFile)
-            if (prefix.length() < 3) {
-                prefix = "tmp_" + prefix;
-            }
-
-            // Always use the system temp directory — fixed, trusted location
-            File tempDir = new File(System.getProperty("java.io.tmpdir"));
-
-            // Validate that directory is safe and writable
-            if (!tempDir.exists() || !tempDir.canWrite()) {
-                throw new IOException("Temporary directory not writable");
-            }
-
-            // Create secure temp file (safe because prefix/suffix are sanitized and dir is trusted)
-            File tempFile = File.createTempFile(prefix + "_", suffix, tempDir);
-
-            return tempFile;
-
-        } catch (IOException e) {
-            log.error("Error creating temp file safely: {}", e.getMessage(), e);
+            return File.createTempFile(safePrefix, safeSuffix, tempDir);
+        } catch (IOException ex) {
+            log.error("getFileFromCRXPath :: unable to create temp file", ex);
             return null;
         }
     }
-
 
 
     /*
