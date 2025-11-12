@@ -329,7 +329,9 @@ public class DatabaseUtils {
 			logger.info("Get Email Function=" + empEmail);
 		} catch (Exception oEx) {
 			throw oEx;
-		}
+		} finally {
+            oStatement.close();
+        }
 		return empEmail;
 	}
 
@@ -350,7 +352,9 @@ public class DatabaseUtils {
 			logger.info("getDetailsOfEmployee Function=" + oRresultSet);
 		} catch (Exception oEx) {
 			throw oEx;
-		}
+		} finally {
+            oStatement.close();
+        }
 		return userArray;
 	}
 
@@ -371,7 +375,9 @@ public class DatabaseUtils {
 			logger.info("getEmployeeAgency Function=" + oRresultSet);
 		} catch (Exception oEx) {
 			throw oEx;
-		}
+		} finally {
+            oStatement.close();
+        }
 		return userArray;
 	}
 
@@ -407,8 +413,9 @@ public class DatabaseUtils {
 		} catch (Exception exp) {
 			logger.error("Error in getDetailsForSearchFunctionality Method - After Finally Block = " + exp.getMessage()
 					+ " --- Stack Track Array= " + Arrays.toString(exp.getStackTrace()));
-
-		}
+		} finally {
+            oStatement.close();
+        }
 		return getDetailsForSearchFunctionalityArray;
 	}
 
@@ -464,7 +471,9 @@ public class DatabaseUtils {
 			logger.error("Error in getDetailsFromNameForSearchFunctionality Method - After Finally Block = "
 					+ exp.getMessage() + " --- Stack Track Array= " + Arrays.toString(exp.getStackTrace()));
 
-		}
+		} finally {
+            oStatement.close();
+        }
 		return getDetailsFromNameForSearchFunctionalityArray;
 	}
 
@@ -500,7 +509,9 @@ public class DatabaseUtils {
 			logger.error("Error in getDetailsFromNameForSearchFunctionality Method - After Finally Block = "
 					+ exp.getMessage() + " --- Stack Track Array= " + Arrays.toString(exp.getStackTrace()));
 
-		}
+		} finally {
+            oStatement.close();
+        }
 		return getDetailsFromNameForSearchFunctionalityArray;
 	}
 
@@ -773,7 +784,11 @@ public class DatabaseUtils {
 			logger.info("Get Employee Details Function=" + empUserArray);
 		} catch (Exception oEx) {
 			throw oEx;
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return empUserArray;
 	}
 
@@ -794,7 +809,11 @@ public class DatabaseUtils {
 			logger.info("Get getEmailID Function=" + empEmail);
 		} catch (Exception oEx) {
 			throw oEx;
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return empEmail;
 	}
 
@@ -815,7 +834,11 @@ public class DatabaseUtils {
 			logger.info("Get getEmailIDBasedOnUserID Function=" + empEmail);
 		} catch (Exception oEx) {
 			throw oEx;
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return empEmail;
 	}
 
@@ -836,7 +859,11 @@ public class DatabaseUtils {
 			logger.info("Get getEmployeeCSUUnit Function=" + unit);
 		} catch (Exception oEx) {
 			throw oEx;
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return unit;
 	}
 
@@ -861,7 +888,11 @@ public class DatabaseUtils {
 		} catch (Exception e) {
 			logger.error("Error in method getManagerDetails - Finally Block = " + e.getMessage()
 					+ " --- Stack Track Array= " + Arrays.toString(e.getStackTrace()));
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return managerUserArray;
 	}
 
@@ -891,7 +922,11 @@ public class DatabaseUtils {
 			}
 		} catch (Exception oEx) {
 			throw oEx;
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return loggedinUserDetails;
 	}
 
@@ -919,7 +954,11 @@ public class DatabaseUtils {
 			logger.info("Exception=" + oEx);
 			oEx.printStackTrace();
 
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 
 		return jArray;
 	}
@@ -952,7 +991,11 @@ public class DatabaseUtils {
 
 		} catch (Exception oEx) {
 			logger.error(Arrays.toString(oEx.getStackTrace()) + ", Exception Message= " + oEx.getMessage());
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return jArray;
 	}
 
@@ -981,11 +1024,15 @@ public class DatabaseUtils {
 
 		} catch (Exception oEx) {
 			logger.error(Arrays.toString(oEx.getStackTrace()) + ", Exception Message= " + oEx.getMessage());
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return jArray;
 	}
 
-	public void deleteEvalData(Connection conn, String empId, String workflowInstance, String tableName) {
+	public void deleteEvalData(Connection conn, String empId, String workflowInstance, String tableName) throws SQLException {
 		ResultSet oRresultSet = null;
 		String speSqlQuery = "";
 		Statement oStatement = null;
@@ -999,10 +1046,14 @@ public class DatabaseUtils {
 
 		} catch (Exception oEx) {
 			oEx.getMessage();
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 	}
 
-	public String getEvalData(Connection conn, String empId, String workflowInstance, String tableName) {
+	public String getEvalData(Connection conn, String empId, String workflowInstance, String tableName) throws SQLException {
 		String resData = "";
 		ResultSet oRresultSet = null;
 		String speSqlQuery = "";
@@ -1021,12 +1072,16 @@ public class DatabaseUtils {
 
 		} catch (Exception oEx) {
 			oEx.getMessage();
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return resData;
 	}
 
 	public String getSPEEvalData(Connection conn, String empId, String colName, String workflowInstance,
-			String tableName) {
+			String tableName) throws SQLException {
 		String resData = "";
 		ResultSet oRresultSet = null;
 		String speSqlQuery = "";
@@ -1047,12 +1102,16 @@ public class DatabaseUtils {
 
 		} catch (Exception oEx) {
 			oEx.getMessage();
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return resData;
 	}
 
 	public void deleteSPEEvalData(Connection conn, String empId, String colName, String workflowInstance,
-			String tableName) {
+			String tableName) throws SQLException {
 		ResultSet oRresultSet = null;
 		String speSqlQuery = "";
 		Statement oStatement = null;
@@ -1068,7 +1127,11 @@ public class DatabaseUtils {
 
 		} catch (Exception oEx) {
 			oEx.getMessage();
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 	}
 
 	// Method to Soft Delete the TimeKeeper Data
@@ -1112,7 +1175,7 @@ public class DatabaseUtils {
 	}
 
 	public String getFormData(Connection conn, String empId, String colName, String workflowInstance,
-			String tableName) {
+			String tableName) throws SQLException {
 		String resData = "";
 		ResultSet oRresultSet = null;
 		String speSqlQuery = "";
@@ -1133,12 +1196,16 @@ public class DatabaseUtils {
 
 		} catch (Exception oEx) {
 			oEx.getMessage();
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return resData;
 	}
 
 	public String getUniversityKeyData(Connection conn, String caseid, String room, String colName1, String colName2,
-			String workflowInstance, String tableName) {
+			String workflowInstance, String tableName) throws SQLException {
 		String resData = "";
 		ResultSet oRresultSet = null;
 		String speSqlQuery = "";
@@ -1161,12 +1228,16 @@ public class DatabaseUtils {
 
 		} catch (Exception oEx) {
 			oEx.getMessage();
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return resData;
 	}
 
 	public void deleteKeyData(Connection conn, String caseid, String room, String colName1, String colName2,
-			String workflowInstance, String tableName) {
+			String workflowInstance, String tableName) throws SQLException {
 		ResultSet oRresultSet = null;
 		String speSqlQuery = "";
 		Statement oStatement = null;
@@ -1186,11 +1257,15 @@ public class DatabaseUtils {
 			}
 		} catch (Exception oEx) {
 			oEx.getMessage();
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 	}
 
 	public String getPETData(Connection conn, String hrDeptID, String colName1, String workflowInstance,
-			String tableName) {
+			String tableName) throws SQLException {
 		String resData = "";
 		ResultSet oRresultSet = null;
 		String speSqlQuery = "";
@@ -1212,12 +1287,16 @@ public class DatabaseUtils {
 
 		} catch (Exception oEx) {
 			oEx.getMessage();
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return resData;
 	}
 
 	public void deletePETData(Connection conn, String hrDeptID, String colName1, String workflowInstance,
-			String tableName) {
+			String tableName) throws SQLException {
 		ResultSet oRresultSet = null;
 		String speSqlQuery = "";
 		Statement oStatement = null;
@@ -1237,10 +1316,14 @@ public class DatabaseUtils {
 
 		} catch (Exception oEx) {
 			oEx.getMessage();
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 	}
 
-	public void deleteSDVData(Connection conn, String cwid, String colName, String wfInstanceID, String tableName) {
+	public void deleteSDVData(Connection conn, String cwid, String colName, String wfInstanceID, String tableName) throws SQLException {
 		ResultSet oRresultSet = null;
 		String speSqlQuery = "";
 		Statement oStatement = null;
@@ -1254,7 +1337,11 @@ public class DatabaseUtils {
 
 		} catch (Exception oEx) {
 			oEx.getMessage();
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 	}
 
 	public static JSONObject getFulCollege(Connection oConnection, String cwid, String dept) throws Exception {
@@ -1277,7 +1364,11 @@ public class DatabaseUtils {
 			logger.info("Get Email Function=" + userArray);
 		} catch (Exception oEx) {
 			throw oEx;
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return userArray;
 	}
 
@@ -1299,7 +1390,11 @@ public class DatabaseUtils {
 		} catch (Exception oEx) {
 			logger.error("Error in method getDOBOfStudentByCwid - Finally Block = " + oEx.getMessage()
 					+ " -- Stack Track Array= " + Arrays.toString(oEx.getStackTrace()));
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return studentDob;
 	}
 
@@ -1336,7 +1431,11 @@ public class DatabaseUtils {
 		} catch (Exception e) {
 			logger.error("Error in method getFinancialAidSubmissionData - Finally Block = " + e.getMessage()
 					+ " --- Stack Track Array= " + Arrays.toString(e.getStackTrace()));
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return financialAidDataArray;
 	}
 
@@ -1451,7 +1550,11 @@ public class DatabaseUtils {
 			logger.info("Get getEmailID Function=" + empEmail);
 		} catch (Exception oEx) {
 			throw oEx;
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return empEmail;
 	}
 
@@ -1587,7 +1690,7 @@ public class DatabaseUtils {
 		}
 	}
 	
-	public void deleteSFTPCredentialsdata(Connection conn) {
+	public void deleteSFTPCredentialsdata(Connection conn) throws SQLException {
 		ResultSet oRresultSet = null;
 		String sqlQuery = "";
 		Statement oStatement = null;
@@ -1598,7 +1701,11 @@ public class DatabaseUtils {
 			oRresultSet = oStatement.executeQuery(sqlQuery);
 		} catch (Exception oEx) {
 			oEx.getMessage();
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 	}
 	
 	public String insertSFTPCredentials(Connection conn, Map<String, Object> dataMap) {
@@ -1710,7 +1817,11 @@ public class DatabaseUtils {
 			logger.error("Error in getDetailsForSearchFunctionality Method - After Finally Block = " + exp.getMessage()
 					+ " --- Stack Track Array= " + Arrays.toString(exp.getStackTrace()));
 
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return getDetailsForSearchFunctionalityArray;
 	}
 	
@@ -1788,7 +1899,11 @@ public class DatabaseUtils {
 			logger.error("Error in getDetailsFromNameForSearchFunctionality Method - After Finally Block = "
 					+ exp.getMessage() + " --- Stack Track Array= " + Arrays.toString(exp.getStackTrace()));
 
-		}
+		} finally {
+            if (oStatement != null) {
+                oStatement.close();
+            }
+        }
 		return getDetailsFromNameForSearchFunctionalityArray;
 	}
 	
