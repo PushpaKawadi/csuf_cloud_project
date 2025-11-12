@@ -96,7 +96,7 @@
                         <configuration>
                             <rules>
                                 <requireMavenVersion>
-                                    <version>[3.3.9,)</version>
+                                    <version>[3.9.11,)</version>
                                 </requireMavenVersion>
                                 <requireJavaVersion>
                                     <message>Maven must be executed with a Java 11 JRE or higher.</message>
