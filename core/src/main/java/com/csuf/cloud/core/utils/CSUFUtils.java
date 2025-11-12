@@ -192,7 +192,7 @@ public class CSUFUtils {
 		return is;
 	}
 
-	public static File getFileFromCRXPath(String filePath) {
+/*	public static File getFileFromCRXPath(String filePath) {
 		try {
 			String[] filePathArray = filePath.split("\\.");
 			String tempPath = filePathArray[0];
@@ -210,7 +210,40 @@ public class CSUFUtils {
 			log.error(ArrayUtils.toString(e.getStackTrace()));
 		}
 		return null;
-	}
+	}*/
+
+    public static File getFileFromCRXPath(String filePath) {
+        try {
+            if (filePath == null || filePath.isBlank()) {
+                throw new IllegalArgumentException("Invalid file path");
+            }
+
+            String[] filePathArray = filePath.split("\\.");
+            String tempPath = filePathArray[0];
+            int lastSlashIndex = tempPath.lastIndexOf("/");
+
+            String fileName = (lastSlashIndex >= 0)
+                    ? tempPath.substring(lastSlashIndex + 1)
+                    : tempPath;
+
+            if (fileName == null || fileName.isBlank()) {
+                fileName = "default";
+            } else {
+                fileName = fileName.replaceAll("[^a-zA-Z0-9-_]", "_");
+            }
+
+            String fileExtension = (filePathArray.length > 1)
+                    ? filePathArray[1].replaceAll("[^a-zA-Z0-9]", "")
+                    : "tmp";
+
+            File tempDir = new File(System.getProperty("java.io.tmpdir"));
+            return File.createTempFile(fileName + "_", "." + fileExtension, tempDir);
+
+        } catch (IOException e) {
+            log.error("Error creating temp file from CRX path: {}", e.getMessage(), e);
+        }
+        return null;
+    }
 
     private static String sanitizePrefix(String prefix) {
         if (prefix == null || prefix.isBlank()) {
