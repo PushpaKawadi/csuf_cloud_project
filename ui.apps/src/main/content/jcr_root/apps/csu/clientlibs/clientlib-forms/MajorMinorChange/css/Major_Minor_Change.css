@@ -1,0 +1,517 @@
+
+
+.rb {
+	width: 15px;
+}
+
+.modal {
+    width: 100% !important;
+	display: none;
+	/* Hidden by default */
+	position: fixed;
+	/* Stay in place */
+	z-index: 1;
+	/* Sit on top */
+	padding-top: 200px;
+	/* Location of the box */
+	left: 0;
+	top: 0;
+	background-color: rgb(0, 0, 0);
+	/* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4);
+	/* Black w/ opacity */
+}
+
+.modal-content {
+	position: relative;
+	background-color: #fefefe;
+    width: 57%;
+	margin: auto;
+	padding: 0;
+	border: 1px solid #888;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s
+}
+
+@media (max-width : 767px){
+.modal-content {
+	width: 100%;
+    }
+}
+
+
+/* Add Animation */
+
+@-webkit-keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+@keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+
+/* The Close Button */
+
+.modal-header .close {
+	margin-top: -28px;
+	margin-right: -10px;
+}
+
+.close {
+	color: grey;
+	float: right;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.modal-header {
+	padding: 2px 16px;
+	/* background-color: #1557c1;*/
+	height: 35px;
+	color: white;
+}
+
+.modal-body {
+	padding: 2px 16px;
+}
+
+.modal-footer {
+	height: 50px;
+	padding: 2px 16px;
+	/* background-color: #1557c1;*/
+	color: white;
+	text-align: left;
+}
+
+th {
+	font-size: 15px;
+	background-color: #00203e;
+	color: white;
+	font-weight: bold;
+}
+
+td,
+tr {
+	border: solid 1px #070f1c;
+	font-size: 14px;
+	font-family: Helvetica;
+	/*background-color:#9baecc;*/
+	color: #070f1c;
+}
+
+table {
+	border: solid 1px #070f1c;
+	border-collapse: collapse;
+	padding: 2px 3px;
+	text-align: center;
+    width: 100%;
+}
+
+.okBtn {
+	position: absolute;
+	right: 0;
+	margin-right: 16px !important;
+	padding-right: 28px !important;
+	padding-left: 28px !important;
+}
+
+.okBtn:hover,
+.okBtn:focus {
+	background-color: #084B8A;
+}
+
+.cancelBtn {
+	position: absolute;
+	margin-left: 622px !important;
+}
+
+.cancelBtn:hover,
+.cancelBtn:focus {
+	background-color: #084B8A;
+}
+
+.modal-text {
+	font-size: 20px !important;
+	font-weight: bold;
+	font-family: Helvetica !importnat;
+	/*background-color:#9baecc;*/
+	color: #070f1c !important;
+}
+
+    .gif-modal{
+          width: 100%;
+    position: fixed;
+    z-index: 1;
+    padding-top: 200px;
+    left: 0;
+    top: 0;
+    text-align: center;
+        }
+
+.gif-img{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.alertBox
+{
+    z-index: 1;
+    padding-top: 200px;
+    right: 0;
+    overflow: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    display: none;
+
+}
+.customAlert {
+
+   width: 400px;
+    border: solid 1px grey;
+    height: auto;
+    border-radius: 5px;
+
+    position: relative;
+    background-color: white;
+    margin: auto;
+    padding: 0;
+   /* box-shadow: 4px 4px 4px grey;*/
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+
+  }
+@media(max-width: 767px) {
+  .customAlert {
+   width : auto;
+   border: solid 1px grey;
+   position: relative;
+   margin: auto;
+   height: auto;
+   text-align: center;
+   border-radius: 5px;
+   background-color: white;
+   padding: 0;
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+}
+  
+.closebtn {
+
+   float: right;
+   cursor:pointer;
+   color: #fff;
+	border: 1px solid #AEAEAE;
+    border-radius: 30px;
+    background: #605F61;
+	font-size: 31px;
+    font-weight: bold;
+    display: inline-block;
+    line-height: 0px;
+    padding: 11px 3px;   
+}
+ 
+
+
+.closebtn:hover {
+  color: black;
+}
+.customtext{
+padding: 50px;
+}
+
+
+.afHeader .guidefield {
+    vertical-align: middle !important;
+}
+
+.guideFieldError {
+padding-left:5px;
+padding-top:5px;
+color:#FF4136;
+} 
+
+/* #guideContainer-rootPanel-basicinformation-guidetextdraw_1240627496___guide-item{
+	position: relative;
+    left: 61px;
+}
+
+#guideContainer-rootPanel-basicinformation-FileNameBR1579692816053___guide-item{
+	position: relative;
+    left: 63px;
+}
+#guideContainer-rootPanel-basicinformation-guidetextdraw_207128965___guide-item{
+	position: relative;
+    left: 35px;
+}
+
+#guideContainer-rootPanel-basicinformation-guidetextdraw_207128___guide-item{
+	position: relative;
+    left: 35px;
+}
+
+#guideContainer-rootPanel-basicinformation-FileNameBR11579692946332___guide-item{
+	position: relative;
+    left: 63px;
+}
+
+#guideContainer-rootPanel-basicinformation-guidetextdraw_124062___guide-item{
+	position: relative;
+    left: 61px;
+}
+
+#guideContainer-rootPanel-basicinformation-guidetextdraw_207128_674349451___guide-item{
+	position: relative;
+    left: 35px;
+}
+
+#guideContainer-rootPanel-basicinformation-FileNameL1579693041120___guide-item{
+	position: relative;
+    left: 63px;
+}
+
+#guideContainer-rootPanel-basicinformation-guidetextdraw_124062_450805286___guide-item{
+	position: relative;
+    left: 61px;
+}
+
+#guideContainer-rootPanel-basicinformation-guidetextdraw_207128_461116587___guide-item{
+	position: relative;
+    left: 35px
+}
+
+#guideContainer-rootPanel-basicinformation-FileNameLR1579693102345___guide-item{
+	position: relative;
+    left: 63px;
+}
+
+#guideContainer-rootPanel-basicinformation-guidetextdraw_124062_1657555561___guide-item{
+	position: relative;
+    left: 61px;
+}
+
+#guideContainer-rootPanel-basicinformation-guidetextdraw_207128_758429471___guide-item{
+	position: relative;
+    left: 35px
+}
+
+#guideContainer-rootPanel-basicinformation-FileNameV1579693267965___guide-item{
+	position: relative;
+    left: 63px;
+}
+
+#guideContainer-rootPanel-basicinformation-guidetextdraw_124062_1447496128___guide-item{
+	position: relative;
+    left: 61px;
+}
+
+#guideContainer-rootPanel-basicinformation-guidetextdraw_207128_1561792772___guide-item{
+	position: relative;
+    left: 35px
+}
+
+#guideContainer-rootPanel-basicinformation-FileNameVR1579693335093___guide-item{
+	position: relative;
+    left: 61px;
+}
+
+#guideContainer-rootPanel-basicinformation-guidetextdraw_124062_750251845___guide-item{
+	position: relative;
+    left: 61px;
+} */
+
+/* Current Major/Concentration Major Code field - Tab A */
+#guideContainer-rootPanel-employeeinformation-interpersonalskills-ChangeCurrentMajorToNewMajorPanel-CurrentMajorAcadPlanCode1592207797526___widget{
+	position: relative;
+    right: 40px;
+    width: 60%;
+}
+
+/* New Major/Concentration Major Code field - Tab A */
+#guideContainer-rootPanel-employeeinformation-interpersonalskills-ChangeCurrentMajorToNewMajorPanel-NewMajorAcadPlanCode1592207807982___widget{
+	right: 40px;
+    width: 60%;
+}
+
+/* Add additional major/concentration Major Code field - Tab B  */
+#guideContainer-rootPanel-employeeinformation-initiative-AddSecondMajorPanel-AddSecondMajorAcadCode1592219541363___widget{
+	right: 40px;
+    width: 60%;
+}
+
+/* Select current major/concentration Major Code field  - Tab B */
+#guideContainer-rootPanel-employeeinformation-initiative-panel-ChangeAdditionalNewMajor1592225259305___widget{
+	right: 40px;
+    width: 60%;
+}
+
+/* Select New Major/Concentration Major Code field - Tab B */
+#guideContainer-rootPanel-employeeinformation-initiative-panel-ChangeAdditionalNewMajorAcadCode1592225408425___widget{
+	right: 40px;
+    width: 60%;
+}
+
+/* Drop Major/Concentration Major Code field - Tab B */
+#guideContainer-rootPanel-employeeinformation-initiative-DropSecondMajorPanel-MajorToDropAcadPlanCode1592222027653___widget{
+	right: 40px;
+    width: 60%;
+}
+
+/* Declare a minor Minor Code field - Tab C */
+#guideContainer-rootPanel-employeeinformation-adaptability-DeclareMinorPanel-DeclareMinorAcadPlan1592294476262___widget{
+	right: 40px;
+    width: 60%;
+}
+
+/* Add a second/or third minor Minor Code field - Tab C */
+#guideContainer-rootPanel-employeeinformation-adaptability-AddSecondOrThirdMinorPanel-AddSecondOrThirdMinorAcadPlan1592294927433___widget{
+	right: 40px;
+    width: 60%;
+}
+
+/* Drop a minor Minor Code field - Tab C */
+#guideContainer-rootPanel-employeeinformation-adaptability-addsecondorthirdmino-DropMinorAcadPlan1592295170448___widget{
+	right: 40px;
+    width: 60%;
+}
+
+/* Declare a certificate Certificate Code field - Tab D */
+#guideContainer-rootPanel-employeeinformation-CertificatePanel-DeclareCertificatePanel-DeclareCertificateAcadPlan1592295454861___widget{
+	right: 10px;
+    width: 60%;
+}
+
+/* Drop a certificate Certificate Code field - Tab D */
+#guideContainer-rootPanel-employeeinformation-CertificatePanel-declarecertificatepa-DropCertificateAcadPlan1592295575648___widget{
+	right: 10px;
+    width: 60%;
+}
+
+.guideTableNode table .guideTableRuntimeRightControls{
+	 display: none !important;
+    }
+
+ .guideTableRuntimeControls guideTableRuntimeRightControls{
+	 display: none !important;
+   }
+.guideTableRuntimeControls .guideTableRuntimeRightControls{
+	 display: none !important;
+   }
+
+
+@media(max-width: 767px){
+	#headerTextFullerton650{
+		padding-left: 30px !important;
+    }
+
+	#guideContainer-rootPanel-basicinformation___guide-item-container{
+		padding-left: 10px;
+	}
+
+	#guideContainer-rootPanel-basicinformation-FileNameBR1579692816053___guide-item{
+		position: relative;
+    	left: 0px;
+	}
+
+	#guideContainer-rootPanel-basicinformation-FileNameBR11579692946332___guide-item{
+		position: relative;
+    	left: 0px;
+	}
+
+	#guideContainer-rootPanel-basicinformation-FileNameL1579693041120___guide-item{
+		position: relative;
+    	left: 0px;
+	}
+
+	#guideContainer-rootPanel-basicinformation-FileNameLR1579693102345___guide-item{
+		position: relative;
+    	left: 0px;
+	}
+
+	#guideContainer-rootPanel-basicinformation-FileNameV1579693267965___guide-item{
+		position: relative;
+    	left: 0px;
+	}
+
+	#guideContainer-rootPanel-basicinformation-FileNameVR1579693335093___guide-item{
+		position: relative;
+    	left: 0px;
+	}
+}
+
+#guideContainer-rootPanel-employeeinformation___guide-item-nav-container{
+
+	position: relative;
+    left: -6px;
+    width: 104%;
+}
+
+
+/*.guideTabbedPanelLayout .tab-navigators.tab-navigators-vertical > li > a.guideLeftNavIcon
+{
+	padding-left: 0px !important;
+	padding-right: 0px !important;
+
+} */
+/*
+.tab-navigators-vertical > li{
+	width: 110% !important;
+    display: block !important;
+    position: relative !important;
+    right: 23px !important;
+	background-color: transparent;
+}*/
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

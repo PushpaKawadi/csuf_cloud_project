@@ -1,0 +1,320 @@
+
+
+.rb {
+	width: 15px;
+}
+
+.modal {
+    width: 100% !important;
+	display: none;
+	/* Hidden by default */
+	position: fixed;
+	/* Stay in place */
+	z-index: 1;
+	/* Sit on top */
+	padding-top: 200px;
+	/* Location of the box */
+	left: 0;
+	top: 0;
+	background-color: rgb(0, 0, 0);
+	/* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4);
+	/* Black w/ opacity */
+}
+
+.modal-content {
+	position: relative;
+	background-color: #fefefe;
+    width: 57%;
+	margin: auto;
+	padding: 0;
+	border: 1px solid #888;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s
+}
+
+@media (max-width : 767px){
+.modal-content {
+	width: 100%;
+    }
+}
+
+
+/* Add Animation */
+
+@-webkit-keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+@keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+
+/* The Close Button */
+
+.modal-header .close {
+	margin-top: -28px;
+	margin-right: -10px;
+}
+
+.close {
+	color: grey;
+	float: right;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.modal-header {
+	padding: 2px 16px;
+	/* background-color: #1557c1;*/
+	height: 35px;
+	color: white;
+}
+
+.modal-body {
+	padding: 2px 16px;
+}
+
+.modal-footer {
+	height: 50px;
+	padding: 2px 16px;
+	/* background-color: #1557c1;*/
+	color: white;
+	text-align: left;
+}
+
+th {
+	font-size: 15px;
+	background-color: #00203e;
+	color: white;
+	font-weight: bold;
+}
+
+td,
+tr {
+	border: solid 1px #070f1c;
+	font-size: 14px;
+	font-family: Helvetica;
+	/*background-color:#9baecc;*/
+	color: #070f1c;
+}
+
+table {
+	border: solid 1px #070f1c;
+	border-collapse: collapse;
+	padding: 2px 3px;
+	text-align: center;
+    width: 100%;
+}
+
+.okBtn {
+	position: absolute;
+	right: 0;
+	margin-right: 16px !important;
+	padding-right: 28px !important;
+	padding-left: 28px !important;
+}
+
+.okBtn:hover,
+.okBtn:focus {
+	background-color: #084B8A;
+}
+
+.cancelBtn {
+	position: absolute;
+	margin-left: 622px !important;
+}
+
+.cancelBtn:hover,
+.cancelBtn:focus {
+	background-color: #084B8A;
+}
+
+.modal-text {
+	font-size: 20px !important;
+	font-weight: bold;
+	font-family: Helvetica !importnat;
+	/*background-color:#9baecc;*/
+	color: #070f1c !important;
+}
+
+    .gif-modal{
+          width: 100%;
+    position: fixed;
+    z-index: 1;
+    padding-top: 200px;
+    left: 0;
+    top: 0;
+    text-align: center;
+        }
+
+.gif-img{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.alertBox
+{
+    z-index: 1;
+    padding-top: 200px;
+    right: 0;
+    overflow: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    display: none;
+
+}
+.customAlert {
+
+   width: 400px;
+    border: solid 1px grey;
+    height: auto;
+    border-radius: 5px;
+
+    position: relative;
+    background-color: white;
+    margin: auto;
+    padding: 0;
+   /* box-shadow: 4px 4px 4px grey;*/
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+
+  }
+@media(max-width: 767px) {
+  .customAlert {
+   width : auto;
+   border: solid 1px grey;
+   position: relative;
+   margin: auto;
+   height: auto;
+   text-align: center;
+   border-radius: 5px;
+   background-color: white;
+   padding: 0;
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+}
+  
+.closebtn {
+
+   float: right;
+   cursor:pointer;
+   color: #fff;
+	border: 1px solid #AEAEAE;
+    border-radius: 30px;
+    background: #605F61;
+	font-size: 31px;
+    font-weight: bold;
+    display: inline-block;
+    line-height: 0px;
+    padding: 11px 3px;   
+}
+ 
+
+
+.closebtn:hover {
+  color: black;
+}
+.customtext{
+padding: 50px;
+}
+
+
+.afHeader .guidefield {
+    vertical-align: middle !important;
+}
+
+@media (max-width: 767px){
+	#headerTextCareerDevelopmentPlan{
+		padding-left: 8px !important;
+    	position: fixed !important;
+    	font-size: 22px;
+}
+}
+
+.guideFieldError {
+padding-left:5px;
+padding-top:5px;
+color:#FF4136;
+}
+
+
+
+.error-modal-content {
+	position: relative;
+	background-color: #fefefe;
+    width: 43%;
+	margin: auto;
+	padding: 0;
+	border: 1px solid #888;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s
+}
+
+@media (max-width : 767px){
+.modal-content {
+	width: 100%;
+    }
+ .error-modal-content {
+        width: 100%;
+        }
+}
+
+
+/* Moving Re-employment List No checkbox towards right side */
+#guideContainer-rootPanel-qualityquantityoralc-quality-ReEmpNo1590474069267__{
+	position: relative;
+    right: 146px;
+}
+
+
+/* Moving BUMP/RETREAT RIGHTS No checkbox towards right side */
+#guideContainer-rootPanel-qualityquantityoralc-panel_1496418637-RetreatNo1590480461409___guide-item{
+    position: relative;
+    right: 146px;
+}
+
+/* Moving Exercise Rights No checkbox towards right side */
+#guideContainer-rootPanel-qualityquantityoralc-panel_1496418637-ExerciseNo1590480472564___guide-item{
+    position: relative;
+    right: 146px;
+}
+
+/* Moving Vacant No checkbox towards right side */
+
+#guideContainer-rootPanel-qualityquantityoralc-panel_1496418637-VacantNo1590480597344___guide-item{
+    position: relative;
+    right: 146px;
+}

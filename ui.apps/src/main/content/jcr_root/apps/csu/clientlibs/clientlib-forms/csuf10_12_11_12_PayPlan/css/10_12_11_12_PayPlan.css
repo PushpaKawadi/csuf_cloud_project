@@ -1,0 +1,417 @@
+
+
+.rb {
+	width: 15px;
+}
+
+.modal {
+    width: 100% !important;
+	display: none;
+	/* Hidden by default */
+	position: fixed;
+	/* Stay in place */
+	z-index: 1;
+	/* Sit on top */
+	padding-top: 200px;
+	/* Location of the box */
+	left: 0;
+	top: 0;
+	background-color: rgb(0, 0, 0);
+	/* Fallback color */
+	background-color: rgba(0, 0, 0, 0.4);
+	/* Black w/ opacity */
+}
+
+.modal-content {
+	position: relative;
+	background-color: #fefefe;
+    width: 57%;
+	margin: auto;
+	padding: 0;
+	border: 1px solid #888;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	-webkit-animation-name: animatetop;
+	-webkit-animation-duration: 0.4s;
+	animation-name: animatetop;
+	animation-duration: 0.4s
+}
+
+@media (max-width : 767px){
+.modal-content {
+	width: 100%;
+    }
+}
+
+
+/* Add Animation */
+
+@-webkit-keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+@keyframes animatetop {
+	from {
+		top: -300px;
+		opacity: 0
+	}
+	to {
+		top: 0;
+		opacity: 1
+	}
+}
+
+
+/* The Close Button */
+
+.modal-header .close {
+	margin-top: -28px;
+	margin-right: -10px;
+}
+
+.close {
+	color: grey;
+	float: right;
+	font-size: 30px;
+	font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+	color: #000;
+	text-decoration: none;
+	cursor: pointer;
+}
+
+.modal-header {
+	padding: 2px 16px;
+	/* background-color: #1557c1;*/
+	height: 35px;
+	color: white;
+}
+
+.modal-body {
+	padding: 2px 16px;
+}
+
+.modal-footer {
+	height: 50px;
+	padding: 2px 16px;
+	/* background-color: #1557c1;*/
+	color: white;
+	text-align: left;
+}
+
+th {
+	font-size: 15px;
+	background-color: #00203e;
+	color: white;
+	font-weight: bold;
+}
+
+td,
+tr {
+	border: solid 1px #070f1c;
+	font-size: 14px;
+	font-family: Helvetica;
+	/*background-color:#9baecc;*/
+	color: #070f1c;
+}
+
+table {
+	border: solid 1px #070f1c;
+	border-collapse: collapse;
+	padding: 2px 3px;
+	text-align: center;
+    width: 100%;
+}
+
+.okBtn {
+	position: absolute;
+	right: 0;
+	margin-right: 16px !important;
+	padding-right: 28px !important;
+	padding-left: 28px !important;
+}
+
+.okBtn:hover,
+.okBtn:focus {
+	background-color: #084B8A;
+}
+
+.cancelBtn {
+	position: absolute;
+	margin-left: 622px !important;
+}
+
+.cancelBtn:hover,
+.cancelBtn:focus {
+	background-color: #084B8A;
+}
+
+.modal-text {
+	font-size: 20px !important;
+	font-weight: bold;
+	font-family: Helvetica !importnat;
+	/*background-color:#9baecc;*/
+	color: #070f1c !important;
+}
+
+    .gif-modal{
+          width: 100%;
+    position: fixed;
+    z-index: 1;
+    padding-top: 200px;
+    left: 0;
+    top: 0;
+    text-align: center;
+        }
+
+.gif-img{
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+.alertBox
+{
+    z-index: 1;
+    padding-top: 200px;
+    right: 0;
+    overflow: auto;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 100%;
+    height: 100%;
+    display: none;
+
+}
+.customAlert {
+
+   width: 400px;
+    border: solid 1px grey;
+    height: auto;
+    border-radius: 5px;
+
+    position: relative;
+    background-color: white;
+    margin: auto;
+    padding: 0;
+   /* box-shadow: 4px 4px 4px grey;*/
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+
+  }
+@media(max-width: 767px) {
+  .customAlert {
+   width : auto;
+   border: solid 1px grey;
+   position: relative;
+   margin: auto;
+   height: auto;
+   text-align: center;
+   border-radius: 5px;
+   background-color: white;
+   padding: 0;
+   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+  }
+}
+  
+.closebtn {
+
+   float: right;
+   cursor:pointer;
+   color: #fff;
+	border: 1px solid #AEAEAE;
+    border-radius: 30px;
+    background: #605F61;
+	font-size: 31px;
+    font-weight: bold;
+    display: inline-block;
+    line-height: 0px;
+    padding: 11px 3px;   
+}
+ 
+
+
+.closebtn:hover {
+  color: black;
+}
+.customtext{
+padding: 50px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-guidetextdraw__{
+	position: relative;
+	left: 50px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-guidetextdraw_1393240660__{
+	position: relative;
+	bottom: 14px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-guidetextdraw_747258378__{
+	position: relative;
+    bottom: 39px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-guidetextdraw_1878914144__{
+	position: relative;
+    right: 90px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-oralCommunication-date11576753368372__{ /* Date field on Approval tab */
+	padding-top: 17px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-oralCommunication-date21576753389532__{ /* Another Date field Approval tab */
+	padding-top: 17px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-guidetextdraw_241104277__{ /* Cross between MonthlySalary and DayToWork*/
+	position: relative;
+    top: 28px;
+    left: 146px !important;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-monthSal1576752869639__{ /* Monthly Salary Field*/
+	position: relative;
+    left: 150px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-guidetextdraw_1384641424__{ /* equals sign (=)*/
+	position: relative;
+    left: 40px;
+    top: 50px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-guidetextdraw_556280228__{ /* x 12 Months text */
+	position: relative;
+    left: 25px;
+    top: 25px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-daystowork1576752910021__{ /* DaysToWork Field */
+	position: relative;
+    left: 35px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-annualSalary1576752963823__{ /* Annual Salary field */
+	position: relative;
+    right: 40px;
+    top: 25px;
+}
+
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-possibleworkdays1576753000381__{ /* PossibleWorkDays field */
+	position: relative;
+    right: 48px;
+}
+
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-monthSal1589771797677__{ /* Monthly Salary field */
+	position: relative;
+    left: 146px;
+}
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-guidetextdraw_241104__{ /* X between Monthly Salary and MonthsToWork field  */
+	padding-top: 46px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-monthstowork1576753076741__{ /* MonthsToWork form-field */
+	padding-top: 17px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-guidetextdraw_241104_601678874__{ /* equals to sign between MonthsToWork and Projected Earned Salary */
+	padding-top: 46px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-annualSalary11577091348008__{ /* Annual Salary1 */
+	padding-top: 17px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-guidetextdraw_1448934979__{ /* X between Annual Salary 1 and Projected Earned Salary 1 */
+	padding-top: 46px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-guidetextdraw_654196862__{ /* equeals-to sign between Projected Earned Salary 1 and Settlement Amount */
+	padding-top: 46px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-settlementAmount1577091389191__{ /* Settlement Amount field */
+	padding-top: 17px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-firstMonthOff1576753193322__{ /* 1st Month of $ field */
+	position: relative;
+    right: 43px;
+}
+
+#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-secondMonthOff1576753197004__{ /* 2nd Month of $ field */
+	position: relative;
+    right: 38px;
+}
+
+
+@media(max-width: 767px){
+	#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-guidetextdraw_747258378__{
+		bottom: 82px;
+	}
+
+	#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-guidetextdraw_1878914144__{
+		left: 30px;
+	}
+
+	#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-monthSal1589771797677__ {
+		left: 4px;
+	}
+
+	#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-daystowork1576752910021__ {
+		left: 4px;
+	}
+
+	#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-guidetextdraw_241104277___guide-item{
+		bottom: 35px;
+	}
+
+	#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-daystowork1576752910021__{
+		bottom: 35px;
+	}
+
+	#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-guidetextdraw_556280228___guide-item{
+		bottom: 55px;
+	}
+
+	#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-guideseparator___guide-item{
+		bottom: 162px;
+	}
+
+	#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-possibleworkdays1576753000381__{
+		bottom: 165px;
+    	right: -2px;
+	}
+
+	#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-annualSalary1576752963823__{ /* Annual Salary field  */
+		right: -2px;
+	}
+
+	#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-firstMonthOff1576753193322__{ /* 1st Month of $ */
+		right: 0px;
+	}
+
+	#guideContainer-rootPanel-qualityquantityoralc-approvaAndSignature-secondMonthOff1576753197004__{
+		right: 0px;
+	}
+}
+
+
+
