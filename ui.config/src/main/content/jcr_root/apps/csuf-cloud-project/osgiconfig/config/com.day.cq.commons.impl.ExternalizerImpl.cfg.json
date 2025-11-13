@@ -1,0 +1,8 @@
+{
+  "externalizer.domains": [
+    "local=http://erpaempr65tst01:4502",
+    "author=http://erpaeman65tst:4502",
+    "processing=http://erpaempr65tst01:4502",
+    "publish=http://erpaempn65tst:4503"
+  ]
+}
