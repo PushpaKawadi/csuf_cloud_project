@@ -1,0 +1,18 @@
+// Configuration created by Apache Sling JCR Installer
+{
+  "uniqueIdentifier":"bulkApprovalConfig4",
+
+  "taskTitle":"CISO Review",
+  
+  "xmlFieldsToUpdate": [
+    "CISOCB~checkbox",
+    "CISOName~textfield"
+  ]
+
+
+}
+
+
+
+
+
