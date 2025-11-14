@@ -1,0 +1,7 @@
+{
+  "scripts": [
+    "create service user data with path /home/users/system/aem-csu",
+    "set ACL for my-system-user \n  allow jcr:all on / \nend",
+    "add data to group administrators"
+  ]
+}
