@@ -27,7 +27,7 @@ public class CloudSampleServlet extends SlingSafeMethodsServlet {
 		String jsonResponse = "{\"configUrl\":\"" + filenetUrl + "\"}";
 		
 		String filenetUrl1 = globalConfigFilenetService.getMajorMinorFilenetURL();
-		String jsonResponse1 = "{\"configUrl\":\"" + filenetUrl1 + "\"}";
+		String jsonResponse1 = "filenetUrl1";
 
 		response.getWriter().write(jsonResponse);
         response.getWriter().write(jsonResponse1);
