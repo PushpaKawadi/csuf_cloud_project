@@ -44,7 +44,7 @@ public @interface GlobalConfigAEMCSU {
 	@AttributeDefinition(name = "HR Benefits Filenet URL", description = "HR Benefits Filenet URL", type = AttributeType.STRING, defaultValue = "http://erpicn521tst.fullerton.edu:9080/CSUFAEMServices/rest/AEMService/addHRIntExtFeeWaiverBenefitsDocuments")
 	String hr_Benefits_Filenet_URL();
 
-	@AttributeDefinition(name = "Major Minor Change FileNet URL", description = "Major Minor Change FileNet URL", type = AttributeType.STRING)
+	@AttributeDefinition(name = "Major Minor Change FileNet URL", description = "Major Minor Change FileNet URL", type = AttributeType.STRING, defaultValue = "http://erpicn521tst.fullerton.edu:9080/CSUFAEMServices/rest/AEMService/addMajorChangeDocuments")
 	String major_Minor_Change_FileNet_URL();
 
 	@AttributeDefinition(name = "New Position Staff FileNet URL", description = "New Position Staff FileNet URL", type = AttributeType.STRING)
