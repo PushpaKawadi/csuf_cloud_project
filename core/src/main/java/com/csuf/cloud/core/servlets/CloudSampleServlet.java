@@ -25,8 +25,8 @@ public class CloudSampleServlet extends SlingSafeMethodsServlet {
 	@Reference
 	transient private GlobalConfigCSUFService globalConfigFilenetService;
 	
-	/*@Reference
-	transient private BulkApprovalFactoryConfigService bulkApproval;*/
+	@Reference
+	transient private BulkApprovalFactoryConfigService bulkApproval;
 
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response) throws IOException {
@@ -41,16 +41,16 @@ public class CloudSampleServlet extends SlingSafeMethodsServlet {
 		response.getWriter().write(jsonResponse);
         response.getWriter().write(jsonResponse1);
         
-        /*String uID = bulkApproval.uniqueIdentifier();
+        String uID = bulkApproval.uniqueIdentifier();
 		String uIDRes = "{\"uID\":\"" + uID + "\"}";
 		
-		 List<String> xmlVal = bulkApproval.xmlFieldsToUpdate();
+        /*List<String> xmlVal = bulkApproval.xmlFieldsToUpdate();
 		 xmlVal.get(1);
 		 xmlVal.get(1);
 		
 		 response.getWriter().write(xmlVal.get(1));
-		 response.getWriter().write(xmlVal.get(2));
-		 response.getWriter().write(uIDRes);*/
+		 response.getWriter().write(xmlVal.get(2));*/
+		 response.getWriter().write(uIDRes);
 		
 		
 	}
