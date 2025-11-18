@@ -17,7 +17,7 @@ import com.csuf.cloud.core.services.GlobalConfigCSUFService;
 import com.csuf.cloud.core.vo.WorkflowVO;
 
 @Component(service = GlobalConfigCSUFService.class, immediate = true, property = {
-		Constants.SERVICE_DESCRIPTION + "=Global Config Filenet Service" })
+		Constants.SERVICE_DESCRIPTION + "=Global Config Filenet Service", Constants.SERVICE_RANKING + ":Integer=500"})
 
 @Designate(ocd = GlobalConfigAEMCSU.class)
 public class GlobalConfigCSUFServiceImpl implements GlobalConfigCSUFService {

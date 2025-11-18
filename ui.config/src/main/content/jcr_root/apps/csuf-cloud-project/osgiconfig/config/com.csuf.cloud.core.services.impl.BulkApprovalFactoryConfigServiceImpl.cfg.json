@@ -1,0 +1,16 @@
+{
+  "uniqueIdentifier": "config1",
+  "taskTitle": "Review Task",
+  "workflowModel": "/var/workflow/models/sample-model",
+  "xmlFieldsToUpdate": [
+    "field1",
+    "field2",
+    "field3"
+  ],
+  "actionToBeTaken": "approve",
+  "getRoutes": "route1,route2",
+  "xmlElement": "RootElement",
+  "actionMetadataField": "approvalAction"
+}
+
+

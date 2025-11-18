@@ -1,0 +1,6 @@
+{
+  "schedulerName": "CSUF Scheduler",
+  "schedulerConcurrent": false,
+  "serviceEnabled": true,
+  "schedulerExpression": "0 * * * * ?"
+}

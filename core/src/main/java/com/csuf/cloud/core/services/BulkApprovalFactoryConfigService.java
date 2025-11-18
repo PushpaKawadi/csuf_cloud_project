@@ -20,5 +20,6 @@ public interface BulkApprovalFactoryConfigService {
 	String xmlElement();
 	
 	String actionMetadataField();
+	
 
 }

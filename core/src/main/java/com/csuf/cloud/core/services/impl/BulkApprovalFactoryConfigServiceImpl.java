@@ -17,7 +17,8 @@ import com.csuf.cloud.core.services.BulkApprovalFactoryConfigService;
 
 @Component(immediate = true, service = BulkApprovalFactoryConfigService.class, configurationPolicy = ConfigurationPolicy.REQUIRE, property = {
 		Constants.SERVICE_VENDOR + "=ThoughtFocus",
-		Constants.SERVICE_DESCRIPTION + "=Bulk Approval Workflow For Approving The Tasks", })
+		Constants.SERVICE_DESCRIPTION + "=Bulk Approval Workflow For Approving The Tasks", Constants.SERVICE_RANKING + ":Integer=100"})
+ 
 @Designate(ocd = BulkApprovalFactoryConfig.class, factory = true)
 public class BulkApprovalFactoryConfigServiceImpl implements BulkApprovalFactoryConfigService {
 
