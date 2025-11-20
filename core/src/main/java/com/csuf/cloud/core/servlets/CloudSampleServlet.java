@@ -1,19 +1,15 @@
 package com.csuf.cloud.core.servlets;
 
 import java.io.IOException;
-import java.util.List;
-
-
 
 import javax.servlet.Servlet;
+
 import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.SlingHttpServletResponse;
 import org.apache.sling.api.servlets.SlingSafeMethodsServlet;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 
-import com.csuf.cloud.core.config.BulkApprovalFactoryConfig;
-import com.csuf.cloud.core.services.BulkApprovalFactoryConfigService;
 import com.csuf.cloud.core.services.GlobalConfigCSUFService;
 
 @Component(service = { Servlet.class }, property = { "sling.servlet.resourceTypes=sling/servlet/default",

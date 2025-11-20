@@ -16,7 +16,7 @@ import org.osgi.service.component.annotations.Reference;
 import com.csuf.cloud.core.services.BulkApprovalFactoryConfigService;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-@Component(service = { Servlet.class }, property = { "sling.servlet.resourceTypes=sling/servlet/test",
+@Component(service = { Servlet.class }, property = { "sling.servlet.paths=/bin/servlet/test", 
 		"sling.servlet.methods=GET", "sling.servlet.selectors=config", "sling.servlet.extensions=json", })
 public class BulkApprovalReaderServlet extends SlingSafeMethodsServlet {
 
