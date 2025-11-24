@@ -390,10 +390,16 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
                         debugger;
                         $.ajax({
                             type: 'GET',
-                            url: "/bin/chrsIDUpdateServlet",
+                            //url: "/bin/chrsIDUpdateServlet",
+							 url: "/bin/fullertonProxySecure",
                             data: {
-                                action: "STD_682_OVERTIME_USER_LOOKUP",
-                                userId: userID
+                                //action: "STD_682_OVERTIME_USER_LOOKUP",
+                                //userId: userID
+								
+								token: "ABC123SECURETOKEN",
+								path: "chrsIDUpdateServlet",
+								action: "STD_682_OVERTIME_USER_LOOKUP",
+								userid: userID
                             },
                             dataType: 'json',
 
