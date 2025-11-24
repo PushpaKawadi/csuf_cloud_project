@@ -399,7 +399,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
 								token: "ABC123SECURETOKEN",
 								path: "chrsIDUpdateServlet",
 								action: "STD_682_OVERTIME_USER_LOOKUP",
-								userid: userID
+								userid: "hramirez"
                             },
                             dataType: 'json',
 
@@ -1779,7 +1779,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_submit158989
             manager_email.value = testEmail;
             hidden_employeeEmail.value = testEmail;
             RequestorEmail.value = testEmail;
-    alert("submit inside func 1");
+    		alert("submit inside func 1");
 
             if (pay_period_month.value === null || pay_period_year.value === null) {
                 showErrorModal("Alert !", "Please enter month and year");
