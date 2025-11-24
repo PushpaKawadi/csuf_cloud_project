@@ -1,4 +1,4 @@
-(function () {
+/*(function () {
     var userId = "nvadlakunta";
 
     var url = "https://myformstst.fullerton.edu/bin/getAppealofaDeclinedFeeWaiverRequestData"
@@ -19,4 +19,4 @@
     .catch(function (err) {
         console.error("Error calling servlet:", err);
     });
-})();
+})();*/
