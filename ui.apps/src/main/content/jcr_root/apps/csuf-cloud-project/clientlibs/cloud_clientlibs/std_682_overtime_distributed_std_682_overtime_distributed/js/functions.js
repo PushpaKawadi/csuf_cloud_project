@@ -629,12 +629,13 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
 	                    },
 	                    dataType: 'json',
 	                    success: function(myresopnse) {
-	                        var userValue = myresopnse[0].EMP_NAME;
+							alert("ok");
+	                        /*var userValue = myresopnse[0].EMP_NAME;       
 	                        RequestorName.value = userValue;
 	                        RequestorUserId.value = myresopnse[0].EMPUSERID;
 	                        //RequestorEmail.value = myresopnse[0].EMAILID; 
 	                        RequestorEmail.value = "pushpa.kawadi@thoughtfocus.com";
-	                        //InitiatorUserName.value = userValue;
+	                        //InitiatorUserName.value = userValue;*/
 	                    },
 	                    error: function(error) {
 	                        alert("error block=" + error);
