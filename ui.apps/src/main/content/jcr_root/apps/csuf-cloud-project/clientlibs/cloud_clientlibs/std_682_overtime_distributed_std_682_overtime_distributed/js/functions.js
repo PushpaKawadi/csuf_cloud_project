@@ -390,10 +390,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
                         debugger;
                         $.ajax({
                             type: 'GET',
-							 url: "/bin/TestProxy",
-							 headers: {
-								"X-CSUF-AUTH": "SecureToken123"
-							},
+							 url: "/bin/fullertonProxy",
                             data: {
 								path: "chrsIDUpdateServlet",
 								action: "STD_682_OVERTIME_USER_LOOKUP",
