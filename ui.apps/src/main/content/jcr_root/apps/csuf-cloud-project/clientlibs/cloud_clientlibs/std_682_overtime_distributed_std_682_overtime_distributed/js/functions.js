@@ -5,10 +5,7 @@
  */
 alert("Start JS");
 std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPanel_init0 = function(scope) {
-    alert("0");
-
-  alert(this);
-    alert(scope);
+ 
 
      debugger;
     with(this) {
