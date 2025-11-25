@@ -27,7 +27,7 @@ import com.csuf.cloud.core.config.FullertonProxyConfig;
     service = Servlet.class,
     property = {
     	"sling.servlet.methods=GET",
-    	"sling.servlet.methods=OPTIONS",
+    	//"sling.servlet.methods=OPTIONS",
         "sling.servlet.paths=/bin/fullertonProxyTest"
     }
 )
