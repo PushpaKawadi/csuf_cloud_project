@@ -389,15 +389,15 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
                         //console.log("workflow_initiator.value= " + workflow_initiator.value);
                         debugger;
                         $.ajax({
+							url: window.location.origin + "/bin/fullertonProxy",
                             type: 'GET',
-							 url: "/bin/fullertonProxy",
-                            data: {
+							 data: {
 								path: "chrsIDUpdateServlet",
 								action: "STD_682_OVERTIME_USER_LOOKUP",
 								userid: "hramirez"
                             },
                             dataType: 'json',
-
+							xhrFields: { withCredentials: true },
                             success: function(myresponse) {
 
                                 var modal = document.getElementById('myModal');
@@ -553,7 +553,10 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
                                     modal.style.display = "none";
                                 };
 
-                            }
+                            },
+							error: function (xhr) {
+							    alert(xhr.status + ": " + xhr.responseText);
+							  }
                         });
                     }
                 });
@@ -615,7 +618,31 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
                 });
 
             }
-            if (StageIndicator.value === null) {
+			
+			if (StageIndicator.value === null) {
+	                $.ajax({
+						url: window.location.origin + "/bin/fullertonProxy",
+						type: 'GET',
+	                    data: {
+							path: "getEvaluationFormData",
+	                        action: "EMP_DETAILS"
+	                    },
+	                    dataType: 'json',
+	                    success: function(myresopnse) {
+	                        var userValue = myresopnse[0].EMP_NAME;
+	                        RequestorName.value = userValue;
+	                        RequestorUserId.value = myresopnse[0].EMPUSERID;
+	                        //RequestorEmail.value = myresopnse[0].EMAILID; 
+	                        RequestorEmail.value = "pushpa.kawadi@thoughtfocus.com";
+	                        //InitiatorUserName.value = userValue;
+	                    },
+	                    error: function(error) {
+	                        alert("error block=" + error);
+	                    }
+	                });
+	            }
+						
+            /*if (StageIndicator.value === null) {
                 $.ajax({
                     type: 'GET',
                     url: "/bin/getEvaluationFormData",
@@ -635,7 +662,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
                         alert("error block=" + error);
                     }
                 });
-            }
+            }*/
             /*
             function getAuthApproverData(deptId,division,agencyUnit,fieldVal){
 
