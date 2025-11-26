@@ -396,12 +396,16 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
                     success: function(myresponse) {
                         gifModal.style.display = "block";
                         var userValue = myresponse.userId;
+						alert("myresponse.userId="+myresponse.userId);
                         var userID = userValue;
+						alert("userID="+userID);
                         hidden_userID.value = userValue;
+						alert("hidden_userID="+hidden_userID.value);
                         workflow_initiator.value = userValue;
+						alert("workflow_initiator="+workflow_initiator.value);
                         // 	hidden_employeeEmail.value = userValue +"@FULLERTON.EDU";  chrs
                         hidden_employeeEmail.value = "pushpa.kawadi@thoughtfocus.com";
-                        //console.log("workflow_initiator.value= " + workflow_initiator.value);
+                        alert("workflow_initiator.value= " + workflow_initiator.value);
                         debugger;
                         $.ajax({
 							url: window.location.origin + "/bin/fullertonProxy",
