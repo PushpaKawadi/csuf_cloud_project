@@ -406,7 +406,9 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
                         // 	hidden_employeeEmail.value = userValue +"@FULLERTON.EDU";  chrs
                         hidden_employeeEmail.value = "pushpa.kawadi@thoughtfocus.com";
                         alert("workflow_initiator.value= " + workflow_initiator.value);
-                        debugger;
+						var urrl11 = window.location.origin + "/bin/fullertonProxy";
+						alert("urrl11="+urrl11);
+                      
                         $.ajax({
 							url: window.location.origin + "/bin/fullertonProxy",
                             type: 'GET',
@@ -638,7 +640,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
 
             }
 			
-			if (StageIndicator.value === null) {
+			/*if (StageIndicator.value === null) {
 	                $.ajax({
 						url: window.location.origin + "/bin/fullertonProxy",
 						type: 'GET',
@@ -654,13 +656,13 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
 	                        RequestorUserId.value = myresopnse[0].EMPUSERID;
 	                        //RequestorEmail.value = myresopnse[0].EMAILID; 
 	                        RequestorEmail.value = "pushpa.kawadi@thoughtfocus.com";
-	                        //InitiatorUserName.value = userValue;*/
+	                        //InitiatorUserName.value = userValue;
 	                    },
 	                    error: function(error) {
 	                        alert("error block=" + error);
 	                    }
 	                });
-	            }
+	            }*/
 						
             /*if (StageIndicator.value === null) {
                 $.ajax({
