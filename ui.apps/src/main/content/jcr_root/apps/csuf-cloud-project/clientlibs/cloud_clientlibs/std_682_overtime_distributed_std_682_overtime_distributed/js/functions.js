@@ -11,6 +11,24 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
     with(this) {
         with(scope) {
               alert(StageIndicator.value);
+			  alert('before Appeal Servlet')
+			  $.ajax({
+			    url: window.location.origin + "/bin/fullertonProxy",
+			    type: "GET",
+			    data: {
+			      path: "getAppealofaDeclinedFeeWaiverRequestData",
+			      action: "FEE_WAIVER_HOLDER_USER_ID_LOOKUP",
+			      userid: "nvadlakunta"
+			    },
+			    xhrFields: { withCredentials: true },
+			    success: function (response) {
+			      console.log("success " + response);
+			    },
+			    error: function (xhr) {
+			      alert(xhr.status + ": " + xhr.responseText);
+			    }
+			  });
+			  alert('after Appeal Servlet')
             var gifModal = document.getElementById('gifModal');
             if (StageIndicator.value === null) {
                 TimeKeeperSignaturePanel.visible = false;
