@@ -11,24 +11,38 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
     with(this) {
         with(scope) {
               alert(StageIndicator.value);
-			  alert('before Appeal Servlet')
+			  alert('before STD Servlet unique method')
 			  $.ajax({
-			    url: window.location.origin + "/bin/fullertonProxy",
-			    type: "GET",
-			    data: {
-			      path: "getAppealofaDeclinedFeeWaiverRequestData",
-			      action: "FEE_WAIVER_HOLDER_USER_ID_LOOKUP",
-			      userid: "nvadlakunta"
-			    },
-			    xhrFields: { withCredentials: true },
-			    success: function (response) {
-			      console.log("success " + response);
-			    },
-			    error: function (xhr) {
-			      alert(xhr.status + ": " + xhr.responseText);
-			    }
+			      type: 'GET',
+			      url: window.location.origin + "/bin/fullertonProxy",
+			      data: {
+			  	      path: "chrsIDUpdateServlet",
+			          action: "STD_682_OVERTIME_USER_LOOKUP",
+			          userId: "nvadlakunta"
+			      },
+			      dataType: 'json',
+			      success: function(myresponse) {
+			          if (myresponse.length === 1) {
+			              empl_Id.value = myresponse[0].EMPLID;
+			              hidden_cwid.value = myresponse[0].EMPLID;
+			              chrsId.value = myresponse[0].CHRS_ID;
+			              hidden_chrsId.value = myresponse[0].CHRS_ID;
+			              employee_last_name.value = myresponse[0].Last_Name;
+			              employee_first_name.value = myresponse[0].First_Name;
+			              empl_rcd.value = myresponse[0].EMPL_RCD;
+			              employee_middle_name.value = myresponse[0].Middle_Name;
+			              position_number.value = myresponse[0].SCOPositionNum;
+			              cbid.value = myresponse[0].UNION_CD;
+			              organization_unit.value = myresponse[0].CSU_UNIT;
+			              dept_ID.value = myresponse[0].DEPTID;
+			              ful_division.value = myresponse[0].FUL_DIVISION;
+			              csu_agency.value = myresponse[0].CSU_SCO_AGENCY;
+			              field_value_1.value = "EMP_TK_PRI";
+			              field_value_2.value = "EMP_AP_OFF";
+			          }
+			      }
 			  });
-			  alert('after Appeal Servlet')
+			  alert('after STD Servlet unique method')
             var gifModal = document.getElementById('gifModal');
             if (StageIndicator.value === null) {
                 TimeKeeperSignaturePanel.visible = false;
