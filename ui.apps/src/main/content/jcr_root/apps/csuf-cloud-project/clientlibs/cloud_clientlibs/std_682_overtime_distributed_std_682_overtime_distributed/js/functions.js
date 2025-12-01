@@ -434,6 +434,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
                             dataType: 'json',
 							xhrFields: { withCredentials: true },
                             success: function(myresponse) {
+								alert("myresponse");
 
                                 var modal = document.getElementById('myModal');
                                 var span = document.getElementsByClassName("close")[0];
