@@ -365,9 +365,9 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 								
 								
 								
-								dataMapTest.put("EMPL_ID", emplId);
-								dataMapTest.put("EMPL_RCD", emplRcd);
-								dataMapTest.put("CHRS_ID", chrsId);
+								dataMapTest.put("EMPL_ID", "100030476");
+								dataMapTest.put("EMPL_RCD", "1");
+								dataMapTest.put("CHRS_ID", "899752547");
 								
 								dataMapFormInfo.put("TOTAL_HRS_AUTH1", totalHoursAuthorized1);
 								dataMapFormInfo.put("TOTAL_HRS_AUTH2", totalHoursAuthorized2);
@@ -536,7 +536,7 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 									json.put("DB_CONNECTION", "AEMDBDEV");
 									json.put("TABLE_NAME", "AEM_STD682_OVERTIME");
 									json.put("FORM_NAME", "STD 682 Overtime Distributed");
-									json.put("UNIQUE_FIELD", emplId);
+									json.put("UNIQUE_FIELD", 100030476);
 									json.put("DATA_MAP", dataMapTest);
 									
 									//On-Prem

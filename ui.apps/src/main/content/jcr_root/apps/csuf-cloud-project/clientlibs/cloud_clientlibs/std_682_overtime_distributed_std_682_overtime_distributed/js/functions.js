@@ -10,7 +10,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
      debugger;
     with(this) {
         with(scope) {
-              alert(StageIndicator.value);
+              /*alert(StageIndicator.value);
 			  alert('before STD Servlet unique method')
 			  $.ajax({
 			      type: 'GET',
@@ -42,7 +42,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
 			          }
 			      }
 			  });
-			  alert('after STD Servlet unique method')
+			  alert('after STD Servlet unique method')*/
             var gifModal = document.getElementById('gifModal');
             if (StageIndicator.value === null) {
                 TimeKeeperSignaturePanel.visible = false;
@@ -1837,7 +1837,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_submit158989
             manager_email.value = testEmail;
             hidden_employeeEmail.value = testEmail;
             RequestorEmail.value = testEmail;
-    		alert("submit inside func 1");
+    		
 
             if (pay_period_month.value === null || pay_period_year.value === null) {
                 showErrorModal("Alert !", "Please enter month and year");
