@@ -417,7 +417,6 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
 						alert("hidden_userID="+hidden_userID.value);
                         workflow_initiator.value = userValue;
 						alert("workflow_initiator="+workflow_initiator.value);
-                        // 	hidden_employeeEmail.value = userValue +"@FULLERTON.EDU";  chrs
                         hidden_employeeEmail.value = "pushpa.kawadi@thoughtfocus.com";
                         alert("workflow_initiator.value= " + workflow_initiator.value);
 						var urrl11 = window.location.origin + "/bin/fullertonProxy";
@@ -429,12 +428,12 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
 							 data: {
 								path: "chrsIDUpdateServlet",
 								action: "STD_682_OVERTIME_USER_LOOKUP",
-								userid: "hramirez"
+								userId: "hramirez"
                             },
                             dataType: 'json',
 							xhrFields: { withCredentials: true },
                             success: function(myresponse) {
-								alert("myresponse");
+								alert("myresponse="+myresponse);
 
                                 var modal = document.getElementById('myModal');
                                 var span = document.getElementsByClassName("close")[0];
