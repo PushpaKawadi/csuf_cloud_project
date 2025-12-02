@@ -515,14 +515,14 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 								dataMapFormInfo.put("WORKFLOW_INSTANCE_ID", workflowInstanceID);
 								
 							//	dbUtil.insertFormData(conn, dataMapFormInfo, tableName, formName);
-								String resultData = dbUtil.getSPEEvalData(conn, emplId, "EMPL_ID", workflowInstanceID, tableName);
+								/*String resultData = dbUtil.getSPEEvalData(conn, emplId, "EMPL_ID", workflowInstanceID, tableName);
 								log.debug("ResultData : {}",resultData);
 								if (resultData != null && !resultData.equals("")) {
 									dbUtil.deleteSPEEvalData(conn, emplId, "EMPL_ID", workflowInstanceID, tableName);
 									dbUtil.insertFormData(conn, dataMapFormInfo, tableName, formName);
 								} else {						
 									dbUtil.insertFormData(conn, dataMapFormInfo, tableName, formName);
-								}
+								}*/
 								
 								if (dataMapTest != null) {
 
