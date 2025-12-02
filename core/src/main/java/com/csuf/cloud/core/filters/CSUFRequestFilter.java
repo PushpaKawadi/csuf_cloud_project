@@ -143,11 +143,11 @@ public class CSUFRequestFilter implements Filter {
 		} catch (Exception e) {
 			logger.error(Arrays.toString(e.getStackTrace()));
 		} finally {
+            if (session != null) {
+                session.logout();
+            }
 			if (resolver != null && resolver.isLive()) {
 				resolver.close();
-			}
-			if (session != null) {
-				session.logout();
 			}
 		}
 		/* logger.debug("exit CSUFSystemMaintenanceFilter"); */
