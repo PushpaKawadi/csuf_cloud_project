@@ -1,0 +1,69 @@
+@media (max-width: 991px) {
+    #container-required {
+        margin-top: 4.5rem;
+    }
+}
+
+.tbThead {
+    background-color: #00274c;
+    color: white;
+}
+
+.action-icn {    
+    color: #00274c;
+}
+
+#confirm-terminate-workflow-modal .modal-header {
+    background-color: #00407f;
+    color: #ffffff;
+    padding: 2rem;
+}
+
+#confirm-terminate-workflow-modal .modal-header .close {
+    color: #fff;
+    opacity: 1;
+}
+
+#confirm-terminate-workflow-modal .modal-body label {
+    display: block;
+    font-size: 13px;
+}
+
+#confirm-terminate-workflow-modal .modal-footer .btn-primary {
+    background-color: #00407f;
+}
+
+#confirm-terminate-workflow-modal .modal-footer {
+    justify-content: center;
+    border-top: 0;
+}
+
+#modal-error-terminate-workflow .modal-header {
+    background-color: #00407f;
+    color: #ffffff;
+    justify-content: center;
+}
+
+#modal-error-terminate-workflow .modal-header .fa-times {
+    font-size: 50px;
+}
+
+#modal-error-terminate-workflow .modal-header .close {
+    color: #fff;
+    opacity: 1;
+}
+
+#modal-error-terminate-workflow .modal-body {
+    color: #818181;
+    text-align: center;
+}
+
+#modal-error-terminate-workflow .modal-footer {
+    display: block;
+    text-align: center;
+    border-top: none;
+}
+
+#modal-error-terminate-workflow .modal-footer .btn-primary {
+    background-color: #00407f;
+}

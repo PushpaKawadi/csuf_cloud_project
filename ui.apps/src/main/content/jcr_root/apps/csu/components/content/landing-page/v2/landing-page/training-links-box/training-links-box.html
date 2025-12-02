@@ -1,0 +1,9 @@
+<sly data-sly-use.resourceModel="${'com.csuf.cloud.core.models.ResourceDuplicationModel' @  resourcePath='csu/components/content/landing-page/v2/landing-page/training-link-row', resourceName = 'linkrow'}" />
+
+<div class="container" data-sly-test="${resourceModel.duplicatedResourceList}" data-sly-list.linkrow="${resourceModel.duplicatedResourceList}">
+    <div class="row" style="border-bottom: 1px solid #cdcdcd;" data-sly-resource="${linkrow.path @ resourceType=linkrow.resourceType}">
+    </div>
+</div>
+
+<sly data-sly-resource="${resource.path @ resourceType='wcm/foundation/components/parsys/newpar', appendPath='/*', decorationTagName='div', cssClassName='new section aem-Grid-newComponent'}" data-sly-test="${((wcmmode.edit || wcmmode.preview) && !resourceModel.duplicatedResourceList)}">
+</sly>

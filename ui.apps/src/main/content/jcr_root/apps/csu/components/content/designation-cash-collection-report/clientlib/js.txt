@@ -1,0 +1,3 @@
+#base=js
+
+designation-cash-collection-report.js

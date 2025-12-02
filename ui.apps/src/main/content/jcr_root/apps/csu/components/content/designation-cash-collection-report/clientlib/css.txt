@@ -1,0 +1,3 @@
+#base=css
+
+designation-cash-collection-report.css

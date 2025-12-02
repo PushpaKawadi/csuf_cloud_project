@@ -1,0 +1,3 @@
+#base=js
+
+investment-real-estate-verification-report.js

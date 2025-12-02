@@ -1,0 +1,43 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.all @ categories='csu.gradeChange-report'}" />
+<pre data-sly-use.gradeChangeModel="com.csuf.cloud.core.models.GradeChangeInboxReportModel"></pre>
+<sly data-sly-use.gradeChangeJson="${'fetchJson.js' @ jsonString=gradeChangeModel.getGradeChangeReportJsonArray}" />
+
+<div id="container-required" class="px-4 py-1">
+    <div id="pills-gcreport" class="tab-pane fade show active identifier" data-identifier='gcreport'>        
+        <div id="dvGradeChangeReport" role="main">
+            <table class="table table-striped table-hover table-bordered" id="tbGradeChangeReport" align="center" cellpadding="2" cellspacing="1"  >
+                <thead id="tbThead">
+                  <tr>                      
+                       <th style="cursor:pointer; text-align: center;" class="sort">S.No</th>
+					  <th style="cursor:pointer; text-align: center;" class="sort">Instructor CWID</th>
+                      <th style="cursor:pointer; text-align: center;" class="sort">Instructor Name</th>
+                      <th style="cursor:pointer; text-align: center;" class="sort">Student CWID</th>  
+				<!--	  <th style="cursor:pointer;" class="sort">Student First Name</th> -->
+                      <th style="cursor:pointer; text-align: center;" class="sort">Student Name</th>
+                      <th style="cursor:pointer; text-align: center;" class="sort">Workflow Start Time</th>
+                      <th style="cursor:pointer; text-align: center;" class="sort">Step Start Time</th>
+                      <th style="cursor:pointer; text-align: center;" class="sort">Step Name</th>
+                      <th style="cursor:pointer; text-align: center;" class="sort">Initiated By</th>
+					  <th style="cursor:pointer; text-align: center;" class="sort">Assignee</th>                         
+                  </tr>
+                </thead>
+                <sly data-sly-list="${gradeChangeJson}">
+                    <tr>
+                        <td>${item.sNo}</td>
+                	    <td>${item.instructorCWID}</td> 
+						<td>${item.instructorName}</td>
+                        <td>${item.cwidList}</td> 
+						<td>${item.lastNameList}</td> 
+                    <!--    <td>${item.firstNameList}</td>  -->
+                        <td>${item.workflowStartTime}</td>
+                        <td>${item.stepStartTime}</td>
+                        <td>${item.stepName}</td>
+                        <td>${item.stepInitiator}</td>
+						<td>${item.stepAssignee}</td>
+                    </tr>
+                </sly>
+            </table>
+        </div>
+    </div>
+</div>

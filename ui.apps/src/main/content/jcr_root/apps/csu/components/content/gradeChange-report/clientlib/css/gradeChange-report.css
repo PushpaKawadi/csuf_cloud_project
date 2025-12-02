@@ -1,0 +1,16 @@
+.customHeaderText{
+	width: 100% !important;
+    position: absolute !important;    
+}
+
+
+@media (max-width: 991px) {
+    #container-required {
+        margin-top: 4.5rem;
+    }
+}
+
+#tbThead {
+    background-color: #00274c;
+    color: white;
+}

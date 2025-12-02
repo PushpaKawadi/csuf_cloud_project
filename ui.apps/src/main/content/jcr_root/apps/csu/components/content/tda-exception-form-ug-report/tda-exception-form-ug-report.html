@@ -1,0 +1,39 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.all @ categories='csu.tda-exception-form-ug-report'}" />
+<pre data-sly-use.tdaExceptionUGReportModel="com.csuf.cloud.core.models.TDAExceptionFormUGReportModel"></pre>
+<sly data-sly-use.tdaExceptionUGReportJson="${'fetchJson.js' @ jsonString=tdaExceptionUGReportModel.tDAExceptionFormUGReportJsonArray}" />
+
+<div id="container-required" class="px-4 py-1">
+    <div id="pills-tdaexceptionugreport" class="tab-pane fade show active identifier" data-identifier='tdaexceptionugreport'>        
+        <div id="dvTDAExceptionUGReport" role="main">
+            <table class="table table-striped table-hover table-bordered" id="tbTDAExceptionUGReport" align="center" cellpadding="2" cellspacing="1"  >
+                <thead id="tbThead">
+                  <tr>                      
+                      <th style="cursor:pointer;" class="sort">S.No</th> 
+					  <th style="cursor:pointer;" class="sort">Student ID</th> 
+                      <th style="cursor:pointer;" class="sort">Student Name</th>
+                      <th style="cursor:pointer;" class="sort">Faculty Name</th>
+                      <th style="cursor:pointer;" class="sort">Workflow Start Time</th>
+                      <th style="cursor:pointer;" class="sort">Step Start Time</th>
+                      <th style="cursor:pointer;" class="sort">Step Name</th>
+                      <th style="cursor:pointer;" class="sort">Initiated By</th>
+					  <th style="cursor:pointer;" class="sort">Assignee</th>                      
+                  </tr>
+                </thead>
+                <sly data-sly-list="${tdaExceptionUGReportJson}">
+                    <tr>
+                        <td>${item.sNo}</td>
+						<td>${item.cwid}</td> 
+						<td>${item.studentName}</td>
+                        <td>${item.facultyName}</td>
+                        <td>${item.workflowStartTime}</td>
+                        <td>${item.stepStartTime}</td>
+                        <td>${item.stepName}</td>
+                        <td>${item.stepInitiator}</td>
+						<td>${item.stepAssignee}</td>
+                    </tr>
+                </sly>
+            </table>
+        </div>
+    </div>
+</div>

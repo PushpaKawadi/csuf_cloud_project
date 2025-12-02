@@ -1,0 +1,37 @@
+@media (max-width: 991px) {
+    #container-required {
+        margin-top: 4.5rem;
+    }
+}
+
+#tbThead {
+    background-color: #00274c;
+    color: white;
+}
+
+div#wfh-dropdowndiv {
+    margin-top: 8.5rem;
+}
+
+select#wfh-dropdown {
+    border-radius: 10px;
+    height: 26px;
+    font-size: 17px;
+    width: 350px;
+    margin-left: 15px;
+}
+
+
+p#wfh-dropdown-header-text {
+    margin-left: 15px;
+    font-size: 17px;
+    font-weight: 500;
+}
+
+button#wfh-fetch-button {
+    background: #00274c;
+    color: white;
+    border-radius: 7px;
+    font-size: 16px;
+}
+

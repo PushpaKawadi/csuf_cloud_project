@@ -1,0 +1,62 @@
+use(function() {
+    // Directly define the JSON array here
+    /* var jsonArray = [
+         {
+             "sNo": 1,
+             "id": "12345",
+             "formId": "A100",
+             "fName": "John",
+             "lName": "Doe"
+         },
+         {
+             "sNo": 2,
+             "id": "67890",
+             "formId": "B200",
+             "fName": "Jane",
+             "lName": "Smith"
+         }
+     ];*/
+    var jsonArray = [{
+        "sNo": 1,
+        "cwid": "890215841",
+        "fName": "Mark",
+        "lName": "Ghoubrial",
+        "formId": "1365129",
+        "workflowStartTime": {
+            "display": "5/7/2024 10:32:31 PM",
+            "timestamp": 1715146351503
+        },
+        "stepStartTime": {
+            "display": "5/7/2024 10:32:43 PM",
+            "timestamp": 1715146363410
+        },
+        "stepInitiator": "mark.ghoubrial",
+        "handlerID": "1211881",
+        "workflowInstanceId": "/var/workflow/instances/server0/2024-04-28/dq-appeal-form_63",
+        "workflowModelName": "Course Withdrawal",
+        "witemId": "/var/workflow/instances/server0/2024-04-28/dq-appeal-form_63/workItems/node8_var_workflow_instances_server0_2024-04-28_dq-appeal-form_63"
+    }, {
+        "sNo": 2,
+        "cwid": "890215841",
+        "fName": "Mark",
+        "lName": "Ghoubrial",
+        "formId": "1365150",
+        "workflowStartTime": {
+            "display": "5/9/2024 10:32:31 PM",
+            "timestamp": 1715146351503
+        },
+        "stepStartTime": {
+            "display": "5/9/2024 10:32:43 PM",
+            "timestamp": 1715146363410
+        },
+        "stepInitiator": "mark.ghoubrial",
+        "handlerID": "1211886",
+        "workflowInstanceId": "/var/workflow/instances/server0/2024-04-28/dq-appeal-form_63",
+        "workflowModelName": "Course Withdrawal",
+        "witemId": "/var/workflow/instances/server0/2024-04-28/dq-appeal-form_63/workItems/node8_var_workflow_instances_server0_2024-04-28_dq-appeal-form_63"
+    }];
+
+    return {
+        populationData: jsonArray
+    };
+});

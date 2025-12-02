@@ -1,0 +1,145 @@
+<!-- <sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.css @ categories='csu.wf-ai-assistant-report'}" /> -->
+
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientlib.all @ categories='csu.wf-ai-assistant-report'}" />
+
+<head>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    </head>
+    <body class="bg-gray-50">
+    <div class="min-h-screen flex flex-col">
+        <div class="flex-1 container mx-auto p-6 flex gap-6">
+            <!-- Dashboard Section -->
+            <div class="flex-1 bg-white rounded-lg shadow-lg p-6">
+                <div class="mb-6 flex space-x-4">
+                    <button class="tab active px-4 py-2 rounded-lg font-medium transition-colors duration-200" data-tab="mytask">
+                        <i class="fas fa-tasks mr-2"></i>My Tasks
+                    </button>
+                    <button class="tab px-4 py-2 rounded-lg font-medium transition-colors duration-200" data-tab="history">
+                        <i class="fas fa-history mr-2"></i>History
+                    </button>
+                </div>
+
+                <div id="mytaskContent" class="tab-content active">
+
+                </div>
+
+                <div id="historyContent" class="tab-content hidden">
+
+                </div>
+            </div>
+
+            <!-- Chatbot Section -->
+            <div class="w-96 bg-white rounded-lg shadow-lg flex flex-col h-[calc(100vh-48px)]">
+                <div class="p-4 bg-indigo-600 text-white rounded-t-lg">
+                    <h2 class="text-lg font-semibold">AI Agent</h2>
+                </div>
+                <div class="flex-1 p-4 overflow-y-auto space-y-3 min-h-0" id="chatMessages">
+                    <!-- Chat messages will be dynamically added here -->
+                </div>
+                <form id="chatForm" class="p-4 border-t bg-white rounded-b-lg">
+                    <div class="flex space-x-2">
+                        <input type="hidden" id="conversationId" value=""/>
+                        <input type="text" 
+                               id="chatInput" 
+                               class="flex-1 px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500 text-sm" 
+                               placeholder="Type your message...">
+                        <button type="submit" 
+                                class="bg-indigo-600 text-white px-4 py-2 rounded-lg hover:bg-indigo-700 transition-colors duration-200">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="reasonModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50 transition-opacity duration-300">
+        <div class="relative top-20 mx-auto p-5 border w-[480px] shadow-2xl rounded-xl bg-white transform transition-all">
+            <div class="absolute top-4 right-4">
+                <button onclick="hideReasonModal()" class="text-gray-400 hover:text-gray-500 focus:outline-none">
+                    <svg class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+                    </svg>
+                </button>
+            </div>
+
+            <div class="mt-3">
+                <div class="flex items-center mb-4">
+                    <div class="flex-shrink-0 w-8 h-8 bg-indigo-100 rounded-full flex items-center justify-center">
+                        <svg class="w-5 h-5 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" 
+                                  d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                    </div>
+                    <h3 class="ml-3 text-lg font-medium text-gray-900">Withdrawal Reason</h3>
+                </div>
+
+                <div class="bg-gray-50 rounded-lg p-4 mb-4">
+                    <div class="text-sm text-gray-600 leading-relaxed modal-reason-text" id="modalReasonText"></div>
+                </div>
+
+                <div class="flex items-center space-x-3 justify-end">
+                    <button onclick="hideReasonModal()" 
+                            class="px-4 py-2 bg-white border border-gray-300 text-sm font-medium rounded-lg text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
+                        Close
+                    </button>
+                <!--    <button onclick="copyReason(event)" 
+                            class="px-4 py-2 bg-indigo-600 text-white text-sm font-medium rounded-lg hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors duration-200">
+                        Copy Text
+                    </button>  -->
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        const defaultTab = document.querySelector('[data-tab="mytask"]');
+        const defaultContent = document.getElementById('mytaskContent');
+
+        defaultTab.classList.add('active', 'bg-indigo-100', 'text-indigo-700');
+        defaultTab.classList.remove('text-gray-600', 'hover:bg-gray-100');
+        defaultContent.classList.remove('hidden');
+        defaultContent.classList.add('active');
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs
+                document.querySelectorAll('.tab').forEach(t => {
+                    t.classList.remove('active', 'bg-indigo-100', 'text-indigo-700');
+                    t.classList.add('text-gray-600', 'hover:bg-gray-100');
+                });
+                
+                // Add active class to clicked tab
+                tab.classList.add('active', 'bg-indigo-100', 'text-indigo-700');
+                tab.classList.remove('text-gray-600', 'hover:bg-gray-100');
+                
+                // Hide all content
+                document.querySelectorAll('.tab-content').forEach(content => {
+                    content.classList.add('hidden');
+                    content.classList.remove('active');
+                });
+                
+                // Show selected content
+                const contentId = tab.getAttribute('data-tab') + 'Content';
+                document.getElementById(contentId).classList.remove('hidden');
+                document.getElementById(contentId).classList.add('active');
+            });
+        });
+
+            function showReasonModal(encodedReason) {
+    // Decode the base64 encoded reason
+    const reason = atob(encodedReason);
+    currentReason = reason;
+    document.getElementById('modalReasonText').textContent = reason;
+    const modal = document.getElementById('reasonModal');
+    modal.classList.remove('hidden');
+    setTimeout(() => modal.classList.add('opacity-100'), 10);
+}
+
+            function hideReasonModal() {
+    const modal = document.getElementById('reasonModal');
+    modal.classList.remove('opacity-100');
+    setTimeout(() => modal.classList.add('hidden'), 300);
+}
+    </script>
+</body>

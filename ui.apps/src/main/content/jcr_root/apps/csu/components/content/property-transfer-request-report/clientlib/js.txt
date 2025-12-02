@@ -1,0 +1,3 @@
+#base=js
+
+property-transfer-request-report.js

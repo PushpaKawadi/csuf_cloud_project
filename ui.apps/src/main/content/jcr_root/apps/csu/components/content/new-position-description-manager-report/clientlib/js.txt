@@ -1,0 +1,3 @@
+#base=js
+
+new-position-description-manager-report.js

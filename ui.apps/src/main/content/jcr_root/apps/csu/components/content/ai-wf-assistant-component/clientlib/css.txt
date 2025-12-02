@@ -1,0 +1,3 @@
+#base=css
+
+ai-wf-assistant-component.css

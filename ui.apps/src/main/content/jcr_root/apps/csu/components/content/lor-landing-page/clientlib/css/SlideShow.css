@@ -1,0 +1,1085 @@
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++                    CSS BASICS DO NOT UPDATE OR CHANGE THIS                          +
++     IF YOU WANT TO OVER RIDE THESE STYLES PLEASE DO IT AT THE VERY BOTTOM OF THIS   +
++     CHANGES TO THESE STYLES WILL BE COPIED OVER THE ENTIRE SECTION                  +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+
+/* Slider Container */
+.slider_container
+{
+    display: block;
+    clear: both;
+    position: relative;
+    line-height:normal !important;
+}
+
+/* Slider Styling */
+.slide
+{
+    cursor: pointer;
+    position: relative;
+}
+
+.slide a:hover, .slide_show a:hover, .slide_hide a:hover
+{
+    text-decoration: none;
+}
+
+.slide_show, .slide_hide
+{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+}
+
+.slide_show
+{
+    z-index: 1000 !important;
+    opacity:1;
+}
+
+.slide_hide
+{
+    z-index: 50 !important;
+    opacity:0;
+}
+
+.slide_image
+{
+    position: relative;
+    margin: auto;
+    text-align: center;
+    margin-bottom:0px !important;
+    padding-bottom:0px !important;
+}
+
+.slide_image img
+{
+    max-width: 99%;
+    height: auto;
+    margin: auto;    
+    margin-bottom:0px !important;
+    padding-bottom:0px !important;
+    border:solid 1px transparent;
+}
+
+.slide_caption
+{
+    min-height: 50px;
+    padding: 5px 10px;
+    margin: 0;
+}
+
+.slide_caption p, .slide_caption h2
+{
+    margin: 0px;
+    padding: 0px;
+}
+
+.slide_caption p
+{
+    font-size: .85em;
+}
+
+#centercontent .slide_caption p
+{
+    margin-bottom: 0px;
+}
+
+.Slideshow_Navbar
+{
+    clear: both;
+    position: relative;
+    margin-top: 0px;
+    min-height: 34px;
+    text-align: center;
+    border-radius: 30px;
+    border-top-left-radius: 0px;
+    border-top-right-radius: 0px;
+    padding: 2%;
+    padding-top: 1%;
+    padding-bottom: 1%;
+    margin: auto;
+    z-index: 5000;
+}
+
+.Slideshow_Navbar button
+{
+    width: 32px;
+    height: 28px;
+    font-size: 1em;
+    display: inline;
+    margin: 1px;
+    margin-top: 3px;
+    margin-left: 6px;
+    padding: 1px;
+    border: 0px;
+    border: solid 2px transparent;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.Slideshow_Navbar button.active, .Slideshow_Navbar button:hover
+{
+    border: solid 2px #222;
+    box-shadow: 0px 1px 3px rgba(0,0,0,.7);
+}
+
+.Slideshow_Shell
+{
+    position: relative;
+    height: auto;
+    width: auto;
+}
+
+/*-------------------------
+ARROWS
+------------------------------*/
+.btnPrevNav, .btnNextNav
+{
+    position: absolute;
+    width: 70px;
+    height: 70px;
+    border-radius: 70px;
+    z-index: 10000;
+    background-color: rgba(0,0,0,.0);
+    color: inherit;
+}
+
+.btnPrevNav
+{
+    left: 0px;
+}
+
+.btnNextNav
+{
+    right: 0px;
+}
+
+.btnPrevNav:hover, .btnNextNav:hover
+{
+    background-color: rgba(0,0,0,.2);
+    color: inherit;
+}
+
+.btnPrevNav:hover .arrowleft, .btnNextNav:hover .arrowright
+{
+    opacity: .4;
+}
+
+.btnPrevNav:hover .arrowleft:hover, .btnNextNav:hover .arrowright:hover
+{
+    opacity: 1;
+}
+
+.arrowleft, .arrowright
+{
+    position: absolute;
+    width: 33px;
+    height: 60px;
+    top: 5px;
+    cursor: pointer;
+    padding: 0px;
+    background: url(../images/slideshow_icons/arrows.png) no-repeat;
+    overflow: hidden;
+    opacity: .2;
+}
+
+.arrowleft
+{
+    left: 10px;
+    background-position: 0px 0px;
+}
+
+.arrowright
+{
+    right: 10px;
+    background-position: -34px 0px;
+}
+
+
+.arrowleft:hover
+{
+    background-position: 0px -60px;
+    opacity: 1;
+}
+.arrowright:hover
+{
+    background-position: -34px -60px;
+    opacity: 1;
+}
+
+.pause
+{
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    width: 33px;
+    height: 60px;
+    cursor: pointer;
+    display: none;
+    padding: 0px;
+    background: url(../images/slideshow_icons/pause.png) no-repeat;
+    overflow: hidden;
+}
+
+.play
+{
+    position: absolute;
+    top: 40%;
+    left: 45%;
+    width: 33px;
+    height: 60px;
+    cursor: pointer;
+    display: none;
+    padding: 0px;
+    background: url(../images/slideshow_icons/play.png) no-repeat;
+    overflow: hidden;
+}
+
+.slider_container:hover .arrowleft, 
+.slider_container:hover .arrowright, 
+.slider_container:hover .pause, 
+.slider_container:hover .play
+{
+    display: block;
+}
+
+.bulletnavX
+{
+    cursor: pointer;
+}
+
+.bulletnavX span
+{
+    content: "";
+    width: 20px;
+    height: 20px;
+    color: #000 !important;
+    background: url(../images/slideshow_icons/bullet.png) no-repeat;
+    background-position: 0px 0px;
+}
+
+.bulletnav
+{
+    background: rgba(0,0,0,.3);
+    border-radius: 8px;
+    padding: 2px;
+    border: solid 1px #333;
+}
+
+.bulletnav div
+{
+    margin: 2px;
+}
+
+.bulletnav div, .bulletnav div:hover, .bulletnav .av
+{
+    background: url(../images/slideshow_icons/bullet.png) no-repeat;
+    overflow: hidden;
+    cursor: pointer;
+    color: #000 !important;
+    font-size: .8em;
+}
+
+.bulletnav div
+{
+    background-position: 0px 0px;
+}
+
+.bulletnav div:hover, .bulletnav .av:hover
+{
+    background-position: 0px -20px;
+}
+
+.bulletnav .av
+{
+    background-position: 0px -20px;
+}
+
+.bulletnav .dn, .bulletnav .dn:hover
+{
+    background-position: 0px -20px;
+}
+
+
+/*===================================================================================
+
+SLIDESHOW COLOR OVERWRITES
+=====================================================================================*/
+
+
+/*--------------------------------------------------------------
+SLIDECOLOR DEFAULT OVERWRITES
+-----------------------------------------------------------------*/
+
+.Slideshow_Shell.slidecolor_default .Slideshow_Navbar
+{
+    color: #222;
+    background:transparent;
+}
+
+.Slideshow_Shell.slidecolor_default .Slideshow_Navbar button
+{
+    color: #222;
+    background-color: transparent;
+    border-color:transparent;
+}
+
+.Slideshow_Shell.slidecolor_default .slide_caption
+{
+    color: #222;
+    background-color: #f7f7f7;   
+}
+
+.Slideshow_Shell.slidecolor_default .slide_caption p, 
+.Slideshow_Shell.slidecolor_default .slide_caption h2
+{
+    color: #222;
+    background-color: #f7f7f7;
+}
+
+.Slideshow_Shell.slidecolor_default .Slideshow_Navbar button.active, 
+.Slideshow_Shell.slidecolor_default .Slideshow_Navbar button:hover
+{
+    color: #222;
+    background: #fff;
+    border-color:#fff;
+}
+
+
+/*--------------------------------------------------------------
+SLIDECOLOR UNIVBLUE OVERWRITES
+-----------------------------------------------------------------*/
+.Slideshow_Shell.slidecolor_univblue .slider_container img
+{
+    border:solid 1px #002B54;
+}
+.Slideshow_Shell.slidecolor_univblue .Slideshow_Navbar
+{
+    color: #f7f7f7;
+    background: #002B54;
+}
+
+
+.Slideshow_Shell.slidecolor_univblue .Slideshow_Navbar button
+{
+    color: #f7f7f7;
+    background-color: #002B54;
+    border-color:transparent;
+}
+
+.Slideshow_Shell.slidecolor_univblue .slide_caption
+{
+    color: #f7f7f7;
+    background-color: #002B54;   
+}
+.Slideshow_Shell.slidecolor_univblue .slide_caption p, 
+.Slideshow_Shell.slidecolor_univblue .slide_caption h2
+{
+    color: #f7f7f7;
+    background-color: #002B54;
+}
+
+.slidecolor_univblue .Slideshow_Navbar button.active, 
+.slidecolor_univblue .Slideshow_Navbar button:hover
+{
+    color: #002B54;
+    background: #f7f7f7;
+    border-color:#fff;
+}
+
+/*--------------------------------------------------------------
+SLIDECOLOR MEDBLUE OVERWRITES
+-----------------------------------------------------------------*/
+.Slideshow_Shell.slidecolor_medblue .slider_container img
+{
+    border:solid 1px #0059B2;
+}
+.Slideshow_Shell.slidecolor_medblue .Slideshow_Navbar
+{
+    color: #fff;
+    background: #0059B2;
+}
+
+.Slideshow_Shell.slidecolor_medblue .Slideshow_Navbar button
+{
+    color: #fff;
+    background-color: #0059B2;
+    border-color:#0059B2;
+}
+
+.Slideshow_Shell.slidecolor_medblue .slide_caption
+{
+    color: #fff;
+    background-color: #0059B2;   
+}
+
+.Slideshow_Shell.slidecolor_medblue .slide_caption p, 
+.Slideshow_Shell.slidecolor_medblue .slide_caption h2
+{
+    color: #fff;
+    background-color: #0059B2;
+}
+
+.Slideshow_Shell.slidecolor_medblue .Slideshow_Navbar button.active, 
+.Slideshow_Shell.slidecolor_medblue .Slideshow_Navbar button:hover
+{
+    color: #0059B2;
+    background: #fff;
+}
+
+
+/*--------------------------------------------------------------
+SLIDECOLOR LIGHTBLUE OVERWRITES
+-----------------------------------------------------------------*/
+.Slideshow_Shell.slidecolor_lightblue .slider_container img
+{
+    border:solid 1px #9DBED8;
+}
+.Slideshow_Shell.slidecolor_lightblue .Slideshow_Navbar
+{
+    color: #010101;
+    background: #9DBED8;
+}
+
+.Slideshow_Shell.slidecolor_lightblue .Slideshow_Navbar button
+{
+    color: #010101;
+    background-color: #9DBED8;
+    border-color:#9DBED8;
+}
+
+.Slideshow_Shell.slidecolor_lightblue .slide_caption
+{
+    color: #010101;
+    background-color: #9DBED8;   
+}
+
+.Slideshow_Shell.slidecolor_lightblue .slide_caption p, 
+.Slideshow_Shell.slidecolor_lightblue .slide_caption h2
+{
+    color: #010101;
+    background-color: #9DBED8;
+}
+
+.Slideshow_Shell.slidecolor_lightblue .Slideshow_Navbar button.active, 
+.Slideshow_Shell.slidecolor_lightblue .Slideshow_Navbar button:hover
+{
+    color: #fff;
+    background: #0059B2;
+    border-color:#0059B2;
+}
+
+/*--------------------------------------------------------------
+SLIDECOLOR ORANGE OVERWRITES
+-----------------------------------------------------------------*/
+.Slideshow_Shell.slidecolor_orange .slider_container img
+{
+    border:solid 1px #E17000;
+}
+.Slideshow_Shell.slidecolor_orange .Slideshow_Navbar
+{
+    color: #010101;
+    background: #E17000;
+}
+
+.Slideshow_Shell.slidecolor_orange .Slideshow_Navbar button
+{
+    color: #010101;
+    background-color: #E17000;
+    border-color:#010101;
+}
+
+.Slideshow_Shell.slidecolor_orange .slide_caption
+{
+    color: #010101;
+    background-color: #E17000;   
+}
+
+.Slideshow_Shell.slidecolor_orange .slide_caption p, 
+.Slideshow_Shell.slidecolor_orange .slide_caption h2
+{
+    color: #010101;
+    background-color: #E17000;
+    text-shadow:none;
+}
+
+.Slideshow_Shell.slidecolor_orange .Slideshow_Navbar button.active, 
+.Slideshow_Shell.slidecolor_orange .Slideshow_Navbar button:hover
+{
+    color: #E17000;
+    background: #010101;
+}
+
+
+/*--------------------------------------------------------------
+SLIDECOLOR BLACK OVERWRITES
+-----------------------------------------------------------------*/
+.Slideshow_Shell.slidecolor_black .slider_container img
+{
+    border:solid 1px #000;
+}
+.Slideshow_Shell.slidecolor_black .Slideshow_Navbar
+{
+    color: #f7f7f7;
+    background: #121212;
+}
+
+.Slideshow_Shell.slidecolor_black .Slideshow_Navbar button
+{
+    color: #f7f7f7;
+    background-color: #121212;
+    border-color:#121212;
+}
+
+.Slideshow_Shell.slidecolor_black .slide_caption
+{
+    color: #f7f7f7;
+    background-color: #121212;   
+}
+
+.Slideshow_Shell.slidecolor_black .slide_caption p, 
+.Slideshow_Shell.slidecolor_black .slide_caption h2
+{
+    color: #f7f7f7;
+    background-color: #121212;
+    text-shadow:none;
+}
+
+.Slideshow_Shell.slidecolor_black .Slideshow_Navbar button.active, 
+.Slideshow_Shell.slidecolor_black .Slideshow_Navbar button:hover
+{
+    color: #f7f7f7;
+    background: #343434;
+}
+
+/*--------------------------------------------------------------
+SLIDECOLOR BEIGE OVERWRITES
+-----------------------------------------------------------------*/
+.Slideshow_Shell.slidecolor_beige .slider_container img
+{
+    border:solid 1px #000;
+}
+.Slideshow_Shell.slidecolor_beige .Slideshow_Navbar
+{
+    color: #222;
+    background: #DAD6CC;
+}
+
+.Slideshow_Shell.slidecolor_beige .Slideshow_Navbar button
+{
+    color: #222;
+    background-color: #DAD6CC;
+    border-color:#DAD6CC;
+}
+
+.Slideshow_Shell.slidecolor_beige .slide_caption
+{
+    color: #222;
+    background-color: #DAD6CC;   
+}
+
+.Slideshow_Shell.slidecolor_beige .slide_caption p, 
+.Slideshow_Shell.slidecolor_beige .slide_caption h2
+{
+    color: #222;
+    background-color: #DAD6CC;
+    text-shadow:none;
+}
+
+.Slideshow_Shell.slidecolor_beige .Slideshow_Navbar button.active, 
+.Slideshow_Shell.slidecolor_beige .Slideshow_Navbar button:hover
+{
+    color: #DAD6CC;
+    background: #222;
+}
+
+/*--------------------------------------------------------------
+SLIDECOLOR WHTIE OVERWRITES
+-----------------------------------------------------------------*/
+.Slideshow_Shell.slidecolor_white .slider_container img
+{
+    border:solid 1px #fff;
+}
+
+.Slideshow_Shell.slidecolor_white .Slideshow_Navbar
+{
+    color: #121212;
+    background: #fff;
+}
+
+.Slideshow_Shell.slidecolor_white .Slideshow_Navbar button
+{
+    color: #121212;
+    background-color: #fff;
+    border-color:#fff;
+}
+
+.Slideshow_Shell.slidecolor_white .slide_caption
+{
+    color: #121212;
+    background-color: #fff;   
+}
+
+.Slideshow_Shell.slidecolor_white .slide_caption p, 
+.Slideshow_Shell.slidecolor_white .slide_caption h2
+{
+    color: #121212;
+    background-color: #fff;
+    text-shadow:none;
+}
+
+.Slideshow_Shell.slidecolor_white .Slideshow_Navbar button.active, 
+.Slideshow_Shell.slidecolor_white .Slideshow_Navbar button:hover
+{
+    color: #ccc;
+    background: #121212;
+}
+
+/*--------------------------------------------------------------
+SLIDECOLOR GRAY OVERWRITES
+-----------------------------------------------------------------*/
+.Slideshow_Shell.slidecolor_gray .slider_container img
+{
+    border:solid 1px #c1c1c1;
+}
+
+.Slideshow_Shell.slidecolor_gray .Slideshow_Navbar
+{
+    color: #121212;
+    background: #c1c1c1;
+}
+
+.Slideshow_Shell.slidecolor_gray .Slideshow_Navbar button
+{
+    color: #121212;
+    background-color: #c1c1c1;
+    border-color:#c1c1c1;
+}
+
+.Slideshow_Shell.slidecolor_gray .slide_caption
+{
+    color: #121212;
+    background-color: #c1c1c1;   
+}
+
+.Slideshow_Shell.slidecolor_gray .slide_caption p, 
+.Slideshow_Shell.slidecolor_gray .slide_caption h2
+{
+    color: #121212;
+    background-color: #c1c1c1;
+    text-shadow:none;
+}
+
+.Slideshow_Shell.slidecolor_gray .Slideshow_Navbar button.active, 
+.Slideshow_Shell.slidecolor_gray .Slideshow_Navbar button:hover
+{
+    color: #ccc;
+    background: #121212;
+}
+
+/*--------------------------------------------------------------
+SLIDECOLOR GRADIENT OVERWRITES
+-----------------------------------------------------------------*/
+.Slideshow_Shell.slidecolor_gradient .slider_container img
+{
+    border:solid 1px #222;
+}
+
+.Slideshow_Shell.slidecolor_gradient .Slideshow_Navbar
+{
+    color: #222;
+    background-color: #f4f5f5;
+background-image: -webkit-gradient(linear, left top, left bottom, from(#f4f5f5), to(#dfdddd));
+background-image: -webkit-linear-gradient(top, #f4f5f5, #dfdddd);
+background-image: -moz-linear-gradient(top, #f4f5f5, #dfdddd);
+background-image: -ms-linear-gradient(top, #f4f5f5, #dfdddd);
+background-image: -o-linear-gradient(top, #f4f5f5, #dfdddd);
+background-image: linear-gradient(to bottom, #f4f5f5, #dfdddd);
+filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#f4f5f5, endColorstr=#dfdddd);
+
+}
+
+.Slideshow_Shell.slidecolor_gradient .Slideshow_Navbar button
+{
+    color: #121212;
+    background-color: #f4f5f5;
+background-image: -webkit-gradient(linear, left top, left bottom, from(#f4f5f5), to(#dfdddd));
+background-image: -webkit-linear-gradient(top, #f4f5f5, #dfdddd);
+background-image: -moz-linear-gradient(top, #f4f5f5, #dfdddd);
+background-image: -ms-linear-gradient(top, #f4f5f5, #dfdddd);
+background-image: -o-linear-gradient(top, #f4f5f5, #dfdddd);
+background-image: linear-gradient(to bottom, #f4f5f5, #dfdddd);
+filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#f4f5f5, endColorstr=#dfdddd);
+
+    border-color:#c1c1c1;
+    border-width:1px;
+}
+
+.Slideshow_Shell.slidecolor_gradient .slide_caption
+{
+    color: #222;
+    background-color: #f4f5f5;
+background-image: -webkit-gradient(linear, left top, left bottom, from(#f4f5f5), to(#dfdddd));
+background-image: -webkit-linear-gradient(top, #f4f5f5, #dfdddd);
+background-image: -moz-linear-gradient(top, #f4f5f5, #dfdddd);
+background-image: -ms-linear-gradient(top, #f4f5f5, #dfdddd);
+background-image: -o-linear-gradient(top, #f4f5f5, #dfdddd);
+background-image: linear-gradient(to bottom, #f4f5f5, #dfdddd);
+filter: progid:DXImageTransform.Microsoft.gradient(GradientType=0,startColorstr=#f4f5f5, endColorstr=#dfdddd);
+  border-bottom:solid 1px #aaa;
+}
+
+.Slideshow_Shell.slidecolor_gradient .slide_caption p, 
+.Slideshow_Shell.slidecolor_gradient .slide_caption h2
+{
+    color: #121212;
+    background-color: transparent;
+    text-shadow:none;
+}
+
+.Slideshow_Shell.slidecolor_gradient .Slideshow_Navbar button.active, 
+.Slideshow_Shell.slidecolor_gradient .Slideshow_Navbar button:hover
+{
+    color: #222;
+    background: #f7f7f7;
+}
+
+
+
+/*==============================================================
+
+SLIDESHOW LAYOUT OVERWRITES
+
+=====================================================================*/
+
+/*--------------------------------------------------------------
+SLIDESHOW COMPACT OVERWRITES
+-----------------------------------------------------------------*/
+
+.Slideshow_Shell.slidelayout_compact .Slideshow_Navbar
+{
+    clear: both;
+    position: relative;
+    margin-top: 0px;
+    text-align: left;
+    width: 98%;
+    padding:0%;
+    padding-left:1%;
+    padding-right:1%;
+    margin: auto;
+    z-index: 5000;
+    border-radius:0px;
+    border-width:1px;
+}
+
+.Slideshow_Shell.slidelayout_compact .slider_container img
+{
+    border:solid 1px transparent;
+}
+
+.Slideshow_Shell.slidelayout_compact .Slideshow_Navbar button
+{
+    width: 18px;
+    font-size: .8em;
+    display: inline;
+    margin: 1px;
+    margin-left: 6px;
+    padding: 1px;
+    cursor: pointer;
+    border-width:0px;
+}
+
+.Slideshow_Shell.slidelayout_compact .Slideshow_Navbar button.active, 
+.Slideshow_Shell.slidelayout_compact .Slideshow_Navbar button:hover
+{
+    border:0px;
+    border-radius:0px;  
+    
+}
+
+.Slideshow_Shell.slidelayout_compact .slide_caption
+{
+    min-height: 50px;
+    color: #f7f7f7;
+    background:transparent;
+    background-color: rgba(0,0,0,.7);
+    padding: 1%;
+    margin: 0px;
+    position:absolute;
+    bottom:0px;
+    left:0px;
+    width:98%;
+}
+
+.Slideshow_Shell.slidelayout_compact .slide_caption p, 
+.Slideshow_Shell.slidelayout_compact .slide_caption h2
+{
+    margin: 0px;
+    padding: 0px;
+    color:inherit;
+    background-color:transparent;
+    text-shadow:2px 2px 2px rgba(0,0,0,.8);
+}
+
+.Slideshow_Shell.slidelayout_compact .slide_caption p
+{
+    font-size: .85em;
+}
+
+
+/*--------------------------------------------------------------
+SLIDESHOW PREVIEW OVERWRITES
+-----------------------------------------------------------------*/
+.slideshow_image_slider_outside
+{
+    float:left;
+    border:solid 1px #dfdfdf;
+    width:92%;
+    margin:2%;    
+    margin-top:0px;
+    margin-bottom:0px;
+    padding:0;
+    height:50px;    
+}
+
+.slideshow_image_slider_outside2
+{
+    float:left;
+    border:0px;
+    width:94%;
+    margin:0; 
+    padding:0;
+    overflow:hidden;
+    height:50px; 
+}
+.slideshow_image_slider_inside
+{
+    height:44px;
+    min-width:1000px;
+    max-width:3500px;
+    margin:0px;
+    padding:2px;
+    padding-left:0px;
+    padding-right:0px;    
+    transition: all 2s;
+    
+}
+
+.slideshow_image_slider_inside_moveleft,
+.slideshow_image_slider_inside_moveright
+{
+    width:3%;
+    text-align:center;
+    padding:0px;
+    margin:0px;
+    height:25px;    
+    padding-top:15px;
+    padding-bottom:10px;
+    float:left;
+}
+
+.slideshow_image_slider_inside_moveleft:hover,
+.slideshow_image_slider_inside_moveright:hover
+{
+    cursor:pointer;
+}
+
+.Slideshow_Shell.slidelayout_previews .Slideshow_Navbar
+{
+    clear: both;
+    position: relative;
+    text-align: left;
+    width: 99%;
+    height:50px;
+    padding:.5%;
+    margin:0px;
+    border-radius:0px;
+}
+
+.Slideshow_Shell.slidelayout_previews .Slideshow_Navbar button
+{
+   width: 18px;
+   font-size: .8em;
+   float:left;
+   margin: 1px;
+   margin-left: 6px;
+   padding: 1px;
+   cursor: pointer;
+}
+
+.Slideshow_Shell.slidelayout_previews .Slideshow_Navbar img
+{
+    height:40px;
+    float:left;
+    width:auto;
+    margin:1px;
+    border:solid 3px transparent;
+}
+
+.Slideshow_Shell.slidelayout_previews .slide_caption
+{
+    min-height: 25px;
+    padding: 1%;
+    margin: 0px;
+    width:98%;
+}
+
+.Slideshow_Shell.slidelayout_previews .slide_caption p, 
+.Slideshow_Shell.slidelayout_previews .slide_caption h2
+{
+    margin: 0px;
+    padding: 0px;
+   text-shadow:none;
+}
+
+.Slideshow_Shell.slidelayout_previews .slide_caption p
+{
+    font-size: .85em;
+}
+
+
+/*--------------------------------------------------------------
+SLIDESHOW LAYOUT DECK
+-----------------------------------------------------------------*/
+.Slideshow_Shell.slidelayout_deck
+{
+   clear:both;
+   position:relative;
+   min-height:50px;
+}
+
+.Slideshow_Shell.slidelayout_deck .Slideshow_Navbar
+{
+    clear: both;
+    position: absolute;
+    top:0px !important;
+    right:0px !important;
+    height:100%;
+    width: 50px;
+    margin-top: 0px;
+    text-align: left;
+    padding:0%;
+    margin: auto;
+    z-index: 5000;
+    border-radius:0px;
+    text-align:center;
+    z-index:50000;
+    background-color:transparent !important;
+    background:transparent !important;
+    
+}
+
+.Slideshow_Shell.slidelayout_deck .Slideshow_Navbar button
+{
+   width: 18px;
+   font-size: .8em;
+   float:left;
+   margin: 1px;
+   margin-left: 1px;
+   padding: 0px;
+   cursor: pointer;
+   border-radius:0px;
+   border:solid 1px transparent;
+}
+
+.Slideshow_Shell.slidelayout_deck .Slideshow_Navbar button.active, 
+.Slideshow_Shell.slidelayout_deck .Slideshow_Navbar button:hover
+{
+    border:solid 1px #2366AD;
+    border-radius:0px;  
+    box-shadow:none;
+    
+}
+
+.Slideshow_Shell.slidelayout_deck .Slideshow_Navbar button:nth-child(1)
+{
+    width:38px;    
+}
+
+.Slideshow_Shell.slidelayout_deck .Slideshow_Navbar button:nth-child(2)
+{
+    clear:both;    
+}
+
+.Slideshow_Shell.slidelayout_deck .slide_image img
+{
+    float:right;
+    width:47%;
+    height:auto;
+    margin-top:30px;
+    margin-right:70px;
+}
+
+.Slideshow_Shell.slidelayout_deck .slide_caption
+{
+    position:relative;
+    float:left;
+    min-height: 50px;
+    padding: 1%;
+    margin: 0px;
+    width:40%;
+    min-height:250px;   
+    border-radius:6px;
+}
+
+.Slideshow_Shell.slidelayout_deck .slide_caption:before, 
+.Slideshow_Shell.slidelayout_deck .slide_caption:after
+{
+ z-index: -1;
+  position: absolute;
+  content: "";
+  bottom: 15px;
+  left: 10px;
+  width: 50%;
+  top: 80%;
+  max-width:300px;
+  background: #777;
+  -webkit-box-shadow: 0 15px 10px #777;
+  -moz-box-shadow: 0 15px 10px #777;
+  box-shadow: 0 15px 10px #777;
+  -webkit-transform: rotate(-3deg);
+  -moz-transform: rotate(-3deg);
+  -o-transform: rotate(-3deg);
+  -ms-transform: rotate(-3deg);
+  transform: rotate(-3deg);
+}
+.Slideshow_Shell.slidelayout_deck .slide_caption:after
+{
+   -webkit-transform: rotate(3deg);
+  -moz-transform: rotate(3deg);
+  -o-transform: rotate(3deg);
+  -ms-transform: rotate(3deg);
+  transform: rotate(3deg);
+  right: 10px;
+  left: auto;
+}
+
+.Slideshow_Shell.slidelayout_deck .slide_caption p, 
+.Slideshow_Shell.slidelayout_deck .slide_caption h2
+{
+    margin: 0px;
+    padding: 0px;
+    
+}
+
+.Slideshow_Shell.slidelayout_deck .slide_caption p
+{
+    font-size: .85em;
+}
+
+.Slideshow_Shell.slidelayout_deck .btnPrevNav, 
+.Slideshow_Shell.slidelayout_deck .btnNextNav
+{
+    display:none;
+}
+
+
+/*+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
++              END OF STANDARD STYLES YOU ARE                                         +
++     USE THE MY STYLE OVERRIDE CSS FILE TO ADJUST STYLES AS NEEDED                   +
++     PLEASE MAINTAIN YOUR SITE NAVIGATION SECTION IN THE MY NAVIGATION CSS FILE      +
++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++*/
+

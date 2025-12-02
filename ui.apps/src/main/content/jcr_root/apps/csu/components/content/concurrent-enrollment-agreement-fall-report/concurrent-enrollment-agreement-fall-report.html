@@ -1,0 +1,39 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.all @ categories='csu.concurrent-enrollment-agreement-fall-report'}" />
+<pre data-sly-use.concurrentEnrollmentAgreementFallModel="com.csuf.cloud.core.models.ConcurrentEnrollmentAgreementFallInboxReportModel"></pre>
+<sly data-sly-use.concurrentEnrollmentAgreementFallJson="${'fetchJson.js' @ jsonString=concurrentEnrollmentAgreementFallModel.concurrentEnrollmentAgreementFallReportJsonArray}" />
+
+<div id="container-required" class="px-4 py-1">
+    <div id="pills-concurrentenrollmentagreementfallreport" class="tab-pane fade show active identifier" data-identifier='concurrentenrollmentagreementfallreport'>        
+        <div id="dvConcurrentEnrollmentAgreementFallReport" role="main">
+            <table class="table table-striped table-hover table-bordered" id="tbConcurrentEnrollmentAgreementFallReport" align="center" cellpadding="2" cellspacing="1"  >
+                <thead id="tbThead">
+                  <tr>                      
+                      <th style="cursor:pointer;" class="sort">S.No</th> 
+					  <th style="cursor:pointer;" class="sort">Employee ID</th> 
+                      <th style="cursor:pointer;" class="sort">First Name</th>
+                      <th style="cursor:pointer;" class="sort">Last Name</th>
+                      <th style="cursor:pointer;" class="sort">Workflow Start Time</th>
+                      <th style="cursor:pointer;" class="sort">Step Start Time</th>
+                      <th style="cursor:pointer;" class="sort">Step Name</th>
+                      <th style="cursor:pointer;" class="sort">Initiated By</th>
+					  <th style="cursor:pointer;" class="sort">Assignee</th>                      
+                  </tr>
+                </thead>
+                <sly data-sly-list="${concurrentEnrollmentAgreementFallJson}">
+                    <tr>
+                        <td>${item.sNo}</td>
+						<td>${item.cwid}</td> 
+						<td>${item.fName}</td>
+                        <td>${item.lName}</td>
+                        <td data-order="${item.workflowStartTime.timestamp}">${item.workflowStartTime.display}</td>
+                        <td data-order="${item.stepStartTime.timestamp}">${item.stepStartTime.display}</td>
+                        <td>${item.stepName}</td>
+                        <td>${item.stepInitiator}</td>
+						<td>${item.stepAssignee}</td>
+                    </tr>
+                </sly>
+            </table>
+        </div>
+    </div>
+</div>

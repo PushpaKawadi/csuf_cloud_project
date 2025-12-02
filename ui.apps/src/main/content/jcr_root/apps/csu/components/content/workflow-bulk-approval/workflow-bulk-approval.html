@@ -1,0 +1,108 @@
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.all @ categories='csu.workflow-bulk-approval'}" />
+<pre data-sly-use.wfBulkApprovalModel="com.csuf.cloud.core.models.BulkApprovalDataModel"></pre>
+<sly data-sly-use.wfBulkApprovalData="${'fetchJson.js' @ jsonString=wfBulkApprovalModel.workflowArray}" />
+
+<div id="container-required" class="px-4 py-1">
+    <div id="pills-workflow-bulk-approval" class="tab-pane fade show active identifier" data-identifier='workflow-bulk-approval'>
+        <div class="scrollTableInner" id="dvWfBulkApproval" role="main">
+            <table class="table table-striped table-hover table-bordered" id="workflow-bulk-approval-dataTable" align="center" cellpadding="2" cellspacing="1">
+                <thead class="tbThead">
+                    <tr>
+						<th></th>
+                        <th scope="col" class="table-col-min-width">Status</th>
+                        <th scope="col" class="table-col-min-width">Initiator</th>
+                        <th scope="col" class="table-col-min-width">Name</th>
+                        <th scope="col" class="table-col-min-width">Start Time</th>
+                        <th scope="col" class="table-col-min-width">Model</th>
+						<th scope="col" class="table-col-min-width">Assignee</th>
+						<th scope="col" class="table-col-min-width">Task Title</th>
+                        <th scope="col" class="table-col-min-width">Workitem Id</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <sly data-sly-list="${wfBulkApprovalData}">
+							<tr data-sly-test="${item.id}" data-id="${item.id}">
+							<td scope="row">
+                            <div class="checkbox-wrapper my-tasks-checkbox">
+                                <input type="checkbox" class="chb" name="mytaskscheckbox" value="${itemList.count}">
+                            </div>
+                            </td>
+                            <td>${item.status}</td>
+                            <td>${item.initiator}</td>
+                            <td>${item.name}</td>
+                            <td data-order="${item.startTime.timestamp}">${item.startTime.display}</td>
+                            <td>${item.modelTitle}</td>
+                            <td>${item.assignee}</td>
+							<td>${item.workItemTitle}</td>
+                            <td id='wId'>${item.workItemId}</td>
+                        </tr>
+                    </sly>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+<div class="show-action-buttons" id="action-buttons"><button class="action-btn" id="approve-btn" type="button">Approve</button></div>
+
+
+    <!-- Modal Bulk Approval Action -->
+<div class="modal fade" id="modal-select-bulk-approval-action" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Bulk Approval</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="form-group">
+      <div class="modal-body modal-body-division" id="modal-body-bulk-approval">
+
+      </div>
+      <div id="labelError"></div>
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-outline-danger" data-dismiss="modal">CANCEL</button>
+        <button type="submit" class="btn btn-primary cls-bulk-approval-ok">SUBMIT</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal Error Approval Action -->
+<div class="modal fade" id="modal-error-bulk-approval-action" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title"><i class="fas fa-times"></i></h5>
+	  </div>
+	  <div class="modal-body">
+		<p>An error occurred while approving the task.</p>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-outline-danger" data-dismiss="modal">OK</button>
+	  </div>
+	</div>
+  </div>
+</div>
+
+<!-- Modal Not Approval Action -->
+<div class="modal fade" id="modal-do-not-delegate-action" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+	<div class="modal-content">
+	  <div class="modal-header">
+		<h5 class="modal-title"><i class="fas fa-times"></i></h5>
+	  </div>
+	  <div class="modal-body">		
+		<p>The selected task cannot be completed.</p>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-outline-danger" data-dismiss="modal">OK</button>
+	  </div>
+	</div>
+  </div>
+</div>
+</div>

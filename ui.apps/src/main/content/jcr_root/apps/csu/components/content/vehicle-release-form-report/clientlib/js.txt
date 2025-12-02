@@ -1,0 +1,3 @@
+#base=js
+
+vehicle-release-form-report.js

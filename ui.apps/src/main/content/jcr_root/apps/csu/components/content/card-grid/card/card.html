@@ -1,0 +1,14 @@
+<sly data-sly-use.resourceModel="${'com.csuf.cloud.core.models.ResourceDuplicationModel' @  resourcePath='csu/components/content/card-grid/card-link', resourceName = 'training-link'}"/>
+
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.css @ categories='csu.card'}" />
+
+<div class="card card-body">
+    <h5 class="card-title mb-4 ct-style card-number"></h5>
+    <img src="/content/dam/csu/number_bg.png" class="title-img-style" alt="">
+    <h4 class="card-title mb-4 w-75 card-title-color">${properties.formName}</h4>
+    <div class="card-scroll-y" data-sly-test="${resourceModel.duplicatedResourceList}" data-sly-list.link="${resourceModel.duplicatedResourceList}">
+        <div data-sly-resource="${link.path @ resourceType=link.resourceType}" data-sly-unwrap="${wcmmode.disabled}">
+        </div>			
+    </div>
+</div>

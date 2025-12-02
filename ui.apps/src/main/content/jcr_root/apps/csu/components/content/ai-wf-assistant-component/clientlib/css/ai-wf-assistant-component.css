@@ -1,0 +1,137 @@
+
+li.nav-item {
+    visibility: visible;
+}
+
+span.header-nav-title.h5.text-white.ml-4 {
+    position: fixed;
+    top: 13px;
+    left: 112px;
+}
+
+.header-vertical-line {
+    margin-left: 6.75rem;
+}
+
+.relative.flex.items-center {
+    bottom: 30px;
+}
+
+main#mainchatscreen {
+    margin-top: 100px;
+}
+
+header.w-2\/4.mx-auto.top-0 {
+    background: none;
+}
+
+main#mainchatscreen {
+    background: white;
+}
+
+a#pills-campusforms-tab {
+    background: none;
+    border-bottom: none;
+}
+
+a#pills-aiassistant {
+    color: #fff !important;
+    background-color: #00274c;
+    border-bottom: 3px solid #ff7900;
+    display: block;
+    margin-top: -4px;
+    border-radius: 0;
+    padding-left: 1rem;
+    text-align: left;
+    text-transform: uppercase;
+}
+/*
+.flex.space-x-1.mt-4 {
+    visibility: hidden;
+}*/
+
+/* Add these new table styles */
+        table {
+            border-collapse: collapse;
+            margin: 1em 0;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #e5e7eb;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f9fafb;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        tr:hover {
+            background-color: #f3f4f6;
+        }
+
+        /* Ensure tables don't overflow on mobile */
+        .markdown-table-wrapper {
+            overflow-x: auto;
+            max-width: 100%;
+        }
+.pb-20 {
+    padding-bottom: 4rem;
+}
+
+.bg-gray-300 {
+  background-color: #d1d5db; /* Light gray background */
+}
+
+.min-h-screen.flex.flex-col {
+    margin-top: 80px;
+}
+
+.flex-1.bg-white.rounded-lg.shadow-lg.p-6 {
+    max-height: 675px;
+        max-width: 1079px;
+}
+
+.w-96.bg-white.rounded-lg.shadow-lg.flex.flex-col.h-\[calc\(100vh-48px\)\] {
+    max-height: 675px;
+}
+
+.p-4.bg-indigo-600.text-white.rounded-t-lg {
+    background: #00274c;
+}
+
+button.bg-indigo-600.text-white.px-4.py-2.rounded-lg.hover\:bg-indigo-700.transition-colors.duration-200 {
+    background: #00274c;
+}
+
+.inline-block.p-3.rounded-lg.bg-indigo-600.text-white.max-w-\[80\%\] {
+    background: #ff7900;
+}
+
+.modal-reason-text {
+            white-space: pre-wrap;
+            word-break: break-word;
+        }
+
+        #reasonModal {
+            opacity: 0;
+            transition: opacity 0.3s ease-in-out;
+        }
+
+        #reasonModal.opacity-100 {
+            opacity: 1;
+        }
+
+.min-h-screen.flex.flex-col {
+    margin-left: -10px;
+}
+
+.top-20 {
+    top: 7rem;
+}

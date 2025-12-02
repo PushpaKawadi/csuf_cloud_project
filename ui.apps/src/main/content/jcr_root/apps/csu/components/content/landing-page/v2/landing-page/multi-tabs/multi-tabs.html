@@ -1,0 +1,19 @@
+<sly data-sly-use.resourceModel="${'com.csuf.cloud.core.models.ResourceDuplicationModel' @  resourcePath='csu/components/content/landing-page/v2/landing-page/tab-content', resourceName = 'tabcontent'}" />
+
+<section class="" style="">
+    <div class="container-fluid" style="background: #FCFCFC;">
+        <div class="col-md-12">
+
+            <!--tab links component-->
+            <div data-sly-resource="${'tabs' @ resourceType='csu/components/content/landing-page/v2/landing-page/tab-links'}"></div>
+
+            <div class="tab-content mt-3 container" id="myTabContent" data-sly-test="${resourceModel.duplicatedResourceList}" data-sly-list.tabcontent="${resourceModel.duplicatedResourceList}">
+                <div class="tab-pane fade" id="" role="tabpanel" aria-labelledby="-tab" data-sly-resource="${tabcontent.path @ resourceType=tabcontent.resourceType}">                
+                </div>            
+            </div>
+            
+            <sly data-sly-resource="${resource.path @ resourceType='wcm/foundation/components/parsys/newpar', appendPath='/*', decorationTagName='div', cssClassName='new section aem-Grid-newComponent'}" data-sly-test="${((wcmmode.edit || wcmmode.preview) && !resourceModel.duplicatedResourceList)}">
+            </sly>
+        </div>
+    </div>
+</section>

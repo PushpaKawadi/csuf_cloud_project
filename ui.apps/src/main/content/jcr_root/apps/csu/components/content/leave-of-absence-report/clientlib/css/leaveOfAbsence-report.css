@@ -1,0 +1,10 @@
+@media (max-width: 991px) {
+    #container-required {
+        margin-top: 4.5rem;
+    }
+}
+
+#tbThead {
+    background-color: #00274c;
+    color: white;
+}

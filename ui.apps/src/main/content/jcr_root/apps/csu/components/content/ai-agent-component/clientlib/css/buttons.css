@@ -1,0 +1,306 @@
+/* Enhanced Bulk Action Buttons */
+.d-flex {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+}
+
+.table-controls .approve-btn,
+.table-controls .reject-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 5px 15px;
+    min-width: 120px;
+    border: none;
+    border-radius: 10px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+/* Approve Button Styling */
+.table-controls .approve-btn {
+    background: linear-gradient(135deg, #00244F 0%, #001a3a 100%);
+    color: white;
+    position: relative;
+}
+
+.table-controls .approve-btn::before {
+    content: '✓';
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.table-controls .approve-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.table-controls .approve-btn:hover::after {
+    left: 100%;
+}
+
+.table-controls .approve-btn:hover:not(:disabled):not(.loading) {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 36, 79, 0.4);
+    background: linear-gradient(135deg, #001a3a 0%, #001122 100%);
+}
+
+.table-controls .approve-btn:active:not(:disabled):not(.loading) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 36, 79, 0.3);
+}
+
+/* Reject Button Styling - Now uses same background as approve */
+.table-controls .reject-btn {
+    background: linear-gradient(135deg, #00244F 0%, #001a3a 100%);
+    color: white;
+    position: relative;
+}
+
+.table-controls .reject-btn::before {
+    content: '✕';
+    font-size: 12px;
+    font-weight: bold;
+}
+
+.table-controls .reject-btn::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+    transition: left 0.5s ease;
+}
+
+.table-controls .reject-btn:hover::after {
+    left: 100%;
+}
+
+.table-controls .reject-btn:hover:not(:disabled):not(.loading) {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(0, 36, 79, 0.4);
+    background: linear-gradient(135deg, #001a3a 0%, #001122 100%);
+}
+
+.table-controls .reject-btn:active:not(:disabled):not(.loading) {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 20px rgba(0, 36, 79, 0.3);
+}
+
+/* Disabled State */
+.table-controls .approve-btn:disabled,
+.table-controls .reject-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    background: #9ca3af;
+}
+
+.table-controls .approve-btn:disabled::before,
+.table-controls .reject-btn:disabled::before {
+    content: '⏸';
+}
+
+/* Loading State */
+.table-controls .approve-btn.loading,
+.table-controls .reject-btn.loading {
+    opacity: 0.8;
+    pointer-events: none;
+    cursor: wait;
+    animation: buttonPulse 1.5s ease-in-out infinite;
+}
+
+.table-controls .approve-btn.loading::before,
+.table-controls .reject-btn.loading::before {
+    content: '';
+}
+
+.table-controls .approve-btn.loading::after,
+.table-controls .reject-btn.loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 18px;
+    height: 18px;
+    border: 2px solid transparent;
+    border-top: 2px solid white;
+    border-right: 2px solid white;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+}
+
+/* Button Animations */
+@keyframes buttonPulse {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    50% {
+        transform: scale(1.02);
+    }
+}
+
+@keyframes spin {
+    0% {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    100% {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+/* Enhanced Table Controls Layout */
+.table-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px;
+    border-bottom: 2px solid #f0f0f0;
+    background: linear-gradient(135deg, #fafbfc 0%, #f8fafc 100%);
+    border-radius: 16px 16px 0 0;
+}
+
+.selected-info {
+    font-size: 15px;
+    color: #374151;
+    width: 100%;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.selected-info span {
+    background: linear-gradient(135deg, #e5e7eb 0%, #d1d5db 100%);
+    padding: 8px 16px;
+    border-radius: 25px;
+    color: #374151;
+    font-weight: 600;
+    border: 2px solid #e5e7eb;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .d-flex {
+        flex-direction: column;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .table-controls .approve-btn,
+    .table-controls .reject-btn {
+        width: 100%;
+        padding: 16px 20px;
+        min-width: auto;
+    }
+
+    .selected-info {
+        flex-direction: column;
+        gap: 16px;
+        align-items: stretch;
+    }
+}
+
+/* Focus States for Accessibility */
+.table-controls .approve-btn:focus,
+.table-controls .reject-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.5);
+}
+
+.table-controls .approve-btn:focus:not(:disabled):not(.loading) {
+    box-shadow: 0 0 0 3px rgba(0, 36, 79, 0.3), 0 12px 30px rgba(0, 36, 79, 0.4);
+}
+
+.table-controls .reject-btn:focus:not(:disabled):not(.loading) {
+    box-shadow: 0 0 0 3px rgba(0, 36, 79, 0.3), 0 12px 30px rgba(0, 36, 79, 0.4);
+}
+
+/* Radio button styles for grade evaluation */
+.radio-group {
+    display: flex;
+    gap: 0.5rem;
+    margin-top: 0.5rem;
+}
+
+.radio-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.radio-item input[type="radio"] {
+    width: 16px;
+    height: 16px;
+    margin: 0;
+    cursor: pointer;
+}
+
+.radio-item input[type="radio"]:disabled {
+    cursor: not-allowed;
+    opacity: 0.5;
+}
+
+.radio-item label {
+    font-size: 0.9rem;
+    color: #333;
+    cursor: pointer;
+    margin: 0;
+    font-weight: normal;
+}
+
+.radio-item input[type="radio"]:disabled+label {
+    color: #999;
+    cursor: not-allowed;
+}
+
+.radio-item input[type="radio"]:checked+label {
+    color: #002B5A;
+    font-weight: 500;
+}
+
+.radio-item input[type="radio"]:disabled:checked+label {
+    color: #666;
+    font-weight: normal;
+}
+
+/* Grade evaluation group visibility */
+#gradeEvaluationGroup {
+    display: block;
+}
+
+#gradeEvaluationGroup.hidden {
+    display: none;
+}
+
+/* Ensure proper spacing in the form */
+.form-group {
+    margin-bottom: 1rem;
+}
+
+.form-row {
+    margin-top: 1rem;
+}

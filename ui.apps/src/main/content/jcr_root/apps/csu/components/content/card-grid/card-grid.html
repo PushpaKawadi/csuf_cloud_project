@@ -1,0 +1,25 @@
+<sly data-sly-use.resourceModel="${'com.csuf.cloud.core.models.ResourceDuplicationModel' @  resourcePath='csu/components/content/card-grid/card', resourceName = 'card'}"/>
+
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.all @ categories='csu.card-grid'}" />
+
+<section>
+<div class="container">
+    <h3 style="" class="text-center main-title"
+    style="text-transform: capitalize;">${properties.categoryName}</h3>
+ 
+    <div class="row" data-sly-test="${resourceModel.duplicatedResourceList}" data-sly-list.card="${resourceModel.duplicatedResourceList}">
+        <sly data-sly-use.cardComponent="card/card.html">
+            <!--<sly data-sly-call="${cardComponent.resultstemplate @ cardCount=cardList.count}" />-->
+        </sly>
+        
+        <div class="col-lg-4 col-md-6 col-sm-3 col-xs-12 mt-2 blogBox moreBox" data-sly-resource="${card.path @ resourceType=card.resourceType}">
+        </div>			
+    </div>
+   
+    <div id="loadMore" class="col-12 text-center mt-3">
+    <h4 class="loadmore"> <span class="button-outlined cursor">${properties.buttonCaption}</span></h4>
+    </div>		 
+		  
+</div>
+</section>

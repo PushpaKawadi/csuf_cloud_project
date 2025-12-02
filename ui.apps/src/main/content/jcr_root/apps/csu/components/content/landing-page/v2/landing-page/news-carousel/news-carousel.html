@@ -1,0 +1,28 @@
+<sly data-sly-use.resourceModel="${'com.csuf.cloud.core.models.ResourceDuplicationModel' @  resourcePath='csu/components/content/landing-page/v2/landing-page/news', resourceName = 'news'}"/>
+
+<section class="" style="background:#ffffff; padding:5px;box-shadow: 0px 3px 6px #0000000F;
+         opacity: 1;">
+    <div class="row">
+        <div class="col-md-3">
+            <h4 class="pt-3 text-right" style="
+                  font-size: medium;
+                  ">News &amp; Announcements</h4>
+        </div>
+        <div class="col-md-9">
+            <div id="mixedSlider-1" class="mixedSlider">
+                <div id="collapseContentDiv" class="MS-content hide" data-sly-test="${resourceModel.duplicatedResourceList}" data-sly-list.news="${resourceModel.duplicatedResourceList}">
+                    <div id="topSlider-${newsList.count}" class="item topSlider col-4">
+                        <div class="topSliderInner" data-sly-resource="${news.path @ resourceType=news.resourceType}">                            
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="MS-controls">
+                    <button class="MS-leftx" style="right: 25px;font-size:25px;"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+                    <button class="MS-right" style="right: 5px !important;position: absolute;font-size:25px;"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+                </div>
+                <div class="expandCollapse mt-2 text-center"><i class="fa fa-chevron-down news-carousel-icon" aria-hidden="true"></i> </div>
+            </div>
+        </div>
+    </div>
+</section>

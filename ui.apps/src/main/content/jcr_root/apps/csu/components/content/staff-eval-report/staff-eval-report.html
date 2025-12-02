@@ -1,0 +1,104 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.all @ categories='csu.spe-report'}" />
+<pre data-sly-use.staffModel="com.csuf.cloud.core.models.StaffEvalInboxReportModel"></pre>
+<sly data-sly-use.staffJson="${'fetchJson.js' @ jsonString=staffModel.staffEvalReportJsonArray}" />
+
+<div id="container-required" class="px-4 py-1">
+    <div id="pills-staffreport" class="tab-pane fade show active identifier" data-identifier='staffreport'> 
+        <div class="scrollTableInner" id="dvStaffReport" role="main">
+            <table class="table table-striped table-hover table-bordered" id="tbStaffReport" align="center" cellpadding="2" cellspacing="1"  >
+                <thead id="tbThead">
+                  <tr>                      
+                      <th style="cursor:pointer;" class="sort">S.No</th>
+                      <th style="cursor:pointer;" class="sort">Workflow Model</th>
+                      <th style="cursor:pointer;" class="sort">Employee ID</th>
+                      <th style="cursor:pointer;" class="sort">First Name</th>
+                      <th style="cursor:pointer;" class="sort">Last Name</th>   
+                      <th style="cursor:pointer;" class="sort">Department Name</th> 
+					  <th style="cursor:pointer;" class="sort">Division Name</th>
+                      <th style="cursor:pointer;" class="sort">Workflow Start Time</th>
+                      <th style="cursor:pointer;" class="sort">Step Start Time</th>
+                      <th style="cursor:pointer;" class="sort">Step Name</th>
+                      <th style="cursor:pointer;" class="sort">Initiated By</th>
+                      <th style="cursor:pointer;" class="sort">Assignee</th>
+                      <th></th>
+                  </tr>
+                </thead>
+                <sly data-sly-list="${staffJson}">
+                    <tr data-sly-test="${item.witemId}" data-id="${item.witemId}">
+                        <td>${item.sNo}</td>
+                        <td>${item.workflowModelName}</td>
+                        <td>${item.cwid}</td>
+                        <td>${item.fName}</td>
+                        <td>${item.lName}</td>   
+                        <td>${item.deptName}</td>
+ 						<td>${item.divisionName}</td>
+                        <td>${item.workflowStartTime}</td>
+                        <td>${item.stepStartTime}</td>
+                        <td>${item.stepName}</td>
+                        <td>${item.stepInitiator}</td>
+                        <td>${item.stepAssignee}</td>
+                        <td><i class="fas fa-trash" tool-tip-toggle='tooltip-icon' data-original-title='Terminate Workitem'></i></td>
+                    </tr>
+                </sly>
+            </table>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="confirm-terminate-workflow-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Terminate Item</h5>
+                    <button type="button" class="close modal-success-close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="modal-body-items">
+                        <p>Are you sure, you want to terminate this workitem?</p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger modal-success-close col-sm-4" data-dismiss="modal">CANCEL</button>
+                    <button id="terminate-workflow-cnf-btn" type="button" class="btn btn-primary col-sm-4">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Error Terminate Workflow Action -->
+    <div class="modal fade" id="modal-error-terminate-workflow" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-sm" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"><i class="fas fa-times"></i></h5>
+                </div>
+                <div class="modal-body">
+                    <p>An error occurred while terminating the workflow. Please try later.</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>         
+
+<div class="modal fade" id="modal-error-terminate-action" tabindex="-1" role="dialog">
+  <div class="modal-dialog modal-sm" role="document">
+	<div class="modal-content">
+	  <div class="modal-header" id="headerIcon">
+         <h5 class="modal-title" style="display:none"><i class="fas fa-times"></i></h5>
+	  </div>
+	  <div class="modal-body">
+		<p>You do not have permission to terminate the workitems.</p>
+	  </div>
+	  <div class="modal-footer">
+		<button type="button" class="btn btn-outline-danger" data-dismiss="modal">OK</button>
+	  </div>
+	</div>
+  </div>
+</div>

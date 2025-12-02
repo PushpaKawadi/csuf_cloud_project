@@ -1,0 +1,45 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.all @ categories='csu.ai-assistant'}" />
+<head>
+<script src="https://cdn.socket.io/4.5.4/socket.io.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/default.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    </head>
+    <body class="h-screen flex flex-col">
+<div id="toast" class="hidden fixed top-4 left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-sm px-4 py-2 rounded-lg shadow-lg z-50"> Copied to clipboard! </div>
+    <main class="flex-1 overflow-y-auto px-4 py-6 pb-20" id="mainchatscreen">
+      <header class="w-2/4 mx-auto top-0">
+        <div class="thread-id-container">
+          <span class="thread-id-label">Thread ID:</span>
+          <input id="input-thread-id" placeholder="ID" class="bg-gray-50 text-gray-600" />
+          <div class="thread-id-tooltip">Hover to expand thread ID</div>
+        </div>
+      </header>
+      <div class="w-2/4 mx-auto mb-20" id="chat"></div>
+    </main>
+    <footer class="fixed bottom-0 left-0 w-full bg-white shadow-md p-4 mt-10">
+      <div class="w-2/4 mx-auto">
+        <div class="relative flex items-center">
+          <textarea id="input-box" placeholder="Message AEM AI Assistant" class="flex-1 border border-gray-100 bg-gray-100 rounded-3xl p-4 focus:outline-none focus:ring-1 focus:ring-gray-200 resize-none" rows="3"></textarea>
+          <button id="send-button" class="absolute right-2 bottom-2 bg-gray-500 text-white p-2 rounded-full focus:outline-none">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 10l7-7m0 0l7 7m-7-7v18" />
+            </svg>
+          </button>
+          <button id="fetch-data-btn" class="">
+            <!-- Fetch -->
+          </button>
+          <button id="update-context-btn" class="">
+            <!-- UC -->
+          </button>
+        </div>
+      </div>
+    </footer>
+    </body>
+   </div>

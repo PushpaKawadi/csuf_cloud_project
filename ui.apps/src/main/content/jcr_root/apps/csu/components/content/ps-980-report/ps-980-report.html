@@ -1,0 +1,45 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.all @ categories='csu.ps-980-report'}" />
+<pre data-sly-use.doaarfModel="com.csuf.cloud.core.models.Pilot980ScheduleReportModel"></pre>
+<sly data-sly-use.doaarfJson="${'fetchJson.js' @ jsonString=doaarfModel.ps980ReportJsonArray}" />
+
+<div id="container-required" class="px-4 py-1">
+    <div id="pills-ps980report" class="tab-pane fade show active identifier" data-identifier='ps980report'>        
+        <div id="dvps980Report" role="main">
+            <table class="table table-striped table-hover table-bordered" id="tbps980Report" align="center" cellpadding="2" cellspacing="1"  >
+                <thead id="tbThead">
+                  <tr>                      
+                      <th style="cursor:pointer;" class="sort">S.No</th> 
+					  <th style="cursor:pointer;" class="sort">Employee ID</th> 
+                      <th style="cursor:pointer;" class="sort">CWID</th> 
+                      <th style="cursor:pointer;" class="sort">First Name</th>
+                      <th style="cursor:pointer;" class="sort">Last Name</th>
+					  <th style="cursor:pointer;" class="sort">Division</th>
+                      <th style="cursor:pointer;" class="sort">Division Name</th>
+                      <th style="cursor:pointer;" class="sort">Workflow Start Time</th>
+                      <th style="cursor:pointer;" class="sort">Step Start Time</th>
+                      <th style="cursor:pointer;" class="sort">Step Name</th>
+                      <th style="cursor:pointer;" class="sort">Initiated By</th>
+					  <th style="cursor:pointer;" class="sort">Assignee</th>                      
+                  </tr>
+                </thead>
+                <sly data-sly-list="${doaarfJson}">
+                    <tr>
+                        <td>${item.sNo}</td>
+                        <td>${item.emplid}</td>
+						<td>${item.cwid}</td> 
+						<td>${item.fName}</td>
+                        <td>${item.lName}</td>
+                        <td>${item.divId}</td>
+                        <td>${item.divName}</td>
+                        <td>${item.workflowStartTime}</td>
+                        <td>${item.stepStartTime}</td>
+                        <td>${item.stepName}</td>
+						<td>${item.stepInitiator}</td>
+                        <td>${item.stepAssignee}</td>
+                    </tr>
+                </sly>
+            </table>
+        </div>
+    </div>
+</div>

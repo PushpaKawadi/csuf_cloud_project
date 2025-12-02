@@ -1,0 +1,2284 @@
+.divA, .divB, .divC, .divD, .divE, .divF, .divG, .divH, .divI, .divJ, .divK, 
+.divL, .divM, .divN, .divO, .divP, .divQ, .divR, .divS, .divT, .divU, .divV, 
+.divW, .divX, .divY, .divZ
+{
+    border:solid 0px #f00;
+    display: none;
+}
+
+
+/*--------------------------------------------------------------
+DEFAULT TEMPLATE TX_0001 -- ONE SECTION
+----------------------------------------------------------------*/
+.TX_00001 .divA
+{
+    display:block;
+    width:98%;
+    padding:.5%;
+    margin:.5%;
+   
+}
+
+
+/*-------------------------------------------------------------------
+TEMPLATE 01 -- MAIN SECTION, 7 SECTIONS WRAP AROUND                 
+--------------------------------------------------------------------*/
+.T3_01 .divA, .T3_01 .divB, .T3_01 .divC, 
+.T3_01 .divD, .T3_01 .divE, .T3_01 .divF, 
+.T3_01 .divG, .T3_01 .divH
+{
+    padding:1%;
+    margin:.5%;
+    display:block;
+}
+
+.T3_01 .divA
+{
+    float:left;
+    width:68%;
+    min-height:428px;
+    padding-bottom:5%;
+    margin-bottom:.5%;
+}
+
+.T3_01 .divB, .T3_01 .divC, .T3_01 .divD,
+.T3_01 .divE, .T3_01 .divF, .T3_01 .divG,
+.T3_01 .divH
+{
+    float:left;
+    width:25%;
+    padding:.5%;
+    margin-bottom:1%;
+    min-height:100px;
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 02 --ROW ACROSS TOP, THREE MIDDLE COLUMNS, ROW ACROSS BOTTOM--
+-------------------------------------------------------------------*/
+
+.T3_02 .divA
+{
+    display:block;
+    clear:both !important;
+    width:98%;
+    padding:.5%;
+    margin-left:.5%;
+    margin-right:.5%;
+   
+}
+
+.T3_02 .divB, .T3_02 .divC,  .T3_02 .divD
+{
+   display:block;
+   float:left;
+   width:30.5%;
+   margin:1%;
+   padding:.5%;
+   margin-left:.5%;
+   margin-right:.5%;
+   
+}
+
+.T3_02 .divD
+{
+    width:31.5%;
+}
+
+.T3_02 .divE
+{
+   display:block;
+   clear:both !important;
+   width:98%;
+    padding:.5%;
+    margin-left:.5%;
+    margin-right:.5%;
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 03 --ROW ACROSS TOP, TWO COLUMNS BOTTOM--
+-------------------------------------------------------------------*/
+.T3_03 .divA
+{
+   display:block;
+   clear:both !important;
+   width:98%;
+   padding:.5%;
+   margin-left:.5%;
+   margin-right:.5%;
+   
+}
+
+.T3_03 .divB, .T3_03 .divC
+{
+   display:block;
+   float:left;
+   width:47%;
+   margin:1%;
+   padding:.5%;
+  
+   
+}
+.T3_03 .divB
+{
+    margin-left:.5%;
+}
+.T3_03 .divB, .T3_03 .divC
+{
+    margin-right:0%;
+}
+
+.T3_03 .divC
+{
+    width:48%;
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 4 --ROW ACROSS TOP, TWO COLUMNS BOTTOM--
+-------------------------------------------------------------------*/
+.T3_04 .divA
+{
+    display:block;
+    clear:both !important;
+    width:98%;
+    padding:.5%;
+    margin-left:.5%;
+    margin-right:.5%;
+   
+}
+
+.T3_04 .divB, .T3_04 .divC, .T3_04 .divD
+{
+   display:block;
+   float:left;
+   width:31%;
+   margin:1%;
+   padding:.5%;
+}
+
+.T3_04 .divB
+{
+    margin-left:.5%;
+    margin-right:.5%;
+}
+.T3_04 .divC, .T3_04 .divD
+{
+    margin-right:0%;
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 5 --ROW ACROSS TOP, TWO COLUMNS MIDDLE, THREE COLUMNS BOTTOM--
+-------------------------------------------------------------------*/
+.T3_05 .divA
+{
+    display:block;
+   position:relative;
+    clear:both !important;
+    width:97.5%;
+    padding:.5%;
+    margin-left:.5%;
+    margin-right:.5%;
+}
+
+.T3_05 .divB, .T3_05 .divC
+{
+   display:block;
+   float:left;
+   width:46%;
+   margin:1%;
+   padding:1%;
+  
+   }
+     
+.T3_05 .divD, .T3_05 .divE, .T3_05 .divF
+{
+   display:block;
+   float: left;
+    width:30%;
+    margin:.5%;
+    padding:1%;
+}
+  
+.T3_05 .divB, .T3_05 .divD
+{
+    margin-left:.5%;
+}
+   
+.T3_05 .divC, .T3_05 .divF
+{
+    margin-right:.5%;
+}
+   
+/*--------------------------------------------------------------
+TEMPLATE 6 --ROW ACROSS TOP, 2x2 SECTIONS--
+-------------------------------------------------------------------*/
+.T3_06 .divA
+{
+    display:block;
+   position:relative;
+    clear:both !important;
+    width:97.5%;
+    padding:.5%;
+    margin-left:.5%;
+    margin-right:.5%;
+   
+}
+
+.T3_06 .divB, .T3_06 .divC, .T3_06 .divD, .T3_06 .divE
+{
+   display:block;
+   margin:1%;
+   padding:.5%;
+   width: 46.5%;
+   float:left;
+   margin-left:.5%;
+}
+     
+.T3_06 .divC, .T3_06 .divE
+{
+    margin-left:1%;
+}
+
+/*-------------------------------------------------------------------
+TEMPLATE 7 --2 COLUMNS TOP AND BOTTON, MIDDLE ROW--
+-------------------------------------------------------------------*/
+.T3_07 .divA, .T3_07 .divB
+{
+   display:block;
+   float: left;
+    width:47%;
+    padding:.5%;
+    margin:.5%;
+   
+}
+
+.T3_07 .divC
+{
+  display:block;
+   clear: both;
+   margin:.5%;
+   padding:.5%;
+   width: 97%;
+    
+   }
+     
+.T3_07 .divD, .T3_07 .divE
+{
+    display:block;
+    float: left;
+    width:47%;
+    padding:.5%;
+    margin:.5%;
+ }
+     
+/*--------------------------------------------------------------
+TEMPLATE 8 --TWO ROWS, THREE BOTTOM COLUMNS--
+-------------------------------------------------------------------*/
+.T3_08 .divA, .T3_08 .divB
+{
+   display:block;
+   position:relative;
+   width:98%;
+   padding:.5%;
+   margin:.5%;
+   
+}
+
+.T3_08 .divC, .T3_08 .divD, .T3_08 .divE
+{
+   display:block;
+   float:left;
+   padding:.5%;
+   width: 31%;
+   margin:.55%;
+    
+   }
+     
+/*--------------------------------------------------------------
+TEMPLATE 9 --SIDEWAYS U WITH MULTIPLE SECTIONS--
+-------------------------------------------------------------------*/
+.T3_09 .divA
+{
+    display:block;
+   float: right;
+    width:20%;
+    padding:.5%;
+    margin:.5%;
+}
+
+.T3_09 .divE
+{
+    display:block;
+   float: left;
+    width:73%;
+    padding:.5%;
+    margin:.5%;
+}
+
+.T3_09 .divB, .T3_09 .divC, .T3_09 .divD,
+.T3_09 .divF, .T3_09 .divG, .T3_09 .divH
+
+{
+  display:block;
+   float:left;
+   margin:.5%;
+   padding:.5%;
+   width: 23%;
+ }
+     
+     
+/*--------------------------------------------------------------
+TEMPLATE 101 -- ONE SECTION
+-------------------------------------------------------------------*/
+.T3_101 .divA
+{
+    display:block;
+    width:98%;
+    padding:.5%;
+    margin:.5%;
+   
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 102 -- TWO SECTIONS
+-------------------------------------------------------------------*/
+.T3_102 .divA, .T3_102 .divB
+{
+    display:block;
+    float:left;
+    width:47%;
+    padding:.5%;
+    margin:.5%;
+   
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 103 IS THE STANDARD TEMPLATE WHICH HAS THREE COLUMNS
+-------------------------------------------------------------------*/
+.T3_103 .divA, .T3_103 .divB, .T3_103 .divC 
+{
+   
+   display:block;
+   float:left;
+   width:30%;
+   margin:.5%;
+   padding:.5%;
+  
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 104 IS THE STANDARD TEMPLATE WHICH HAS FOUR COLUMNS
+-------------------------------------------------------------------*/
+.T3_104 .divA, .T3_104 .divB, .T3_104 .divC, .T3_104 .divD
+{
+   
+   display:block;
+   float:left;
+   width:22%;
+   margin:.5%;
+   padding:.5%;
+  
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 105 IS THE STANDARD TEMPLATE WHICH HAS FOUR COLUMNS
+-------------------------------------------------------------------*/
+.T3_105 .divA, .T3_105 .divB, .T3_105 .divC, .T3_105 .divD, .T3_105 .divE
+{
+   display:block;
+   float:left;
+   width:17%;
+   margin:.5%;
+   padding:.5%;
+  
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 106 IS THE STANDARD TEMPLATE WHICH HAS FOUR COLUMNS
+-------------------------------------------------------------------*/
+.T3_106 .divA, .T3_106 .divB, .T3_106 .divC, .T3_106 .divD, .T3_106 .divE, .T3_106 .divF
+{
+   display:block;
+   float:left;
+   width:14%;
+   margin:.5%;
+   padding:.5%;
+  
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 107 IS THE STANDARD TEMPLATE WHICH HAS FOUR COLUMNS
+-------------------------------------------------------------------*/
+.T3_107 .divA, .T3_107 .divB, .T3_107 .divC, .T3_107 .divD, .T3_107 .divE, .T3_107 .divF, .T3_107 .divG
+{
+   display:block;
+   float:left;
+   width:12%;
+   margin:.5%;
+   padding:.5%;
+  
+}
+     
+/*--------------------------------------------------------------
+TEMPLATE 108 -- EIGHT COLUMNS
+-------------------------------------------------------------------*/
+.T3_108 .divA, .T3_108 .divB, .T3_108 .divC, .T3_108 .divD,
+.T3_108 .divE, .T3_108 .divF, .T3_108 .divG, .T3_108 .divH
+{
+  display:block;
+  float: left;
+  width:10%;
+  padding:.5%;
+  margin:.5%;
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 112 -- TWO ROWS
+-------------------------------------------------------------------*/
+.T3_112 .divA, .T3_112 .divB
+{
+  display:block;
+  clear:both;
+  width:98%;
+  padding:.5%;
+  margin:.5%;
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 113 -- THREE ROWS
+-------------------------------------------------------------------*/
+.T3_113 .divA, .T3_113 .divB, .T3_113 .divC
+{
+  display:block;
+  clear:both;
+  width:98%;
+  padding:.5%;
+  margin:.5%;
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 114 -- FOUR ROWS
+-------------------------------------------------------------------*/
+.T3_114 .divA, .T3_114 .divB, .T3_114 .divC, .T3_114 .divD
+{
+  display:block;
+  clear:both;
+  width:98%;
+  padding:.5%;
+  margin:.5%;
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 115 -- FIVE ROWS
+-------------------------------------------------------------------*/
+.T3_115 .divA, .T3_115 .divB, .T3_115 .divC, .T3_115 .divD, .T3_115 .divE
+{
+  display:block;
+  clear:both;
+  width:98%;
+  padding:.5%;
+  margin:.5%;
+}
+     
+/*--------------------------------------------------------------
+TEMPLATE 116 -- SIX ROWS
+-------------------------------------------------------------------*/
+.T3_116 .divA, .T3_116 .divB, .T3_116 .divC, .T3_116 .divD,
+.T3_116 .divE, .T3_116 .divF
+{
+  display:block;
+   clear:both;
+    width:98%;
+    padding:.5%;
+    margin:.5%;
+}
+     
+/*--------------------------------------------------------------
+TEMPLATE 117 -- SEVEN ROWS
+-------------------------------------------------------------------*/
+.T3_117 .divA, .T3_117 .divB, .T3_117 .divC, .T3_117 .divD,
+.T3_117 .divE, .T3_117 .divF, .T3_117 .divG
+{
+  display:block;
+   clear:both;
+    width:98%;
+    padding:.5%;
+    margin:.5%;
+}
+     
+/*--------------------------------------------------------------
+TEMPLATE 118 -- EIGHT ROWS
+-------------------------------------------------------------------*/
+.T3_118 .divA, .T3_118 .divB, .T3_118 .divC, .T3_118 .divD,
+.T3_118 .divE, .T3_118 .divF, .T3_118 .divG, .T3_118 .divH
+{
+  display:block;
+   clear:both;
+    width:98%;
+    padding:.5%;
+    margin:.5%;
+}
+
+
+/*----------------------------------------------------------------
+TEMPLATE 126 -- ALL ROWS
+-------------------------------------------------------*/
+
+.T3_126 .divA, .T3_126 .divB, .T3_126 .divC, .T3_126 .divD, .T3_126 .divE, .T3_126 .divF, .T3_126 .divG, .T3_126 .divH, 
+.T3_126 .divI, .T3_126 .divJ, .T3_126 .divK, .T3_126 .divL, .T3_126 .divM, .T3_126 .divN, .T3_126 .divO, .T3_126 .divP, 
+.T3_126 .divQ, .T3_126 .divR, .T3_126 .divS, .T3_126 .divT, .T3_126 .divU, .T3_126 .divV, .T3_126 .divW, .T3_126 .divX, 
+.T3_126 .divY, .T3_126 .divZ
+{
+    display: block;
+}
+
+     
+/*--------------------------------------------------------------
+TEMPLATE 12 -- 4x2 SECTIONS
+-------------------------------------------------------------------*/
+.T3_12 .divA, .T3_12 .divB, .T3_12 .divC, .T3_12 .divD,
+.T3_12 .divE, .T3_12 .divF, .T3_12 .divG, .T3_12 .divH
+{
+   display:block;
+   float: left;
+    width:22%;
+    padding:.5%;
+    margin:.5%;      
+}
+
+.T3_12 .divE
+{
+   display:block;
+    clear:left;
+}
+
+
+/*--------------------------------------------------------------
+TEMPLATE 13 â€“TWO ROWS, THREE COLUMNS EACH--
+-------------------------------------------------------------------*/
+.T3_13 .divA, .T3_13 .divB, .T3_13 .divC {   
+   display:block;
+   float:left;
+   width:30%;
+   margin:.5%;
+   padding:.5%;
+  
+}
+
+.T3_13 .divD {
+  clear: both;
+}
+
+.T3_13 .divD, .T3_13 .divE, .T3_13 .divF {
+   display:block;
+   float:left;
+   width:30%;
+   margin:.5%;
+   padding:.5%;
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 15 -- TWO STACKED ROWS, TWO BOTTOM COLUMNS
+-------------------------------------------------------------------*/
+.T3_15 .divA, .T3_15 .divB
+{
+   display:block;
+   width:97%;
+   padding:.5%;
+   margin:.5%;   
+}
+
+.T3_15 .divC, .T3_15 .divD
+{
+    display:block;
+   width: 47%;
+    float:left;
+    padding:.5%;
+    margin:.5%;
+} 
+
+/*--------------------------------------------------------------
+TEMPLATE 16 -- COLUMN A LEFTSIDE, 5 ROWS RIGHT
+-------------------------------------------------------------------*/
+.T3_16 .divA
+{
+    display:block;
+   float:right;
+    width:27%;
+    padding:.5%;
+    margin:.5%;   
+}
+
+.T3_16 .divB, .T3_16 .divC, .T3_16 .divD, .T3_16 .divE, .T3_16 .divF
+{
+    display:block;
+   width: 67%;
+    float:left;
+    padding:.5%;
+    margin:.5%;
+} 
+
+
+/*--------------------------------------------------------------
+TEMPLATE 17 -- 2 COLUMNS IN 4 ROWS
+-------------------------------------------------------------------*/
+.T3_17 .divA, .T3_17 .divB, .T3_17 .divC, .T3_17 .divD, 
+.T3_17 .divE, .T3_17 .divF, .T3_17 .divG, .T3_17 .divH 
+{
+    display:block;
+    float:left;
+    width:47.5%;
+    margin:.5%;
+    padding:.5%;
+}
+
+.T3_17 .divA, .T3_17 .divC, .T3_17 .divE, .T3_17 .divG
+{
+    clear:both;
+}
+
+
+/*--------------------------------------------------------------
+TEMPLATE 18 -- TOP ROW, 3 COLUMNS, 3 COLUMNS
+-------------------------------------------------------------------*/
+.T3_18 .divA
+{
+    display:block;
+   width:97%;
+    padding:.5%;
+    margin:.5%;   
+}
+
+.T3_18 .divB, .T3_18 .divC, .T3_18 .divD, .T3_18 .divE, .T3_18 .divF, .T3_18 .divG
+{
+    display:block;
+   width: 30%;
+    float:left;
+    padding:.5%;
+    margin:.5%;
+} 
+
+.T3_18 .divE
+{
+    clear:left;
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 20 -- COLUMN A LEFTSIDE, 2 ROWS RIGHT WITH THREE COLS EACH
+-------------------------------------------------------------------*/
+.T3_20 .divA
+{
+    display:block;
+   float:right;
+    width:27%;
+    padding:.5%;
+    margin:.5%;   
+}
+
+.T3_20 .divB, .T3_20 .divC, .T3_20 .divD, .T3_20 .divE, .T3_20 .divF, .T3_20 .divG
+{
+    display:block;
+   width: 21%;
+    float:left;
+    padding:.5%;
+    margin:.5%;
+}
+
+.T3_20 .divE
+{
+    clear:left;
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 21  3 COLS TOP OF SINGLE ROW
+-------------------------------------------------------------------*/
+.T3_21 .divA, .T3_21 .divB, .T3_21 .divC
+{
+   display:block;
+   float:left;
+   width:31%;
+   padding:.5%;
+   margin:.5%;   
+}
+
+.T3_21 .divD
+{
+   display:block;
+   float:left;
+   width:98%;
+   padding:.5%;
+   margin:.5%;   
+  
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 22  3 COLS TOP OF 2 SINGLE ROWS
+-------------------------------------------------------------------*/
+.T3_22 .divA, .T3_22 .divB, .T3_22 .divC
+{
+   display:block;
+   float:left;
+   width:31%;
+   padding:.5%;
+   margin:.5%;   
+}
+
+.T3_22 .divD, .T3_22 .divE
+{
+   display:block;
+   float:left;
+   width:98%;
+   padding:.5%;
+   margin:.5%;   
+  
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 23  4 COLS TOP OF SINGLE ROW
+-------------------------------------------------------------------*/
+.T3_23 .divA, .T3_23 .divB, .T3_23 .divC, .T3_23 .divD
+{
+   display:block;
+   float:left;
+   width:22%;
+   padding:.5%;
+   margin:.5%;   
+}
+
+.T3_23 .divE
+{
+   display:block;
+   float:left;
+   width:98%;
+   padding:.5%;
+   margin:.5%;   
+  
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 24  4 COLS TOP OF 2 SINGLE ROWS
+-------------------------------------------------------------------*/
+.T3_24 .divA, .T3_24 .divB, .T3_24 .divC, .T3_24 .divD
+{
+   display:block;
+   float:left;
+   width:22%;
+   padding:.5%;
+   margin:.5%;   
+}
+
+.T3_24 .divE, .T3_24 .divF
+{
+   display:block;
+   float:left;
+   width:98%;
+   padding:.5%;
+   margin:.5%;   
+  
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 25 -- 1 COLUMN RIGHT, 2 COLUMN IN 2 ROWS, 1 ROWS BELOW THAT
+-------------------------------------------------------------------*/
+.T3_25 .divA
+{
+    display:block;
+   float:right;
+    width:31%;
+    padding:.5%;
+    margin:.5%;   
+}
+
+.T3_25 .divB, .T3_25 .divC, .T3_25 .divD, .T3_25 .divE
+{
+    display:block;
+   width: 31%;
+    float:left;
+    padding:.5%;
+    margin:.5%;
+} 
+
+.T3_25 .divF
+{
+    display:block;
+   clear:left;
+    width: 64%;
+    float:left;
+    padding:.5%;
+    margin:.5%;
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 26 -- 1 COLUMN RIGHT, 2 COLUMN IN 2 ROWS, 1 ROWS BELOW THAT
+-------------------------------------------------------------------*/
+.T3_26 .divA, .T3_26 .divB
+{
+    display:block;
+   float:left;
+    width:20%;
+    padding:.5%;
+    margin:.5%; 
+    min-height:400px;  
+}
+
+.T3_26 .divB
+{
+    width:45%;
+}
+
+.T3_26 .divC, .T3_26 .divD, .T3_26 .divE, .T3_26 .divF, .T3_26 .divG
+{
+    display:block;
+   width: 28%;
+    float:left;
+    padding:.5%;
+    margin:.5%;
+} 
+
+.T3_26 .divH
+{
+    display:block;
+   clear:both;
+    width: 98%;
+    float:left;
+    padding:.5%;
+    margin:.5%;
+}
+
+
+/*--------------------------------------------------------------
+TEMPLATE 27 -- 2 ROWS, 2 COLUMN IN 1 ROWS, 1 ROW, 4 COLS IN ROW, ROWS BELOW THAT
+-------------------------------------------------------------------*/
+.T3_27 .divA, .T3_27 .divB, .T3_27 .divE,
+.T3_27 .divJ, .T3_27 .divK, .T3_27 .divL
+{
+    display:block;    
+    clear:both;
+}
+
+.T3_27 .divC, .T3_27 .divD
+{
+    display:block;   
+    float:left;
+    width:33% 
+}
+
+.T3_27 .divD
+{
+    display:block;   
+    float:left;
+    width:66% 
+}
+
+.T3_27 .divF, .T3_27 .divG, .T3_27 .divH, .T3_27 .divI
+{
+    display:block; 
+    width:20%;   
+    float:left;
+}
+
+ .T3_27 .divG, .T3_27 .divH
+{
+    display:block; 
+    width:30%;   
+    float:left;
+}
+
+
+
+/*--------------------------------------------------------------
+TEMPLATE 28 2 COLS 2 ROWS 2 COLS 1 ROW
+-------------------------------------------------------------------*/
+.T3_28 .divA, .T3_28 .divB, .T3_28 .divC, .T3_28 .divD, 
+.T3_28 .divE, .T3_28 .divF, .T3_28 .divG, .T3_28 .divH,
+.T3_28 .divI, .T3_28 .divJ, .T3_28 .divK, .T3_28 .divL
+{
+    display:block;
+}
+
+.T3_28 .divA, .T3_28 .divB 
+{
+    float:left;
+    min-height:100px;
+    width:48%;
+    margin:.5%;
+    padding:.5%;
+   
+}
+
+.T3_28 .divA
+{
+    margin-right:0px;
+}
+
+.T3_28 .divC, .T3_28 .divD 
+{
+    clear:both;
+    min-height:100px;
+    width:97.5%;
+    margin:.5%;
+    padding:.5%;
+   
+}
+
+.T3_28 .divE, .T3_28 .divF 
+{
+    float:left;
+    min-height:100px;
+    width:48%;
+    margin:.5%;
+    padding:.5%;
+   
+}
+
+.T3_28 .divE
+{
+    margin-right:0px;
+}
+
+.T3_28 .divG
+{
+    clear:both;
+    min-height:100px;
+    width:97.5%;
+    margin:.5%;
+    padding:.5%;
+}
+
+.T3_28 .divH 
+{
+    display:none;
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 29 2 COLS 2 ROWS 3 COLS 1 ROW
+-------------------------------------------------------------------*/
+.T3_29 .divA, .T3_29 .divB, .T3_29 .divC, .T3_29 .divD, 
+.T3_29 .divE, .T3_29 .divF, .T3_29 .divG, .T3_29 .divH,
+.T3_29 .divI, .T3_29 .divJ, .T3_29 .divK, .T3_29 .divL
+{
+    display:block;
+}
+
+
+.T3_29 .divA, .T3_29 .divB 
+{
+    float:left;
+    min-height:100px;
+    width:48%;
+    margin:.5%;
+    padding:.5%;
+   
+}
+
+.T3_29 .divA
+{
+    margin-right:0px;
+}
+
+.T3_29 .divC, .T3_29 .divD 
+{
+    clear:both;
+    min-height:100px;
+    width:97.5%;
+    margin:.5%;
+    padding:.5%;
+   
+}
+
+.T3_29 .divE, .T3_29 .divF, .T3_29 .divG
+{
+    float:left;
+    min-height:100px;
+    width:31.5%;
+    margin:.5%;
+    padding:.5%;
+   
+}
+
+.T3_29 .divE, .T3_29 .divF
+{
+    margin-right:0px;
+}
+
+.T3_29 .divH
+{
+    clear:both;
+    min-height:100px;
+    width:97.5%;
+    margin:.5%;
+    padding:.5%;   
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 31 IS THE STANDARD TEMPLATE WHICH HAS ONE LARGE ROW ACROSS THE TOP, DIV A,  AND 2 COLUMNS / 2 ROWS BELOW THAT
+THEN DIV B, C, D, AND E ARE SMALLER SQUARES WITH F BELOW THEM AS AN OPTIONAL BLOCK.  G AND H ARE HIDDEN
+-------------------------------------------------------------------*/
+
+.T3_31 .divA, .T3_31 .divF 
+{
+    display:block;
+   clear:both !important;
+    width:93% !important;
+    margin:2% !important;
+    padding:1% !important;  
+}
+
+.T3_31 .divB, .T3_31 .divC, 
+.T3_31 .divD, .T3_31 .divE
+{
+    display:block;
+   clear:none !important;
+    float:left !important;
+    height:150px !important;
+    width:45% !important;
+    margin:2% !important;
+    margin-right:0% !important;
+    padding:1% !important;   
+   
+}
+
+
+/*--------------------------------------------------------------
+TEMPLATE 32 IS A VARIATION ON THE FIRST TIMEPLATE WITH ONLY THREE.  IT HAS
+-------------------------------------------------------------------*/
+.T3_32 .divA
+{
+    display:block;
+    width:97%;
+    margin:.5%;
+    padding:1%;    
+}
+
+.T3_32 .divB, .T3_32 .divC, .T3_32 .divD
+{
+    display:block;
+    clear:none;
+    float:left;
+    width:30%;
+    margin:.5%;
+    padding:1%;
+    min-height:310px;
+}
+
+.T3_32 .divE
+{
+    display:block;
+    width:97%;
+    margin:.5%;
+    padding:1%;    
+}
+
+.T3_32 .divF, .T3_32 .divG, .T3_32 .divH
+{
+    display:block;
+    clear:none;
+    float:left;
+    width:30%;
+    margin:.5%;
+    padding:1%;
+    min-height:310px;
+}
+
+
+.T3_32 .divI
+{
+    display:block;
+    width:97%;
+    margin:.5%;
+    padding:1%;    
+}
+
+.T3_32 .divJ, .T3_32 .divK, .T3_32 .divL
+{
+    display:block;
+    clear:none;
+    float:left;
+    width:30%;
+    margin:.5%;
+    padding:1%;
+    min-height:310px;
+}
+
+
+/*--------------------------------------------------------------
+TEMPLATE 33 IS SETUP LIKE A MAGAZINE / NEWSPAPER LAYOUT
+-------------------------------------------------------------------*/
+.T3_33 .divA
+{
+    display:block;
+    float:left;
+    min-height:150px;
+    width:64%;
+    margin:1%;
+    margin-right:0px;
+    padding:1%;   
+}
+
+ .T3_33 .divB
+{
+    display:block;
+    float:left;
+    min-height:150px;
+    width:28%;
+    margin:1%;
+    padding:1%;   
+}
+
+.T3_33 .divC, .T3_33 .divD, .T3_33 .divE, 
+.T3_33 .divF, .T3_33 .divG, .T3_33 .divH 
+{
+    display:block;
+   	clear:both;
+  	width:93%;
+    margin:2%;
+    margin-bottom:0%;
+    padding:1%;
+}
+
+
+
+
+/*--------------------------------------------------------------
+TEMPLATE 34 IS SETUP LIKE A MAGAZINE / NEWSPAPER LAYOUT EXTENDED SIZE
+-------------------------------------------------------------------*/
+.T3_34 .divA, .T3_34 .divJ, .T3_34 .divK
+{
+    display:block;
+    clear:both;
+    margin:1%;
+    padding:1%;     
+}
+
+.T3_34 .divB, .T3_34 .divC, .T3_34 .divD,
+.T3_34 .divG, .T3_34 .divH, .T3_34 .divI
+{
+    display:block;
+    float:left;
+    min-height:200px;
+    width:29%;
+    margin:1%;
+    margin-right:0px;
+    padding:1%;
+}
+
+.T3_34 .divE, .T3_34 .divF
+{
+    display:block;
+    clear:none;
+    float:left;
+    min-height:250px;
+    width:46%;
+    margin:1%;
+    margin-right:0px;
+    padding:1%;  
+}
+
+.T3_34 .divB, .T3_34 .divE, .T3_34 .divG
+{
+    clear:both;
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 35 IS SETUP LIKE AN EVENT ITEM
+-------------------------------------------------------------------*/
+.T3_35 .divA
+{
+    display:block;
+    clear:both;
+    min-height:80px;
+    width:95%;
+    margin:auto;
+    padding:1%;   
+}
+
+.T3_35 .divB, .T3_35 .divC
+{
+    display:block;
+    float:left;
+    min-height:150px;
+    width:45%;
+    margin:1%;
+    margin-top:0%;
+    padding:1%;
+}
+
+
+.T3_35 .divD, .T3_35 .divE, .T3_35 .divF
+{
+    display:block;
+    float:left;
+    min-height:200px;
+    width:29%;
+    margin:1%;
+    padding:1%;
+    margin-right:0;
+}
+
+.T3_35 .divH
+{
+    display:block;
+    min-height:80px;
+    width:95%;
+    margin:auto;
+    padding:1%;  
+}
+
+.T3_35 .divI, .T3_35 .divJ
+{
+    display:block;
+    float:left;
+    min-height:150px;
+    width:45%;
+    margin:1%;
+    margin-top:0%;
+    padding:1%;
+}
+
+.T3_35 .divA, .T3_35 .divB, .T3_35 .divD, .T3_35 .divH, .T3_35 .divI
+{
+    clear:both;
+}
+
+
+/*--------------------------------------------------------------
+TEMPLATE 36 IS TWO COLUMNS AND A BASE
+-------------------------------------------------------------------*/
+.T3_36 .divA, .T3_36 .divB
+{
+    display:block;
+    float:left;
+    width:45%;
+    min-height:400px;
+    margin:1%;
+    padding:1%;   
+}
+
+.T3_36 .divC, .T3_36 .divD, .T3_36 .divE
+{
+    display:block;
+    float:left;
+    height:130px;
+    width:29%;
+    margin:1%;
+    margin-right:0px;
+    padding:1%;   
+}
+
+.T3_36 .divA, .T3_36 .divC
+{
+    clear:both;
+}
+
+
+/*--------------------------------------------------------------
+TEMPLATE 37 SERVICES BY PERSON TYPE
+-----------------------------------------------------------------*/
+.T3_37 .divA, .T3_37 .divB, .T3_37 .divC,
+.T3_37 .divD, .T3_37 .divE, .T3_37 .divF,
+.T3_37 .divG, .T3_37 .divH
+{
+   display:block;
+   margin:1%;
+   width:auto;
+   padding:1%;   
+ }
+
+.T3_37 .divA
+{
+    min-height:500px;
+    width:38%;
+    float:right;
+}
+
+.T3_37 .divB, .T3_37 .divC,
+.T3_37 .divD, .T3_37 .divE, .T3_37 .divF,
+.T3_37 .divG, .T3_37 .divH
+{
+    float:left;
+    width:47%;
+}
+
+ 
+ 
+/*--------------------------------------------------------------
+TEMPLATE 38 SERVICE DETAILS PAGE
+-----------------------------------------------------------------*/
+.T3_38 .divA, .T3_38 .divB, .T3_38 .divC, .T3_38 .divD, .T3_38 .divE, 
+.T3_38 .divF, .T3_38 .divG, .T3_38 .divH
+{
+    display:block;
+    margin:1%;
+    padding:1%;
+}
+
+.T3_38 .divA, .T3_38 .divC
+{
+   float:right;  
+   width:28%; 
+   margin:1%;
+   padding:1%;
+}
+
+.T3_38 .divA
+{
+    min-height:525px;
+}
+
+.T3_38 .divB
+{
+   float:left;  
+   width:60%; 
+   margin:1%;
+   padding:1%;
+   min-height:200px;
+}
+
+.T3_38 .divC
+{
+    clear:both;
+}
+.T3_38 .divC, .T3_38 .divD
+{
+   float:left;  
+   width:28%; 
+   margin:1%;
+   padding:1%;
+   min-height:250px;
+}
+
+.T3_38 .divE
+{
+   clear:both;
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 39
+-------------------------------------------------------------------*/
+
+.T3_39 .divA {
+    display:block;
+    position:relative;
+    clear:both !important;
+    width:98%;
+    padding:.5%;
+    margin:.5%;
+    
+}
+.T3_39 .divB 
+{
+    display:block;
+    width: 65%;
+    float: left;    
+    padding:.5%; 
+    margin:.5%;
+        }
+        
+.T3_39 .divC {
+    display:block;
+    width: 30%;   
+    padding:.5%; 
+    margin:.5%;
+    float: left;
+}
+.T3_39 .divD {
+        clear: both;
+}     
+.T3_39 .divD, .T3_39 .divE, .T3_39 .divF, .T3_39 .divG {
+   display:block;
+   float:left;
+   width:22.5%;
+   padding:.5%;
+   margin:.5%;  
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 40
+-------------------------------------------------------------------*/
+
+.T3_40 .divA {
+    display:block;
+    position:relative;
+    clear:both !important;
+    width:98%;
+    padding:.5%;
+    margin:.5%;
+    
+}
+.T3_40 .divB, .T3_40 .divC, .T3_40 .divD, .T3_40 .divE
+{
+    display:block;
+    width: 22.5%;
+    float: left;
+    
+   padding:.5%;
+   margin:.5%;  
+        }
+        
+.T3_40 .divF
+{
+   display:block;
+   float:left;
+   width:47%;
+   padding:.5%;
+   margin:.5%;  
+}
+
+.T3_40 .divG, .T3_40 .divH 
+{
+   display:block;
+   float:left;
+   width:22.5%;
+   padding:.5%;
+   margin:.5%;  
+}
+
+
+
+/*--------------------------------------------------------------
+TEMPLATE 41
+-------------------------------------------------------------------*/
+
+.T3_41 .divA, .T3_41 .divB,  .T3_41 .divC, .T3_41 .divF {
+    display:block;
+    position:relative;
+    clear:both !important;
+    width:98%;
+    padding:.5%;
+    margin:.5%;
+}
+ 
+.T3_41 .divD, .T3_41 .divE
+{
+   display:block;
+   width: 47.5%;
+   float: left;
+   padding:.5%;
+   margin:.5%;  
+ }
+
+
+.T3_41 .divG, .T3_41 .divH 
+{
+   display:block;
+   float:left;
+   width:47.5%;
+   padding:.5%;
+   margin:.5%;  
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 42
+-------------------------------------------------------------------*/
+
+.T3_42 .divA, .T3_42 .divB {
+    display:block;
+    position:relative;
+    clear:both !important;
+    width:98%;
+    padding:.5%;
+    margin:.5%;
+}
+ 
+.T3_42 .divD, .T3_42 .divE, .T3_42 .divC, .T3_42 .divF
+{
+   display:block;
+   width: 22.5%;
+   float: left;
+   padding:.5%;
+   margin:.5%;  
+ }
+
+
+.T3_42 .divG, .T3_42 .divH 
+{
+   display:block;
+   float:left;
+   width:47.5%;
+   padding:.5%;
+   margin:.5%;  
+}
+		
+		
+/*--------------------------------------------------------------
+TEMPLATE 43
+-------------------------------------------------------------------*/
+
+.T3_43 .divA, .T3_43 .divB {
+    display:block;
+    position:relative;
+    clear:both !important;
+    width:98%;
+    padding:.5%;
+    margin:.5%;
+}
+ 
+.T3_43 .divD, .T3_43 .divE, .T3_43 .divC, .T3_43 .divF, .T3_43 .divG
+{
+   display:block;
+   width: 18%;
+   float: left;
+   padding:.5%;
+   margin:.5%;  
+ }
+
+
+ .T3_43 .divH, .T3_43 .divI
+{
+   display:block;
+   float:left;
+   width:47.5%;
+   padding:.5%;
+   margin:.5%;  
+}
+
+
+		
+/*--------------------------------------------------------------
+TEMPLATE 45
+-------------------------------------------------------------------*/
+
+.T3_45 .divA 
+{
+    display:block;
+    width: 65%;
+    float: left;    
+    padding:.5%; 
+    margin:.5%;
+        }
+        
+.T3_45 .divB {
+    display:block;
+    width: 30%;   
+    padding:.5%; 
+    margin:.5%;
+    float: left;
+}
+.T3_45 .divC {
+    display:block;
+    position:relative;
+    clear:both !important;
+    width:98%;
+    padding:.5%;
+    margin:.5%;   
+}
+.T3_45 .divD {
+        clear: both;
+}     
+.T3_45 .divD, .T3_45 .divE, .T3_45 .divF {
+   display:block;
+   float:left;
+   width:31%;
+   padding:.5%;
+   margin:.5%;  
+}
+
+.T3_45 .divG {
+        clear: both;
+}     
+.T3_45 .divG, .T3_45 .divH, .T3_45 .divI {
+   display:block;
+   float:left;
+   width:31%;
+   padding:.5%;
+   margin:.5%;  
+}
+
+.T3_45 .divJ {
+    display:block;
+    position:relative;
+    clear:both !important;
+    width:98%;
+    padding:.5%;
+    margin:.5%;   
+}
+
+/*--------------------------------------------------------------
+TEMPLATE 46 --ROW ACROSS TOP, 4 ROWS WITH 4 COLUMNS, ROW WITH 3 COLUMNS--
+-------------------------------------------------------------------*/
+
+.T3_46 .divA {
+    display: block;
+    width: 97%;    
+    padding: .5%; 
+    margin: .5%;
+}
+                                
+.T3_46 .divB, .T3_46 .divC, .T3_46 .divD, .T3_46 .divE {
+   display:block;
+   float:left;
+   width:21%;
+   padding:.5%;
+   margin:.5%;  
+}
+
+.T3_46 .divF {
+                clear: both;
+}
+
+.T3_46 .divF, .T3_46 .divG, .T3_46 .divH, .T3_46 .divI {
+   display:block;
+   float:left;
+   width:21%;
+   padding:.5%;
+   margin:.5%;  
+}
+
+.T3_46 .divJ {
+                clear: both;
+}
+
+.T3_46 .divJ, .T3_46 .divK, .T3_46 .divL, .T3_46 .divM {
+   display:block;
+   float:left;
+   width:21%;
+   padding:.5%;
+   margin:.5%;  
+}
+
+.T3_46 .divN {
+                clear: both;
+}
+
+.T3_46 .divN, .T3_46 .divO, .T3_46 .divP, .T3_46 .divQ {
+   display:block;
+   float:left;
+   width:21%;
+   padding:.5%;
+   margin:.5%;  
+}
+
+.T3_46 .divR{
+                clear: both;
+}
+
+.T3_46 .divR, .T3_46 .divS, .T3_46 .divT {
+   display:block;
+   float:left;
+   width:31%;
+   padding:.5%;
+   margin:.5%;  
+}
+
+
+
+/*--------------------------------------------------------------
+TEMPLATE 47 -- 2 COLUMNS IN 4 ROWS
+-------------------------------------------------------------------*/
+.T3_47 .divA
+{
+    display:block;
+    float:left;
+    width:67.5%;
+    margin:.5%;
+    padding:.5%;
+}
+
+.T3_47 .divB
+{
+    display:block;
+    float:left;
+    width:27.5%;
+    margin:.5%;
+    padding:.5%;
+}
+
+.T3_47 .divC, .T3_47 .divD, .T3_47 .divE, .T3_47 .divF, 
+.T3_47 .divG, .T3_47 .divH 
+{
+    display:block;
+    float:left;
+    width:47.5%;
+    margin:.5%;
+    padding:.5%;
+}
+
+.T3_47 .divA, .T3_47 .divC, .T3_47 .divE, .T3_47 .divG
+{
+    clear:both;
+}
+
+
+
+
+/*--------------------------------------------------------------
+TEMPLATE 48 LEFT SIDE LONG COLUMN
+-------------------------------------------------------------------*/
+
+.T3_48 .divA
+{
+    display:block;
+    float:left;
+    min-height:500px;
+    width:18%;
+    margin:1%;
+    margin-right:0px;
+    padding:1%;
+   
+  
+}
+
+.T3_48 .divB, .T3_48 .divC, .T3_48 .divD
+{
+    display:block;
+    float:left;
+    min-height:150px;
+    width:22%;
+    margin:1%;
+    margin-right:0px;
+    padding:1%;
+}
+
+.T3_48 .divE, .T3_48 .divF, .T3_48 .divG, .T3_48 .divH
+{
+    display:block;
+    float:left;
+    min-height:100px;
+    width:36%;
+    margin:1%;
+    margin-right:0px;
+    padding:1%;
+}
+
+
+/*--------------------------------------------------------------
+TEMPLATE 49 RIGHT SIDE LONG COLUMN
+-------------------------------------------------------------------*/
+
+.T3_49 .divA
+{
+    display:block;
+    float:right;
+    min-height:500px;
+    width:18%;
+    margin:1%;
+    margin-left:0px;
+    padding:1%;
+   
+  
+}
+
+.T3_49 .divB, .T3_49 .divC, .T3_49 .divD
+{
+    display:block;
+    float:right;
+    min-height:150px;
+    width:22%;
+    margin:1%;
+    margin-left:0px;
+    padding:1%;
+}
+
+.T3_49 .divE, .T3_49 .divF, .T3_49 .divG, .T3_49 .divH
+{
+    display:block;
+    float:right;
+    min-height:150px;
+    width:36%;
+    margin:1%;
+    margin-left:0px;
+    padding:1%;
+}
+
+
+/*--------------------------------------------------------------
+TEMPLATE 50 SERVICES BY PERSON TYPE
+-----------------------------------------------------------------*/
+.T3_50 .divA, .T3_50 .divB, .T3_50 .divC,
+.T3_50 .divD, .T3_50 .divE, .T3_50 .divF,
+.T3_50 .divG, .T3_50 .divH
+{
+    display:block;
+  	margin:1%;
+    padding:1%;    
+}
+
+.T3_50 .divA, .T3_50 .divE 
+{
+    width:25%;
+    float:right;
+}
+
+
+.T3_50 .divB, .T3_50 .divC,
+.T3_50 .divD, .T3_50 .divF,
+.T3_50 .divG, .T3_50 .divH
+{
+    float:left;
+    width:62%;
+}
+
+
+
+/*--------------------------------------------------------------
+TEMPLATE 50 SERVICES BY PERSON TYPE
+-----------------------------------------------------------------*/
+.T3_51 .divA, .T3_51 .divB, .T3_51 .divC,
+.T3_51 .divD, .T3_51 .divE, .T3_51 .divF,
+.T3_51 .divG, .T3_51 .divH, .T3_51 .divI, 
+.T3_51 .divJ, .T3_51 .divK, .T3_51 .divL, 
+.T3_51 .divM, .T3_51 .divN, .T3_51 .divO 
+{
+    display:block;
+  	margin:1%;
+    padding:1%;    
+}
+
+.T3_51 .divB, .T3_51 .divC,
+.T3_51 .divJ, .T3_51 .divK
+{
+    width:46%;
+    margin-right:0px;
+    float:left;
+}
+
+.T3_51 .divD, .T3_51 .divE,
+.T3_51 .divF, .T3_51 .divG,
+.T3_51 .divH, .T3_51 .divI
+{
+    float:left;
+    width:30%;
+    margin-right:0px;
+}
+
+.T3_51 .divB, .T3_51 .divD,
+.T3_51 .divG, .T3_51 .divJ, .T3_51 .divL
+{
+    clear:both;
+}
+
+
+/*-----------------------------------------------------------
+TEMPLATE 4 LAYOUTS
+-------------------------------------------------------------*/
+
+
+/*--------------------------------------------------------------
+DEFAULT TEMPLATE T4_0001 -- ONE SECTION
+-------------------------------------------------------------------*/
+.T4_0001 .divA
+{
+    display:block;
+    width:98%;
+    padding:.5%;
+    margin:.5%;
+   
+}
+
+.T4_0001 .divB, .T4_0001 .divC, .T4_0001 .divD,
+.T4_0001 .divE, .T4_0001 .divF, .T4_0001 .divG
+{
+    display:block;
+    float:left;
+    width:31%;
+    padding:.5%;
+    margin:.5%;
+   
+}
+
+.T4_0001 .divB, .T4_0001 .divE, .T4_0001 .divH
+{
+    clear:both;
+}
+
+.T4_0001 .divH, .T4_0001 .divI
+{
+    display:block;
+    float:left;
+    width:31%;
+    padding:.5%;
+    margin:.5%;
+   
+}
+
+
+/*--------------------------------------------------------------
+DEFAULT TEMPLATE T4_FullSandwich_1 -- GROUPED SECTIONS IN A TOP AND BOTTOM CONTAINER
+-------------------------------------------------------------------*/
+.T4_0001 .divA, .T4_0001 .divB, .T4_0001 .divC, 
+.T4_0001 .divD, .T4_0001 .divE, .T4_0001 .divF, 
+.T4_0001 .divG, .T4_0001 .divH, .T4_0001 .divI, 
+.T4_0001 .divJ, .T4_0001 .divK, .T4_0001 .divL, 
+.T4_0001 .divM, .T4_0001 .divN, .T4_0001 .divO, 
+.T4_0001 .divP, .T4_0001 .divQ, .T4_0001 .divR, 
+.T4_0001 .divS, .T4_0001 .divT, .T4_0001 .divU, 
+.T4_0001 .divV, .T4_0001 .divW, .T4_0001 .divX, 
+.T4_0001 .divY, .T4_0001 .divZ
+{
+    display:inline;       
+}
+
+
+.T4_0001 .divA, .T4_0001 .divZ 
+{
+    display:block;
+    width:98%;
+    padding:.5%;
+    margin:.5%; 
+}
+
+.T4_0001 .contentcontainer
+{
+    clear:both;
+    margin:0em;
+    padding:.5em;
+    height:auto;
+    float:left;
+    width:99%;   
+}
+
+
+
+
+.T4_0001 .divB, .T4_0001 .divC, .T4_0001 .divD,
+.T4_0001 .divE, .T4_0001 .divF, .T4_0001 .divG, 
+.T4_0001 .divH, .T4_0001 .divI, .T4_0001 .divJ, 
+.T4_0001 .divK, .T4_0001 .divL, .T4_0001 .divM, 
+.T4_0001 .divN, .T4_0001 .divO, .T4_0001 .divP, 
+.T4_0001 .divQ, .T4_0001 .divR, .T4_0001 .divS, 
+.T4_0001 .divT, .T4_0001 .divU, .T4_0001 .divV, 
+.T4_0001 .divW, .T4_0001 .divX, .T4_0001 .divY
+{
+    float:left;
+    width:45%;
+    padding:.5%;
+    margin:.5%;
+}
+
+.T4_0001 .divB, .T4_0001 .divE, .T4_0001 .divH,
+.T4_0001 .divK, .T4_0001 .divN, .T4_0001 .divQ,
+.T4_0001 .divT, .T4_0001 .divW
+{
+    clear:both;
+    float:none;
+    width:98%;
+    margin:auto;
+}
+
+
+/*--------------------------------------------------------------
+DEFAULT TEMPLATE T4_0002 -- MULTIPLE BLOCK LAYOUT
+TWO ROWS, 3 COLS, 2 ROWS, 3 COLS, 2 ROWS, 3 COLS, 2ROWS,  3 COLS, 2ROWS,  3 COLS, 1 ROW 
+-------------------------------------------------------------------*/
+.T4_0002 .divA, .T4_0002 .divB, 
+.T4_0002 .divF, .T4_0002 .divG, 
+.T4_0002 .divK, .T4_0002 .divL,
+.T4_0002 .divP, .T4_0002 .divQ,  
+.T4_0002 .divU, .T4_0002 .divV, .T4_0002 .divZ  
+{
+    clear:both;
+    display:block;
+    width:98%;
+    padding:.5%;
+    margin:.5%;
+   
+}
+
+.T4_0002 .divC, .T4_0002 .divD, .T4_0002 .divE,
+.T4_0002 .divH, .T4_0002 .divI, .T4_0002 .divJ,
+.T4_0002 .divM, .T4_0002 .divN, .T4_0002 .divO,
+.T4_0002 .divR, .T4_0002 .divS, .T4_0002 .divT,
+.T4_0002 .divW, .T4_0002 .divX, .T4_0002 .divY
+{
+    display:block;
+    float:left;
+    width:31%;
+    padding:.5%;
+    margin:.5%;
+   
+}
+
+
+
+/*--------------------------------------------------------------
+T4_0003 -- BASED ON CAMPUS HOMEPAGE WITH ACCORDION FOLD
+-------------------------------------------------------------------*/
+
+.T4_0003 .divA, .T4_0003 .divB, .T4_0003 .divC, .T4_0003 .divD, .T4_0003 .divE,
+.T4_0003 .divF, .T4_0003 .divG, .T4_0003 .divH, .T4_0003 .divI, .T4_0003 .divJ,
+.T4_0003 .divK, .T4_0003 .divL, .T4_0003 .divM
+{
+    display:block;    
+}
+
+.T4_0003 .divA
+{
+    float:left;
+    width:65%;
+    min-height:306px;
+    padding:.5%;
+    margin:.5%;
+}
+
+.T4_0003 .divB
+{
+    float:left;
+    width:30%;
+    min-height:140px;
+    padding:.5%;
+    margin:.5%;
+}
+
+.T4_0003 .divC
+{
+    float:left;
+    width:30%;    
+    min-height:140px;
+    padding:.5%;
+    margin:.5%;
+}
+
+.T4_0003 .divD, .T4_0003 .divK, .T4_0003 #divContentContainer1
+{
+    clear:both;
+   
+}
+
+.T4_0003 .divD, .T4_0003 .divE, .T4_0003 .divF
+{
+    float:left;
+    width:31%;   
+    padding:.5%;
+    margin:.5%;
+}
+
+.T4_0003 #divContentContainer1
+{
+    float:left;
+    width:98%;
+    padding:0;
+    margin:.5%;
+}
+
+.T4_0003 .divG, .T4_0003 .divH, .T4_0003 .divI, .T4_0003 .divJ,
+.T4_0003 .divK, .T4_0003 .divL, .T4_0003 .divM
+{
+    float:left;
+    width:31%;   
+    padding:.5%;
+    margin:.5%;
+}
+
+.T4_0003 .divG
+{
+    width:97%;
+}
+
+
+
+
+/*--------------------------------------------------------------
+T4_0004 -- GOOD FOR HOMEPAGE WITH IMPORTANT RIGHT SIDE TEXT 
+-------------------------------------------------------------------*/
+
+.T4_0004 .divA, .T4_0004 .divB, .T4_0004 .divC, .T4_0004 .divD, .T4_0004 .divE,
+.T4_0004 .divF, .T4_0004 .divG, .T4_0004 .divH, .T4_0004 .divI, .T4_0004 .divJ,
+.T4_0004 .divK, .T4_0004 .divL, .T4_0004 .divM, .T4_0004 .divN, .T4_0004 .divO,
+.T4_0004 .divP, .T4_0004 .divQ, .T4_0004 .divR, .T4_0004 .divS, .T4_0004 .divT,
+.T4_0004 .divU, .T4_0004 .divV, .T4_0004 .divW, .T4_0004 .divX, .T4_0004 .divY, 
+.T4_0004 .divZ
+{
+    display:block;
+}
+
+.T4_0004 #divContentContainer1, .T4_0004 #divContentContainer2
+{
+    float:left;
+    margin:.5%;
+    width:74%;
+}
+
+.T4_0004 #divContentContainer1
+{
+    float:left;
+    width:24%;
+}
+
+.T4_0004 .divG, .T4_0004 .divH, .T4_0004 .divI
+{
+    float:left;
+    width:31%;
+    padding:.5%;
+    margin:.5%;
+}
+
+.T4_0004 .divJ,.T4_0004 .divO
+{
+    clear:both;
+}
+
+.T4_0004 .divJ, .T4_0004 .divK, .T4_0004 .divL, .T4_0004 .divM, .T4_0004 .divN
+{
+    float:left;
+    width:18%;
+    padding:.5%;
+    margin:.5%;
+}
+
+/*--------------------------------------------------------------
+T4_0005 -- GOOD FOR HOMEPAGE WITH IMPORTANT RIGHT SIDE TEXT 
+-------------------------------------------------------------------*/
+.T4_0005 .divA, .T4_0005 .divB, .T4_0005 .divC, .T4_0005 .divD, .T4_0005 .divE,
+.T4_0005 .divF, .T4_0005 .divG, .T4_0005 .divH, .T4_0005 .divI, .T4_0005 .divJ,
+.T4_0005 .divK, .T4_0005 .divL, .T4_0005 .divM, .T4_0005 .divN, .T4_0005 .divO,
+.T4_0005 .divP, .T4_0005 .divQ, .T4_0005 .divR, .T4_0005 .divS, .T4_0005 .divT,
+.T4_0005 .divU, .T4_0005 .divV, .T4_0005 .divW, .T4_0005 .divX, .T4_0005 .divY, 
+.T4_0005 .divZ
+{
+    display:block;
+}
+
+.T4_0005 #divContentContainer1, .T4_0005 #divContentContainer2
+{
+    float:left;
+    margin:.5%;
+    width:74%;
+}
+
+.T4_0005 #divContentContainer1
+{
+    float:left;
+    width:24%;
+}
+
+
+
+.T4_0005 .divH,.T4_0005 .divM
+{
+    clear:both;
+}
+
+.T4_0005 .divH, .T4_0005 .divI, .T4_0005 .divJ, .T4_0005 .divK, .T4_0005 .divL
+{
+    float:left;
+    width:18%;
+    padding:.5%;
+    margin:.5%;
+}
+
+
+/*-------------------------------------------------------------------
+T4_0006 -- GOOD DESIGN FOR MENU OF SERVICES
+--------------------------------------------------------------------*/
+
+.T4_0006 .divA {
+	display: block;
+    width: 97%;    
+    padding: .5%; 
+    margin: .5%;
+}
+
+.T4_0006 #divContentContainer1 
+{
+    width:100%;
+    display:flex;
+    -webkit-flex-wrap:wrap;
+    flex-wrap:wrap;
+    flex-grow:1;
+    flex-basis:25%;
+}
+		
+.T4_0006 #divContentContainer1 div 
+{
+  flex:auto;
+  float:left;
+  -webkit-flex:auto;
+  display:block;
+  min-width:21%;
+  min-height:130px;
+  vertical-align:middle;
+  margin:6px;
+  padding:.5%;
+  font-size:.85em;
+}
+
+.T4_0006 #divContentContainer1 div:hover 
+{
+    background-color:#fff;
+    color:#333;
+}
+
+.T4_0006 #divContentContainer1 div img 
+{
+    height:50px !important;
+    width:auto !important;
+    }
+
+.T4_0006 .divV {
+	clear: both;
+}
+
+.T4_0006 .divV, .T4_0006 .divW, .T4_0006 .divX 
+{
+   display:block;
+   float:left;
+   width:31%;
+   padding:.5%;
+   margin:.5%;  
+}
+.T4_0006 .divY{
+	clear: both;
+}
+.T4_0006 .divV, .T4_0006 .divW, .T4_0006 .divX,
+.T4_0006 .divY, .T4_0006 .divZ 
+{
+	display: block;
+    padding: .5%; 
+    margin: .5%;
+}
+
+
+
+/*-------------------------------------------------------------------
+T4_0007 -- LEFT AND RIGHT BARS WITHOUT NEEDING A LEFT AND RIGHT BAR
+--------------------------------------------------------------------*/
+.T4_0007 .divA, .T4_0007 .divB, .T4_0007 .divC, .T4_0007 .divD, .T4_0007 .divE,
+.T4_0007 .divF, .T4_0007 .divG, .T4_0007 .divH, .T4_0007 .divI, .T4_0007 .divJ,
+.T4_0007 .divK, .T4_0007 .divL, .T4_0007 .divM, .T4_0007 .divN, .T4_0007 .divO,
+.T4_0007 .divP, .T4_0007 .divQ, .T4_0007 .divR, .T4_0007 .divS, .T4_0007 .divT,
+.T4_0007 .divU, .T4_0007 .divV, .T4_0007 .divW, .T4_0007 .divX, .T4_0007 .divY,
+.T4_0007 .divZ
+{
+     display:block;
+   padding:.5%;
+   margin:.5%;  
+}
+
+.T4_0007 .divA, .T4_0007 .divZ {
+   clear:both;
+}
+
+.T4_0007 #divContentContainer1,
+.T4_0007 #divContentContainer3 
+{
+    width:25%;
+    float:left;
+    margin:0;
+    padding:0;   
+}
+
+.T4_0007 #divContentContainer2
+{
+    float:left;
+    width:50%;
+    margin:0;
+    padding:0;   
+}
+
+.T4_0007 .divL, .T4_0007 .divM, .T4_0007 .divN 
+{
+   float:left;
+   width:31%; 
+}
+
+.T4_0007 .divO, .T4_0007 .divP, .T4_0007 .divQ, .T4_0007 .divR
+{
+   float:left;
+   width:47%; 
+}	
+
+.T4_0007 .divS {
+	clear: both;
+}
+
+
+

@@ -1,0 +1,3 @@
+#base=js
+
+req-to-cancel-financial-aid-processing-report.js

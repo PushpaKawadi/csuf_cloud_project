@@ -1,0 +1,41 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.all @ categories='csu.new-position-description-manager-report'}" />
+<pre data-sly-use.newPositionDescriptionManagerModel="com.csuf.cloud.core.models.NewPositionDescriptionManagerInboxReportModel"></pre>
+<sly data-sly-use.newPositionDescriptionManagerJson="${'fetchJson.js' @ jsonString=newPositionDescriptionManagerModel.newPositionDescriptionManagerReportJsonArray}" />
+
+<div id="container-required" class="px-4 py-1">
+    <div id="pills-npdmreport" class="tab-pane fade show active identifier" data-identifier='npdmreport'>        
+        <div id="dvNewPositionDescriptionManagerReport" role="main">
+            <table class="table table-striped table-hover table-bordered" id="tbNewPositionDescriptionManagerReport" align="center" cellpadding="2" cellspacing="1"  >
+                <thead id="tbThead">
+                  <tr>                      
+                      <th style="cursor:pointer;" class="sort">S.No</th> 
+					  <th style="cursor:pointer;" class="sort">Emlpoyee ID</th>
+                      <th style="cursor:pointer;" class="sort">CWID</th>
+                      <th style="cursor:pointer;" class="sort">First Name</th>
+                      <th style="cursor:pointer;" class="sort">Last Name</th>
+                      <th style="cursor:pointer;" class="sort">Workflow Start Time</th>
+                      <th style="cursor:pointer;" class="sort">Step Start Time</th>
+                      <th style="cursor:pointer;" class="sort">Step Name</th>
+                      <th style="cursor:pointer;" class="sort">Initiated By</th>
+					  <th style="cursor:pointer;" class="sort">Assignee</th>                      
+                  </tr>
+                </thead>
+                <sly data-sly-list="${newPositionDescriptionManagerJson}">
+                    <tr>
+                        <td>${item.sNo}</td>
+						<td>${item.chrsId}</td> 
+                        <td>${item.cwid}</td>
+						<td>${item.IncumbentFirstName}</td>
+                        <td>${item.IncumbentLastName}</td>
+                        <td>${item.workflowStartTime}</td>
+                        <td>${item.stepStartTime}</td>
+                        <td>${item.stepName}</td>
+                        <td>${item.stepInitiator}</td>
+						<td>${item.stepAssignee}</td>
+                    </tr>
+                </sly>
+            </table>
+        </div>
+    </div>
+</div>

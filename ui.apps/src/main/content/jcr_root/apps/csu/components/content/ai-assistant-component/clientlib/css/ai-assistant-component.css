@@ -1,0 +1,287 @@
+body {
+        /*font-family: "Geist";*/
+        font-weight: 400;
+        /* Default weight */
+      }
+
+      /* Enable smooth scrolling for the chat container */
+      #chat {
+        scroll-behavior: smooth;
+      }
+  #mainchatscreen {
+    height: 610px; /* Set height */
+    overflow-y: auto; /* Enable vertical scroll */
+}
+
+      pre {
+        background: #f9f9f9;
+        border-radius: 4px;
+        padding: 10px;
+        overflow-x: auto;
+      }
+
+      code {
+        font-family: "Geist";
+        font-size: 10px;
+      }
+
+      /* Geist font class with variable weight */
+      .geist-light {
+        font-weight: 100;
+      }
+
+      .geist-regular {
+        font-weight: 400;
+      }
+
+      .geist-bold {
+        font-weight: 700;
+      }
+
+      .geist-black {
+        font-weight: 900;
+      }
+
+      #toast {
+        animation: slideDown 0.3s ease-out forwards, slideUp 0.3s ease-in 2.5s forwards;
+      }
+
+      @keyframes slideDown {
+        from {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 1;
+          transform: translateY(0);
+        }
+
+        to {
+          opacity: 0;
+          transform: translateY(-20px);
+        }
+      }
+
+      /* Update these AI animation styles */
+      .ai-animation {
+        position: relative;
+        display: inline-flex;
+        align-items: center;
+        margin-left: 4px;
+      }
+
+      .ai-animation svg {
+        width: 24px;
+        height: 24px;
+      }
+
+      .ai-pulse {
+        transform-origin: center;
+        animation: vibrate 1s ease-in-out infinite;
+      }
+
+      .ai-gradient-pen {
+        animation: colorChange 0.1s linear infinite alternate;
+        /* Reduced to 100ms and added alternate */
+      }
+
+      @keyframes vibrate {
+
+        0%,
+        100% {
+          transform: scale(1) rotate(0deg);
+          opacity: 0.8;
+        }
+
+        25% {
+          transform: scale(0.95) rotate(2deg);
+          opacity: 1;
+        }
+
+        75% {
+          transform: scale(0.95) rotate(-2deg);
+          opacity: 1;
+        }
+      }
+
+      @keyframes colorChange {
+        0% {
+          stop-color: #000000;
+        }
+
+        100% {
+          stop-color: #666666;
+        }
+      }
+
+      /* Update these thread ID styles */
+      .thread-id-container {
+        position: relative;
+        width: 60px;
+        /* Small initial width */
+        transition: width 0.3s ease;
+        overflow: hidden;
+        margin: 0 auto;
+      }
+
+      .thread-id-container:hover {
+        width: 300px;
+        /* Expand on hover */
+      }
+
+      .thread-id-label {
+        position: absolute;
+        left: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        font-size: 10px;
+        color: #666;
+        white-space: nowrap;
+        pointer-events: none;
+        padding-left: 4px;
+        /* Added padding */
+      }
+
+      #input-thread-id {
+        width: 100%;
+        padding-left: 60px;
+        /* Increased padding for "Thread ID:" */
+        font-size: 10px;
+        height: 24px;
+        border: none;
+        background: transparent;
+        transition: all 0.3s ease;
+        /* Smooth transition for all changes */
+      }
+
+      #input-thread-id:focus {
+        outline: none;
+        background: #f3f4f6;
+        border-radius: 4px;
+        width: 100%;
+      }
+
+      .thread-id-container:hover #input-thread-id {
+        background: #f3f4f6;
+        border-radius: 4px;
+      }
+
+      .thread-id-tooltip {
+        position: absolute;
+        top: calc(100% + 4px);
+        /* Added gap between input and tooltip */
+        left: 50%;
+        transform: translateX(-50%);
+        background: #1f2937;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 4px;
+        font-size: 10px;
+        opacity: 0;
+        transition: opacity 0.2s;
+        pointer-events: none;
+        white-space: nowrap;
+        z-index: 10;
+        /* Ensure tooltip stays on top */
+      }
+
+      .thread-id-container:hover .thread-id-tooltip {
+        opacity: 1;
+      }
+li.nav-item {
+    visibility: visible;
+}
+
+span.header-nav-title.h5.text-white.ml-4 {
+    position: fixed;
+    top: 13px;
+    left: 112px;
+}
+
+.header-vertical-line {
+    margin-left: 6.75rem;
+}
+
+.relative.flex.items-center {
+    bottom: 30px;
+}
+
+main#mainchatscreen {
+    margin-top: 100px;
+}
+
+header.w-2\/4.mx-auto.top-0 {
+    background: none;
+}
+
+main#mainchatscreen {
+    background: white;
+}
+
+a#pills-campusforms-tab {
+    background: none;
+    border-bottom: none;
+}
+
+a#pills-aiassistant {
+    color: #fff !important;
+    background-color: #00274c;
+    border-bottom: 3px solid #ff7900;
+    display: block;
+    margin-top: -4px;
+    border-radius: 0;
+    padding-left: 1rem;
+    text-align: left;
+    text-transform: uppercase;
+}
+/*
+.flex.space-x-1.mt-4 {
+    visibility: hidden;
+}*/
+
+/* Add these new table styles */
+        table {
+            border-collapse: collapse;
+            margin: 1em 0;
+            width: 100%;
+        }
+
+        th, td {
+            border: 1px solid #e5e7eb;
+            padding: 8px 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f9fafb;
+            font-weight: 600;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f9fafb;
+        }
+
+        tr:hover {
+            background-color: #f3f4f6;
+        }
+
+        /* Ensure tables don't overflow on mobile */
+        .markdown-table-wrapper {
+            overflow-x: auto;
+            max-width: 100%;
+        }
+.pb-20 {
+    padding-bottom: 4rem;
+}
+
+.bg-gray-300 {
+  background-color: #d1d5db; /* Light gray background */
+}

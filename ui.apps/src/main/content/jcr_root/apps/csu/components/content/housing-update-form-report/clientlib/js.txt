@@ -1,0 +1,3 @@
+#base=js
+
+housing-update-form-report.js

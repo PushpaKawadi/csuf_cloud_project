@@ -1,0 +1,22 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientlib.all @ categories='csu.ldap-authentication'}"/>
+
+<div id="container-required" class="px-5 row">
+    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-12">
+        <form class="form-signin">
+
+            <h2 class="form-signin-heading">${properties.title || "LDAP Authentication"}</h2>
+            <h4 class="form-signin-heading"><small>${properties.subheading || "Please enter your User Name and Password"}</small></h4>
+            <div class="error" id="errordiv"></div>
+            <div class="success" id="successdiv"></div>
+            <label for="userId" class="sr-only">User Name</label>
+            <input type="TEXT" id="userId" class="form-control sign-in-input" placeholder="User Name" required autofocus>
+            <label for="inputPassword" class="sr-only">Password</label>
+            <input type="password" id="inputPassword" class="form-control sign-in-input" placeholder="Password" required>
+
+            <button class="btn btn-lg btn-primary btn-block btn-login" id="loginButton" >Sign</button>       
+
+            <input type="hidden" class="form-control" id="userFullName"/>
+            <input type="hidden" class="form-control" id="userEmail"/>
+        </form>
+    </div>
+</div>

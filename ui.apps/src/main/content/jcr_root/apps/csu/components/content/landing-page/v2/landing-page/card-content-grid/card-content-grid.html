@@ -1,0 +1,9 @@
+<sly data-sly-use.resourceModel="${'com.csuf.cloud.core.models.ResourceDuplicationModel' @  resourcePath='csu/components/content/landing-page/v2/landing-page/card-content', resourceName = 'cardcontent'}" />
+
+<div class="col-md-12 bg-white" data-sly-test="${resourceModel.duplicatedResourceList}" data-sly-list.cardcontent="${resourceModel.duplicatedResourceList}">
+    <div id="tabBox-${cardcontentList.count}-text" class="tabBox-text ${cardcontentList.first ? '' : 'dispNone'}" data-sly-resource="${cardcontent.path @ resourceType=cardcontent.resourceType}">        
+    </div>
+</div>
+
+<sly data-sly-resource="${resource.path @ resourceType='wcm/foundation/components/parsys/newpar', appendPath='/*', decorationTagName='div', cssClassName='new section aem-Grid-newComponent'}" data-sly-test="${((wcmmode.edit || wcmmode.preview) && !resourceModel.duplicatedResourceList)}">
+</sly>

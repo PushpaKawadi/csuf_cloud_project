@@ -1,0 +1,142 @@
+@media (max-width: 991px) {
+    #container-required {
+        margin-top: 4.5rem;
+    }
+}
+
+.tbThead {
+    background-color: #00274c;
+    color: white;
+}
+
+.action-icn {    
+    color: #00274c;
+}
+
+#confirm-terminate-workflow-modal .modal-header {
+    background-color: #00407f;
+    color: #ffffff;
+    padding: 2rem;
+}
+
+#btn-delegate-my-tasks {
+color: #00274c !important;
+    opacity: 1 !important;
+}
+
+
+#confirm-terminate-workflow-modal .modal-header .close {
+    color: #fff;
+    opacity: 1;
+}
+
+#confirm-terminate-workflow-modal .modal-body label {
+    display: block;
+    font-size: 13px;
+}
+
+#confirm-terminate-workflow-modal .modal-footer .btn-primary {
+    background-color: #00407f;
+}
+
+#confirm-terminate-workflow-modal .modal-footer {
+    justify-content: center;
+    border-top: 0;
+}
+
+#modal-error-terminate-workflow .modal-header {
+    background-color: #00407f;
+    color: #ffffff;
+    justify-content: center;
+}
+
+#modal-error-terminate-workflow .modal-header .fa-times {
+    font-size: 50px;
+}
+
+#modal-error-terminate-workflow .modal-header .close {
+    color: #fff;
+    opacity: 1;
+}
+
+#modal-error-terminate-workflow .modal-body {
+    color: #818181;
+    text-align: center;
+}
+
+#modal-error-terminate-workflow .modal-footer {
+    display: block;
+    text-align: center;
+    border-top: none;
+}
+
+#modal-error-terminate-workflow .modal-footer .btn-primary {
+    background-color: #00407f;
+}
+table.dataTable, table.dataTable th, table.dataTable td {
+    box-sizing: border-box;
+}
+#btn-delegate-my-tasks {
+    color: #ffffff !important;
+}
+a#open-details {
+    display: none;
+}
+/*.modal-header{
+        display:none;
+    }*/
+
+#modal-select-delegatee-action.modal.fade {
+    z-index: 9999 !important;
+}
+span.select2-dropdown.select2-dropdown--below {
+      z-index: 10000;
+}
+span.select2.select2-container.select2-container--default.select2-container--below {
+    width: 200px !important;
+}
+
+button.action-btn {
+    border-radius: 3px !important;
+    border: 1px solid #00407f !important;
+    color: #ffffff !important;
+    background: #00407f !important;
+}
+div#action-buttons {
+    text-align: center;
+}
+
+button.close {
+    color: white;
+}
+.modal-header {
+    background: #00407f;
+    color: white;
+}
+input {
+    margin-bottom: 5px;
+}
+/*border: 1px solid black;*/
+.cb-group {
+    margin-top: -22px;
+    margin-left: 16px;
+}
+
+/*input#TrainerName {
+    width: 100%;
+
+}
+
+input#TrainerDate {
+    width: 100%;
+
+}
+
+input#TrainerComments {
+    border: 1px solid #343a40;
+
+}*/
+#labelError {
+    color: red;
+    text-align: center;
+}

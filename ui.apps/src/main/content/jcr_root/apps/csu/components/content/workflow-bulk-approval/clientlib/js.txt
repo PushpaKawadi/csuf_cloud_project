@@ -1,0 +1,4 @@
+#base=js
+
+workflow-bulk-approval.js
+//select2.js

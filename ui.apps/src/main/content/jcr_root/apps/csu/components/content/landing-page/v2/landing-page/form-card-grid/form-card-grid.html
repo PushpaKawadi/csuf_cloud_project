@@ -1,0 +1,19 @@
+<sly data-sly-use.resourceModel="${'com.csuf.cloud.core.models.ResourceDuplicationModel' @  resourcePath='csu/components/content/landing-page/v2/landing-page/form-card', resourceName = 'card'}" />
+
+<div data-sly-use.templates="core/wcm/components/commons/v1/templates.html">
+    <div id="mixedSlider-2" class="mixedSlider">
+        <div class="MS-content" data-sly-test="${resourceModel.duplicatedResourceList}" data-sly-list.card="${resourceModel.duplicatedResourceList}">
+            <div id="tabBox-${cardList.count}" class="item tabBox">
+                <div class="text-center" data-sly-resource="${card.path @ resourceType=card.resourceType}">
+                </div>
+            </div>
+        </div>
+        <div class="MS-controls">
+            <button class="MS-left"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+            <button class="MS-right"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+        </div>
+        <sly data-sly-resource="${resource.path @ resourceType='wcm/foundation/components/parsys/newpar', appendPath='/*', decorationTagName='div', cssClassName='new section aem-Grid-newComponent'}"
+         data-sly-test="${((wcmmode.edit || wcmmode.preview) && !resourceModel.duplicatedResourceList)}">
+        </sly>
+    </div>
+</div>

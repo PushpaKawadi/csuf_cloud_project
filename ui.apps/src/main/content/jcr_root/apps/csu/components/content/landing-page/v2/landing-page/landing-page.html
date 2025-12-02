@@ -1,0 +1,35 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientlib.all @ categories='csu.landing-page-v2'}" />
+
+<div id="container-required">
+
+    <!--news carousel component-->
+    <div data-sly-resource="${'news-carousel' @ resourceType='csu/components/content/landing-page/v2/landing-page/news-carousel'}"></div>
+
+    <div class="row mt-1">
+        <div class="col-6 pr-0" style="background-color: #fff;height: 300px;">
+            <div class="text-wrapper style-search">
+                <h6>Welcome To:</h6>
+                <h3>Online Campus Form Directory</h3>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <select id="inputState" class="form-control" style="width:150px;border-radius: 0px;">
+                            <option selected>Forms</option>
+                        </select>
+                    </div>
+                    <input id="searchTextBox" type="text" class="form-control search-input-text" aria-label="Text input with dropdown button">
+                    <div class="input-group-append">
+                        <span class="input-group-text" id="basic-addon1"><i class="fa fa-search" aria-hidden="true"></i></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 pl-0" style="height: 300px;">
+            <div class="banner">
+            </div>
+        </div>
+    </div>
+
+    <!--multi tabs component-->
+    <div data-sly-resource="${'multi-tabs' @ resourceType='csu/components/content/landing-page/v2/landing-page/multi-tabs'}"></div>
+
+</div>

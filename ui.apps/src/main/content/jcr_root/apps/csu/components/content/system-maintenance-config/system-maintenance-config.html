@@ -1,0 +1,25 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.all @ categories='csu.system-maintenance'}" />
+
+<div id="container-required" class="px-5 py-1 row">
+    <div id="pills-sysconfig" class="tab-pane fade show active identifier" data-identifier='sysconfig'>
+        <form id="systemMaintenanceForm" enctype="multipart/form-data">
+            <div class="error" id="errordiv"></div>
+            <div class="success" id="successdiv"></div>
+            <div>
+                <h2>Is scheduled downtime ?</h2>
+                <div class="checkbox checkbox-danger">
+                    <input id="system-checkbox-yes" class="chb" type="checkbox" name="isSystemUnderMaintenance" value="yes" />
+                    <label for="system-checkbox-yes">Yes</label>
+                </div>
+                <div class="checkbox checkbox-success">
+                    <input id="system-checkbox-no" class="chb" type="checkbox" name="isSystemUnderMaintenance" value="no" />     <label for="system-checkbox-no">No</label>            
+                </div>                
+                <input type="hidden" name="config@Delete" value="delete text" />
+            </div>
+            <div>
+                <button class="btn btn-lg btn-system" id="saveSystemConfigBtn">Submit</button>                
+            </div>
+        </form>        
+    </div>
+</div>

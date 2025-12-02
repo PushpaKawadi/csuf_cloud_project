@@ -1,0 +1,10 @@
+#base=js
+
+chatbot.js
+constants.js
+script.js
+userDetails.js
+voiceInput.js
+axios.min.js
+genericFunctions.js
+attachmentsLoader.js

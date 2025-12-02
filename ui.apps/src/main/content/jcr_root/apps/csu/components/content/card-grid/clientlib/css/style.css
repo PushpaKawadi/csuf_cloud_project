@@ -1,0 +1,105 @@
+.card .ct-style{
+	position: absolute;
+		right: 12px;
+		z-index: 9;
+		top: 26px;
+		color: #ffffff;
+	}
+.card-scroll-y{
+    overflow-y:auto;
+}
+	.card-text a{color:#3e4041;}
+	
+	.max-width-truncate {
+	    max-width: 238px;
+	}
+	.card .title-img-style {
+	position: absolute;
+		right: -1px;
+		top: 20px;
+		width: 42px;
+	}
+	.card-title-color {
+	color: #00274c;
+	font-weight: 400;
+	}
+	 .main-title {
+	color: #00274c;
+	font-weight: 600;
+	}
+	.button-outlined{
+		    border-radius: 5px;
+			color: #00274c;
+			border: 2px solid #00274c;
+			background-color: #fff;
+			font-weight: 500;
+			font-size: 14px;
+			padding: 15px;
+			margin: 9px;
+	}
+	.loadmore:before, 
+        .loadmore:after { 
+            content: ""; 
+            flex: 1 1; 
+            border-bottom: 2px solid #00274c; 
+            margin: auto; 
+        } 
+		.loadmore { 
+            display: flex; 
+            flex-direction: row; 
+        } 
+		
+		.card-body {
+		height:225px;
+		min-height: 225px;
+		}
+		
+		/*transition animation*/
+		.example {
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  
+}
+	.example img.pr-2.image-top{
+	display: none;
+	}
+	
+.example .hover {
+  
+  transition: all 0.2s ease-in-out;
+  position: relative;
+  
+}
+
+.example .hover:before, .example .hover:after {
+  content: "";
+  position: absolute;
+  bottom: 8px;
+  width: 0px;
+  height: 5px;
+  margin: 5px 0 0;
+  transition: all 0.2s ease-in-out;
+  transition-duration: 0.4s;
+  opacity: 0;
+  background-color: #F18F3C;
+}
+.example .hover.hover-1:before, .example .hover.hover-1:after {
+  left: 0;
+}
+.example:hover {
+  cursor: pointer;
+  color:#E17000
+}
+
+.example:hover .hover:before, .example:hover .hover:after {
+  width: 100%;
+  opacity: 1;
+}
+.example:hover .hover.hover-3:before, .example:hover .hover.hover-4:before, .example:hover .hover.hover-3:after, .example:hover .hover.hover-4:after {
+  width: 50%;
+}
+.cursor{
+cursor:pointer
+}
+

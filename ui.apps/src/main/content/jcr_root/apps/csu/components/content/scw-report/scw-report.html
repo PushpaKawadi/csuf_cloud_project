@@ -1,0 +1,45 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.all @ categories='csu.scw-report'}" />
+<pre data-sly-use.scwModel="com.csuf.cloud.core.models.SCWInboxReportModel"></pre>
+<sly data-sly-use.scwJson="${'fetchJson.js' @ jsonString=scwModel.scwReportJsonArray}" />
+
+<div id="container-required" class="px-4 py-1">
+    <div id="pills-scwreport" class="tab-pane fade show active identifier" data-identifier='scwreport'>         
+        <div id="dvSCWReport" role="main">
+            <table class="table table-striped table-hover table-bordered" id="tbSCWReport" align="center" cellpadding="2" cellspacing="1"  >
+                <thead id="tbThead">
+                  <tr>                      
+                      <th style="cursor:pointer;" class="sort">S.No</th>
+                      <th style="cursor:pointer;" class="sort">CWID</th>
+                      <th style="cursor:pointer;" class="sort">Last Name</th>
+                      <th style="cursor:pointer;" class="sort">First Name</th>
+                      <th style="cursor:pointer;" class="sort">Case ID</th>
+                      <th style="cursor:pointer;" class="sort">Workflow start time</th>
+                      <th style="cursor:pointer;" class="sort">Step start time</th>
+                      <th style="cursor:pointer;" class="sort">Step Name</th>
+                      <th style="cursor:pointer;" class="sort">Initiated By</th>
+					  <th style="cursor:pointer;" class="sort">Assignee</th>
+                      <th style="cursor:pointer;" class="sort">Term Withdrawal</th>
+                      <th style="cursor:pointer;" class="sort">Course Number</th>                     
+                  </tr>
+                </thead>
+                <sly data-sly-list="${scwJson}">
+                    <tr>
+                        <td>${item.sNo}</td>
+                        <td>${item.cwid}</td>
+                        <td>${item.lName}</td>
+                        <td>${item.fName}</td>
+                        <td>${item.caseId}</td>
+                        <td>${item.workflowStartTime}</td>
+                        <td>${item.stepStartTime}</td>
+                        <td>${item.stepName}</td>
+                        <td>${item.stepInitiator}</td>
+						<td>${item.stepAssignee}</td>
+						<td>${item.isTermWithdrawal}</td>
+						<td>${item.courseNo}</td>
+                    </tr>
+                </sly>
+            </table>
+         </div>
+    </div>
+</div>

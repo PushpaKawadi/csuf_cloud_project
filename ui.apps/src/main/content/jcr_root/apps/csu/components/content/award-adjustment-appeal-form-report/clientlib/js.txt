@@ -1,0 +1,3 @@
+#base=js
+
+award-adjustment-appeal-form-report.js

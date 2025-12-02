@@ -1,0 +1,44 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.all @ categories='csu.on-base-report'}" />
+<!--<pre data-sly-use.onBaseReportModel="com.thoughtfocus.aem.csu.core.models.PositionActionFormReportModel"></pre>-->
+<sly data-sly-use.onBaseReportJson="${'fetchJson.js'}" />
+
+<div id="container-required" class="px-4 py-1">
+    <div id="pills-onbasereport" class="tab-pane fade show active identifier" data-identifier='onbasereport'>        
+        <div id="dvOnBaseReport" role="main">
+            <table class="table table-striped table-hover table-bordered" id="tbOnBaseReport" align="center" cellpadding="2" cellspacing="1"  >
+                <thead id="tbThead">
+                  <tr>                      
+                      <th style="cursor:pointer;" class="sort">S.No</th> 
+					  <th style="cursor:pointer;" class="sort">CWID</th> 
+                      <th style="cursor:pointer;" class="sort">Form Id</th>
+                      <th style="cursor:pointer;" class="sort">First Name</th>
+                      <th style="cursor:pointer;" class="sort">Last Name</th>
+                      <th style="cursor:pointer;" class="sort">Workflow Start Time</th>
+                      <th style="cursor:pointer;" class="sort">Workflow End Time</th>
+                      <th style="cursor:pointer;" class="sort">Initiated By</th>
+                      <th style="cursor:pointer;" class="sort">Workflow</th>      
+                      <th></th> 
+                  </tr>
+                </thead>
+                <tbody>
+                    <sly data-sly-list.item="${onBaseReportJson.populationData}">
+                        <tr data-sly-test="${item.handlerID}" data-id="${item.handlerID}">
+                            <td>${item.sNo}</td>
+							<td>${item.cwid}</td> 
+							<td>${item.formId}</td>
+                            <td>${item.fName}</td>
+                            <td>${item.lName}</td>
+                            <td data-order="${item.workflowStartTime.timestamp}">${item.workflowStartTime.display}</td>
+                            <td data-order="${item.stepStartTime.timestamp}">${item.stepStartTime.display}</td>
+                            <td>${item.stepInitiator}</td>
+                            <td>${item.workflowModelName}</td>
+                            <td><i class="fas fa-file" style="font-size: 20px;display: block;margin: 0 auto;text-align: center;" tool-tip-toggle='tooltip-icon' data-original-title='Open document of record'></i></td>
+                        </tr>
+                    </sly>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+

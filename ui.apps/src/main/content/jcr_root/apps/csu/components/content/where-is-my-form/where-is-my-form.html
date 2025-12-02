@@ -1,0 +1,44 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.all @ categories='csu.my-form-status'}" />
+<pre data-sly-use.wfDelegateModel="com.csuf.cloud.core.models.WhereIsMyFormDataModel"></pre>
+<sly data-sly-use.wfDelegateData="${'fetchJson.js' @ jsonString=wfDelegateModel.workflowArray}" />
+<sly data-sly-use.userMenu="com.csuf.cloud.core.models.UserMenuModel" />
+
+
+<div id="container-required" class="px-4 py-1">
+    <div id="pills-where-is-my-form" class="tab-pane fade show active identifier" data-identifier='where-is-my-form'>
+        <div class="scrollTableInner" id="dvwhereIsMyForm" role="main">
+            <table class="table table-striped table-hover table-bordered" id="where-is-my-form-dataTable" align="center" cellpadding="2" cellspacing="1">
+                <thead class="tbThead">
+                    <tr>
+                        <th scope="col" class="table-col-min-width">Status</th>
+                        <th scope="col" class="table-col-min-width">Initiator</th>
+                        <th scope="col" class="table-col-min-width">First Name</th>
+                        <th scope="col" class="table-col-min-width">Last Name</th>
+                        <th scope="col" class="table-col-min-width">Start Time</th>
+                        <th scope="col" class="table-col-min-width">Model</th>
+						<th scope="col" class="table-col-min-width">Assignee</th>
+						<th scope="col" class="table-col-min-width">Task Title</th>
+                    </tr>
+                </thead>
+				<tbody>
+                    <sly data-sly-list="${wfDelegateData}">
+                        <tr data-sly-test="${item.id}" data-id="${item.id}">
+                            <td>${item.status}</td>
+                            <td>${item.initiator}</td>
+                            <td>${item.fName}</td>
+                            <td>${item.lName}</td>
+                            <td>${item.startTime}</td>
+                            <td>${item.modelTitle}</td>
+                            <td>${item.assignee}</td>
+							<td>${item.workItemTitle}</td>
+                        </tr>
+                    </sly>
+				</tbody>
+            </table>
+        </div>
+    </div>
+    </div>
+
+
+

@@ -1,0 +1,353 @@
+<div class="app-container">
+    <div class="container">
+      <div class="header">
+        <div class="header-left">
+          <h2>Tuffy Assist (Beta)</h2>
+          <span class="description">AI-powered assistance for instructors and chairs in reviewing and approving AEM Student Course Withdrawal forms.</span>
+        </div>
+        <div class="header-right">
+          <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Search pending tasks..." class="search-input">
+            <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+              stroke-width="2">
+              <circle cx="11" cy="11" r="8"></circle>
+              <path d="m21 21-4.35-4.35"></path>
+            </svg>
+          </div>
+        </div>
+      </div>
+
+      <div class="main-content">
+        <div class="tab-container">
+          <button class="tab-button high-confidence active" data-tab="high">
+            High Confidence Approval
+            <span class="badge">0</span>
+          </button>
+          <button class="tab-button high-rejection" data-tab="highRejection">
+            High Confidence Denial
+            <span class="badge">0</span>
+          </button>
+          <button class="tab-button low-confidence" data-tab="low">
+            Low Confidence
+            <span class="badge">0</span>
+          </button>
+        </div>
+
+        <div class="table-wrapper">
+          <div class="tab-content active" id="tab-high">
+            <div class="table-controls">
+              <div class="selected-info">
+                <span id="selected-count-high">0 selected</span>
+                <div class="d-flex">
+                  <button class="approve-btn" onclick="handleBulkAction('high', 'approve')">Approve</button>
+                  <!-- <button class="reject-btn" onclick="handleBulkAction('high', 'disapprove')">Disapprove</button> -->
+
+                </div>
+              </div>
+            </div>
+            <p class="note-text">Note: The Last Attended Date is retrieved from Canvas</p>
+            <div class="table-scroll-container">
+              <table id="table-high">
+                <thead class="table-head">
+                  <tr>
+                    <th>
+                      <input type="checkbox" id="masterCheckbox-high" class="master-checkbox">
+                    </th>
+                    <th>Student Name</th>
+                    <th>Case ID</th>
+                    <th>Course #</th>
+                    <th>CWID</th>
+                    <th>Step Name</th>
+                    <th>Step Date</th>
+                    <th>Grade</th>
+                    <th><abbr title="The Last Attended Date is retrieved from Canvas.">*Last Attended Date</abbr></th>
+                    <th>Term Description</th>
+                    <th>Major</th>
+                    <th>Confidence Score</th>
+                    <th>Instructor Decision</th>
+                    <th>Agent Decision</th>
+                    <th>Edit</th>
+
+                  </tr>
+                </thead>
+                <tbody class="table-body" id="body-high"></tbody>
+              </table>
+            </div>
+            <div class="pagination-container">
+              <div class="rows-per-page">
+                <label for="rowsPerPage-high">Rows per page:</label>
+                <select id="rowsPerPage-high" class="rows-select">
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                </select>
+              </div>
+              <div class="pagination-info" id="pagination-info-high"></div>
+              <div class="pagination-controls" id="pagination-controls-high"></div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="tab-low">
+            <div class="table-controls">
+              <div class="selected-info">
+                <span id="selected-count-low">0 selected</span>
+                <div class="d-flex">
+                  <button class="approve-btn" onclick="handleBulkAction('low', 'approve')">Approve</button>
+                  <button class="reject-btn" onclick="handleBulkAction('low', 'disapprove')">Deny</button>
+                </div>
+              </div>
+            </div>
+            <p class="note-text">Note: The Last Attended Date is retrieved from Canvas</p>
+            <div class="table-scroll-container">
+              <table id="table-low">
+                <thead class="table-head">
+                  <tr>
+                    <th>
+                      <input type="checkbox" id="masterCheckbox-low" class="master-checkbox">
+                    </th>
+                    <th>Student Name</th>
+                    <th>Case ID</th>
+                    <th>Course #</th>
+                    <th>CWID</th>
+                    <th>Step Name</th>
+                    <th>Step Date</th>
+                    <th>Grade</th>
+                    <th><abbr title="The Last Attended Date is retrieved from Canvas.">*Last Attended Date</abbr></th>
+                    <th>Term Description</th>
+                    <th>Major</th>
+                    <th>Confidence Score</th>
+                    <th>Instructor Decision</th>
+                    <th>Agent Decision</th>
+                    <th>Edit</th>
+
+                  </tr>
+                </thead>
+                <tbody class="table-body" id="body-low"></tbody>
+              </table>
+            </div>
+            <div class="pagination-container">
+              <div class="rows-per-page">
+                <label for="rowsPerPage-low">Rows per page:</label>
+                <select id="rowsPerPage-low" class="rows-select">
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                </select>
+              </div>
+              <div class="pagination-info" id="pagination-info-low"></div>
+              <div class="pagination-controls" id="pagination-controls-low"></div>
+            </div>
+          </div>
+
+          <div class="tab-content" id="tab-highRejection">
+            <div class="table-controls">
+              <div class="selected-info">
+                <span id="selected-count-highRejection">0 selected</span>
+                <div class="d-flex">
+                  <!-- <button class="approve-btn" onclick="handleBulkAction('highRejection', 'approve')">Approve</button> -->
+                  <button class="reject-btn" onclick="handleBulkAction('highRejection', 'disapprove')">Deny</button>
+                </div>
+              </div>
+            </div>
+            <p class="note-text">Note: The Last Attended Date is retrieved from Canvas</p>
+            <div class="table-scroll-container">
+              <table id="table-highRejection">
+                <thead class="table-head">
+                  <tr>
+                    <th>
+                      <input type="checkbox" id="masterCheckbox-highRejection" class="master-checkbox">
+                    </th>
+                    <th>Student Name</th>
+                    <th>Case ID</th>
+                    <th>Course #</th>
+                    <th>CWID</th>
+                    <th>Step Name</th>
+                    <th>Step Date</th>
+                    <th>Grade</th>
+                    <th><abbr title="The Last Attended Date is retrieved from Canvas.">*Last Attended Date</abbr></th>
+                    <th>Term Description</th>
+                    <th>Major</th>
+                    <th>Confidence Score</th>
+                    <th>Instructor Decision</th>
+                    <th>Agent Decision</th>
+                    <th>Edit</th>
+
+                  </tr>
+                </thead>
+                <tbody class="table-body" id="body-highRejection"></tbody>
+              </table>
+            </div>
+            <div class="pagination-container">
+              <div class="rows-per-page">
+                <label for="rowsPerPage-highRejection">Rows per page:</label>
+                <select id="rowsPerPage-highRejection" class="rows-select">
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="25">25</option>
+                  <option value="50">50</option>
+                </select>
+              </div>
+              <div class="pagination-info" id="pagination-info-highRejection"></div>
+              <div class="pagination-controls" id="pagination-controls-highRejection"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="chatbot-panel">
+      <div class="chatbot-header">Assistant</div>
+      <div class="chatbot-messages" id="chatMessages">
+        <div id="chatbot-empty-state" class="chatbot-empty">
+          <img src="/content/dam/ai-chatbot/AI_Chatbot_Image.svg" class="chatbot-icon" />
+           <div class="chatbot-suggestions">
+         <!--   <p>Try asking:</p> -->
+            <ul>
+              <li class="suggestion">Hi there! I'm your AI workflow assistant, designed to help automate tasks. Tell me what you need to accomplish, and I'll use my tools to find solutions or perform the task for you.</li>
+            <!--  <li class="suggestion">Show forms applied after (Date)</li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="chatbot-input-area">
+        <input type="text" id="chatInput" placeholder="Type a message..." />
+        <button id="voiceBtn" class="voice-btn" title="Voice Input">
+          <svg width="100" height="100" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 1a4 4 0 0 0-4 4v7a4 4 0 0 0 8 0V5a4 4 0 0 0-4-4z"></path>
+            <path d="M19 10v2a7 7 0 0 1-14 0v-2"></path>
+            <line x1="12" y1="19" x2="12" y2="23"></line>
+            <line x1="8" y1="23" x2="16" y2="23"></line>
+          </svg>
+        </button>
+        <button id="sendBtn">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="22" y1="2" x2="11" y2="13"></line>
+            <polygon points="22,2 15,22 11,13 2,9 22,2"></polygon>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+  <div id="rowModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Form Details</h2>
+        <button class="close-btn" onclick="closeModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <div id="modal-details" class="detail-grid">
+          <!-- Content will be populated here -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Edit Modal -->
+  <div id="editModal" class="modal-overlay">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2 class="modal-title">Edit Form</h2>
+        <button class="close-btn" onclick="closeEditModal()">×</button>
+      </div>
+      <div class="modal-body">
+        <form id="editForm" class="edit-form">
+          <div class="form-group">
+            <label for="editApprovalStatus">Decision Bucket:</label>
+            <select id="editApprovalStatus" class="form-input">
+              <option value="approve">Approve</option>
+              <option value="disapprove">Deny</option>
+              <!-- <option value="low_confidence">Low Confidence</option> -->
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="editComments">Comments:</label>
+            <textarea id="editComments" class="form-input" rows="4"
+              placeholder="Please explain the reason for this decision change..."></textarea>
+          </div>
+
+          <!-- Grade Evaluation Radio Buttons (Only for Instructors) -->
+          <div class="form-group" id="gradeEvaluationGroup">
+            <label>Grade Evaluation:</label>
+            <div class="radio-group">
+              <div class="radio-item">
+                <input type="radio" id="estimatedGrade" name="gradeEvaluation" value="estimated" checked>
+                <label for="estimatedGrade">Estimated Grade at time of withdrawal</label>
+              </div>
+              <div class="radio-item">
+                <input type="radio" id="noBasisGrade" name="gradeEvaluation" value="noBasis">
+                <label for="noBasisGrade">No basis for evaluation (no exams or grade assignments)</label>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="editLastAttendDate">Last Attended Date:</label>
+              <input type="date" id="editLastAttendDate" class="form-input" placeholder="">
+            </div>
+            <div class="form-group">
+              <label for="editGrade">Grade:</label>
+              <div class="grade-input-container">
+                <select id="editGradeSelect" class="form-input">
+                  <option value="">Select Grade</option>
+                  <option value="A+">A+</option>
+                  <option value="A">A</option>
+                  <option value="A-">A-</option>
+                  <option value="B+">B+</option>
+                  <option value="B">B</option>
+                  <option value="B-">B-</option>
+                  <option value="C+">C+</option>
+                  <option value="C">C</option>
+                  <option value="C-">C-</option>
+                  <option value="D+">D+</option>
+                  <option value="D">D</option>
+                  <option value="D-">D-</option>
+                  <option value="F">F</option>
+                  <option value="Not Applicable">Not Applicable</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+          <!-- New Denial Reason Section -->
+          <div class="form-group" id="denialReasonGroup">
+            <label for="editDenialReason">Denial Reason:</label>
+            <select id="editDenialReason" class="form-input denial-reason-select">
+              <option value="">Select Reason</option>
+              <option value="1">should be re-submitted as medical issue</option>
+              <option value="2">missing or inadequate documentation</option>
+              <option value="3">documentation does not indicate sufficient hardship</option>
+              <option value="4">Other</option>
+            </select>
+          </div>
+
+          <!-- Other Denial Reason Input (Hidden by default) -->
+          <div class="form-group" id="otherDenialReasonGroup" style="display: none;">
+            <label for="editOtherDenialReason">Other Denial Reason:</label>
+            <textarea id="editOtherDenialReason" class="form-input text-area-reason" rows="3"
+              placeholder="Please specify the other denial reason..."></textarea>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="btn-cancel" onclick="closeEditModal()">Cancel</button>
+            <button type="button" class="btn-save" onclick="saveEdit()">Save Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification container -->
+  <div id="notification" class="notification">
+    <span id="notificationMessage"></span>
+  </div>
+
+  <!-- Loader overlay -->
+  <div id="loaderOverlay" class="loader-overlay">
+    <div class="loader"></div>
+  </div>
+
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" data-sly-call="${clientlib.all @ categories='csu.ai-agent'}" />
+

@@ -1,0 +1,134 @@
+<sly data-sly-use.clientlib="/libs/granite/sightly/templates/clientlib.html" />
+<sly data-sly-call="${clientlib.all @ categories='csu.lor-landing-page'}" />
+
+<div class="InheritValues"><div id="test_info"> </div><a name="top" id="top"> </a><div id="skipnav"><p class="skipnav"><a href="#MainContent">Skip to Content (Press Enter)</a></p></div><div id="divAjaxTools">
+		<input type="hidden" id="hdnServerBase" value="https://president.fullerton.edu" />
+		 
+	</div><div id="CSUFLink_Search" role="complementary"><div class="container"><h3 id="CSUFTopLink"><a href="http://www.fullerton.edu"><span> </span>California State University, Fullerton</a></h3><ul id="SearchNav"><li><a href="http://www.fullerton.edu/a-z.aspx">A-Z Index</a></li><li><div id="search" role="search"><form action="http://www.google.com/search" target="_blank" method="get" name="gs"><label for="SearchCSUF">Search this site or CSUF general sites</label><input id="SearchCSUF" type="text" name="as_q" size="20" maxlength="255"/><button id="search-button">Search</button><div id="searchRadioBtns"><input type="hidden" name="hl" value="en"/><input type="hidden" name="sort" value="date:D:L:d1"/><input id="SiteSpecific" name="as_sitesearch" type="radio" value="https://president.fullerton.edu" checked="checked" title="Search this site"/><label for="SiteSpecific">Site</label><input id="CSUFGeneral" name="as_sitesearch" type="radio" value="www.fullerton.edu" title="Search CSU Fullerton websites"/><label for="CSUFGeneral">CSUF</label></div></form></div></li></ul></div></div><div id="mobile_header"><p><button id="btnMobileMenu" onclick="mobilemenu()"><span class="sr-only">Site Menu</span><span class="menubar"> </span><span class="menubar"> </span><span class="menubar"> </span></button></p><div id="mobile_search"><form action="http://www.google.com/search" method="get" name="gs"><button type="submit" id="btnSearchMobile"> </button><label id="mobile_search_label" for="mobile_as_q">Search this site</label><input type="text" id="mobile_as_q" name="as_q" value=""/><input type="hidden" name="sort" value="date:D:L:d1"/><input id="mobile_SiteSpecific" name="as_sitesearch" type="hidden" value="https://president.fullerton.edu" title="Search this site"/></form></div></div><div id="mobile_header_menu" class="mobileclosed"><ul><li><a href="http://www.fullerton.edu/"><span class="mobile_csuftree"> </span>CSUF Homepage</a></li></ul><ul>
+			</ul><ul class="mobile_sitetabs"><li><a href="/bio/index.aspx"  target="" title="">
+		Bio
+		</a></li><li><a href="/videos/index.aspx"  target="" title="">
+		Videos
+		</a></li><li><a href="/cabinet/index.aspx"  target="" title="">
+		Cabinet
+		</a></li><li><a href="/pab/index.aspx"  target="" title="">
+		Advisory Board
+		</a></li><li><a href="/staff/index.aspx"  target="" title="">
+		Office Staff
+		</a></li><li><button id="divMobileExpand_tabF_button" onclick="mobileexpand('divMobileExpand_tabF')">+</button><a href="/communications/"  target="" title="">
+		Communications
+		</a><div id="divMobileExpand_tabF" class="mobilecollapse"><extended>
+  <ul>
+    <li>
+      <a href="https://president.fullerton.edu/communications/messages/">Messages to Campus</a>
+    </li>
+    <li>
+      <a href="https://president.fullerton.edu/communications/articles/">Published Articles</a>
+    </li>
+  </ul>
+</extended></div></li><li><a href="/directives/index.aspx"  target="" title="">
+		Directives
+		</a></li><li><a href="http://www.fullerton.edu/auditor/"  target="" title="">
+		Internal Auditor
+		</a></li><li><a href="/contact.aspx"  target="" title="">
+		Contact
+		</a></li>
+			</ul>
+			</div><div id="header_LowerScroll" class="BTT_off"><div class="container"><ul class="LowerMenu_csuftree"><li><a href="http://www.fullerton.edu/">
+				
+				</a></li></ul><div id="lowerscroll_search"><form action="http://www.google.com/search" method="get" name="gs"><button type="submit" id="btnSearchLowerHeader">search</button><label for="LowerScroll_as_q">Search This Site</label><input id="LowerScroll_as_q" type="text" name="as_q" value="" title="Search this site, enter your text here"/><input type="hidden" name="sort" value="date:D:L:d1"/><input id="lowerscroll_SiteSpecific" name="as_sitesearch" type="hidden" value="https://president.fullerton.edu" title="Search this site"/></form><div id="lowerscroll_social">
+			</div></div><div id="lowerscroll_menu"><ul><li  class="LowerScroll_site" ><a title="Lower Scollr Site Name" href="https://president.fullerton.edu">Office of the President</a></li>
+			</ul><ul class="LowerScroll_Header_sitetabs"><li><a href="/bio/index.aspx" >
+		Bio
+		</a></li><li><a href="/videos/index.aspx" >
+		Videos
+		</a></li><li><a href="/cabinet/index.aspx" >
+		Cabinet
+		</a></li><li><a href="/pab/index.aspx" >
+		Advisory Board
+		</a></li><li><a href="/staff/index.aspx" >
+		Office Staff
+		</a></li><li><a href="/communications/" >
+		Communications
+		</a></li><li><a href="/directives/index.aspx" >
+		Directives
+		</a></li><li><a href="http://www.fullerton.edu/auditor/" >
+		Internal Auditor
+		</a></li><li><a href="/contact.aspx" >
+		Contact
+		</a></li>
+			</ul></div></div></div><div id="SiteName_Tabs" role="banner"><div class="container"><div id="branding"><p id="sitename"><a title="President Home Link" href="https://president.fullerton.edu">Office of the President</a></p></div><div id="Tabs" class="navbar" role="navigation"><ul id="navMain"><li id="navtabA" class=""><a href="/bio/index.aspx"  target='' title=''>
+		Bio
+		</a></li><li id="navtabB" class=""><a href="/videos/index.aspx"  target='' title=''>
+		Videos
+		</a></li><li id="navtabC" class=""><a href="/cabinet/index.aspx"  target='' title=''>
+		Cabinet
+		</a></li><li id="navtabD" class=""><a href="/pab/index.aspx"  target='' title=''>
+		Advisory Board
+		</a></li><li id="navtabE" class=""><a href="/staff/index.aspx"  target='' title=''>
+		Office Staff
+		</a></li><li id="navtabF" class=""><a href="/communications/"  target='' title=''>
+		Communications
+		</a><div id="extendedF"><div class="ExtendedNav"><production>
+  <div>
+    <ul>
+      <li>
+        <a href="https://president.fullerton.edu/communications/messages/">Messages to Campus</a>
+      </li>
+      <li>
+        <a href="https://president.fullerton.edu/communications/articles/">Published Articles</a>
+      </li>
+    </ul>
+  </div>
+</production></div></div></li><li id="navtabG" class=""><a href="/directives/index.aspx"  target='' title=''>
+		Directives
+		</a></li><li id="navtabH" class=""><a href="http://www.fullerton.edu/auditor/"  target='' title=''>
+		Internal Auditor
+		</a></li><li id="navtabI" class="active"><a href="/contact.aspx"  target='' title=''>
+		Contact
+		</a></li></ul></div></div></div><div id="MainContent" role="main"><div class="container"><div id="centercontent" class="Show100Wide"><div id="layoutcontainer" class="T3_101"><div id="divA" class="divA "><h1>Contact</h1>
+<p><strong>Office of the President</strong> <br/>2600 Nutwood Avenue, CP-1000<br/>Fullerton, CA 92831</p>
+<p>657-278-3456<br/> <a href="mailto:presidentvirjee@fullerton.edu">presidentvirjee@fullerton.edu</a> <br/><br/> <b>Request for a Letter of Recommendation</b><br/><a href="http://erpaempn65dev.fullerton.edu:4503/content/dam/formsanddocuments/letter-of-recommendation-lor/letter-of-recommendation/jcr:content?wcmmode=disabled" target="_blank">Click Here to Request a Letter of Recommendation</a></p></div><div id="divB" class="divB "></div><div id="divC" class="divC "></div><div id="divD" class="divD "></div><div id="divE" class="divE "></div><div id="divF" class="divF "></div><div id="divG" class="divG "></div><div id="divH" class="divH "></div><div id="divI" class="divI "></div><div id="divJ" class="divJ "></div><div id="divK" class="divK "></div><div id="divL" class="divL "></div><div id="divM" class="divM "></div><div id="divN" class="divN "></div><div id="divO" class="divO "></div><div id="divP" class="divP "></div><div id="divQ" class="divQ "></div><div id="divR" class="divR "></div><div id="divS" class="divS "></div><div id="divT" class="divT "></div><div id="divU" class="divU "></div><div id="divV" class="divV "></div><div id="divW" class="divW "></div><div id="divX" class="divX "></div><div id="divY" class="divY "></div><div id="divZ" class="divZ "></div></div></div></div></div><div id="back_to_top" class="BTT_off"><div class="container"><a href="#top"><img src="https://president.fullerton.edu/_resources/images/icons/back_to_top.png" alt="back to top" title="back to top" /></a></div></div><div id="divFooter"><div class="container"><p class="logo"><a href="http://www.fullerton.edu/"><img src="https://president.fullerton.edu/_resources/images/campuscss/csuf-logo-web-reversedbw.png" alt="Cal State Fullerton" /></a></p><p class="disclaimer">This site is maintained by 
+
+				<a title="President Footer Home Link" href="http://president.fullerton.edu">Office of the President</a>.
+				
+				<br/>To report problems or comments, please contact
+					<a href="mailto:strategiccomm@fullerton.edu">strategiccomm@fullerton.edu</a>. 
+				
+				<br/>&copy; California State University, Fullerton All Rights Reserved.</p><div class="accessibility"><h2>Web Accessibility</h2><ul><li><a href="http://www.fullerton.edu/ATI">Learn about web accessibility</a></li><li><a href="http://www.fullerton.edu/reportati/">Report a web accessibility problem</a></li></ul><ul><li><a href="http://get.adobe.com/reader/">Download Adobe Acrobat Reader</a></li><li><a href="https://www.microsoft.com/en-us/download/details.aspx" title="find sofware for reading Microsoft documents">Microsoft Viewers</a></li></ul></div></div></div><script type="text/javascript">
+	 function mobilemenu()
+        {
+            if(document.getElementById('mobile_header_menu').className == 'mobileclosed')
+            {
+                document.getElementById('mobile_header_menu').className = 'mobileopen';
+            }else
+            {
+                document.getElementById('mobile_header_menu').className = 'mobileclosed';
+            }
+        }
+	
+	 function mobileexpand(div)
+	{
+		
+            if(document.getElementById(div).className == 'mobileexpand')
+            {
+                document.getElementById(div).className = 'mobilecollapse';
+				document.getElementById(div + "_button").innerHTML = '+';
+            }else
+            {
+                document.getElementById(div).className = 'mobileexpand';
+				document.getElementById(div + "_button").innerHTML = '-';
+            }
+	}
+	
+		</script>
+		<noscript>
+			This page uses mobile menus which rely on javascript.  You do not have javascript enabled, some functions will be disabled.
+		</noscript>
+	<script type="text/javascript">
+		collectAccordionSections();
+		</script>
+		<noscript>
+			This page uses accordion styles which rely on javascript.  You do not have javascript enabled, some functions will be disabled.
+		</noscript>
+	

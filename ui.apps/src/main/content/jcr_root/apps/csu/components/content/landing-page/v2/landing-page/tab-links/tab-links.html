@@ -1,0 +1,12 @@
+<sly data-sly-use.resourceModel="${'com.csuf.cloud.core.models.ResourceDuplicationModel' @  resourcePath='csu/components/content/landing-page/v2/landing-page/tab-link', resourceName = 'tab'}"/>
+
+<div data-sly-use.templates="core/wcm/components/commons/v1/templates.html">
+    <ul class="nav nav-pills container" id="myTab" role="tablist" data-sly-test="${resourceModel.duplicatedResourceList}" data-sly-list.tab="${resourceModel.duplicatedResourceList}">
+        <li class="nav-item">
+            <div data-sly-resource="${tab.path @ resourceType=tab.resourceType}" data-sly-unwrap="${wcmmode.edit || wcmmode.disabled}"></div>
+        </li>
+    </ul>
+    <sly data-sly-resource="${resource.path @ resourceType='wcm/foundation/components/parsys/newpar', appendPath='/*', decorationTagName='div', cssClassName='new section aem-Grid-newComponent'}"
+         data-sly-test="${((wcmmode.edit || wcmmode.preview) && !resourceModel.duplicatedResourceList)}">
+    </sly>
+</div>

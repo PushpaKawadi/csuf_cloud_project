@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:sling="http://sling.apache.org/jcr/sling/1.0" xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0"
+    jcr:primaryType="nt:unstructured"
+    jcr:title="Form Card Properties"
+    sling:resourceType="cq/gui/components/authoring/dialog">
+    <content
+        jcr:primaryType="nt:unstructured"
+        sling:resourceType="granite/ui/components/coral/foundation/fixedcolumns">
+        <items jcr:primaryType="nt:unstructured">
+            <column
+                jcr:primaryType="nt:unstructured"
+                sling:resourceType="granite/ui/components/coral/foundation/container">
+                <items jcr:primaryType="nt:unstructured">
+                    <form-name
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/textfield"
+                        fieldDescription="Please add form name"
+                        fieldLabel="Form Name"
+                        name="./formName"
+                        value="sample form"/>
+                    <link-count
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/numberfield"
+                        fieldDescription="Please enter number of training guide links to be added for this form card"
+                        fieldLabel="Training Link Count"
+                        max="10"
+                        min="1"
+                        name="./linkCount"
+                        step="1"
+                        value="3"/>
+                    <make-training-guide-publish-date-string
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="/libs/granite/ui/components/coral/foundation/form/hidden"
+                        about="This causes trainingGuidePublishDate to be saved as a String in JCR instead of Date"
+                        name="./trainingGuidePublishDate@TypeHint"
+                        value="String"/>
+                    <training-guide-publish-date
+                        jcr:primaryType="nt:unstructured"
+                        sling:resourceType="granite/ui/components/coral/foundation/form/datepicker"
+                        fieldLabel="Training Guide Publish Date"
+                        name="./trainingGuidePublishDate"
+                        required="{Boolean}true"
+                        valueFormat="MM/DD/YYYY"/>
+                </items>
+            </column>
+        </items>
+    </content>
+</jcr:root>

@@ -1,0 +1,9 @@
+<h4 style="font-size: medium;">${properties.newsTitle}</h4>
+<h6 style="font-size: small;">${properties.type} | ${properties.newsPublishDate}</h6>
+<div class="d-flex">
+    <div class="col-3 d-inline-block">
+        <!--<img src="./images/Group-874.png" class="rounded float-left" style="width: 55px;height: 55px;">-->
+        <div class="rounded float-left" style="width: 75px;height: 75px;" data-sly-resource="${'news-image' @ resourceType='csu/components/content/image'}"></div>
+    </div>
+    <div class="col-9 ml-3 d-inline-block" style="font-size: 11px;" data-sly-resource="${'news-description' @ resourceType='csu/components/content/text'}"></div>
+</div>

@@ -1,0 +1,35 @@
+<sly data-sly-use.resourceModel="${'com.csuf.cloud.core.models.ResourceDuplicationModel' @  resourcePath='csu/components/content/landing-page/news-carousel', resourceName = 'item'}"/>
+
+<div id="container-required">
+    <section>
+        <div class="banner">
+            <div class="text-wrapper">
+                <h6>Welcome To</h6>
+                <h3>Online Campus Form Directory</h3>
+            </div>
+        </div>
+
+        <div class="row identifier" data-identifier='campusforms'>
+            <!--<a class="nav-link" id="training-link-url" href="${properties.trainingLinkURL ? properties.trainingLinkURL : '#'}">Training Guide</a>-->
+            
+            <div class="col-12 text-center px-5" data-sly-resource="${'landing-page-text' @ resourceType='csu/components/content/text'}"></div>
+           
+        </div>
+        
+        <!-- News and announcement -->
+        <h3 style="text-transform: capitalize;" class="text-center main-title">News and Announcement</h3>
+        <div id="demo" class="carousel slide card mb-3 col-10" data-ride="carousel">
+            <div class="carousel-inner" data-sly-test="${resourceModel.duplicatedResourceList}" data-sly-list.item="${resourceModel.duplicatedResourceList}">        
+                <div class="carousel-item ${itemList.count == 1 ? 'active' : ''}" data-sly-resource="${item.path @ resourceType=item.resourceType}">
+                </div>			
+            </div>               
+            
+            <a class="carousel-control-prev" href="#demo" data-slide="prev"> <i class="fa fa-angle-left custom-icon"></i> </a> <a class="carousel-control-next" href="#demo" data-slide="next"> <i class="fa fa-angle-right custom-icon"></i> 
+            </a>
+        </div>
+
+        <!-- card grid component -->
+        <div data-sly-resource="${'card-grid' @ resourceType='csu/components/content/card-grid'}"></div>    
+    </section>
+</div>
+

@@ -1,0 +1,21 @@
+@media (max-width: 991px) {
+    #container-required {
+        margin-top: 4.5rem;
+    }
+}
+
+#tbThead {
+    background-color: #00274c;
+    color: white;
+}
+
+
+/* To show department IDs & Units in the next line in the column in report */
+#tbDoaReport td:nth-child(3){
+	word-break: break-word;
+    width: 22%;
+}
+#tbDoaReport td:nth-child(4){
+	word-break: break-word;
+    width: 21%;
+}
