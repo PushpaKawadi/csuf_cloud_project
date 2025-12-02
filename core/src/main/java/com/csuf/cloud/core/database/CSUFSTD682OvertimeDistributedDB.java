@@ -524,7 +524,7 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 									dbUtil.insertFormData(conn, dataMapFormInfo, tableName, formName);
 								}*/
 								
-								if (dataMapTest != null) {
+								//if (dataMapTest != null) {
 
 									JSONObject json = new JSONObject();
 									/*json.put("cwid", cwid);
@@ -552,7 +552,7 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 									CloseableHttpResponse response = client.execute(post);
 									log.info("DB Service Response: {}", response.getStatusLine());
 									client.close();
-								}
+								//}
 
 							}
 						}
