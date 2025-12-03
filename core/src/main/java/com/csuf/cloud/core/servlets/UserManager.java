@@ -1,6 +1,7 @@
 package com.csuf.cloud.core.servlets;
 
 import java.io.IOException;
+import java.time.LocalDate;
 
 import javax.jcr.Session;
 import javax.servlet.Servlet;
@@ -31,6 +32,7 @@ public class UserManager extends SlingSafeMethodsServlet {
     protected void doGet(final SlingHttpServletRequest req, final SlingHttpServletResponse response)
             throws ServletException, IOException {
         JSONObject userValues = null;
+       
         try {
             userValues = getCurrentUserId(req);
         } catch (Exception e) {
@@ -46,11 +48,19 @@ public class UserManager extends SlingSafeMethodsServlet {
         JSONObject userDetails = new JSONObject();
         ResourceResolver resolver = request.getResourceResolver();
         Session session = resolver.adaptTo(Session.class);
+        LocalDate serverDate = LocalDate.now();  
         //Session session = globalService.getAdminSession();
         String userId = session.getUserID();
         //logger.info("userDetails=" + userId);
+        
+        if (userId != null && userId.endsWith("@fullerton.edu")) {
+            userId.substring(0, userId.indexOf("@"));
+        }
         userDetails.put("userId", userId);
         userDetails.put("Status", "Success");
+        userDetails.put("SERVER_DATE", serverDate);
+        userDetails.put("email", session.getUserID());
+        
         if(session != null){
             session.logout();
         }

@@ -1368,13 +1368,13 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_ApprovingOff
 
                         type: 'GET',
 
-                        url: "/bin/getLoggedUserDetails",
+                        url: "/bin/getLoggedUserId",
 
                         dataType: 'json',
 
                         success: function(myresponse) {
 
-                            approving_official_signature.value = myresponse.userName;
+                            approving_official_signature.value = myresponse.userId;
                         }
                     });
                 }
@@ -1445,13 +1445,13 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_ManagerSigna
 
                         type: 'GET',
 
-                        url: "/bin/getLoggedUserDetails",
+                        url: "/bin/getLoggedUserId",
 
                         dataType: 'json',
 
                         success: function(myresponse) {
 
-                            manager_signature.value = myresponse.userName;
+                            manager_signature.value = myresponse.userId;
                         }
                     });
                 }
@@ -1550,13 +1550,13 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_Internationa
 
                         type: 'GET',
 
-                        url: "/bin/getLoggedUserDetails",
+                        url: "/bin/getLoggedUserId",
 
                         dataType: 'json',
 
                         success: function(myresponse) {
 
-                            time_keeper_signature.value = myresponse.userName;
+                            time_keeper_signature.value = myresponse.userId;
                         }
                     });
                 }
@@ -1639,13 +1639,13 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_StudentSigna
 
                         type: 'GET',
 
-                        url: "/bin/getLoggedUserDetails",
+                        url: "/bin/getLoggedUserId",
 
                         dataType: 'json',
 
                         success: function(myresponse) {
 
-                            student_signature.value = myresponse.userName;
+                            student_signature.value = myresponse.userId;
                         }
                     });
                 }
