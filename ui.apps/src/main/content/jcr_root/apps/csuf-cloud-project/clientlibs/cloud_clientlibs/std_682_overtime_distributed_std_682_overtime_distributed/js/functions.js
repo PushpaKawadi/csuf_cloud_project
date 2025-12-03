@@ -1508,6 +1508,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_Internationa
     with(this) {
         with(scope) {
             if (this.value == 1) {
+				alert("timekeeper here");
                 //RecordsSignature.value = LogUser.value;
                 time_keeper_signature.enabled = false;
 
@@ -1515,12 +1516,15 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_Internationa
                     var dateString = new Date().toLocaleString("en-US", {
                         timeZone: (Intl.DateTimeFormat().resolvedOptions().timeZone)
                     }).replace(/[^ -~]/g, ' ');
+					alert("dateString = "+dateString);
                     var dateObject = new Date(dateString);
                     var curyear = dateObject.getFullYear();
                     var curyearMonth = dateObject.getMonth() + 1;
                     var curyearDay = dateObject.getDate();
                     var d = (curyear + "-" + curyearMonth + "-" + curyearDay);
+					alert("test="+d);
                     time_keeper_date.value = d;
+					alert("time_keeper_date.value="+time_keeper_date.value);
                     time_keeper_signature.enabled = false;
                 } else {
                     time_keeper_date.enabled = false;
