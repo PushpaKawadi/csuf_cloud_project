@@ -63,7 +63,7 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 		String formName = "STD 682 Overtime Distributed";
 		ResourceResolver resolver = workflowSession.adaptTo(ResourceResolver.class);
 		String payloadPath = workItem.getWorkflowData().getPayload().toString();
-		DatabaseUtils dbUtil = new DatabaseUtils();
+		//DatabaseUtils dbUtil = new DatabaseUtils();
 		Document doc = null;
 		InputStream is = null;
 		String workflowInstanceID = "";
@@ -152,18 +152,36 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 		LinkedHashMap<String, Object> dataMapTest = null;
 		Resource xmlNode = resolver.getResource(payloadPath);
 		Iterator<Resource> xmlFiles = xmlNode.listChildren();
-		String dataSourceVal = globalConfigFilenetService.getAEMFormsDatabaseSource();
-		conn = jdbcConnectionService.getDBConn(dataSourceVal);
+		
+		log.error("Pushpa xmlNode=" + xmlNode);
+		log.info("Pushpa xmlNode=" + xmlNode);
+		log.debug("Pushpa xmlNode=" + xmlNode);
 
-		if (conn != null) {
+		
+		log.error("Pushpa xmlFiles=" + xmlFiles);
+		log.info("Pushpa xmlFiles=" + xmlFiles);
+		log.debug("Pushpa xmlFiles=" + xmlFiles);
+		
+		//String dataSourceVal = globalConfigFilenetService.getAEMFormsDatabaseSource();
+		//conn = jdbcConnectionService.getDBConn(dataSourceVal);
+
+		//if (conn != null) {
 			while (xmlFiles.hasNext()) {
 				workflowInstanceID = workItem.getWorkflow().getId();
 				Resource attachmentXml = xmlFiles.next();
 				String filePath = attachmentXml.getPath();
+				log.error("Pushpa Filepath=" + filePath);
+				log.info("Pushpa Filepath=" + filePath);
+				log.debug("Pushpa Filepath=" + filePath);
 
 				if (filePath.contains("Data.xml")) {
 					filePath = attachmentXml.getPath().concat("/jcr:content");
 					Node subNode = resolver.getResource(filePath).adaptTo(Node.class);
+					log.error("Pushpa subNode=" + subNode);
+					log.info("Pushpa subNode=" + subNode);
+					log.debug("Pushpa subNode=" + subNode);
+
+					
 					try {
 						is = subNode.getProperty("jcr:data").getBinary().getStream();
 					} catch (ValueFormatException e2) {
@@ -205,8 +223,12 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 								emplRcd = eElement.getElementsByTagName("empl_rcd").item(0).getTextContent();
 								
 								chrsId = eElement.getElementsByTagName("chrsId").item(0).getTextContent();
+								
+								log.error("Pushpa emplId=" + emplId);
+								log.info("Pushpa emplId=" + emplId);
+								log.debug("Pushpa emplId=" + emplId);
 
-								employeeLastname = eElement.getElementsByTagName("employee_last_name").item(0)
+								/*employeeLastname = eElement.getElementsByTagName("employee_last_name").item(0)
 										.getTextContent();
 
 								employeeFirstname = eElement.getElementsByTagName("employee_first_name").item(0)
@@ -251,8 +273,6 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 										.getTextContent();
 								total_hours_authorized = eElement.getElementsByTagName("total_hours_authorized").item(0)
 										.getTextContent();
-								
-
 								compensationTimeOff1 = eElement.getElementsByTagName("compensation_timeOff1").item(0)
 										.getTextContent();
 								compensationTimeOff2 = eElement.getElementsByTagName("compensation_timeOff2").item(0)
@@ -271,8 +291,6 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 										.getTextContent();
 								compensationTimeOff9 = eElement.getElementsByTagName("compensation_timeOff9").item(0)
 										.getTextContent();
-								
-
 								extraHoursWorked1 = eElement.getElementsByTagName("extra_hours_worked1").item(0)
 										.getTextContent();
 								extraHoursWorked2 = eElement.getElementsByTagName("extra_hours_worked2").item(0)
@@ -292,9 +310,9 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 								extraHoursWorked9 = eElement.getElementsByTagName("extra_hours_worked9").item(0)
 										.getTextContent();
 								totalExtraHoursWorked = eElement.getElementsByTagName("total_extra_hours_worked")
-										.item(0).getTextContent();
+										.item(0).getTextContent();*/
 
-								to1 = eElement.getElementsByTagName("to1").item(0).getTextContent();
+								/*to1 = eElement.getElementsByTagName("to1").item(0).getTextContent();
 								to2 = eElement.getElementsByTagName("to2").item(0).getTextContent();
 								to3 = eElement.getElementsByTagName("to3").item(0).getTextContent();
 								to4 = eElement.getElementsByTagName("to4").item(0).getTextContent();
@@ -345,9 +363,19 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 										.getTextContent();
 								managerDate = eElement.getElementsByTagName("manager_date").item(0).getTextContent();
 								managerComment = eElement.getElementsByTagName("manager_comment").item(0)
-										.getTextContent();
+										.getTextContent();*/
+								
+								dataMapTest.put("EMPL_ID", "100030476");
+								dataMapTest.put("EMPL_RCD", "1");
+								dataMapTest.put("CHRS_ID", "899752547");
+								
+								
+								log.error("Pushpa dataMapTest=" + dataMapTest.size());
+								log.info("Pushpa dataMapTest=" + dataMapTest.size());
+								log.debug("Pushpa dataMapTest=" + dataMapTest.size());
+								
 
-								dataMapFormInfo = new LinkedHashMap<String, Object>();
+								/*dataMapFormInfo = new LinkedHashMap<String, Object>();
 								dataMapFormInfo.put("CASE_ID", "");
 								dataMapFormInfo.put("EMPL_ID", emplId);
 								dataMapFormInfo.put("EMPL_RCD", emplRcd);
@@ -361,9 +389,6 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 								dataMapFormInfo.put("PAY_PRD_MONTH", payPeriodMonth);								
 								dataMapFormInfo.put("PAY_PRD_YEAR", payPeriodYear);
 								dataMapFormInfo.put("RESN_EXTRA_HRS", reasonForExtraHours);
-								
-								
-								
 								
 								dataMapTest.put("EMPL_ID", "100030476");
 								dataMapTest.put("EMPL_RCD", "1");
@@ -512,7 +537,7 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 								}
 								dataMapFormInfo.put("MNGR_DATE", managerDateObj);
 								dataMapFormInfo.put("MNGR_COMNT", managerComment);
-								dataMapFormInfo.put("WORKFLOW_INSTANCE_ID", workflowInstanceID);
+								dataMapFormInfo.put("WORKFLOW_INSTANCE_ID", workflowInstanceID);*/
 								
 							//	dbUtil.insertFormData(conn, dataMapFormInfo, tableName, formName);
 								/*String resultData = dbUtil.getSPEEvalData(conn, emplId, "EMPL_ID", workflowInstanceID, tableName);
@@ -538,20 +563,29 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 									json.put("FORM_NAME", "STD 682 Overtime Distributed");
 									json.put("UNIQUE_FIELD", "100030476");
 									json.put("UNIQUE_FIELD_COLUMN","EMPL_ID");
+									json.put("WORKFLOW_INSTANCE_ID", workflowInstanceID);
 									json.put("DATA_MAP", dataMapTest);
 									
 									//On-Prem
 									String dbServiceUrl = "https://myformstst.fullerton.edu/bin/dbSaveforCloud";
+									
+									log.info("Pushpa dbServiceUrl =" +dbServiceUrl);
+									log.error("Pushpa dbServiceUrl =" +dbServiceUrl);
+									log.debug("Pushpa dbServiceUrl ="+dbServiceUrl);
 
 									CloseableHttpClient client = HttpClients.createDefault();
 									HttpPost post = new HttpPost(dbServiceUrl);
 									post.addHeader("Content-Type", "application/json");
 									post.setEntity(new StringEntity(json.toString()));
 									
-									log.info("Pushpa : {}", post);
+									log.info("Pushpa Json:=}" +json.toString());
+									log.error("Pushpa Json:=}"+ json.toString());
+									log.debug("Pushpa Json: =" +json.toString());
 
 									CloseableHttpResponse response = client.execute(post);
-									log.info("DB Service Response: {}", response.getStatusLine());
+									log.info("DB Service Response: =" + response.getStatusLine());
+									log.error("DB Service Response: ="+ response.getStatusLine());
+									log.debug("DB Service Response: ="+ response.getStatusLine());
 									client.close();
 								//}
 
@@ -575,19 +609,11 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 										+ Arrays.toString(e.getStackTrace()));
 							}
 						}
-						if (conn != null) {
-							try {
-								conn.close();
-							} catch (SQLException e) {
-								log.error("SQLException from Finally Block from CSUFSTD682OvertimeDistributedDB="
-										+ Arrays.toString(e.getStackTrace()));
-							}
-
-						}
+						
 					}
 
 				}
 			}
 		}
 	}
-}
+//}
