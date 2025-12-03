@@ -365,9 +365,19 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 								managerComment = eElement.getElementsByTagName("manager_comment").item(0)
 										.getTextContent();*/
 								dataMapTest = new LinkedHashMap<String, Object>();
-								dataMapTest.put("EMPL_ID", "100030476");
-								dataMapTest.put("EMPL_RCD", "1");
-								dataMapTest.put("CHRS_ID", "899752547");
+								
+								date1 = eElement.getElementsByTagName("date1").item(0).getTextContent();
+								Object date1Obj = null;
+								if (date1 != null && date1 != "") {
+									Date date1New = Date.valueOf(date1);
+									date1Obj = date1New;
+								}
+							
+								
+								dataMapTest.put("EMPL_ID", emplId);
+								dataMapTest.put("EMPL_RCD", emplRcd);
+								dataMapTest.put("CHRS_ID", chrsId);
+								dataMapTest.put("DATE1", date1Obj);
 								
 								
 								log.info("Pushpa dataMapTest=" + dataMapTest.size());
