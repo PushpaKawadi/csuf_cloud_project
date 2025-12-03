@@ -1,4 +1,4 @@
-package com.thoughtfocus.aem.csu.core.servlets;
+package com.csuf.cloud.core.servlets;
 
 import java.io.IOException;
 import java.time.LocalDate;
