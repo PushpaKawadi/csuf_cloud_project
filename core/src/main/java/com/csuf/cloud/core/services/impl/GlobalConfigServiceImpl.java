@@ -47,6 +47,9 @@ public class GlobalConfigServiceImpl implements GlobalConfigService {
 	@Override
 	public ResourceResolver getResourceResolver() throws LoginException {
         ResourceResolver resolver = null;
+        
+        log.info("Anagha Resolver========"+resolverFactory.getServiceResourceResolver(
+				Collections.singletonMap(ResourceResolverFactory.SUBSERVICE, (Object) SUB_SERVICE_NAME)));
 		return resolver = resolverFactory.getServiceResourceResolver(
 				Collections.singletonMap(ResourceResolverFactory.SUBSERVICE, (Object) SUB_SERVICE_NAME));
 	}

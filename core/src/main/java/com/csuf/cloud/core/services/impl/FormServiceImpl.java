@@ -85,18 +85,28 @@ public class FormServiceImpl implements FormService {
 
 	@Override
 	public Document getDoR(String dataXml, String formPath, String fileName) throws IOException {
+		log.info("Anagha Inside getDoR method");
 
 		Resource resource;
 		Document dorDocument = null;
 
 		try (ResourceResolver resourceResolver = globalConfig.getResourceResolver()) {
+			log.info("Anagha getDor="+resourceResolver);
 			resource = resourceResolver.getResource(formPath);
+			log.info("Anagha resource="+resource);
+
 			DoROptions dorOptions = new DoROptions();
 			dorOptions.setData(dataXml);
 			dorOptions.setFormResource(resource);
 			java.util.Locale locale = new java.util.Locale("en");
 			dorOptions.setLocale(locale);
+			
+			log.info("Anagha dorOptions="+dorOptions);
+
+			
 			DoRResult dorResult = dorService.render(dorOptions);
+			
+			log.info("Anagha dorResult="+dorResult);
 			byte[] fileBytes = dorResult.getContent();
 			dorDocument = new Document(fileBytes);
 		} catch (LoginException | DoRGenerationException e) {

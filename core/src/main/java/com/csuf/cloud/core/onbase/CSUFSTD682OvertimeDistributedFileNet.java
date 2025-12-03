@@ -99,7 +99,7 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 		log.info("OnBase payloadPath=" + payloadPath);
 		ResourceResolver resolver = workflowSession.adaptTo(ResourceResolver.class);
 		if (StringUtils.isNotBlank(payloadPath)) {
-			log.info("OnBase payloadPath inside method=" + payloadPath);
+			
 			InputStream is = null;
 			try {
 				is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, payloadPath, "Data.xml");
@@ -124,7 +124,7 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 						}
 					}
 					String xml = XMLUtils.prettyPrintAsString(doc);
-					log.info("OnBase payloadPath xml=" + xml);
+					
 					dorDocument = formService.getDoR(xml, FORM_PATH, DOR_FILE_NAME);
 					
 					log.info("OnBase payloadPath dorDocument=" + dorDocument);
