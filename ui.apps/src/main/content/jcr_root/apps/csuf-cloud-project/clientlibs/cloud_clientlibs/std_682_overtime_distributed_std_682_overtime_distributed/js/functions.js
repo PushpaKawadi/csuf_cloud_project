@@ -1412,9 +1412,12 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_ManagerSigna
                     }).replace(/[^ -~]/g, ' ');
                     var dateObject = new Date(dateString);
                     var curyear = dateObject.getFullYear();
-                    var curyearMonth = dateObject.getMonth() + 1;
-                    var curyearDay = dateObject.getDate();
+                    //var curyearMonth = dateObject.getMonth() + 1;
+                    //var curyearDay = dateObject.getDate();
+					var curyearMonth = String(dateObject.getMonth() + 1).padStart(2, '0');
+                    var curyearDay = String(dateObject.getDate()).padStart(2, '0');	
                     var d = (curyear + "-" + curyearMonth + "-" + curyearDay);
+					console.log(d);
                     manager_date.value = d;
                     manager_signature.enabled = false;
                 } else {
@@ -1519,12 +1522,15 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_Internationa
 					alert("dateString = "+dateString);
                     var dateObject = new Date(dateString);
                     var curyear = dateObject.getFullYear();
-                    var curyearMonth = dateObject.getMonth() + 1;
-                    var curyearDay = dateObject.getDate();
+                    //var curyearMonth = dateObject.getMonth() + 1;
+                    //var curyearDay = dateObject.getDate();
+					
+					var curyearMonth = String(dateObject.getMonth() + 1).padStart(2, '0');
+                    var curyearDay = String(dateObject.getDate()).padStart(2, '0');	
+					
                     var d = (curyear + "-" + curyearMonth + "-" + curyearDay);
-					alert("test="+d);
+					console.log(d);
                     time_keeper_date.value = d;
-					alert("time_keeper_date.value="+time_keeper_date.value);
                     time_keeper_signature.enabled = false;
                 } else {
                     time_keeper_date.enabled = false;
@@ -1609,9 +1615,12 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_StudentSigna
                     }).replace(/[^ -~]/g, ' ');
                     var dateObject = new Date(dateString);
                     var curyear = dateObject.getFullYear();
-                    var curyearMonth = dateObject.getMonth() + 1;
-                    var curyearDay = dateObject.getDate();
+                    //var curyearMonth = dateObject.getMonth() + 1;
+                    //var curyearDay = dateObject.getDate();
+					var curyearMonth = String(dateObject.getMonth() + 1).padStart(2, '0');
+                    var curyearDay = String(dateObject.getDate()).padStart(2, '0');	
                     var d = (curyear + "-" + curyearMonth + "-" + curyearDay);
+					console.log(d);
                     student_date.value = d;
                     student_signature.enabled = false;
                 } else {
