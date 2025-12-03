@@ -66,9 +66,9 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 		ResourceResolver resolver = workflowSession.adaptTo(ResourceResolver.class);
 		String payloadPath = workItem.getWorkflowData().getPayload().toString();
 		
-		log.error("Pushpa xmlNode=" + payloadPath);
+		
 		log.info("Pushpa xmlNode=" + payloadPath);
-		log.debug("Pushpa xmlNode=" + payloadPath);
+
 		
 		
 		//DatabaseUtils dbUtil = new DatabaseUtils();
@@ -159,16 +159,11 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 		LinkedHashMap<String, Object> dataMapFormInfo = null;
 		LinkedHashMap<String, Object> dataMapTest = null;
 		Resource xmlNode = resolver.getResource(payloadPath);
+		log.info("Pushpa xmlNode=" + xmlNode);
 		Iterator<Resource> xmlFiles = xmlNode.listChildren();
 		
-		log.error("Pushpa xmlNode=" + xmlNode);
-		log.info("Pushpa xmlNode=" + xmlNode);
-		log.debug("Pushpa xmlNode=" + xmlNode);
-
-		
-		log.error("Pushpa xmlFiles=" + xmlFiles);
 		log.info("Pushpa xmlFiles=" + xmlFiles);
-		log.debug("Pushpa xmlFiles=" + xmlFiles);
+		
 		
 		//String dataSourceVal = globalConfigFilenetService.getAEMFormsDatabaseSource();
 		//conn = jdbcConnectionService.getDBConn(dataSourceVal);
@@ -178,17 +173,14 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 				workflowInstanceID = workItem.getWorkflow().getId();
 				Resource attachmentXml = xmlFiles.next();
 				String filePath = attachmentXml.getPath();
-				log.error("Pushpa Filepath=" + filePath);
+				
 				log.info("Pushpa Filepath=" + filePath);
-				log.debug("Pushpa Filepath=" + filePath);
 
 				if (filePath.contains("Data.xml")) {
 					filePath = attachmentXml.getPath().concat("/jcr:content");
 					Node subNode = resolver.getResource(filePath).adaptTo(Node.class);
-					log.error("Pushpa subNode=" + subNode);
+					
 					log.info("Pushpa subNode=" + subNode);
-					log.debug("Pushpa subNode=" + subNode);
-
 					
 					try {
 						is = subNode.getProperty("jcr:data").getBinary().getStream();
@@ -232,9 +224,9 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 								
 								chrsId = eElement.getElementsByTagName("chrsId").item(0).getTextContent();
 								
-								log.error("Pushpa emplId=" + emplId);
+								
 								log.info("Pushpa emplId=" + emplId);
-								log.debug("Pushpa emplId=" + emplId);
+								
 
 								/*employeeLastname = eElement.getElementsByTagName("employee_last_name").item(0)
 										.getTextContent();
@@ -372,17 +364,14 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 								managerDate = eElement.getElementsByTagName("manager_date").item(0).getTextContent();
 								managerComment = eElement.getElementsByTagName("manager_comment").item(0)
 										.getTextContent();*/
-								
+								dataMapTest = new LinkedHashMap<String, Object>();
 								dataMapTest.put("EMPL_ID", "100030476");
 								dataMapTest.put("EMPL_RCD", "1");
 								dataMapTest.put("CHRS_ID", "899752547");
 								
 								
-								log.error("Pushpa dataMapTest=" + dataMapTest.size());
 								log.info("Pushpa dataMapTest=" + dataMapTest.size());
-								log.debug("Pushpa dataMapTest=" + dataMapTest.size());
-								
-
+							
 								/*dataMapFormInfo = new LinkedHashMap<String, Object>();
 								dataMapFormInfo.put("CASE_ID", "");
 								dataMapFormInfo.put("EMPL_ID", emplId);
@@ -578,22 +567,19 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 									String dbServiceUrl = "https://myformstst.fullerton.edu/bin/dbSaveforCloud";
 									
 									log.info("Pushpa dbServiceUrl =" +dbServiceUrl);
-									log.error("Pushpa dbServiceUrl =" +dbServiceUrl);
-									log.debug("Pushpa dbServiceUrl ="+dbServiceUrl);
+									
 
 									CloseableHttpClient client = HttpClients.createDefault();
 									HttpPost post = new HttpPost(dbServiceUrl);
 									post.addHeader("Content-Type", "application/json");
 									post.setEntity(new StringEntity(json.toString()));
 									
-									log.info("Pushpa Json:=}" +json.toString());
-									log.error("Pushpa Json:=}"+ json.toString());
-									log.debug("Pushpa Json: =" +json.toString());
+									log.info("Pushpa Json:=" +json.toString());
+									
 
 									CloseableHttpResponse response = client.execute(post);
 									log.info("DB Service Response: =" + response.getStatusLine());
-									log.error("DB Service Response: ="+ response.getStatusLine());
-									log.debug("DB Service Response: ="+ response.getStatusLine());
+									
 									client.close();
 								//}
 
@@ -601,11 +587,11 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 						}
 
 					} catch (SAXException e) {
-						log.error("SAXException=" + Arrays.toString(e.getStackTrace()));
+						log.error("SAXException=" + e);
 
 					} catch (Exception e) {
 						log.error(
-								"Exception From CSUFSTD682OvertimeDistributedDB=" + Arrays.toString(e.getStackTrace()));
+								"Exception From CSUFSTD682OvertimeDistributedDB=" + e);
 					}
 
 					finally {
@@ -614,7 +600,7 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 								is.close();
 							} catch (Exception e) {
 								log.error("Exception from Finally Block from CSUFSTD682OvertimeDistributedDB="
-										+ Arrays.toString(e.getStackTrace()));
+										+ e);
 							}
 						}
 						
