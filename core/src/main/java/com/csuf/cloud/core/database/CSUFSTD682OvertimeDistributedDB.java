@@ -537,7 +537,7 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 									json.put("TABLE_NAME", "AEM_STD682_OVERTIME");
 									json.put("FORM_NAME", "STD 682 Overtime Distributed");
 									json.put("UNIQUE_FIELD", "100030476");
-									json.put("UNIQUE_FIELD_COLUMN":"EMPL_ID");
+									json.put("UNIQUE_FIELD_COLUMN","EMPL_ID");
 									json.put("DATA_MAP", dataMapTest);
 									
 									//On-Prem
