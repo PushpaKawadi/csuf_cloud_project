@@ -1,4 +1,4 @@
-package com.csuf.cloud.core.filenet;
+package com.csuf.cloud.core.onbase;
 
 import java.io.*;
 import java.net.HttpURLConnection;

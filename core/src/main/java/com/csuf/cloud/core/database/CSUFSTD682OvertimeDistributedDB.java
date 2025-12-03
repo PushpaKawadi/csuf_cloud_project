@@ -228,7 +228,7 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 								log.info("Pushpa emplId=" + emplId);
 								
 
-								/*employeeLastname = eElement.getElementsByTagName("employee_last_name").item(0)
+								employeeLastname = eElement.getElementsByTagName("employee_last_name").item(0)
 										.getTextContent();
 
 								employeeFirstname = eElement.getElementsByTagName("employee_first_name").item(0)
@@ -251,7 +251,7 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 										.getTextContent();
 								
 								
-								reasonForExtraHours = eElement.getElementsByTagName("reason_for_extra_hours").item(0)
+								/*reasonForExtraHours = eElement.getElementsByTagName("reason_for_extra_hours").item(0)
 										.getTextContent();
 								totalHoursAuthorized1 = eElement.getElementsByTagName("total_hours_authorized1").item(0)
 										.getTextContent();
@@ -366,18 +366,25 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 										.getTextContent();*/
 								dataMapTest = new LinkedHashMap<String, Object>();
 								
-								date1 = eElement.getElementsByTagName("date1").item(0).getTextContent();
-								Object date1Obj = null;
-								if (date1 != null && date1 != "") {
-									Date date1New = Date.valueOf(date1);
-									date1Obj = date1New;
-								}
+								
 							
 								
 								dataMapTest.put("EMPL_ID", emplId);
 								dataMapTest.put("EMPL_RCD", emplRcd);
 								dataMapTest.put("CHRS_ID", chrsId);
-								dataMapTest.put("DATE1", date1Obj);
+								dataMapTest.put("CHRS_ID", chrsId);
+								dataMapTest.put("CHRS_ID", chrsId);
+								dataMapTest.put("CHRS_ID", chrsId);
+								dataMapTest.put("EMP_LAST_NAME", employeeLastname);
+								dataMapTest.put("EMP_FRST_NAME", employeeFirstname);
+								dataMapTest.put("EMP_M_NAME", employeeMiddlename);
+								dataMapTest.put("POSITION_NUMBER", positionNumber);
+								dataMapTest.put("CBID", cbid);
+								dataMapTest.put("ORG_UNIT", organizationUnit);
+								dataMapTest.put("PAY_PRD_MONTH", payPeriodMonth);								
+								dataMapTest.put("PAY_PRD_YEAR", payPeriodYear);
+								
+								//dataMapTest.put("DATE1", date1Obj);
 								
 								
 								log.info("Pushpa dataMapTest=" + dataMapTest.size());

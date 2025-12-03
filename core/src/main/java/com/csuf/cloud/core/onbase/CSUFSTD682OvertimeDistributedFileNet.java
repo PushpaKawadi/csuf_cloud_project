@@ -1,7 +1,14 @@
-package com.csuf.cloud.core.filenet;
+package com.csuf.cloud.core.onbase;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.text.ParseException;
@@ -51,24 +58,32 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 	private static final String FORM_PATH = "/content/forms/af/std-682-overtime-distributed/std-682-overtime-distributed";
 	private static final String DOR_FILE_NAME = "STD682OvertimeDistributed.pdf";
 	private static final String FORM_NAME = "STD 682 Overtime Distributed";
+	private final String ONBASE_URL = "https://onbaseweb.fullerton.edu/aem/OnBaseDocumentUpload";
 
 	public void execute(WorkItem workItem, WorkflowSession workflowSession, MetaDataMap args)
 			throws com.adobe.granite.workflow.WorkflowException {
+		log.info("Entered OnBase Class");
 		Connection conn = null;
 		com.adobe.aemfd.docmanager.Document dorDocument = null;
-		String dataSourceVal = globalConfigFilenetService.getAEMFormsDatabaseSource();
-		conn = jdbcConnectionService.getDBConn(dataSourceVal);
+		/*
+		 * String dataSourceVal =
+		 * globalConfigFilenetService.getAEMFormsDatabaseSource(); conn =
+		 * jdbcConnectionService.getDBConn(dataSourceVal);
+		 */
 		String params = args.get("PROCESS_ARGS", String.class);
-		String filenet_onbase = globalConfigFilenetService.getfilenet_or_onbase_selection();
+		// String filenet_onbase =
+		// globalConfigFilenetService.getfilenet_or_onbase_selection();
 		String url = "";
 		Document doc = null;
 		String workflowInstanceId = workItem.getWorkflow().getId();
 
-		if (filenet_onbase.equalsIgnoreCase("filenet")) {
-			url = globalConfigFilenetService.getHRBenefitsFilenetURL();
-		} else if (filenet_onbase.equalsIgnoreCase("onbase")) {
-			url = globalConfigFilenetService.getOnbaseURL();
-		}
+		/*
+		 * if (filenet_onbase.equalsIgnoreCase("filenet")) { url =
+		 * globalConfigFilenetService.getHRBenefitsFilenetURL(); } else if
+		 * (filenet_onbase.equalsIgnoreCase("onbase")) { url =
+		 * globalConfigFilenetService.getOnbaseURL(); }
+		 */
+		url = ONBASE_URL;
 		JsonObject json = new JsonObject();
 
 		String firstName = "";
@@ -81,8 +96,10 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 		String year = "";
 
 		String payloadPath = workItem.getWorkflowData().getPayload().toString();
+		log.info("OnBase payloadPath=" + payloadPath);
 		ResourceResolver resolver = workflowSession.adaptTo(ResourceResolver.class);
 		if (StringUtils.isNotBlank(payloadPath)) {
+			log.info("OnBase payloadPath inside method=" + payloadPath);
 			InputStream is = null;
 			try {
 				is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, payloadPath, "Data.xml");
@@ -107,12 +124,15 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 						}
 					}
 					String xml = XMLUtils.prettyPrintAsString(doc);
+					log.info("OnBase payloadPath xml=" + xml);
 					dorDocument = formService.getDoR(xml, FORM_PATH, DOR_FILE_NAME);
+					
+					log.info("OnBase payloadPath dorDocument=" + dorDocument);
 					byte[] bytes = CSUFUtils.toByteArrayFromInputStream(dorDocument.getInputStream());
 					Base64.Encoder encoder = Base64.getEncoder();
 					String encodedDoc = encoder.encodeToString(bytes);
 
-					json.addProperty("FirstName", firstName);
+					/*json.addProperty("FirstName", firstName);
 					json.addProperty("LastName", lastName);
 					json.addProperty("CWID", cwid);
 					json.addProperty("CaseID", "");
@@ -123,35 +143,55 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 					json.addProperty("Year", year);
 					json.addProperty("DocType", "OT");
 					json.addProperty("Attachment", encodedDoc);
-					json.addProperty("AttachmentMimeType", "application/pdf");
+					json.addProperty("AttachmentMimeType", "application/pdf");*/
 				}
-				// log.info("JSON="+json.toString());
 				FilenetUtil fUtil = new FilenetUtil();
-				// onbase
-				if (filenet_onbase.equalsIgnoreCase("filenet")) {
-					String resultVal = fUtil.sendToFilenet(json.toString(), url, conn, FORM_NAME);
-					log.debug("Result Value returned from filenet in CSUFSTD682OvertimeDistributedFileNet : {}",
-							resultVal);
-				} else if (filenet_onbase.equalsIgnoreCase("onbase")) {
-					if (null != dorDocument) {
-						Element afBoundDataElement = XMLUtils.getParentNode(doc, "afBoundData");
-						if (null != afBoundDataElement && afBoundDataElement.hasChildNodes()) {
-							Element element = XMLUtils.getChildNode(afBoundDataElement, "STD682Overtime");
-							json = prepareOnbaseJson(element, params, dorDocument, fUtil);
-							String resultVal = fUtil.sendToOnbase(json.toString(), url, conn, FORM_NAME,
-									workflowInstanceId, "", "Final_DOR",
-									XMLUtils.getChildNodeContent(element, "empl_Id"), "",
-									XMLUtils.getChildNodeContent(element, "employee_first_name"),
-									XMLUtils.getChildNodeContent(element, "employee_last_name"));
-							log.debug("Result Value returned from onbase in STD682OvertsimeDistributedOnbase : {}",
-									resultVal);
-						} else {
-							log.error("afbound elements not found in STD682OvertsimeDistributedOnbase");
-						}
+				if (null != dorDocument) {
+					
+					log.info("Inside dorDocument=" + dorDocument);
+
+					Element afBoundDataElement = XMLUtils.getParentNode(doc, "afBoundData");
+					if (null != afBoundDataElement && afBoundDataElement.hasChildNodes()) {
+						Element element = XMLUtils.getChildNode(afBoundDataElement, "STD682Overtime");
+						json = prepareOnbaseJson(element, params, dorDocument, fUtil);
+						
+						
+						log.info("Onbase json=" + json.toString());
+						
+						
+						String resultVal = sendToOnBase(json.toString());
+						log.info("Result Value returned from onbase in STD682OvertsimeDistributedOnbase : {}",
+								resultVal);
+						
+						log.debug("Result Value returned from onbase in STD682OvertsimeDistributedOnbase : {}",
+								resultVal);
 					} else {
-						log.error("dorDocument is null in STD682OvertsimeDistributedOnbase");
+						log.error("afbound elements not found in STD682OvertsimeDistributedOnbase");
 					}
 				}
+
+				// log.info("JSON="+json.toString());
+				/*
+				 * FilenetUtil fUtil = new FilenetUtil(); if
+				 * (filenet_onbase.equalsIgnoreCase("filenet")) { String resultVal =
+				 * fUtil.sendToFilenet(json.toString(), url, conn, FORM_NAME); log.
+				 * debug("Result Value returned from filenet in CSUFSTD682OvertimeDistributedFileNet : {}"
+				 * , resultVal); } else if (filenet_onbase.equalsIgnoreCase("onbase")) { if
+				 * (null != dorDocument) { Element afBoundDataElement =
+				 * XMLUtils.getParentNode(doc, "afBoundData"); if (null != afBoundDataElement &&
+				 * afBoundDataElement.hasChildNodes()) { Element element =
+				 * XMLUtils.getChildNode(afBoundDataElement, "STD682Overtime"); json =
+				 * prepareOnbaseJson(element, params, dorDocument, fUtil); String resultVal =
+				 * fUtil.sendToOnbase(json.toString(), url, conn, FORM_NAME, workflowInstanceId,
+				 * "", "Final_DOR", XMLUtils.getChildNodeContent(element, "empl_Id"), "",
+				 * XMLUtils.getChildNodeContent(element, "employee_first_name"),
+				 * XMLUtils.getChildNodeContent(element, "employee_last_name")); log.
+				 * debug("Result Value returned from onbase in STD682OvertsimeDistributedOnbase : {}"
+				 * , resultVal); } else {
+				 * log.error("afbound elements not found in STD682OvertsimeDistributedOnbase");
+				 * } } else {
+				 * log.error("dorDocument is null in STD682OvertsimeDistributedOnbase"); } }
+				 */
 
 			} catch (Exception e) {
 				log.error("SQL Exception from Class Name: CSUFSTD682OvertimeDistributedFileNet"
@@ -167,14 +207,11 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 
 					}
 			}
-			if (conn != null) {
-				try {
-					conn.close();
-				} catch (SQLException e) {
-					log.error("SQLException from finally block for Class Name: CSUFSTD682OvertimeDistributedFileNet"
-							+ Arrays.toString(e.getStackTrace()));
-				}
-			}
+			/*
+			 * if (conn != null) { try { conn.close(); } catch (SQLException e) { log.
+			 * error("SQLException from finally block for Class Name: CSUFSTD682OvertimeDistributedFileNet"
+			 * + Arrays.toString(e.getStackTrace())); } }
+			 */
 
 		}
 
@@ -182,6 +219,9 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 
 	private JsonObject prepareOnbaseJson(Element eElement, String params,
 			com.adobe.aemfd.docmanager.Document dorDocument, FilenetUtil oUtil) throws IOException {
+		
+		log.info("Onbase prepareOnbaseJson method");
+		
 		String[] keyArray = { "CHRS_ID-8", "Employee_ID-8", "First_Name-8", "Last_Name-8",
 				"Doc_Type_-_Faculty_and_Staff-8", "SCO_Position_Number-8", "Month-1", "Unit-8", "Year-1" };
 		String monthSelected = XMLUtils.getChildNodeContent(eElement, "pay_period_month");
@@ -213,7 +253,102 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 		json.addProperty("attachmentMimeType", "application/pdf");
 		json.addProperty("attachmentType", "FinalDOR");
 		json.addProperty("Document_Type", "HR Faculty and Staff Payroll Documents");
+		
+		log.info("Onbase prepareOnbaseJson end="+json.toString());
+		
 		return json;
+	}
+
+	private String sendToOnBase(String responseJson) {
+		log.info("Inside sendToOnbase Class");
+		String resValue = null;
+		StringBuffer response = new StringBuffer();
+		URL url = null;
+
+		try {
+			String oURL = ONBASE_URL;
+			url = new URL(oURL);
+			log.info("URL Ok");
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+			resValue = "Failed";
+			log.error("MalformedURLException: {}", e.getMessage());
+		}
+
+		HttpURLConnection con = null;
+		try {
+			con = (HttpURLConnection) url.openConnection();
+			log.info("Connection Ok");
+		} catch (IOException e1) {
+			e1.printStackTrace();
+			resValue = "Failed";
+			log.error("IOException opening connection: {}", e1.getMessage());
+		}
+
+		try {
+			con.setRequestMethod("POST");
+			con.setRequestProperty("Content-Type", "application/json");
+			log.info("Request Ok");
+		} catch (ProtocolException e) {
+			e.printStackTrace();
+			resValue = "Failed";
+			log.error("ProtocolException: {}", e.getMessage());
+		}
+
+		con.setDoOutput(true);
+		try (OutputStream os = con.getOutputStream()) {
+			os.write(responseJson.getBytes("utf-8"));
+			os.close();
+			int responseCode = con.getResponseCode();
+			log.info("Response Ok" + responseCode);
+			log.info("POST Response Code to Onbase :: " + responseCode);
+
+			BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+			String inputLine;
+			while ((inputLine = in.readLine()) != null) {
+				response.append(inputLine);
+			}
+			in.close();
+			log.info("Response from Onbase =============" + response.toString());
+			log.error("Response from Onbase =============" + response.toString());
+
+			String responseToString = response.toString();
+			String docHandler = "";
+			int indexDocHandle = responseToString.indexOf("\"documentHandle\":") + "\"documentHandle\":".length();
+			int indexCheckDocHandler = responseToString.indexOf(",", indexDocHandle);
+			docHandler = responseToString.substring(indexDocHandle, indexCheckDocHandler);
+			docHandler = docHandler.replaceAll("\"", "");
+			log.debug("Response from Onbase to check DocumentHandle value =============" + docHandler);
+			log.error("Response from Onbase to check DocumentHandle value =============" + docHandler);
+
+			int indexIsSuccess = responseToString.indexOf("\"isSuccess\":") + "\"isSuccess\":".length();
+			int indexCheckFalse = responseToString.indexOf(",", indexIsSuccess);
+			String isSuccessValue = responseToString.substring(indexIsSuccess, indexCheckFalse);
+			log.debug("Response from Onbase to check isSuccess value =============" + isSuccessValue);
+
+			if (responseCode == HttpURLConnection.HTTP_OK) {
+				if (isSuccessValue.contains("false")) {
+					resValue = "Failed";
+					log.error("OnBase returned isSuccess:false - {}", response.toString());
+				} else {
+					resValue = "Success";
+					log.info("OnBase upload successful with docHandler: {}", docHandler);
+				}
+				log.info("Response from Onbase HTTP_OK =============" + response);
+			} else {
+				resValue = "Failed";
+				log.error("HTTP Error {} - {}", responseCode, response.toString());
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
+			resValue = "Failed";
+			log.error("IOException during request: {}", e1.getMessage());
+		} finally {
+			con.disconnect();
+		}
+
+		return resValue;
+
 	}
 
 }
