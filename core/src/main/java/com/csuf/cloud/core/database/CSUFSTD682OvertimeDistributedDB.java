@@ -58,11 +58,19 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 	@Override
 	public void execute(WorkItem workItem, WorkflowSession workflowSession, MetaDataMap processArguments)
 			throws WorkflowException {
-		Connection conn = null;
+		log.info("Pushpa Excecuting Database Cloud");
+		
+		/*Connection conn = null;
 		String tableName = "AEM_STD682_OVERTIME";
-		String formName = "STD 682 Overtime Distributed";
+		String formName = "STD 682 Overtime Distributed";*/
 		ResourceResolver resolver = workflowSession.adaptTo(ResourceResolver.class);
 		String payloadPath = workItem.getWorkflowData().getPayload().toString();
+		
+		log.error("Pushpa xmlNode=" + payloadPath);
+		log.info("Pushpa xmlNode=" + payloadPath);
+		log.debug("Pushpa xmlNode=" + payloadPath);
+		
+		
 		//DatabaseUtils dbUtil = new DatabaseUtils();
 		Document doc = null;
 		InputStream is = null;
