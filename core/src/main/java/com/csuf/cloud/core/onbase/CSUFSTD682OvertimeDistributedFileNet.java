@@ -222,11 +222,17 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 	private JsonObject prepareOnbaseJson(Element eElement, String params,
 			com.adobe.aemfd.docmanager.Document dorDocument, FilenetUtil oUtil) throws IOException {
 		
-		log.info("Onbase prepareOnbaseJson method");
+		log.info("Paghu123 prepareOnbaseJson method");
 		
 		String[] keyArray = { "CHRS_ID-8", "Employee_ID-8", "First_Name-8", "Last_Name-8",
 				"Doc_Type_-_Faculty_and_Staff-8", "SCO_Position_Number-8", "Month-1", "Unit-8", "Year-1" };
+		log.info("Raghu Keys= ");
+
+		
 		String monthSelected = XMLUtils.getChildNodeContent(eElement, "pay_period_month");
+		
+		log.info("Paghu123 monthSelected = " +monthSelected);
+
 		try {
 			Date date = new SimpleDateFormat("MMMM").parse(monthSelected);
 			Calendar cal = Calendar.getInstance();
@@ -247,6 +253,8 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 				XMLUtils.getChildNodeContent(eElement, "position_number"), monthSelected,
 				XMLUtils.getChildNodeContent(eElement, "organization_unit"),
 				XMLUtils.getChildNodeContent(eElement, "pay_period_year") };
+		
+		log.info("Paghu123 KeyValueArray = " +KeyValueArray.length);
 
 		JsonObject json = new JsonObject();
 		json.add("keywordTypes", oUtil.getKeywords(keyArray, KeyValueArray));
@@ -256,7 +264,7 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 		json.addProperty("attachmentType", "FinalDOR");
 		json.addProperty("Document_Type", "HR Faculty and Staff Payroll Documents");
 		
-		log.info("Onbase prepareOnbaseJson end="+json.toString());
+		log.info("Paghu123 Onbase prepareOnbaseJson end="+json.toString());
 		
 		return json;
 	}
