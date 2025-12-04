@@ -28,6 +28,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Arrays;
+import java.util.Base64;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -140,12 +141,14 @@ public class CSUFUtils {
 	}
 
 	public static byte[] toByteArrayFromInputStream(InputStream is) throws IOException {
+		log.info("India inside toByteArrayFromInputStream");
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		int reads = is.read();
 		while (reads != -1) {
 			baos.write(reads);
 			reads = is.read();
 		}
+		log.info("India end method= "+baos.toByteArray());
 		return baos.toByteArray();
 	}
 

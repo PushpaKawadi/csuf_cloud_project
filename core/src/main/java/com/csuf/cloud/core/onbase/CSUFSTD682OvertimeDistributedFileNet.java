@@ -258,11 +258,19 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 
 		JsonObject json = new JsonObject();
 		json.add("keywordTypes", oUtil.getKeywords(keyArray, KeyValueArray));
+		log.info("India keywordTypes = " );
+		
 		byte[] bytes = CSUFUtils.toByteArrayFromInputStream(dorDocument.getInputStream());
+		log.info("India bytes = " +bytes.length);
+		
 		json.addProperty("attachment", Base64.getEncoder().encodeToString(bytes));
+		log.info("India attachment = " +Base64.getEncoder().encodeToString(bytes));
+		
 		json.addProperty("attachmentMimeType", "application/pdf");
 		json.addProperty("attachmentType", "FinalDOR");
 		json.addProperty("Document_Type", "HR Faculty and Staff Payroll Documents");
+		
+		
 		
 		log.info("Paghu123 Onbase prepareOnbaseJson end="+json.toString());
 		
