@@ -264,7 +264,8 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 		log.info("India bytes = " +bytes.length);
 		
 		json.addProperty("attachment", Base64.getEncoder().encodeToString(bytes));
-		log.info("India attachment = " +Base64.getEncoder().encodeToString(bytes));
+		String aa = Base64.getEncoder().encodeToString(bytes);
+		log.info("India attachment = " +aa);
 		
 		json.addProperty("attachmentMimeType", "application/pdf");
 		json.addProperty("attachmentType", "FinalDOR");
