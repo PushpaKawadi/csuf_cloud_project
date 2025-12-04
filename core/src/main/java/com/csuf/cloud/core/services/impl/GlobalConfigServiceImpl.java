@@ -11,7 +11,6 @@ import javax.jcr.Session;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jackrabbit.commons.JcrUtils;
-import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
@@ -45,7 +44,6 @@ public class GlobalConfigServiceImpl implements GlobalConfigService {
 	@Reference
 	private ResourceResolverFactory resolverFactory;
 	
-	private SlingHttpServletRequest request;
 
 	//@Override
 	/*public ResourceResolver getResourceResolver() throws LoginException {
@@ -68,13 +66,17 @@ public class GlobalConfigServiceImpl implements GlobalConfigService {
     	
         Map<String, Object> params = new HashMap<>();
         params.put(ResourceResolverFactory.SUBSERVICE, SUB_SERVICE_NAME);
-
+        ResourceResolver resolver = null;
         log.info(" Requesting service resolver for subservice {}", SUB_SERVICE_NAME);
 
-        ResourceResolver resolver = resolverFactory.getServiceResourceResolver(params);
+        try {
+         resolver = resolverFactory.getServiceResourceResolver(params);
         log.info("resolver object -{}",resolver);
         //ResourceResolver resolver = request.getResourceResolver();
         log.info("Service resolver obtained successfully");
+        } catch(Exception e) {
+        	log.error("Not able to fetch resource reoslver {}--{}",e,e.getMessage());
+        }
 
         return resolver;
     }
