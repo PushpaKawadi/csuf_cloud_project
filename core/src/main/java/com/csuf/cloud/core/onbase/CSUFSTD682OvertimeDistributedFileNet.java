@@ -125,9 +125,10 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 					}
 					String xml = XMLUtils.prettyPrintAsString(doc);
 					
-					dorDocument = formService.getDoR(xml, FORM_PATH, DOR_FILE_NAME);
+					//dorDocument = formService.getDoR(xml, FORM_PATH, DOR_FILE_NAME);
+					dorDocument = formService.getDoROnBase(xml, FORM_PATH, DOR_FILE_NAME,resolver);
 					
-					log.info("OnBase payloadPath dorDocument=" + dorDocument);
+					log.info("Raghu OnBase payloadPath dorDocument=" + dorDocument);
 					byte[] bytes = CSUFUtils.toByteArrayFromInputStream(dorDocument.getInputStream());
 					Base64.Encoder encoder = Base64.getEncoder();
 					String encodedDoc = encoder.encodeToString(bytes);

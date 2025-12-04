@@ -114,6 +114,39 @@ public class FormServiceImpl implements FormService {
 		}
 		return dorDocument;
 	}
+	
+
+	public Document getDoROnBase(String dataXml, String formPath, String fileName,ResourceResolver resolver) throws IOException {
+		log.info("Raghu Inside getDoR method");
+
+		Resource resource;
+		Document dorDocument = null;
+
+		try (ResourceResolver resourceResolver = resolver) {
+			log.info("Raghu getDor="+resourceResolver);
+			resource = resourceResolver.getResource(formPath);
+			log.info("Raghu resource="+resource);
+
+			DoROptions dorOptions = new DoROptions();
+			dorOptions.setData(dataXml);
+			dorOptions.setFormResource(resource);
+			java.util.Locale locale = new java.util.Locale("en");
+			dorOptions.setLocale(locale);
+			
+			log.info("Raghu dorOptions="+dorOptions);
+
+			
+			DoRResult dorResult = dorService.render(dorOptions);
+			
+			log.info("Raghu dorResult="+dorResult);
+			byte[] fileBytes = dorResult.getContent();
+			dorDocument = new Document(fileBytes);
+		} catch (Exception e) {
+			log.error(Arrays.toString(e.getStackTrace()));
+		}
+		return dorDocument;
+	}
+
 
 	@Override
 	public Document getDoRFromPayloadPath(String payloadPath, String fileName) throws IOException {
@@ -379,5 +412,8 @@ public class FormServiceImpl implements FormService {
 		}
 		return payrollCalendarArray;
 	}
+
+
+	
 
 }

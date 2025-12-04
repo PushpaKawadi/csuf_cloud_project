@@ -2,11 +2,17 @@ package com.csuf.cloud.core.services;
 
 import java.io.IOException;
 
+import org.apache.sling.api.resource.ResourceResolver;
+
 import com.adobe.aemfd.docmanager.Document;
 import com.google.gson.JsonArray;
 
 public interface FormService {
 	Document getDoR(String dataXml, String formPath, String fileName) throws IOException;
+	
+	Document getDoROnBase(String dataXml, String formPath, String fileName, ResourceResolver resolver) throws IOException;
+	
+	
 
 	/**
 	 * @month takes 1 based index for month, for e.g. 5 for May
