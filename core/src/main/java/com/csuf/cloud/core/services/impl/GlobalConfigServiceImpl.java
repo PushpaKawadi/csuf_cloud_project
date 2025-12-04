@@ -44,15 +44,32 @@ public class GlobalConfigServiceImpl implements GlobalConfigService {
 	@Reference
 	private ResourceResolverFactory resolverFactory;
 
-	@Override
-	public ResourceResolver getResourceResolver() throws LoginException {
+	//@Override
+	/*public ResourceResolver getResourceResolver() throws LoginException {
         ResourceResolver resolver = null;
         
         log.info("Anagha Resolver========"+resolverFactory.getServiceResourceResolver(
 				Collections.singletonMap(ResourceResolverFactory.SUBSERVICE, (Object) SUB_SERVICE_NAME)));
 		return resolver = resolverFactory.getServiceResourceResolver(
 				Collections.singletonMap(ResourceResolverFactory.SUBSERVICE, (Object) SUB_SERVICE_NAME));
-	}
+	}*/
+	
+	 
+    @Override
+    public ResourceResolver getResourceResolver() throws LoginException {
+
+        Map<String, Object> authInfo = Collections.singletonMap(
+                ResourceResolverFactory.SUBSERVICE,
+                SUB_SERVICE_NAME
+        );
+
+        log.info("Anagha Requesting service resolver for subservice {}", SUB_SERVICE_NAME);
+
+        ResourceResolver resolver = resolverFactory.getServiceResourceResolver(authInfo);
+        log.info("Anagha Service resolver obtained successfully");
+
+        return resolver;
+    }
 
 	@Override
 	public Session getAdminSession() {

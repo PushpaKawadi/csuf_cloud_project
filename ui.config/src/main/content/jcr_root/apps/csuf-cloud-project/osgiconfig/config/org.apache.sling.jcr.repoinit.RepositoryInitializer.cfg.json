@@ -1,0 +1,12 @@
+{
+  "scripts": [
+    "create service user csuf-datawrite-user",
+    "create service user csuf-forms-reader",
+    "set ACL for csuf-datawrite-user",
+    "    allow jcr:read, jcr:write on /",
+    "end",
+    "set ACL for csuf-forms-reader",
+    "    allow jcr:read on /",
+    "end"
+  ]
+}
