@@ -249,6 +249,7 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 								
 								payPeriodYear = eElement.getElementsByTagName("pay_period_year").item(0)
 										.getTextContent();
+								date1 = eElement.getElementsByTagName("date1").item(0).getTextContent();
 								
 								
 								/*reasonForExtraHours = eElement.getElementsByTagName("reason_for_extra_hours").item(0)
