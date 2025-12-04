@@ -61,15 +61,19 @@ public class GlobalConfigServiceImpl implements GlobalConfigService {
     @Override
     public ResourceResolver getResourceResolver() throws LoginException {
 
-        Map<String, Object> authInfo = Collections.singletonMap(
+        /*Map<String, Object> authInfo = Collections.singletonMap(
                 ResourceResolverFactory.SUBSERVICE,
                 SUB_SERVICE_NAME
-        );
+        );*/
+    	
+        Map<String, Object> params = new HashMap<>();
+        params.put(ResourceResolverFactory.SUBSERVICE, SUB_SERVICE_NAME);
 
         log.info(" Requesting service resolver for subservice {}", SUB_SERVICE_NAME);
 
-        //ResourceResolver resolver = resolverFactory.getServiceResourceResolver(authInfo);
-        ResourceResolver resolver = request.getResourceResolver();
+        ResourceResolver resolver = resolverFactory.getServiceResourceResolver(params);
+        log.info("resolver object -{}",resolver);
+        //ResourceResolver resolver = request.getResourceResolver();
         log.info("Service resolver obtained successfully");
 
         return resolver;

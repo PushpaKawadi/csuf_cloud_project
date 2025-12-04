@@ -1,7 +1,10 @@
 {
   "scripts": [
     "create service user data with path /home/users/system/aem-csu",
-    "set ACL for data \n  allow jcr:all on / \nend",
+    "set ACL for data \n allow jcr:all on /content \n allow jcr:all on /apps \n",
+    "allow jcr:all on /var \n allow jcr:all on /conf \n allow jcr:all on /etc \n",
+    "allow jcr:all on /libs \n allow jcr:all on /home \n",
+    "\n end",
     "add data to group administrators"
   ]
 }
