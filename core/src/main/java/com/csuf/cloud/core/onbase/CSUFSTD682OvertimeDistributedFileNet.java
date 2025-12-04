@@ -132,6 +132,8 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 					byte[] bytes = CSUFUtils.toByteArrayFromInputStream(dorDocument.getInputStream());
 					Base64.Encoder encoder = Base64.getEncoder();
 					String encodedDoc = encoder.encodeToString(bytes);
+					
+					log.info("Ammu OnBase payloadPath dorDocument=" + encodedDoc);
 
 					/*json.addProperty("FirstName", firstName);
 					json.addProperty("LastName", lastName);
@@ -155,8 +157,7 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 					if (null != afBoundDataElement && afBoundDataElement.hasChildNodes()) {
 						Element element = XMLUtils.getChildNode(afBoundDataElement, "STD682Overtime");
 						json = prepareOnbaseJson(element, params, dorDocument, fUtil);
-						
-						
+					
 						log.info("Pushpa Onbase json=" + json.toString());
 						
 						
