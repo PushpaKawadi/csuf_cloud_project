@@ -383,11 +383,18 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 								dataMapTest.put("ORG_UNIT", organizationUnit);
 								dataMapTest.put("PAY_PRD_MONTH", payPeriodMonth);								
 								dataMapTest.put("PAY_PRD_YEAR", payPeriodYear);
+								Object date1Obj = null;
+								if (date1 != null && date1 != "") {
+									Date date1New = Date.valueOf(date1);
+									date1Obj = date1New;
+								}
+								dataMapTest.put("DATE1", date1Obj);
 								
-								//dataMapTest.put("DATE1", date1Obj);
+								log.info("Chaitnya dataMapTest1=" + dataMapTest.get("DATE1"));
+								log.info("Chaitnya dataMapTest2=" + dataMapTest.get("DATE1").toString());
+								log.info("Chaitnya dataMapTest3=" + dataMapTest.get("EMPL_ID"));
+
 								
-								
-								log.info("Pushpa dataMapTest=" + dataMapTest.size());
 							
 								/*dataMapFormInfo = new LinkedHashMap<String, Object>();
 								dataMapFormInfo.put("CASE_ID", "");
