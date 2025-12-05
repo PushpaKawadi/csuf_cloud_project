@@ -170,8 +170,8 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 						log.info("Bengaluru Onbase json=" + json.toString());
 						
 						
-						//String resultVal = sendToOnBase(json.toString());
-						String resultVal = "";
+						String resultVal = sendToOnBase(json.toString());
+						//String resultVal = "";
 						log.info("Bengaluru Result Value returned from onbase in STD682OvertsimeDistributedOnbase : {}",
 								resultVal);
 					} else {
@@ -268,19 +268,19 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 		log.info("Bengaluru bytes = " +bytes.length);
 		
 		json.addProperty("attachment", Base64.getEncoder().encodeToString(bytes));
-		String aa = Base64.getEncoder().encodeToString(bytes);
-		log.info("Bengaluru attachment = " +aa);
+		//String aa = Base64.getEncoder().encodeToString(bytes);
+		//log.info("Bengaluru attachment = " +aa);
 		
 		json.addProperty("attachmentMimeType", "application/pdf");
 		json.addProperty("attachmentType", "FinalDOR");
 		json.addProperty("Document_Type", "HR Faculty and Staff Payroll Documents");
 		
-		log.info("Bengaluru Onbase prepareOnbaseJson end="+json.toString());
+		//log.info("Bengaluru Onbase prepareOnbaseJson end="+json.toString());
 		
 		return json;
 	}
 
-	private String sendToOnBase123(String responseJson) {
+	private String sendToOnBase(String responseJson) {
 		log.info("Inside sendToOnbase Class");
 		String resValue = null;
 		StringBuffer response = new StringBuffer();
