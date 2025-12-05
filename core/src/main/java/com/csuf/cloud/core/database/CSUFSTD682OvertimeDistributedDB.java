@@ -391,6 +391,8 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 								}
 								dataMapTest.put("DATE1", date1Obj);
 								
+								
+								
 								log.info("Chaitnya dataMapTest1=" + dataMapTest.get("DATE1"));
 								log.info("Chaitnya dataMapTest2=" + dataMapTest.get("DATE1").toString());
 								log.info("Chaitnya dataMapTest3=" + dataMapTest.get("EMPL_ID"));
@@ -587,7 +589,7 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 									json.put("UNIQUE_FIELD_COLUMN","EMPL_ID");
 									json.put("WORKFLOW_INSTANCE_ID", workflowInstanceID);
 									json.put("DATA_MAP", dataMapTest);
-									
+									json.put("DATE_FIELDS", "DATE1");
 									//On-Prem
 									String dbServiceUrl = "https://myformstst.fullerton.edu/bin/dbSaveforCloud";
 									
