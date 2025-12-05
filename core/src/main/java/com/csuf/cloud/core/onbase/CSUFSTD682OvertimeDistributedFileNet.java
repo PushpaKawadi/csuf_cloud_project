@@ -170,8 +170,8 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 						log.info("Bengaluru Onbase json=" + json.toString());
 						
 						
-						String resultVal = sendToOnBase(json.toString());
-						//String resultVal = "";
+						//String resultVal = sendToOnBase(json.toString());
+						String resultVal = "";
 						log.info("Bengaluru Result Value returned from onbase in STD682OvertsimeDistributedOnbase : {}",
 								resultVal);
 					} else {
