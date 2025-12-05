@@ -128,13 +128,12 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 					//dorDocument = formService.getDoR(xml, FORM_PATH, DOR_FILE_NAME);
 					dorDocument = formService.getDoROnBase(xml, FORM_PATH, DOR_FILE_NAME,resolver);
 					
-					log.info("Raghu OnBase payloadPath dorDocument=" + dorDocument);
+					log.info("Bengaluru OnBase payloadPath dorDocument=" + dorDocument);
 					byte[] bytes = CSUFUtils.toByteArrayFromInputStream(dorDocument.getInputStream());
 					Base64.Encoder encoder = Base64.getEncoder();
 					String encodedDoc = encoder.encodeToString(bytes);
 					
-					log.info("Ammu OnBase payloadPath dorDocument=" + encodedDoc);
-
+					
 					/*json.addProperty("FirstName", firstName);
 					json.addProperty("LastName", lastName);
 					json.addProperty("CWID", cwid);
@@ -151,22 +150,19 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 				FilenetUtil fUtil = new FilenetUtil();
 				if (null != dorDocument) {
 					
-					log.info("Inside dorDocument=" + dorDocument);
+					log.info("Bengaluru Inside dorDocument=" + dorDocument);
 
 					Element afBoundDataElement = XMLUtils.getParentNode(doc, "afBoundData");
 					if (null != afBoundDataElement && afBoundDataElement.hasChildNodes()) {
 						Element element = XMLUtils.getChildNode(afBoundDataElement, "STD682Overtime");
 						json = prepareOnbaseJson(element, params, dorDocument, fUtil);
 					
-						log.info("Pushpa Onbase json=" + json.toString());
+						log.info("Bengaluru Onbase json=" + json.toString());
 						
 						
 						//String resultVal = sendToOnBase(json.toString());
 						String resultVal = "";
-						log.info("Result Value returned from onbase in STD682OvertsimeDistributedOnbase : {}",
-								resultVal);
-						
-						log.debug("Result Value returned from onbase in STD682OvertsimeDistributedOnbase : {}",
+						log.info("Bengaluru Result Value returned from onbase in STD682OvertsimeDistributedOnbase : {}",
 								resultVal);
 					} else {
 						log.error("afbound elements not found in STD682OvertsimeDistributedOnbase");
@@ -197,8 +193,7 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 				 */
 
 			} catch (Exception e) {
-				log.error("SQL Exception from Class Name: CSUFSTD682OvertimeDistributedFileNet"
-						+ Arrays.toString(e.getStackTrace()));
+				log.error("Exception from Class Name: CSUFSTD682OvertimeDistributedFileNet"+ e);
 
 			} finally {
 				if (null != is)
@@ -223,16 +218,14 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 	private JsonObject prepareOnbaseJson(Element eElement, String params,
 			com.adobe.aemfd.docmanager.Document dorDocument, FilenetUtil oUtil) throws IOException {
 		
-		log.info("Paghu123 prepareOnbaseJson method");
+		log.info("Bengaluru prepareOnbaseJson method");
 		
 		String[] keyArray = { "CHRS_ID-8", "Employee_ID-8", "First_Name-8", "Last_Name-8",
 				"Doc_Type_-_Faculty_and_Staff-8", "SCO_Position_Number-8", "Month-1", "Unit-8", "Year-1" };
-		log.info("Raghu Keys= ");
-
 		
 		String monthSelected = XMLUtils.getChildNodeContent(eElement, "pay_period_month");
 		
-		log.info("Paghu123 monthSelected = " +monthSelected);
+		log.info("Bengaluru monthSelected = " +monthSelected);
 
 		try {
 			Date date = new SimpleDateFormat("MMMM").parse(monthSelected);
@@ -255,26 +248,24 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 				XMLUtils.getChildNodeContent(eElement, "organization_unit"),
 				XMLUtils.getChildNodeContent(eElement, "pay_period_year") };
 		
-		log.info("Paghu123 KeyValueArray = " +KeyValueArray.length);
+		log.info("Bengaluru KeyValueArray = " +KeyValueArray.length);
 
 		JsonObject json = new JsonObject();
 		json.add("keywordTypes", oUtil.getKeywords(keyArray, KeyValueArray));
-		log.info("India keywordTypes = " );
+		log.info("Bengaluru keywordTypes = " );
 		
 		byte[] bytes = CSUFUtils.toByteArrayFromInputStream(dorDocument.getInputStream());
-		log.info("India bytes = " +bytes.length);
+		log.info("Bengaluru bytes = " +bytes.length);
 		
 		json.addProperty("attachment", Base64.getEncoder().encodeToString(bytes));
 		String aa = Base64.getEncoder().encodeToString(bytes);
-		log.info("India attachment = " +aa);
+		log.info("Bengaluru attachment = " +aa);
 		
 		json.addProperty("attachmentMimeType", "application/pdf");
 		json.addProperty("attachmentType", "FinalDOR");
 		json.addProperty("Document_Type", "HR Faculty and Staff Payroll Documents");
 		
-		
-		
-		log.info("Paghu123 Onbase prepareOnbaseJson end="+json.toString());
+		log.info("Bengaluru Onbase prepareOnbaseJson end="+json.toString());
 		
 		return json;
 	}

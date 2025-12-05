@@ -117,15 +117,15 @@ public class FormServiceImpl implements FormService {
 	
 
 	public Document getDoROnBase(String dataXml, String formPath, String fileName,ResourceResolver resolver) throws IOException {
-		log.info("Raghu Inside getDoR method");
+		log.info("Bengaluru Inside getDoR method");
 
 		Resource resource;
 		Document dorDocument = null;
 
 		try (ResourceResolver resourceResolver = resolver) {
-			log.info("Raghu getDor="+resourceResolver);
+			log.info("Bengaluru getDor="+resourceResolver);
 			resource = resourceResolver.getResource(formPath);
-			log.info("Raghu resource="+resource);
+			log.info("Bengaluru resource="+resource);
 
 			DoROptions dorOptions = new DoROptions();
 			dorOptions.setData(dataXml);
@@ -133,12 +133,12 @@ public class FormServiceImpl implements FormService {
 			java.util.Locale locale = new java.util.Locale("en");
 			dorOptions.setLocale(locale);
 			
-			log.info("Raghu dorOptions="+dorOptions);
+			log.info("Bengaluru dorOptions="+dorOptions);
 
 			
 			DoRResult dorResult = dorService.render(dorOptions);
 			
-			log.info("Raghu dorResult="+dorResult);
+			log.info("Bengaluru dorResult="+dorResult);
 			byte[] fileBytes = dorResult.getContent();
 			dorDocument = new Document(fileBytes);
 		} catch (Exception e) {
