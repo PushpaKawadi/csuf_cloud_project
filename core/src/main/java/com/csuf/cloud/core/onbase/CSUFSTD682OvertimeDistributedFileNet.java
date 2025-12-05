@@ -128,11 +128,14 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 					//dorDocument = formService.getDoR(xml, FORM_PATH, DOR_FILE_NAME);
 					dorDocument = formService.getDoROnBase(xml, FORM_PATH, DOR_FILE_NAME,resolver);
 					
-					log.info("Bengaluru OnBase payloadPath dorDocument=" + dorDocument);
+					log.info("Pushpa Executing STD WF="+dorDocument);
 					byte[] bytes = CSUFUtils.toByteArrayFromInputStream(dorDocument.getInputStream());
+					log.info("Pushpa bytes="+bytes);
 					Base64.Encoder encoder = Base64.getEncoder();
+					log.info("Pushpa encoder="+encoder);
 					String encodedDoc = encoder.encodeToString(bytes);
-					
+					log.info("Pushpa encodedDoc="+encodedDoc);
+
 					
 					/*json.addProperty("FirstName", firstName);
 					json.addProperty("LastName", lastName);
