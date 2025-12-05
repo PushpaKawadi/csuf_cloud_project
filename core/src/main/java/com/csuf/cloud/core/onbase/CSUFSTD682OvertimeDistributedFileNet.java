@@ -18,6 +18,7 @@ import java.util.Base64;
 import java.util.Calendar;
 import java.util.Date;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.osgi.service.component.annotations.Component;
@@ -134,7 +135,13 @@ public class CSUFSTD682OvertimeDistributedFileNet implements WorkflowProcess {
 					Base64.Encoder encoder = Base64.getEncoder();
 					log.info("Pushpa encoder="+encoder);
 					String encodedDoc = encoder.encodeToString(bytes);
-					log.info("Pushpa encodedDoc="+encodedDoc);
+					
+					String first200 = encodedDoc.substring(0, Math.min(200, encodedDoc.length()));
+					log.info("Pushpa EncodedDoc start = " + first200);
+					log.info("Encoded length = " + encodedDoc.length());
+					//log.info("Pushpa encodedDoc="+encodedDoc);
+					
+					
 
 					
 					/*json.addProperty("FirstName", firstName);
