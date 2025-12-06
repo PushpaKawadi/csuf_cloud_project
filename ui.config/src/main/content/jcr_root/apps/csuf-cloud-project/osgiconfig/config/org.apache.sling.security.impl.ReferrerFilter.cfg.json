@@ -2,7 +2,7 @@
     "allow.empty": true,
     "allow.hosts.regexp": [ ],
     "allow.hosts": [
-        "login.microsoftonline.com/82c0b871-335f-4b5c-9ed0-a4a23565a79b/saml2"
+        "login.microsoftonline.com"
     ],
     "filter.methods": [
         "POST"

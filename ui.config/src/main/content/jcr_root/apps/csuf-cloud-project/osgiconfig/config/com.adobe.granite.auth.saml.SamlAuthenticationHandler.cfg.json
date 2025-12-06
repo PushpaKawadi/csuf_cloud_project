@@ -1,5 +1,5 @@
 {
-    "path": [ "/content/csu", "/content/dam", "/content/forms"],
+    "path": "/",
     "idpCertAlias": "certAlias___1764886830665",
     "idpIdentifier": "https://sts.windows.net/82c0b871-335f-4b5c-9ed0-a4a23565a79b/",
     "idpUrl": "https://login.microsoftonline.com/82c0b871-335f-4b5c-9ed0-a4a23565a79b/saml2",
