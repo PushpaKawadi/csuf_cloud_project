@@ -88,6 +88,7 @@ public class CSUFSTD682OvertimeDistributedWFHistoryDB implements WorkflowProcess
 		String comments = "";
 		Timestamp stepCompleteTime = null;
 		Timestamp wfCompleteTime = null;
+		String processStepValue = "";
 
 		Resource xmlNode = resolver.getResource(payloadPath);
 		log.info("Vista xmlNode=" + xmlNode);
@@ -117,6 +118,7 @@ public class CSUFSTD682OvertimeDistributedWFHistoryDB implements WorkflowProcess
 					// increment it.
 			firstStr = firstStr.replaceAll(t1, String.valueOf(a1));
 			workItemID = wfInstanceID.concat(firstStr).concat("_").concat(secString);
+			processStepValue = "Before Assign Task";
 			log.info("Vista Final workItemID ==" + workItemID);
 		}
 
@@ -130,6 +132,7 @@ public class CSUFSTD682OvertimeDistributedWFHistoryDB implements WorkflowProcess
 					// it.
 			firstStr = firstStr.replaceAll(t1, String.valueOf(a1));
 			workItemID = wfInstanceID.concat(firstStr).concat("_").concat(secString);
+			processStepValue = "After Assign Task";
 		}
 
 		while (xmlFiles.hasNext()) {
@@ -307,6 +310,7 @@ public class CSUFSTD682OvertimeDistributedWFHistoryDB implements WorkflowProcess
 				
 				json.put("DB_CONNECTION", "AEMDBDEV");
 				json.put("TABLE_NAME", "AEM_WORKFLOW_HISTORY");
+				json.put("PROCESS_STEP_VAL", processStepValue);
 				//json.put("FORM_NAME", "STD 682 Overtime Distributed");
 				//json.put("UNIQUE_FIELD", "100030476");
 				//json.put("UNIQUE_FIELD_COLUMN","EMPL_ID");
