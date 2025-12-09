@@ -315,7 +315,7 @@ public class CSUFSTD682OvertimeDistributedWFHistoryDB implements WorkflowProcess
 				json.put("DATA_MAP", dataMap);
 				//json.put("DATE_FIELDS", "DATE1");
 				
-				String dbServiceUrl = "https://myformstst.fullerton.edu/bin/dbSaveforCloud";
+				String dbServiceUrl = "https://myformstst.fullerton.edu/bin/WFHistorySave";
 				
 				log.info("Pushpa dbServiceUrl =" +dbServiceUrl);
 				
