@@ -3,7 +3,7 @@
     "idpCertAlias": "certAlias___1764886830665",
     "idpIdentifier": "https://sts.windows.net/82c0b871-335f-4b5c-9ed0-a4a23565a79b/",
     "idpUrl": "https://login.microsoftonline.com/82c0b871-335f-4b5c-9ed0-a4a23565a79b/saml2",
-    "serviceProviderEntityId": "https://author-p161404-e1713869.adobeaemcloud.com/",
+    "serviceProviderEntityId": "https://author-p161404-e1713869.adobeaemcloud.com/ui#/aem/aem/start.html?appId=aemshell",
     "useEncryption": false,
     "createUser": true,
 	"userIDAttribute" : "emailaddress",
