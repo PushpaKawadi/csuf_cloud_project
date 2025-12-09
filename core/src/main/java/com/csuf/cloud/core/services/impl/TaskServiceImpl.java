@@ -1,7 +1,9 @@
 package com.csuf.cloud.core.services.impl;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -52,6 +54,9 @@ import com.csuf.cloud.core.services.WorkflowService;
 import com.csuf.cloud.core.utils.ArgumentParser;
 import com.csuf.cloud.core.utils.CSUFUtils;
 import com.csuf.cloud.core.utils.XMLUtils;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonParser;
+
 
 @Component(service = TaskService.class, immediate = true, property = {
 		Constants.SERVICE_DESCRIPTION + "=Task Service Implementation" })
@@ -1013,19 +1018,27 @@ public class TaskServiceImpl implements TaskService {
 			
 
 			CloseableHttpResponse response = client.execute(post);
-			log.info("DB Service Response: =" + response.getStatusLine());
+			log.info("Girija DB Service Response: =" + response.getStatusLine());
+			
+			 BufferedReader reader = new BufferedReader(
+		                new InputStreamReader(response.getEntity().getContent()));
+
+		        StringBuilder sb = new StringBuilder();
+		        String line;
+
+		        while ((line = reader.readLine()) != null) {
+		            sb.append(line);
+		        }
+
+		        JsonArray resultArray = JsonParser.parseString(sb.toString()).getAsJsonArray();
+		        log.info("Girija DB Service Response: =" +resultArray.size());
 			
 			client.close();
 		}catch(Exception e) {
 			log.error(Arrays.toString(e.getStackTrace()));
 		}
 		
-		String getTasksStmt = "select task_title, priority, task_description, assignee, "
-				+ "workflow_model, status, start_date, due_date, workflow_instance_id, " + "workitem_id, action_taken, "
-				+ "task_submit_comment, show_action_taken, show_comment, routes_data, "
-				+ "show_submit, show_save, show_reset from task_details WHERE status = 'ACTIVE' "
-				+ "and workflow_status = 'RUNNING' order by start_date desc";
-
+		
 		// log.debug("getTasks SQL : {}", getTasksStmt);
 		/*try (Connection connection = jdbcService.getInboxDBConnection();
 				PreparedStatement prStmt = connection.prepareStatement(getTasksStmt);
