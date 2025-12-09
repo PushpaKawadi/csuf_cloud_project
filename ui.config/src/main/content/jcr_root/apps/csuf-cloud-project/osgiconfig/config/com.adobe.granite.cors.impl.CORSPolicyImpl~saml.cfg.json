@@ -4,7 +4,7 @@
         "null"
     ],
     "allowedpaths": [
-        ".*/saml_login"
+        "/"
     ],
     "supportedmethods": [
         "POST"
