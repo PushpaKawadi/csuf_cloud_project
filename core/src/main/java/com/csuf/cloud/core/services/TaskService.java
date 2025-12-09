@@ -50,4 +50,7 @@ public interface TaskService {
 	String getAfPath(String workItemId);
 
 	boolean updateTaskDescription(String workflowInstanceId, String taskDescription);
+	
+	JsonArray getAllTasksCloud(Session currentUserSession);
+	
 }

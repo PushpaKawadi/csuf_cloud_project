@@ -24,6 +24,7 @@ import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
@@ -286,7 +287,7 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public JsonArray getAllTasks(Session currentUserSession) {
+	public JsonArray getAllTasksCloud(Session currentUserSession) {
 		String getTasksStmt = "select task_title, priority, task_description, assignee, "
 				+ "workflow_model, status, start_date, due_date, workflow_instance_id, " + "workitem_id, action_taken, "
 				+ "task_submit_comment, show_action_taken, show_comment, routes_data, "
@@ -995,6 +996,115 @@ public class TaskServiceImpl implements TaskService {
 			if (null != response)
 				response.close();
 		}
+		return null;
+	}
+	
+	@Override
+	public JsonArray getAllTasks(Session currentUserSession) {
+		String dbServiceUrl = "https://myformstst.fullerton.edu/bin/getMyTasksData";
+		log.info("Girija GetAllTask");
+		try {
+			CloseableHttpClient client = HttpClients.createDefault();
+			HttpPost post = new HttpPost(dbServiceUrl);
+			post.addHeader("Content-Type", "application/json");
+			//post.setEntity(new StringEntity(json.toString()));
+			
+			//log.info("Pushpa Json:=" +json.toString());
+			
+
+			CloseableHttpResponse response = client.execute(post);
+			log.info("DB Service Response: =" + response.getStatusLine());
+			
+			client.close();
+		}catch(Exception e) {
+			log.error(Arrays.toString(e.getStackTrace()));
+		}
+		
+		String getTasksStmt = "select task_title, priority, task_description, assignee, "
+				+ "workflow_model, status, start_date, due_date, workflow_instance_id, " + "workitem_id, action_taken, "
+				+ "task_submit_comment, show_action_taken, show_comment, routes_data, "
+				+ "show_submit, show_save, show_reset from task_details WHERE status = 'ACTIVE' "
+				+ "and workflow_status = 'RUNNING' order by start_date desc";
+
+		// log.debug("getTasks SQL : {}", getTasksStmt);
+		/*try (Connection connection = jdbcService.getInboxDBConnection();
+				PreparedStatement prStmt = connection.prepareStatement(getTasksStmt);
+				ResultSet resultSet = prStmt.executeQuery();) {
+			JsonArray jsonArray = new JsonArray();
+			// log.debug("before while loop : {}", LocalTime.now());
+			while (resultSet.next()) {
+				String assignee = resultSet.getString("assignee");
+				boolean isViewTaskAllowed = inboxService.isViewInboxTaskAllowed(currentUserSession, assignee);
+				if (!isViewTaskAllowed)
+					continue;
+				JsonObject jsonObj = new JsonObject();
+				jsonObj.addProperty("isViewTaskAllowed", String.valueOf(isViewTaskAllowed));
+				boolean isAssigneeAGroup = CSUFUtils.isAuthorizableAGroup(currentUserSession, assignee);
+				boolean isViewTaskDetailsAllowed = inboxService.isViewTaskDetailsAllowed(currentUserSession, assignee);
+				boolean isCurrentUserAdmin = inboxService.isCurrentUserAdmin(currentUserSession);
+				String currentUserId = inboxService.getCurrentUserId(currentUserSession);
+				jsonObj.addProperty("isCurrentUserAdmin", String.valueOf(isCurrentUserAdmin));
+				jsonObj.addProperty("isViewTaskDetailsAllowed", String.valueOf(isViewTaskDetailsAllowed));
+				jsonObj.addProperty("isAssigneeAGroup", String.valueOf(isAssigneeAGroup));
+				jsonObj.addProperty("currentUserId", currentUserId);
+				jsonObj.addProperty("task_title", resultSet.getString("task_title"));
+				jsonObj.addProperty("priority", resultSet.getString("priority"));
+				jsonObj.addProperty("task_description", resultSet.getString("task_description"));
+				jsonObj.addProperty("assignee", resultSet.getString("assignee"));
+				jsonObj.addProperty("workflow_model", resultSet.getString("workflow_model"));
+				jsonObj.addProperty("status", resultSet.getString("status"));
+				String startDate = resultSet.getString("start_date");
+
+				if (StringUtils.isNotBlank(startDate)) {
+					Date formattedStartDate = CSUFUtils.convertStringToDate(startDate, DATE_FORMAT_DB);
+					if (null != formattedStartDate) {
+						String finalStartDate = CSUFUtils.convertDateToString(formattedStartDate, DATE_FORMAT_US);
+						if (StringUtils.isNotBlank(finalStartDate)) {
+							jsonObj.addProperty("start_date",
+									StringUtils.isNotBlank(finalStartDate) ? finalStartDate : StringUtils.EMPTY);
+						}
+					}
+				}
+				String dueDate = resultSet.getString(DUE_DATE);
+				jsonObj.addProperty(DUE_DATE, StringUtils.isNotBlank(dueDate) ? dueDate : StringUtils.EMPTY);
+
+				String workItemId = resultSet.getString("workitem_id");
+				String actionTaken = null;
+				String workitemComment = null;
+				jsonObj.addProperty("workflow_instance_id", resultSet.getString("workflow_instance_id"));
+				jsonObj.addProperty("workitem_id", resultSet.getString("workitem_id"));
+				jsonObj.addProperty("action_taken", actionTaken);
+				jsonObj.addProperty("task_submit_comment", workitemComment);
+				jsonObj.addProperty("routes_data", resultSet.getString("routes_data"));
+
+				if (!processingConfig.dbType().equalsIgnoreCase("ORACLE")) {
+					jsonObj.addProperty("show_submit", String.valueOf(resultSet.getBoolean("show_submit")));
+					jsonObj.addProperty("show_save", String.valueOf(resultSet.getBoolean("show_save")));
+					jsonObj.addProperty("show_reset", String.valueOf(resultSet.getBoolean("show_reset")));
+					jsonObj.addProperty("show_action_taken", String.valueOf(resultSet.getBoolean("show_action_taken")));
+					jsonObj.addProperty("show_comment", String.valueOf(resultSet.getBoolean("show_comment")));
+				} else {
+					jsonObj.addProperty("show_submit",
+							String.valueOf(CSUFUtils.getBooleanEquivalent(resultSet.getString("show_submit"))));
+					jsonObj.addProperty("show_save",
+							String.valueOf(CSUFUtils.getBooleanEquivalent(resultSet.getString("show_save"))));
+					jsonObj.addProperty("show_reset",
+							String.valueOf(CSUFUtils.getBooleanEquivalent(resultSet.getString("show_reset"))));
+					jsonObj.addProperty("show_action_taken",
+							String.valueOf(CSUFUtils.getBooleanEquivalent(resultSet.getString("show_action_taken"))));
+					jsonObj.addProperty("show_comment",
+							String.valueOf(CSUFUtils.getBooleanEquivalent(resultSet.getString("show_comment"))));
+				}
+				jsonArray.add(jsonObj);
+
+				// log.debug("checkpoint 3 : {}", LocalTime.now());
+
+			}
+			// log.debug("after while loop : {}", LocalTime.now());
+			return jsonArray;
+		} catch (Exception e) {
+			//log.error(Arrays.toString(e.getStackTrace()));
+		}*/
 		return null;
 	}
 }
