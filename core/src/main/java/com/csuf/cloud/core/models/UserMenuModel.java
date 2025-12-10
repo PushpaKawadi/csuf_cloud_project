@@ -86,7 +86,7 @@ public class UserMenuModel {
 	@PostConstruct
 	public void init() {
         if (request != null) {
-            domain = request.getServerName();
+            domain = request.getScheme()+ "://" +request.getServerName();
         }
 
         session = request.getResourceResolver().adaptTo(Session.class);
