@@ -33,6 +33,7 @@ public class STD682OvertimeDistributedInboxReportModel {
 
 	@PostConstruct
 	protected void init() {
+		log.info("Pushpa Model");
 		try {
 			std682OvertimeDistributedReportJsonArray = taskService
 					.getTaskDetailsFromProcessingInstance("/bin/getInboxReport?workflowType=STD_682");

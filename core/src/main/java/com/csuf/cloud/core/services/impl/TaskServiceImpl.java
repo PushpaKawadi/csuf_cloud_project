@@ -977,17 +977,22 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public String getTaskDetailsFromProcessingInstance(String url) throws IOException {
+		log.info("Pushpa Task Details");
 		HttpGet get = null;
 		CloseableHttpResponse response = null;
 		try (CloseableHttpClient httpclient = HttpClients.createDefault();) {
 			get = new HttpGet(processingConfig.processingUrl().concat(url));
-			log.debug("url=" + url);
+			log.info("Pushpa Task Details="+processingConfig.processingUrl());
+			log.debug("Pushpa url=" + url);
 			String auth = new StringBuffer(processingConfig.userName()).append(":")
 					.append(processingConfig.userSecurity()).toString();
+			log.debug("Pushpa auth=" +auth);
 			byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.US_ASCII));
+			log.debug("Pushpa encodedAuth=" +encodedAuth);
 			String authHeader = "Basic " + new String(encodedAuth);
 			get.setHeader("AUTHORIZATION", authHeader);
 			response = httpclient.execute(get);
+			log.debug("Pushpa response=" +response.getStatusLine());
 			if (null != response && response.getStatusLine().getStatusCode() == 200) {
 				return EntityUtils.toString(response.getEntity());
 			}
