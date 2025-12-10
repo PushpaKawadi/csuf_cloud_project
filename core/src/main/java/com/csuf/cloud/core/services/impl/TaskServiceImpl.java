@@ -1007,7 +1007,7 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public JsonArray getAllTasks(Session currentUserSession) {
 		String dbServiceUrl = "https://myformstst.fullerton.edu/bin/getMyTasksData";
-		log.info("Girija GetAllTask");
+		log.info("GetAllTask");
 		try {
 			CloseableHttpClient client = HttpClients.createDefault();
 			HttpPost post = new HttpPost(dbServiceUrl);
@@ -1018,7 +1018,8 @@ public class TaskServiceImpl implements TaskService {
 			
 
 			CloseableHttpResponse response = client.execute(post);
-			log.info("Girija DB Service Response: =" + response.getStatusLine());
+			log.info("California DB Service Response: =" + response.getStatusLine());
+			
 			
 			 BufferedReader reader = new BufferedReader(
 		                new InputStreamReader(response.getEntity().getContent()));
@@ -1031,7 +1032,8 @@ public class TaskServiceImpl implements TaskService {
 		        }
 
 		        JsonArray resultArray = JsonParser.parseString(sb.toString()).getAsJsonArray();
-		        log.info("Girija DB Service Response: =" +resultArray.size());
+		        
+		        log.info("California value =" +resultArray);
 			
 			client.close();
 		}catch(Exception e) {
