@@ -1,0 +1,206 @@
+{
+  "scwReportViewersGroupList": [
+    "ARSC-Reviewers"
+  ],
+  "mppReportViewersGroupList": [
+    "HR-Reviewers"
+  ],
+  "staffReportViewersGroupList": [
+    "HR-Reviewers"
+  ],
+  "gcReportViewersGroupList": [
+    "Records-Office-Reviewers"
+  ],
+  "mmcReportViewersGroupList": [
+    "Records-Office-Reviewers"
+  ],
+  "tfpReportViewersGroupList": [
+    "Payroll - Reviewers"
+  ],
+  "npdsReportViewersGroupList": [
+    "HR-Compensation-Review"
+  ],
+  "npdmReportViewersGroupList": [
+    "HR-Compensation-Review"
+  ],
+  "efwReportViewersGroupList": [
+    "HRDI/Total Wellness Reviewers"
+  ],
+  "dfwReportViewersGroupList": [
+    "HRDI/Total Wellness Reviewers"
+  ],
+  "dptcReportViewersGroupList": [
+    "HRDI/Total Wellness Reviewers"
+  ],
+  "std682ReportViewersGroupList": [
+    "Payroll - Reviewers"
+  ],
+  "saefwReportViewersGroupList": [
+    "HRDI/Total Wellness Reviewers"
+  ],
+  "clrReportViewersGroupList": [
+    "HRDI/Total Wellness Reviewers"
+  ],
+  "pfaReportViewersGroupList": [
+    "HR-Compensation-Review"
+  ],
+  "panReportViewersGroupList": [
+    "HR-Compensation-Review"
+  ],
+  "cdReportViewersGroupList": [
+    "HRDI/Total Wellness Reviewers"
+  ],
+  "otsdReportViewersGroupList": [
+    "Payroll-Reviewers"
+  ],
+  "confTicketReportViewersGroupList": [
+    "Payroll - Reviewers"
+  ],
+  "manualcdReportViewersGroupList": [
+    "Payroll - Reviewers"
+  ],
+  "timebaseChangeRequestReportViewersGroupList": [
+    "HR-Compensation-Review"
+  ],
+  "miscPayrollReportViewersGroupList": [
+    "Payroll - Reviewers"
+  ],
+  "cataLeaveDonationReportViewersGroupList": [
+    "HRDI/Total Wellness Reviewers"
+  ],
+  "payPlanReportViewersGroupList": [
+    "HR-Compensation-Review"
+  ],
+  "doaReportViewersGroupList": [
+    "Payroll - Reviewers"
+  ],
+  "dockNoticeReportViewersGroupList": [
+    "Payroll - Reviewers"
+  ],
+  "specialConsultantTimesheetReportViewersGroupList": [
+    "Payroll - Reviewers"
+  ],
+  "hourlyINTTimesheetReportViewersGroupList": [
+    "Payroll - Reviewers"
+  ],
+  "studentTimesheetReportViewersGroupList": [
+    "Payroll - Reviewers"
+  ],
+  "appealsReportViewersGroupList": [
+    "Admissions Appeal Committee"
+  ],
+  "loaReportViewersGroupList": [
+    "Records-Office-Reviewers"
+  ],
+  "majorMinorReportViewersGroupList": [
+    "Records-Office-Reviewers"
+  ],
+  "lateAddsViewersGroupList": [
+    "Records-Office-Reviewers"
+  ],
+  "catalogYearViewersGroupList": [
+    "Records-Office-Reviewers"
+  ],
+  "facultyAdditionalEmploymentViewersGroupList": [
+    "HR-Unit-Reviewers"
+  ],
+  "petitionViewersGroupList": [
+    "Records-Office-Reviewers"
+  ],
+  "mppJustificationViewersGroupList": [
+    "HR-Compensation-Review"
+  ],
+  "facultyActionRequestViewersGroupList": [
+    "HR-Unit-Reviewers"
+  ],
+  "telecommutingAgreementViewersGroupList": [
+    "HR-Unit-Reviewers"
+  ],
+  "financeAccessRequestViewersGroupList": [
+    "HR-Unit-Reviewers"
+  ],
+  "finDOAViewersGroupList": [
+    "HR-Unit-Reviewers"
+  ],
+  "campusSolViewersGroupList": [
+    "HR-Unit-Reviewers"
+  ],
+  "hrARFViewersGroupList": [
+    "HR-Unit-Reviewers"
+  ],
+  "requestForExcessUnitsViewersGroupList": [
+    "ARSC-Reviewers"
+  ],
+  "prtbViewersGroupList": [
+    "HR-Unit-Reviewers"
+  ],
+  "ferpViewersGroupList": [
+    "HR-Unit-Reviewers"
+  ],
+  "sfsdViewersGroupList": [
+    "HR-Unit-Reviewers"
+  ],
+  "sftsViewersGroupList": [
+    "HR-Unit-Reviewers"
+  ],
+  "taSubTSViewersGroupList": [
+    "HR-Unit-Reviewers"
+  ],
+  "taSubAFViewersGroupList": [
+    "HR-Unit-Reviewers"
+  ],
+  "chairDirectorAFViewersGroupList": [
+    "HR-Unit-Reviewers"
+  ],
+  "cbeDeclarationViewersGroupList": [
+    "Records-Office-Reviewers"
+  ],
+  "taxFilingViewersGroupList": [
+    "Financial Aid Reviewers"
+  ],
+  "petViewersGroupList": [
+    "HR-Unit-Reviewers"
+  ],
+  "studentDependentVerificationViewersGroupList": [
+    "Financial Aid Reviewers"
+  ],
+  "familySizeCertificateViewersGroupList": [
+    "Financial Aid Reviewers"
+  ],
+  "citizenshipVerificationViewersGroupList": [
+    "Financial Aid Reviewers"
+  ],
+  "teachGrantRequirementCertViewersGroupList": [
+    "Financial Aid Reviewers"
+  ],
+  "summerLoanRequestViewersGroupList": [
+    "Financial Aid Reviewers"
+  ],
+  "studentNonFilerCertificationViewersGroupList": [
+    "Financial Aid Reviewers"
+  ],
+  "studentProjectedYearIncomeAppealViewersGroupList": [
+    "Financial Aid Reviewers"
+  ],
+  "federalDirectGradPlusLoanViewersGroupList": [
+    "Financial Aid Reviewers"
+  ],
+  "dependencyOverrideRenewalViewersGroupList": [
+    "Financial Aid Reviewers"
+  ],
+  "parentverificationofnonfilingletterViewersGroupList": [
+    "Financial Aid Reviewers"
+  ],
+  "parentnonfilercertificationViewersGroupList": [
+    "Financial Aid Reviewers"
+  ],
+  "dependencyOverrideAppealViewersGroupList": [
+    "Financial Aid Reviewers"
+  ],
+  "sectionChangeReportViewersGroupList": [
+    "ARSC-Reviewers"
+  ],
+  "requestforTimeConflictApprovalViewersGroupList": [
+    "ARSC-Reviewers"
+  ]
+}

@@ -1019,6 +1019,7 @@ public class TaskServiceImpl implements TaskService {
 
 			CloseableHttpResponse response = client.execute(post);
 			log.info("California DB Service Response: =" + response.getStatusLine());
+			log.info("Best: =" + response.getEntity().getContent());
 			
 			
 			 BufferedReader reader = new BufferedReader(
@@ -1033,7 +1034,7 @@ public class TaskServiceImpl implements TaskService {
 
 		        JsonArray resultArray = JsonParser.parseString(sb.toString()).getAsJsonArray();
 		        
-		        log.info("California value =" +resultArray);
+		        log.info("Best value =" +resultArray);
 			
 			client.close();
 		}catch(Exception e) {
