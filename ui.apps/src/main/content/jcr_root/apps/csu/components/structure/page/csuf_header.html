@@ -4,7 +4,7 @@
 <header class="fixed-top">
    <!-- Primary navbar -->
    <nav class="navbar navbar-expand-lg navbar-light new-header-bg justify-content-between">
-      <a class="navbar-brand" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/home.html">
+      <a class="navbar-brand" href="${userMenu.domain}/content/csu/us/en/home.html">
         <!--  <img class="new-header-logo" alt="newlogo" src="/content/dam/csu/csfu-logo-1280x1280.png"> -->
        <!-- <img class="new-header-logo" alt="newlogo" src="/content/dam/csu/CSUF-Generic-Logo.png">-->
         <!--   <img class="new-header-mobile-logo" alt="newlogo" src="/content/dam/csu/csfu-logo-48x48.png"> -->
@@ -48,416 +48,416 @@
       <div class="collapse navbar-collapse secondary-navbar-hide" id="slide-navbar-collapse">
          <ul class="navbar-nav mr-auto navbar-tabs">
             <li class="nav-item">
-               <a class="nav-link" id="pills-campusforms-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/home.html" role="tab">home</a>
+               <a class="nav-link" id="pills-campusforms-tab" href="${userMenu.domain}/content/csu/us/en/home.html" role="tab">home</a>
             </li>
             <li class="nav-divider"></li>
             <li class="nav-item" data-sly-test="${userMenu.userName != 'anonymous'}">
-               <a class="nav-link" id="pills-formscatalogue-tab"  href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/forms-catalog0.html" role="tab">my forms</a>
+               <a class="nav-link" id="pills-formscatalogue-tab"  href="${userMenu.domain}/content/csu/us/en/forms-catalog0.html" role="tab">my forms</a>
             </li>
             <li class="nav-divider"></li>
             <li class="nav-item" data-sly-test="${userMenu.userName != 'anonymous'}">
-               <a class="nav-link" id="pills-drafts-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/my-drafts.html" role="tab">my drafts</a>
+               <a class="nav-link" id="pills-drafts-tab" href="${userMenu.domain}/content/csu/us/en/my-drafts.html" role="tab">my drafts</a>
             </li>
             <li class="nav-divider"></li>
             <!--<li class="nav-item">
-               <a class="nav-link" id="pills-submissions-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/my-submissions.html?wcmmode=disabled" role="tab">my submissions</a>
+               <a class="nav-link" id="pills-submissions-tab" href="${userMenu.domain}/content/csu/us/en/my-submissions.html?wcmmode=disabled" role="tab">my submissions</a>
                </li>
                <li class="nav-divider"></li>-->
             <li class="nav-item"  data-sly-test="${userMenu.userName != 'anonymous'}">
-               <a class="nav-link" id="pills-mytasks-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/my-tasks.html" role="tab">my tasks</a>
+               <a class="nav-link" id="pills-mytasks-tab" href="${userMenu.domain}/content/csu/us/en/my-tasks.html" role="tab">my tasks</a>
             </li>
             <!--<li class="nav-divider"></li>
             <li class="nav-item">
-               <a class="nav-link" id="pills-help-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/help.html" role="tab">help</a>
+               <a class="nav-link" id="pills-help-tab" href="${userMenu.domain}/content/csu/us/en/help.html" role="tab">help</a>
             </li>-->
             <li class="nav-item" data-sly-test="${userMenu.userName != 'anonymous'}">
-               <a class="nav-link" id="pills-where-is-my-form-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/where-is-my-form.html" role="tab">WHERE IS MY FORM</a>
+               <a class="nav-link" id="pills-where-is-my-form-tab" href="${userMenu.domain}/content/csu/us/en/where-is-my-form.html" role="tab">WHERE IS MY FORM</a>
             </li>
           <!--  <li class="nav-item" data-sly-test="${userMenu.userName != 'anonymous'}">
-               <a class="nav-link" id="pills-aiassistant" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/ai-assistant.html" role="tab">AI Assistant</a>
+               <a class="nav-link" id="pills-aiassistant" href="${userMenu.domain}/content/csu/us/en/ai-assistant.html" role="tab">AI Assistant</a>
             </li> -->
             <li class="nav-divider"></li>
             <li class="nav-item dropdown" data-sly-test="${userMenu.isReportViewer}">
                <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown">Reports</a>
                <ul class="dropdown-menu dropdown-nav-menu">
                   <li class="nav-item dropdown-nav-item" data-sly-test="${userMenu.isSCWReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-scwreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/student-course-withdrawal-report.html" role="tab">Student Course Withdrawal Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-scwreport-tab" href="${userMenu.domain}/content/csu/us/en/student-course-withdrawal-report.html" role="tab">Student Course Withdrawal Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isMPPReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-mppreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/mpp-report.html" role="tab">MPP Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-mppreport-tab" href="${userMenu.domain}/content/csu/us/en/mpp-report.html" role="tab">MPP Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isStaffReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-staffreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/staff-performance-evaluation-report.html" role="tab">Staff Performance Evaluation Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-staffreport-tab" href="${userMenu.domain}/content/csu/us/en/staff-performance-evaluation-report.html" role="tab">Staff Performance Evaluation Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isGCReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-gcreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/grade-change-report.html" role="tab">Grade Change Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-gcreport-tab" href="${userMenu.domain}/content/csu/us/en/grade-change-report.html" role="tab">Grade Change Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isMMCReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-mmcreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/major-minor-change-report.html" role="tab">Major-Minor Change Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-mmcreport-tab" href="${userMenu.domain}/content/csu/us/en/major-minor-change-report.html" role="tab">Major-Minor Change Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isTempFacultyPayrollReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-tfpreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/temp-faculty-payroll-inbox-report.html" role="tab">Temp Faculty Payroll Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-tfpreport-tab" href="${userMenu.domain}/content/csu/us/en/temp-faculty-payroll-inbox-report.html" role="tab">Temp Faculty Payroll Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isNewPositionStaffReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-npdsreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/new-position-description-staff-inbox-report.html" role="tab">New Position Description Staff Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-npdsreport-tab" href="${userMenu.domain}/content/csu/us/en/new-position-description-staff-inbox-report.html" role="tab">New Position Description Staff Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isEmployeeFeeWaiverReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-efwreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/employee-fee-waiver-inbox-report.html" role="tab">Employee Fee Waiver Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-efwreport-tab" href="${userMenu.domain}/content/csu/us/en/employee-fee-waiver-inbox-report.html" role="tab">Employee Fee Waiver Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isNewPositionManagerReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-npdmreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/new-position-description-manager-inbox-report.html" role="tab">New Position Description Manager Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-npdmreport-tab" href="${userMenu.domain}/content/csu/us/en/new-position-description-manager-inbox-report.html" role="tab">New Position Description Manager Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isDependentFeeWaiverReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-dfwreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/dependent-fee-waiver-inbox-report.html" role="tab">Dependent Fee Waiver Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-dfwreport-tab" href="${userMenu.domain}/content/csu/us/en/dependent-fee-waiver-inbox-report.html" role="tab">Dependent Fee Waiver Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isDomesticPartnerTaxCertificationReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-dptcreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/domestic-partner-tax-certification-inbox-report.html" role="tab">Domestic Partner Tax Certification Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-dptcreport-tab" href="${userMenu.domain}/content/csu/us/en/domestic-partner-tax-certification-inbox-report.html" role="tab">Domestic Partner Tax Certification Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isSTD682ReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-sodreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/std-682-overtime-distributed-inbox-report.html" role="tab">STD 682 Overtime Distributed Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-sodreport-tab" href="${userMenu.domain}/content/csu/us/en/std-682-overtime-distributed-inbox-report.html" role="tab">STD 682 Overtime Distributed Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isShortAppEmpFeeWaiverReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-saefwreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/short-application-employee-fee-waiver-report.html" role="tab">Short Application Employee Fee Waiver Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-saefwreport-tab" href="${userMenu.domain}/content/csu/us/en/short-application-employee-fee-waiver-report.html" role="tab">Short Application Employee Fee Waiver Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isCLRReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-clrreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/catastrophic-leave-request.html" role="tab">Catastrophic Leave Request Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-clrreport-tab" href="${userMenu.domain}/content/csu/us/en/catastrophic-leave-request.html" role="tab">Catastrophic Leave Request Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isPerFileAccessReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-pfareport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/personnel-file-access-request.html" role="tab">Personnel File Access Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-pfareport-tab" href="${userMenu.domain}/content/csu/us/en/personnel-file-access-request.html" role="tab">Personnel File Access Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isCareerDevReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-careerDevreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/career-development-plan-inbox-report.html" role="tab">Career Development Plan Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-careerDevreport-tab" href="${userMenu.domain}/content/csu/us/en/career-development-plan-inbox-report.html" role="tab">Career Development Plan Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isPersonnelActionNoticeReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-panreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/personnel-action-notice-inbox-report.html" role="tab">Personnel Action Notice Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-panreport-tab" href="${userMenu.domain}/content/csu/us/en/personnel-action-notice-inbox-report.html" role="tab">Personnel Action Notice Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isMiscPayrollReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-mprreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/miscellaneous-payroll-request-distributed.html" role="tab">Miscellaneous Payroll Request Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-mprreport-tab" href="${userMenu.domain}/content/csu/us/en/miscellaneous-payroll-request-distributed.html" role="tab">Miscellaneous Payroll Request Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isTimebaseChangeRequestReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-mprreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/timebase-change-request-inbox-report.html" role="tab">Timebase Change Request Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-mprreport-tab" href="${userMenu.domain}/content/csu/us/en/timebase-change-request-inbox-report.html" role="tab">Timebase Change Request Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isCataLeaveDonationReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-cldreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/catastrophic-leave-donation.html" role="tab">Catastrophic Leave Donation Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-cldreport-tab" href="${userMenu.domain}/content/csu/us/en/catastrophic-leave-donation.html" role="tab">Catastrophic Leave Donation Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isPayPlanReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-payplanreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/payplan10121112.html" role="tab">10 12 11 12 Pay Plan Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-payplanreport-tab" href="${userMenu.domain}/content/csu/us/en/payplan10121112.html" role="tab">10 12 11 12 Pay Plan Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isDockNoticetViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-docknoticereport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/dock-notice-inbox-report.html" role="tab">Dock Notice Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-docknoticereport-tab" href="${userMenu.domain}/content/csu/us/en/dock-notice-inbox-report.html" role="tab">Dock Notice Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isHourlyINTViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-hourlyINTreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/hourly-intermittent-timesheet-report.html" role="tab">Hourly Intermittent Timesheet Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-hourlyINTreport-tab" href="${userMenu.domain}/content/csu/us/en/hourly-intermittent-timesheet-report.html" role="tab">Hourly Intermittent Timesheet Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isSpecialConsultantViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-splconreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/special-consultant-timesheet-report.html" role="tab">Special Consultant Timesheet Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-splconreport-tab" href="${userMenu.domain}/content/csu/us/en/special-consultant-timesheet-report.html" role="tab">Special Consultant Timesheet Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isStudentTimesheetViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-stmereport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/student-timesheet-manual-entry.html" role="tab">Student Timesheet Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-stmereport-tab" href="${userMenu.domain}/content/csu/us/en/student-timesheet-manual-entry.html" role="tab">Student Timesheet Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isDOAViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-doareport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/doa-report.html" role="tab">DOA Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-doareport-tab" href="${userMenu.domain}/content/csu/us/en/doa-report.html" role="tab">DOA Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isOTSDReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-otsdreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/overtime-and-shift-differential-request.html" role="tab">Overtime and Shift Differential Request Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-otsdreport-tab" href="${userMenu.domain}/content/csu/us/en/overtime-and-shift-differential-request.html" role="tab">Overtime and Shift Differential Request Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isConfirmationTicketReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-ctreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/confirmation-ticket-and-appointment-notification.html" role="tab">Confirmation Ticket</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-ctreport-tab" href="${userMenu.domain}/content/csu/us/en/confirmation-ticket-and-appointment-notification.html" role="tab">Confirmation Ticket</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isAppealsViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-appealsreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/appeals.html" role="tab">Admissions Appeal</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-appealsreport-tab" href="${userMenu.domain}/content/csu/us/en/appeals.html" role="tab">Admissions Appeal</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isLOAViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-loaReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/leave-of-absence-inbox-report.html" role="tab">Leave of Absence</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-loaReport-tab" href="${userMenu.domain}/content/csu/us/en/leave-of-absence-inbox-report.html" role="tab">Leave of Absence</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.iscatalogYearViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-cyreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/change-of-catalog-year.html" role="tab">Catalog Year</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-cyreport-tab" href="${userMenu.domain}/content/csu/us/en/change-of-catalog-year.html" role="tab">Catalog Year</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.islateAddsViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-lateAddsreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/late-adds-report.html" role="tab">Late Adds</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-lateAddsreport-tab" href="${userMenu.domain}/content/csu/us/en/late-adds-report.html" role="tab">Late Adds</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isManualCDReportViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-manualcdReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/manual-cd048-report.html" role="tab">Manual CD048 Report</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-manualcdReport-tab" href="${userMenu.domain}/content/csu/us/en/manual-cd048-report.html" role="tab">Manual CD048 Report</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isPetitionViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-petitionReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/petition-inbox-report.html" role="tab">Petition</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-petitionReport-tab" href="${userMenu.domain}/content/csu/us/en/petition-inbox-report.html" role="tab">Petition</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isFAERViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-faerreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/faculty-additional-employment-request.html" role="tab">Faculty Additional Employment Request</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-faerreport-tab" href="${userMenu.domain}/content/csu/us/en/faculty-additional-employment-request.html" role="tab">Faculty Additional Employment Request</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isRequestForExcessUnitsViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-requestForExcessUnitsReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/request-for-excess-units-inbox-report.html" role="tab">Request For Excess Units Request</a>
+                     <a class="nav-link nav-dropdown-link" id="pills-requestForExcessUnitsReport-tab" href="${userMenu.domain}/content/csu/us/en/request-for-excess-units-inbox-report.html" role="tab">Request For Excess Units Request</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isTelecommuteAgreementViewer}">
-                             <a class="nav-link nav-dropdown-link" id="pills-telecommutereport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/telecommuting-agreement.html" role="tab">Telecommuting Agreement</a>
+                             <a class="nav-link nav-dropdown-link" id="pills-telecommutereport-tab" href="${userMenu.domain}/content/csu/us/en/telecommuting-agreement.html" role="tab">Telecommuting Agreement</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isFERPViewer}">
-                     <a class="nav-link nav-dropdown-link" id="pills-ferpreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/faculty-early-retirement-program-request-form-.html" role="tab">Faculty Early Retirement Program Request Form </a>
+                     <a class="nav-link nav-dropdown-link" id="pills-ferpreport-tab" href="${userMenu.domain}/content/csu/us/en/faculty-early-retirement-program-request-form-.html" role="tab">Faculty Early Retirement Program Request Form </a>
                   </li>
 						
     			  <li class="nav-item" data-sly-test="${userMenu.isPRTBViewer}">
-                      <a class="nav-link nav-dropdown-link" id="pills-prtbreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/pre-retirement-time-base-request.html" role="tab">Pre Retirement Time Base Request</a>
+                      <a class="nav-link nav-dropdown-link" id="pills-prtbreport-tab" href="${userMenu.domain}/content/csu/us/en/pre-retirement-time-base-request.html" role="tab">Pre Retirement Time Base Request</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isCBEDeclarationViewer}">
-                       <a class="nav-link nav-dropdown-link" id="pills-tbCbeDeclarationReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/cbe-declaration-report.html" role="tab">CBE Declaration Form </a>
+                       <a class="nav-link nav-dropdown-link" id="pills-tbCbeDeclarationReport-tab" href="${userMenu.domain}/content/csu/us/en/cbe-declaration-report.html" role="tab">CBE Declaration Form </a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isTASubAFViewer}">
-						<a class="nav-link nav-dropdown-link" id="pills-tasubafreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/ta-substitute-appointment-form.html" role="tab">TA Substitute Appointment Form </a>
+						<a class="nav-link nav-dropdown-link" id="pills-tasubafreport-tab" href="${userMenu.domain}/content/csu/us/en/ta-substitute-appointment-form.html" role="tab">TA Substitute Appointment Form </a>
                   </li>
 	 			  <li class="nav-item" data-sly-test="${userMenu.isSFSDViewer}">
-						<a class="nav-link nav-dropdown-link" id="pills-sfsdreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/substitute-faculty-appointment-form-for-short-duration-form.html" role="tab">Substitute Faculty Appointment Form for Short Duration Form </a>
+						<a class="nav-link nav-dropdown-link" id="pills-sfsdreport-tab" href="${userMenu.domain}/content/csu/us/en/substitute-faculty-appointment-form-for-short-duration-form.html" role="tab">Substitute Faculty Appointment Form for Short Duration Form </a>
                   </li>
 	
 				 <li class="nav-item" data-sly-test="${userMenu.isPS980Viewer}">
-						<a class="nav-link nav-dropdown-link" id="pills-tbps980Report-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/pilot-summer-9-80-work-schedule-request-report.html" role="tab">Summer Work Schedule Request Form </a>
+						<a class="nav-link nav-dropdown-link" id="pills-tbps980Report-tab" href="${userMenu.domain}/content/csu/us/en/pilot-summer-9-80-work-schedule-request-report.html" role="tab">Summer Work Schedule Request Form </a>
                 </li> 
                  <li class="nav-item" data-sly-test="${userMenu.isTASubTSViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-tasubtsreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/ta-substitute-timesheet.html" role="tab">TA Substitute Timesheet </a>
+                            <a class="nav-link nav-dropdown-link" id="pills-tasubtsreport-tab" href="${userMenu.domain}/content/csu/us/en/ta-substitute-timesheet.html" role="tab">TA Substitute Timesheet </a>
                   </li>
 
 				<li class="nav-item" data-sly-test="${userMenu.isSFTSViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-sftsreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/substitute-faculty-time-sheet.html" role="tab">Substitute Faculty Time Sheet </a>
+                            <a class="nav-link nav-dropdown-link" id="pills-sftsreport-tab" href="${userMenu.domain}/content/csu/us/en/substitute-faculty-time-sheet.html" role="tab">Substitute Faculty Time Sheet </a>
                  </li>
                 <li class="nav-item" data-sly-test="${userMenu.isFinanceSystemAccessRequestViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-farfreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/finance-system-access-request.html" role="tab">Finance System Access Request</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-farfreport-tab" href="${userMenu.domain}/content/csu/us/en/finance-system-access-request.html" role="tab">Finance System Access Request</a>
                  </li>
                  <li class="nav-item" data-sly-test="${userMenu.isCitizenshipVerificationViewer}">
-                    	<a class="nav-link nav-dropdown-link" id="pills-citizenshipVerificationReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/citizenship-verification-inbox-report.html" role="tab">Citizenship Verification Form </a>
+                    	<a class="nav-link nav-dropdown-link" id="pills-citizenshipVerificationReport-tab" href="${userMenu.domain}/content/csu/us/en/citizenship-verification-inbox-report.html" role="tab">Citizenship Verification Form </a>
                    </li>
                  <li class="nav-item" data-sly-test="${userMenu.isTaxFilingViewer}">
-                        <a class="nav-link nav-dropdown-link" id="pills-taxFilingStatementReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/tax-filing-statement-inbox-report.html" role="tab">Tax Filing Statement Forms </a>
+                        <a class="nav-link nav-dropdown-link" id="pills-taxFilingStatementReport-tab" href="${userMenu.domain}/content/csu/us/en/tax-filing-statement-inbox-report.html" role="tab">Tax Filing Statement Forms </a>
                  </li> 
                  <li class="nav-item" data-sly-test="${userMenu.isFamilySizeCertificate}">
-	                    <a class="nav-link nav-dropdown-link" id="pills-familySizeCertificateReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/family-size-certificate-inbox-report.html" role="tab">Family Size Certificate Forms </a>
+	                    <a class="nav-link nav-dropdown-link" id="pills-familySizeCertificateReport-tab" href="${userMenu.domain}/content/csu/us/en/family-size-certificate-inbox-report.html" role="tab">Family Size Certificate Forms </a>
                  </li>
                  <li class="nav-item" data-sly-test="${userMenu.isRequestforTimeConflictViewer}">
-                         <a class="nav-link nav-dropdown-link" id="pills-requestfortimeconflictreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/request-for-time-conflict.html" role="tab">Request for Time Conflict Approval</a>
+                         <a class="nav-link nav-dropdown-link" id="pills-requestfortimeconflictreport-tab" href="${userMenu.domain}/content/csu/us/en/request-for-time-conflict.html" role="tab">Request for Time Conflict Approval</a>
                  </li>
                  <li class="nav-item" data-sly-test="${userMenu.isSectionChangeViewer}">
-                         <a class="nav-link nav-dropdown-link" id="pills-sectionchangereport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/section-change.html" role="tab">Request for Section Change</a>
+                         <a class="nav-link nav-dropdown-link" id="pills-sectionchangereport-tab" href="${userMenu.domain}/content/csu/us/en/section-change.html" role="tab">Request for Section Change</a>
                  </li>
                  <li class="nav-item" data-sly-test="${userMenu.isFacultySpecialConsultantStipendViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-facultySpecialConsultantStipendreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/faculty-special-consultant-stipend.html" role="tab">Faculty Special Consultant Stipend</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-facultySpecialConsultantStipendreport-tab" href="${userMenu.domain}/content/csu/us/en/faculty-special-consultant-stipend.html" role="tab">Faculty Special Consultant Stipend</a>
                  </li> 
                  <li class="nav-item" data-sly-test="${userMenu.isFARViewer}">
-                             <a class="nav-link nav-dropdown-link" id="pills-farreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/faculty-action-request.html" role="tab">Faculty Action Request</a>
+                             <a class="nav-link nav-dropdown-link" id="pills-farreport-tab" href="${userMenu.domain}/content/csu/us/en/faculty-action-request.html" role="tab">Faculty Action Request</a>
                  </li> 
                  <li class="nav-item" data-sly-test="${userMenu.isIdentityVerificationAndStatementViewer}">
-                             <a class="nav-link nav-dropdown-link" id="pills-idverificationstatementreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/id-verification-and-statement-of-educational-purpose.html" role="tab">Id Verification and Statement of Educational Purpose</a>
+                             <a class="nav-link nav-dropdown-link" id="pills-idverificationstatementreport-tab" href="${userMenu.domain}/content/csu/us/en/id-verification-and-statement-of-educational-purpose.html" role="tab">Id Verification and Statement of Educational Purpose</a>
                  </li>
                   <li class="nav-item" data-sly-test="${userMenu.isImmigrationCitizenshipVerificationViewer}">
-                             <a class="nav-link nav-dropdown-link" id="pills-immigrationcitizenshipreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/immigration-citizenship-verification.html" role="tab">Immigration/Citizenship Verification</a>
+                             <a class="nav-link nav-dropdown-link" id="pills-immigrationcitizenshipreport-tab" href="${userMenu.domain}/content/csu/us/en/immigration-citizenship-verification.html" role="tab">Immigration/Citizenship Verification</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isCalGrantTransferViewer}">
-                             <a class="nav-link nav-dropdown-link" id="pills-calgranttransferreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/cal-grant-transfer-entitlement-verification.html" role="tab">Cal Grant Transfer Entitlement Verification</a>
+                             <a class="nav-link nav-dropdown-link" id="pills-calgranttransferreport-tab" href="${userMenu.domain}/content/csu/us/en/cal-grant-transfer-entitlement-verification.html" role="tab">Cal Grant Transfer Entitlement Verification</a>
                    </li>
                    <li class="nav-item" data-sly-test="${userMenu.isFacultyAssignedTimeAgreementViewer}">
-    						 <a class="nav-link nav-dropdown-link" id="pills-facultyassignedtimeagreementreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/faculty-assigned-time-agreement.html" role="tab">Faculty Assigned Time Agreement</a>
+    						 <a class="nav-link nav-dropdown-link" id="pills-facultyassignedtimeagreementreport-tab" href="${userMenu.domain}/content/csu/us/en/faculty-assigned-time-agreement.html" role="tab">Faculty Assigned Time Agreement</a>
 					</li>
                   <li class="nav-item" data-sly-test="${userMenu.isUnitCapAppealViewer}">
-                             <a class="nav-link nav-dropdown-link" id="pills-unitcapappealreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/unit-cap-appeal.html" role="tab">Unit Cap Appeal</a>
+                             <a class="nav-link nav-dropdown-link" id="pills-unitcapappealreport-tab" href="${userMenu.domain}/content/csu/us/en/unit-cap-appeal.html" role="tab">Unit Cap Appeal</a>
                   </li>
                   <li class="nav-item" data-sly-test="${userMenu.isSAPAppealViewer}">
-                             <a class="nav-link nav-dropdown-link" id="pills-sapappealreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/sap-appeal.html" role="tab">Satisfactory Academic Progress Appeal</a>
+                             <a class="nav-link nav-dropdown-link" id="pills-sapappealreport-tab" href="${userMenu.domain}/content/csu/us/en/sap-appeal.html" role="tab">Satisfactory Academic Progress Appeal</a>
                    </li>
                   <li class="nav-item" data-sly-test="${userMenu.isstudentDependentVerificationViewer}">                            
-                             <a class="nav-link nav-dropdown-link" id="pills-studentdependentsverificationreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/student-dependents-verification.html" role="tab">Student Dependents Verification</a>
+                             <a class="nav-link nav-dropdown-link" id="pills-studentdependentsverificationreport-tab" href="${userMenu.domain}/content/csu/us/en/student-dependents-verification.html" role="tab">Student Dependents Verification</a>
                    </li>
                   <li class="nav-item" data-sly-test="${userMenu.isNonFilerCertificationViewer}">
-                             <a class="nav-link nav-dropdown-link" id="pills-nonfilerreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/non-filer-certification.html" role="tab">Non Filer Certification Forms</a>
+                             <a class="nav-link nav-dropdown-link" id="pills-nonfilerreport-tab" href="${userMenu.domain}/content/csu/us/en/non-filer-certification.html" role="tab">Non Filer Certification Forms</a>
                    </li>
                   <li class="nav-item" data-sly-test="${userMenu.isStudentW2StatementViewer}">
-                             <a class="nav-link nav-dropdown-link" id="pills-studentw2statementreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/student-w-2-statement.html" role="tab">W2 Statement Forms</a>
+                             <a class="nav-link nav-dropdown-link" id="pills-studentw2statementreport-tab" href="${userMenu.domain}/content/csu/us/en/student-w-2-statement.html" role="tab">W2 Statement Forms</a>
                    </li>
                   <li class="nav-item" data-sly-test="${userMenu.isVerificationOfNonFilingViewer}">
-                             <a class="nav-link nav-dropdown-link" id="pills-verificationOfNonFilingreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/verification-of-non-filing.html" role="tab">Verification of Non Filing Forms</a>
+                             <a class="nav-link nav-dropdown-link" id="pills-verificationOfNonFilingreport-tab" href="${userMenu.domain}/content/csu/us/en/verification-of-non-filing.html" role="tab">Verification of Non Filing Forms</a>
                    </li>
                    <li class="nav-item" data-sly-test="${userMenu.isFederalAidRefundVerificationViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-federalaidrefundverificationreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/federal-aid-refund-verification.html" role="tab">Federal Aid Refund Verification</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-federalaidrefundverificationreport-tab" href="${userMenu.domain}/content/csu/us/en/federal-aid-refund-verification.html" role="tab">Federal Aid Refund Verification</a>
                    </li>
 
                    <li class="nav-item" data-sly-test="${userMenu.isLoanStatusVerificationViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-loanStatusVerificationreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/loan-status-verification.html" role="tab">Loan Status Verification</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-loanStatusVerificationreport-tab" href="${userMenu.domain}/content/csu/us/en/loan-status-verification.html" role="tab">Loan Status Verification</a>
                    </li> 
 					<li class="nav-item" data-sly-test="${userMenu.isHRARFViewer}">
-                    		<a class="nav-link nav-dropdown-link" id="pills-hrarfreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/hr-finance-access-request.html" role="tab">HR Access Request Form</a>
+                    		<a class="nav-link nav-dropdown-link" id="pills-hrarfreport-tab" href="${userMenu.domain}/content/csu/us/en/hr-finance-access-request.html" role="tab">HR Access Request Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isFederalDirectGradPlusLoanViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-federalgradloanreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/federal-direct-grad-plus-loan.html" role="tab">Federal Direct GRAD Plus Loan Application</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-federalgradloanreport-tab" href="${userMenu.domain}/content/csu/us/en/federal-direct-grad-plus-loan.html" role="tab">Federal Direct GRAD Plus Loan Application</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isFederalDirectLoanRequestViewer}">
-                             <a class="nav-link nav-dropdown-link" id="pills-federalDirectLoanRequestreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/federal-direct-loan-request.html" role="tab">Federal Direct Loan Request</a>
+                             <a class="nav-link nav-dropdown-link" id="pills-federalDirectLoanRequestreport-tab" href="${userMenu.domain}/content/csu/us/en/federal-direct-loan-request.html" role="tab">Federal Direct Loan Request</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isFederalDirectPlusApplicationViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-federalDirectPlusApplicationreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/federal-direct-plus-application.html" role="tab">Federal Direct Plus Application</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-federalDirectPlusApplicationreport-tab" href="${userMenu.domain}/content/csu/us/en/federal-direct-plus-application.html" role="tab">Federal Direct Plus Application</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isParentAmendedTaxReturnViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-parentamendedtaxreturnreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/parent-amended-tax-return.html" role="tab">Amended Tax Return</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-parentamendedtaxreturnreport-tab" href="${userMenu.domain}/content/csu/us/en/parent-amended-tax-return.html" role="tab">Amended Tax Return</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isAwardAdjustmentAppealViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-awardadjustmentappealreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/award-adjustment-appeal.html" role="tab">Award Adjustment Appeal</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-awardadjustmentappealreport-tab" href="${userMenu.domain}/content/csu/us/en/award-adjustment-appeal.html" role="tab">Award Adjustment Appeal</a>
                     </li>
                      <li class="nav-item" data-sly-test="${userMenu.isDependencyOverrideAppealViewer}">
-                             <a class="nav-link nav-dropdown-link" id="pills-dependencyoverrideappealreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/dependency-override-appeal.html" role="tab">Dependency Override Appeal</a>
+                             <a class="nav-link nav-dropdown-link" id="pills-dependencyoverrideappealreport-tab" href="${userMenu.domain}/content/csu/us/en/dependency-override-appeal.html" role="tab">Dependency Override Appeal</a>
                         </li>
                      <li class="nav-item" data-sly-test="${userMenu.isDependencyOverrideRenewalViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-dependencyoverriderenewalreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/dependency-override-renewal.html" role="tab">Dependency Override Renewal</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-dependencyoverriderenewalreport-tab" href="${userMenu.domain}/content/csu/us/en/dependency-override-renewal.html" role="tab">Dependency Override Renewal</a>
                         </li>
                      <li class="nav-item" data-sly-test="${userMenu.isStudentBudgetAdjustmentAppealViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-studentbudgetadjappealreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/student-budget-adjustment-appeal.html" role="tab">Student Budget Adjustment Appeal</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-studentbudgetadjappealreport-tab" href="${userMenu.domain}/content/csu/us/en/student-budget-adjustment-appeal.html" role="tab">Student Budget Adjustment Appeal</a>
                         </li> 
                       <li class="nav-item" data-sly-test="${userMenu.isParentStatementOfNonSupportViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-parentstatementofnonsupportreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/parent-statement-of-non-support.html" role="tab">Parent Statement of Non-Support</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-parentstatementofnonsupportreport-tab" href="${userMenu.domain}/content/csu/us/en/parent-statement-of-non-support.html" role="tab">Parent Statement of Non-Support</a>
                     </li>					
                     <li class="nav-item" data-sly-test="${userMenu.isUnaccompaniedHomelessYouthVerificationHomeViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-unaccompaniedhomlessyouthverificationreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/unaccompanied-homeless-youth-verification---home.html" role="tab">Unaccompanied Homeless Youth Verification - Home</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-unaccompaniedhomlessyouthverificationreport-tab" href="${userMenu.domain}/content/csu/us/en/unaccompanied-homeless-youth-verification---home.html" role="tab">Unaccompanied Homeless Youth Verification - Home</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isChafeeStudentSuccessPlanViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-chafeeStudentSuccessPlanreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/chafee-student-success-plan.html" role="tab">Chafee Student Success Plan</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-chafeeStudentSuccessPlanreport-tab" href="${userMenu.domain}/content/csu/us/en/chafee-student-success-plan.html" role="tab">Chafee Student Success Plan</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isGoldenStateTeacherGrantCertificationViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-goldenstateteachergrantreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/golden-state-teacher-grant-certification-request-form.html" role="tab">Golden State Teacher Grant Certification Request Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-goldenstateteachergrantreport-tab" href="${userMenu.domain}/content/csu/us/en/golden-state-teacher-grant-certification-request-form.html" role="tab">Golden State Teacher Grant Certification Request Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isConcurrentEnrollmentAgreementFallViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-concurrentenrollmentagreementfallreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/concurrent-enrollment-agreement---fall.html" role="tab">Concurrent Enrollment Agreement - Fall</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-concurrentenrollmentagreementfallreport-tab" href="${userMenu.domain}/content/csu/us/en/concurrent-enrollment-agreement---fall.html" role="tab">Concurrent Enrollment Agreement - Fall</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isConcurrentEnrollmentAgreementSpringViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-concurrentenrollmentagreementspringreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/concurrent-enrollment-agreement---spring.html" role="tab">Concurrent Enrollment Agreement - Spring</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-concurrentenrollmentagreementspringreport-tab" href="${userMenu.domain}/content/csu/us/en/concurrent-enrollment-agreement---spring.html" role="tab">Concurrent Enrollment Agreement - Spring</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isHousingUpdateFormViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-housingUpdateFormreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/housing-update-form.html" role="tab">Housing Update Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-housingUpdateFormreport-tab" href="${userMenu.domain}/content/csu/us/en/housing-update-form.html" role="tab">Housing Update Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isRequesttoCancelFAProcessingViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-reqtocancelfinancialaidprocessingreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/request-to-cancel-financial-aid-processing.html" role="tab">Request to cancel Financial Aid Processing</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-reqtocancelfinancialaidprocessingreport-tab" href="${userMenu.domain}/content/csu/us/en/request-to-cancel-financial-aid-processing.html" role="tab">Request to cancel Financial Aid Processing</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isStateUnivGrantAppealViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-stateuniversitygrantappealreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/state-university-grant-appeal.html" role="tab">State University Grant Appeal</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-stateuniversitygrantappealreport-tab" href="${userMenu.domain}/content/csu/us/en/state-university-grant-appeal.html" role="tab">State University Grant Appeal</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isTEACHGrantRequirementCertViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-teachgrantreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/teach-grant-requirement-cert-.html" role="tab">TEACH Grant Requirement Cert</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-teachgrantreport-tab" href="${userMenu.domain}/content/csu/us/en/teach-grant-requirement-cert-.html" role="tab">TEACH Grant Requirement Cert</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isSummerLoanRequestViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-summerloanreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/summer-loan-request.html" role="tab">Summer Loan Request</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-summerloanreport-tab" href="${userMenu.domain}/content/csu/us/en/summer-loan-request.html" role="tab">Summer Loan Request</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isSsnVerificationViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-ssnVerificationreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/ssn-verification.html" role="tab">SSN Verification Forms</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-ssnVerificationreport-tab" href="${userMenu.domain}/content/csu/us/en/ssn-verification.html" role="tab">SSN Verification Forms</a>
                     </li>	
                     <li class="nav-item" data-sly-test="${userMenu.isVeteranStatusVerificationViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-veteranStatusVerificationreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/veteran-status-verification.html" role="tab">Veteran Status Verification</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-veteranStatusVerificationreport-tab" href="${userMenu.domain}/content/csu/us/en/veteran-status-verification.html" role="tab">Veteran Status Verification</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isAssetInformationViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-assetInformationreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/asset-information.html" role="tab">Asset Information Forms</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-assetInformationreport-tab" href="${userMenu.domain}/content/csu/us/en/asset-information.html" role="tab">Asset Information Forms</a>
                     </li>                       
                     <li class="nav-item" data-sly-test="${userMenu.isPensionRollOverViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-pensionRollOverreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/pension-roll-over.html" role="tab">Pension Roll Over Forms</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-pensionRollOverreport-tab" href="${userMenu.domain}/content/csu/us/en/pension-roll-over.html" role="tab">Pension Roll Over Forms</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isFederalTaxReturnViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-federaltaxreturnreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/federal-tax-return.html" role="tab">Federal Tax Return forms</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-federaltaxreturnreport-tab" href="${userMenu.domain}/content/csu/us/en/federal-tax-return.html" role="tab">Federal Tax Return forms</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isCampusSolViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-csarfreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/campus-solution-access-request.html" role="tab">Campus Solution Access Request</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-csarfreport-tab" href="${userMenu.domain}/content/csu/us/en/campus-solution-access-request.html" role="tab">Campus Solution Access Request</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isFinDOAViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-doaarfreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/finance-delegation-of-authority.html" role="tab">Finance Delegation of Authority</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-doaarfreport-tab" href="${userMenu.domain}/content/csu/us/en/finance-delegation-of-authority.html" role="tab">Finance Delegation of Authority</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isFederalTaxReturnScheduleEViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-federaltaxreturnscheduleereport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/federal-tax-return-schedule-e.html" role="tab">Federal Tax Return Schedule E Forms</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-federaltaxreturnscheduleereport-tab" href="${userMenu.domain}/content/csu/us/en/federal-tax-return-schedule-e.html" role="tab">Federal Tax Return Schedule E Forms</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isInvestmentRealEstateVerificationViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-investmentRealEstateVerificationreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/investment-real-estate-verification.html" role="tab">Investment/Real Estate Verification Forms</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-investmentRealEstateVerificationreport-tab" href="${userMenu.domain}/content/csu/us/en/investment-real-estate-verification.html" role="tab">Investment/Real Estate Verification Forms</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isPetitionforPGCreditViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-petitionpgcreditreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/petition-for-postgraduate-credit.html" role="tab">Petition For Postgraduate Credit</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-petitionpgcreditreport-tab" href="${userMenu.domain}/content/csu/us/en/petition-for-postgraduate-credit.html" role="tab">Petition For Postgraduate Credit</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isPetitionforGEVariationViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-petitiongevariationreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/university-petition-for-general-education-variation.html" role="tab">Petition For General Education Variation</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-petitiongevariationreport-tab" href="${userMenu.domain}/content/csu/us/en/university-petition-for-general-education-variation.html" role="tab">Petition For General Education Variation</a>
                     </li>
 				    <li class="nav-item" data-sly-test="${userMenu.isBusinessSupplementViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-businesssupplementreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/business-supplement-form.html" role="tab">Business Supplement Forms</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-businesssupplementreport-tab" href="${userMenu.domain}/content/csu/us/en/business-supplement-form.html" role="tab">Business Supplement Forms</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isStudyAbroadAcademicTranscriptSubmissionViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-studyAbroadAcademicTranscriptSubmissionreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/study-abroad-academic-transcript-submission-form.html" role="tab">Study Abroad Academic Transcript Submission Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-studyAbroadAcademicTranscriptSubmissionreport-tab" href="${userMenu.domain}/content/csu/us/en/study-abroad-academic-transcript-submission-form.html" role="tab">Study Abroad Academic Transcript Submission Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isTeachGrantSupplementViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-teachGrantSupplementreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/teach-grant-supplement-component.html" role="tab">Teach Grant Supplement Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-teachGrantSupplementreport-tab" href="${userMenu.domain}/content/csu/us/en/teach-grant-supplement-component.html" role="tab">Teach Grant Supplement Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isFamilyCollegeEnrollmentVerificationViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-familyCollegeEnrollmentVerificationreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/family-college-enrollment-verification-form-.html" role="tab">Family College Enrollment Verification Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-familyCollegeEnrollmentVerificationreport-tab" href="${userMenu.domain}/content/csu/us/en/family-college-enrollment-verification-form-.html" role="tab">Family College Enrollment Verification Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isProjectedYearIncomeAppealViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-projectedincomereport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/income-appeal-form.html" role="tab">Income Appeal Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-projectedincomereport-tab" href="${userMenu.domain}/content/csu/us/en/income-appeal-form.html" role="tab">Income Appeal Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isFacultyAssignedTimeAgreementATGuidelinesViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-facultyassignedtimeagreementatguidelinesreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/faculty-assigned-time-agreement-at-guideines.html" role="tab">Faculty Assigned Time Agreement - AT Guidelines</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-facultyassignedtimeagreementatguidelinesreport-tab" href="${userMenu.domain}/content/csu/us/en/faculty-assigned-time-agreement-at-guideines.html" role="tab">Faculty Assigned Time Agreement - AT Guidelines</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isPETViewer}">
-                    		<a class="nav-link nav-dropdown-link" id="pills-petreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/payroll-expenditure-transfer.html" role="tab">Payroll Expenditure Transfer</a>
+                    		<a class="nav-link nav-dropdown-link" id="pills-petreport-tab" href="${userMenu.domain}/content/csu/us/en/payroll-expenditure-transfer.html" role="tab">Payroll Expenditure Transfer</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isPositionActionFormViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-positionactionformreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/position-action-form.html" role="tab">Position Action Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-positionactionformreport-tab" href="${userMenu.domain}/content/csu/us/en/position-action-form.html" role="tab">Position Action Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isPosthumousDegreeApprovalViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-posthumousDegreeApprovalreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/posthumous-degree-approval.html" role="tab">Posthumous Degree Approval</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-posthumousDegreeApprovalreport-tab" href="${userMenu.domain}/content/csu/us/en/posthumous-degree-approval.html" role="tab">Posthumous Degree Approval</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isTitanCardViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-titancardreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/titan-card.html" role="tab">TitanCard Closed Account Request Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-titancardreport-tab" href="${userMenu.domain}/content/csu/us/en/titan-card.html" role="tab">TitanCard Closed Account Request Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isDqAppealViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-dqAppealreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/dq-appeal.html" role="tab">DQ Appeal Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-dqAppealreport-tab" href="${userMenu.domain}/content/csu/us/en/dq-appeal.html" role="tab">DQ Appeal Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isNachaFormViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-nachaFormreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/nacha-form.html" role="tab">Nacha Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-nachaFormreport-tab" href="${userMenu.domain}/content/csu/us/en/nacha-form.html" role="tab">Nacha Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isNewAssetAcquisitionFormViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-newAssetAcquisitionFormReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/new-asset-acquisition-form.html" role="tab">New Asset Acquisition Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-newAssetAcquisitionFormReport-tab" href="${userMenu.domain}/content/csu/us/en/new-asset-acquisition-form.html" role="tab">New Asset Acquisition Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isLostorStolenPropertyFormViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-lostStolenPropertyreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/lost-or-stolen-property-form.html" role="tab">Lost or Stolen Property Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-lostStolenPropertyreport-tab" href="${userMenu.domain}/content/csu/us/en/lost-or-stolen-property-form.html" role="tab">Lost or Stolen Property Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isVehicleReleaseFormViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-vehicleReleaseFormReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/vehicle-release-form.html" role="tab">Vehicle Release Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-vehicleReleaseFormReport-tab" href="${userMenu.domain}/content/csu/us/en/vehicle-release-form.html" role="tab">Vehicle Release Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isOffCampusAgreementUseFormViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-offCampusAgreementUsereport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/off-campus-agreement-use-form.html" role="tab">Off Campus Agreement Use Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-offCampusAgreementUsereport-tab" href="${userMenu.domain}/content/csu/us/en/off-campus-agreement-use-form.html" role="tab">Off Campus Agreement Use Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isAppealofaDeclinedFeeWaiverFormViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-appealofaDeclinedFeeWaiverreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/appeal-of-a-declined-fee-waiver-request.html" role="tab">Appeal of a Declined Fee Waiver Request</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-appealofaDeclinedFeeWaiverreport-tab" href="${userMenu.domain}/content/csu/us/en/appeal-of-a-declined-fee-waiver-request.html" role="tab">Appeal of a Declined Fee Waiver Request</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isRetroactiveLeaveOfAbsenceFormViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-retroactiveLoareport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/retroactive-leave-of-absence.html" role="tab">Retroactive Leave Of Absence Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-retroactiveLoareport-tab" href="${userMenu.domain}/content/csu/us/en/retroactive-leave-of-absence.html" role="tab">Retroactive Leave Of Absence Form</a>
                     </li>
 					<li class="nav-item" data-sly-test="${userMenu.isVerificationReqFormReviewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-verificationreqFormreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/verification-request-form.html" role="tab">Verification Request Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-verificationreqFormreport-tab" href="${userMenu.domain}/content/csu/us/en/verification-request-form.html" role="tab">Verification Request Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isPropertyTransferFormViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-propertyTransferRequestreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/property-transfer-request-form.html" role="tab">Property Transfer Request Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-propertyTransferRequestreport-tab" href="${userMenu.domain}/content/csu/us/en/property-transfer-request-form.html" role="tab">Property Transfer Request Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isPropertySurveyFormViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-propertySurveyRequestreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/property-management-survey-request-form.html" role="tab">Property Management Survey Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-propertySurveyRequestreport-tab" href="${userMenu.domain}/content/csu/us/en/property-management-survey-request-form.html" role="tab">Property Management Survey Form</a>
                     </li>
  					<li class="nav-item" data-sly-test="${userMenu.isVolunteerFormViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-volunteerFormReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/csuf-volunteer-form.html" role="tab">CSUF Volunteer Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-volunteerFormReport-tab" href="${userMenu.domain}/content/csu/us/en/csuf-volunteer-form.html" role="tab">CSUF Volunteer Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isPetitionforRetroactiveWithdrawalViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-petitionforRetroactiveWithdrawalreport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/petition-for-retroactive-withdrawal.html" role="tab">Petition for Retroactive Withdrawal</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-petitionforRetroactiveWithdrawalreport-tab" href="${userMenu.domain}/content/csu/us/en/petition-for-retroactive-withdrawal.html" role="tab">Petition for Retroactive Withdrawal</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isDesignationUniversityCashCollectionFormViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-designationCashReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/designation-as-university-cash-collection-point.html" role="tab">Designation As University Cash Collection Point Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-designationCashReport-tab" href="${userMenu.domain}/content/csu/us/en/designation-as-university-cash-collection-point.html" role="tab">Designation As University Cash Collection Point Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isUniversityWithdrawalFormViewer}">
-                            <a class="nav-link nav-dropdown-link" id="pills-universityReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/university-withdrawal-form.html" role="tab">University Withdrawal Form</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-universityReport-tab" href="${userMenu.domain}/content/csu/us/en/university-withdrawal-form.html" role="tab">University Withdrawal Form</a>
                     </li>
                     <li class="nav-item" data-sly-test="${userMenu.isAuthorizationDriverRecordInfoFormViewer}">
-							<a class="nav-link nav-dropdown-link" id="pills-authorizationDriverRecordInfoFormReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/authorization-driver-record-information-form.html" role="tab">Authorization Driver Record Information Form</a>
+							<a class="nav-link nav-dropdown-link" id="pills-authorizationDriverRecordInfoFormReport-tab" href="${userMenu.domain}/content/csu/us/en/authorization-driver-record-information-form.html" role="tab">Authorization Driver Record Information Form</a>
 					</li>
 					<li class="nav-item" data-sly-test="${userMenu.isAuthorizationPrivateOwnedVehiclesFormViewer}">
-							<a class="nav-link nav-dropdown-link" id="pills-authorizationPrivateOwnedVehiclesFormReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/authorization-privately-owned-vehicle-form.html" role="tab">Authorization To Use Privately Owned Vehicles Form</a>
+							<a class="nav-link nav-dropdown-link" id="pills-authorizationPrivateOwnedVehiclesFormReport-tab" href="${userMenu.domain}/content/csu/us/en/authorization-privately-owned-vehicle-form.html" role="tab">Authorization To Use Privately Owned Vehicles Form</a>
 					</li>
 					<li class="nav-item" data-sly-test="${userMenu.isAuthorizationVehicleUniversityBusinessFormViewer}">
-							<a class="nav-link nav-dropdown-link" id="pills-authorizationVehicleUniversityBusinessFormReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/authorization-vehicle-university-business-form.html" role="tab">Authorization To Drive Vehicle on University Business Form</a>
+							<a class="nav-link nav-dropdown-link" id="pills-authorizationVehicleUniversityBusinessFormReport-tab" href="${userMenu.domain}/content/csu/us/en/authorization-vehicle-university-business-form.html" role="tab">Authorization To Drive Vehicle on University Business Form</a>
 					</li>
                     <li class="nav-item" data-sly-test="${userMenu.isVendorFeeWaiverReductionFormViewer}">
-							<a class="nav-link nav-dropdown-link" id="pills-vendorFeeWaiverReductionFormReport-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/vendor-fee-waiver-reduction-form.html" role="tab">Vendor Fee Waiver / Reduction Form</a>
+							<a class="nav-link nav-dropdown-link" id="pills-vendorFeeWaiverReductionFormReport-tab" href="${userMenu.domain}/content/csu/us/en/vendor-fee-waiver-reduction-form.html" role="tab">Vendor Fee Waiver / Reduction Form</a>
 					</li>
                </ul>
             </li>
@@ -468,29 +468,29 @@
                     <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown">Administration</a>
                     <ul class="dropdown-menu dropdown-nav-menu">
                         <li class="nav-item dropdown-nav-item" data-sly-test="${userMenu.isAdmin}">
-                            <a class="nav-link nav-dropdown-link" id="pills-sysconfig-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/configure-system-maintenence.html" role="tab">System Configuration</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-sysconfig-tab" href="${userMenu.domain}/content/csu/us/configure-system-maintenence.html" role="tab">System Configuration</a>
                             </li>
                             <li class="nav-item" data-sly-test="${userMenu.isAdmin}">
-                                <a class="nav-link nav-dropdown-link" id="pills-sysdowntime-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/scheduled-system-maintenance.html" role="tab">System Downtime</a>
+                                <a class="nav-link nav-dropdown-link" id="pills-sysdowntime-tab" href="${userMenu.domain}/content/csu/us/scheduled-system-maintenance.html" role="tab">System Downtime</a>
                                 </li>
                             <li class="nav-item" data-sly-test="${userMenu.isAdmin}">
-                            <a class="nav-link nav-dropdown-link" id="pills-workflow-administration-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/workflow-administration.html" role="tab">Workflow Administration</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-workflow-administration-tab" href="${userMenu.domain}/content/csu/us/en/workflow-administration.html" role="tab">Workflow Administration</a>
                     		</li>
                              <li class="nav-item" data-sly-test="${userMenu.isAdmin}">
-                            <a class="nav-link nav-dropdown-link" id="pills-workflow-delegation-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/workitem-delegation.html" role="tab">Workflow Delegation</a>
+                            <a class="nav-link nav-dropdown-link" id="pills-workflow-delegation-tab" href="${userMenu.domain}/content/csu/us/en/workitem-delegation.html" role="tab">Workflow Delegation</a>
                         	</li>
 
                             <li class="nav-item" data-sly-test="${userMenu.isAdmin}">
-                                <a class="nav-link nav-dropdown-link" id="pills-workflow-bulk-approval-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/bulk-approval.html" role="tab">Bulk Approval</a>
+                                <a class="nav-link nav-dropdown-link" id="pills-workflow-bulk-approval-tab" href="${userMenu.domain}/content/csu/us/en/bulk-approval.html" role="tab">Bulk Approval</a>
                              </li>
                           </ul>
                        </li>
                             <li class="nav-item" data-sly-test="${userMenu.isFaculty}">
-                            <a class="nav-link" id="pills-aiassistant" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/tuffyassist.html" role="tab">Tuffy Assist (Beta)</a>
+                            <a class="nav-link" id="pills-aiassistant" href="${userMenu.domain}/content/csu/us/en/tuffyassist.html" role="tab">Tuffy Assist (Beta)</a>
                             </li>
                             <li class="nav-divider"></li>
  								<li class="nav-item" data-sly-test="${userMenu.userName == 'anonymous'}">
-    								<a class="nav-link" id="pills-help-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/help.html" role="tab">help</a>
+    								<a class="nav-link" id="pills-help-tab" href="${userMenu.domain}/content/csu/us/en/help.html" role="tab">help</a>
 							</li>
 							<li class="nav-divider"></li>
 							<li class="nav-item dropdown" data-sly-test="${userMenu.userName != 'anonymous'}">
@@ -512,7 +512,7 @@
             <a href="#" id="questionLink-where-is-my-form" class="nav-link nav-dropdown-link" style="display: block; padding: 8px 12px; color: #007bff; text-decoration: none;">Where is my form</a>
         </li>
         <li class="nav-item" style="display: list-item;" data-sly-test="${userMenu.userName != 'anonymous'}">
-            <a class="nav-link nav-dropdown-link" id="pills-help-tab" href="https://author-p161404-e1713869.adobeaemcloud.com/content/csu/us/en/help.html" role="tab">help</a>
+            <a class="nav-link nav-dropdown-link" id="pills-help-tab" href="${userMenu.domain}/content/csu/us/en/help.html" role="tab">help</a>
         </li>
     </ul>
 </li>

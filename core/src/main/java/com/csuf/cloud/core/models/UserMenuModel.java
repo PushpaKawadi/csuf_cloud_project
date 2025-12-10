@@ -64,6 +64,8 @@ public class UserMenuModel {
 	@Required
 	private SlingHttpServletRequest request;
 
+    private String domain;
+
 	@OSGiService
 	private InboxReportConfigService reportConfig;
 
@@ -83,9 +85,17 @@ public class UserMenuModel {
 
 	@PostConstruct
 	public void init() {
-		session = request.getResourceResolver().adaptTo(Session.class);
+        if (request != null) {
+            domain = request.getServerName();
+        }
+
+        session = request.getResourceResolver().adaptTo(Session.class);
 		setCurrentUser();
 	}
+
+    public String getDomain() {
+        return domain;
+    }
 
 	private void setCurrentUser() {
 		final Authorizable auth = request.getResourceResolver().adaptTo(Authorizable.class);
