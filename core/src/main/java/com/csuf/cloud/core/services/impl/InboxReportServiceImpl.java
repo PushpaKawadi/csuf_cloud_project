@@ -2041,6 +2041,7 @@ public class InboxReportServiceImpl implements InboxReportService {
 	@Override
 	public JsonObject getSTD682OTDistributedTimesheetReport(ResourceResolver resolver,
 			WorkflowSession graniteWorkflowSession, WorkItem wItem, int count) {
+		log.info("Pushpa Impl Class");
 		try {
 			JsonObject outputJson = new JsonObject();
 			String currentAssignee = wItem.getCurrentAssignee();
@@ -2123,6 +2124,7 @@ public class InboxReportServiceImpl implements InboxReportService {
 			outputJson.addProperty("workflowInstanceId", wItem.getWorkflow().getId());
 			outputJson.addProperty("workflowModelName", wItem.getWorkflow().getWorkflowModel().getTitle());
 			outputJson.addProperty("witemId", wItem.getId());
+			log.info("Pushpa outputJson="+outputJson.size());
 			return outputJson;
 			
 		} catch (Exception e) {

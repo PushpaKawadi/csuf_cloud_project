@@ -68,6 +68,7 @@ public class GenericInboxReportServlet extends SlingSafeMethodsServlet {
 		private WorkflowType() {
 		}
 	}
+	
 
 	private static final String ASSIGN_TASK_STEP = "forms:assigntask";
 	private static final String CD048_WORKFLOW_NAME = "CD048 Student Asst Attendance";
@@ -220,13 +221,19 @@ public class GenericInboxReportServlet extends SlingSafeMethodsServlet {
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
+		log.info("Generic Servlet Start");
+
 		WorkflowSession graniteWorkflowSession = null;
 		ResourceResolver resolver = null;
 		try {
 			resolver = request.getResourceResolver();
+			log.info("Anagha resolver="+resolver);
 			graniteWorkflowSession = resolver.adaptTo(WorkflowSession.class);
+			log.info("Anagha graniteWorkflowSession="+graniteWorkflowSession);
 			String workflowType = request.getParameter("workflowType");
+			log.info("Anagha workflowType="+workflowType);
 			WorkItem[] workItems = graniteWorkflowSession.getActiveWorkItems();
+			
 			JsonArray jsonResponse = new JsonArray();
 			JsonObject json = null;
 			int count = 1;
@@ -281,6 +288,7 @@ public class GenericInboxReportServlet extends SlingSafeMethodsServlet {
 						&& workflowType.equalsIgnoreCase(WorkflowType.STD_682.name())
 						&& ((wItem.getItemSubType().equalsIgnoreCase(ASSIGN_TASK_STEP)
 								&& title.matches(STD_682_TIMESHEET_WORKFLOW_NAME)))) {
+					log.info("Pushpa inside method");
 					json = inboxReportService.getSTD682OTDistributedTimesheetReport(resolver, graniteWorkflowSession,
 							wItem, count);
 					if (null != json && json.isJsonObject()) {
