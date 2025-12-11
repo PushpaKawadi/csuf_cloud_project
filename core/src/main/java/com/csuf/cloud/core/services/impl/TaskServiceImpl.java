@@ -1047,7 +1047,7 @@ public class TaskServiceImpl implements TaskService {
 				JsonObject jsonObj = new JsonObject();
 
 				// ----- AEM Permission Block -----
-				jsonObj.addProperty("isViewTaskAllowed", isViewTaskAllowed);
+				/*jsonObj.addProperty("isViewTaskAllowed", isViewTaskAllowed);
 				jsonObj.addProperty("isAssigneeAGroup", CSUFUtils.isAuthorizableAGroup(currentUserSession, assignee));
 				log.info("Test1=" +CSUFUtils.isAuthorizableAGroup(currentUserSession, assignee));
 				
@@ -1055,7 +1055,7 @@ public class TaskServiceImpl implements TaskService {
 						inboxService.isViewTaskDetailsAllowed(currentUserSession, assignee));
 				jsonObj.addProperty("isCurrentUserAdmin", inboxService.isCurrentUserAdmin(currentUserSession));
 				jsonObj.addProperty("currentUserId", inboxService.getCurrentUserId(currentUserSession));
-				log.info("Test2=" +inboxService.getCurrentUserId(currentUserSession));
+				log.info("Test2=" +inboxService.getCurrentUserId(currentUserSession));*/
 
 				// ----- Standard Fields -----
 				jsonObj.addProperty("task_title", getSafe(obj, "task_title"));
