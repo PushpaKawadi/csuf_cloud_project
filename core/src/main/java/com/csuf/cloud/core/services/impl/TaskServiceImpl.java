@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -44,6 +45,7 @@ import com.adobe.granite.workflow.exec.Status;
 import com.adobe.granite.workflow.exec.WorkItem;
 import com.adobe.granite.workflow.exec.Workflow;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.csuf.cloud.core.services.GlobalConfigService;
 import com.csuf.cloud.core.services.InboxItemService;
@@ -1007,6 +1009,7 @@ public class TaskServiceImpl implements TaskService {
 	@Override
 	public JsonArray getAllTasks(Session currentUserSession) {
 		String dbServiceUrl = "https://myformstst.fullerton.edu/bin/getMyTasksData";
+		  JsonArray resultArray = new JsonArray();
 		log.info("GetAllTask");
 		try {
 			CloseableHttpClient client = HttpClients.createDefault();
@@ -1032,7 +1035,7 @@ public class TaskServiceImpl implements TaskService {
 		            sb.append(line);
 		        }
 
-		        JsonArray resultArray = JsonParser.parseString(sb.toString()).getAsJsonArray();
+		         resultArray = JsonParser.parseString(sb.toString()).getAsJsonArray();
 		        
 		        log.info("Best value =" +resultArray);
 			
@@ -1042,14 +1045,17 @@ public class TaskServiceImpl implements TaskService {
 		}
 		
 		
-		// log.debug("getTasks SQL : {}", getTasksStmt);
-		/*try (Connection connection = jdbcService.getInboxDBConnection();
-				PreparedStatement prStmt = connection.prepareStatement(getTasksStmt);
-				ResultSet resultSet = prStmt.executeQuery();) {
+		
 			JsonArray jsonArray = new JsonArray();
 			// log.debug("before while loop : {}", LocalTime.now());
-			while (resultSet.next()) {
-				String assignee = resultSet.getString("assignee");
+			
+			//while (resultSet.next()) {
+			try {
+			for (JsonElement element : resultArray) {
+				log.info("Pushpa value =" +resultArray);
+				JsonObject obj = element.getAsJsonObject();
+				//String assignee = resultSet.getString("assignee");
+				String assignee = obj.get("assignee").getAsString();
 				boolean isViewTaskAllowed = inboxService.isViewInboxTaskAllowed(currentUserSession, assignee);
 				if (!isViewTaskAllowed)
 					continue;
@@ -1063,13 +1069,22 @@ public class TaskServiceImpl implements TaskService {
 				jsonObj.addProperty("isViewTaskDetailsAllowed", String.valueOf(isViewTaskDetailsAllowed));
 				jsonObj.addProperty("isAssigneeAGroup", String.valueOf(isAssigneeAGroup));
 				jsonObj.addProperty("currentUserId", currentUserId);
-				jsonObj.addProperty("task_title", resultSet.getString("task_title"));
+				/*jsonObj.addProperty("task_title", resultSet.getString("task_title"));
 				jsonObj.addProperty("priority", resultSet.getString("priority"));
 				jsonObj.addProperty("task_description", resultSet.getString("task_description"));
 				jsonObj.addProperty("assignee", resultSet.getString("assignee"));
 				jsonObj.addProperty("workflow_model", resultSet.getString("workflow_model"));
 				jsonObj.addProperty("status", resultSet.getString("status"));
-				String startDate = resultSet.getString("start_date");
+				String startDate = resultSet.getString("start_date");*/
+				
+				jsonObj.addProperty("task_title",obj.get("task_title").getAsString());
+				jsonObj.addProperty("priority",obj.get("priority").getAsString());
+				jsonObj.addProperty("task_description",obj.get("task_description").getAsString());
+				jsonObj.addProperty("assignee",obj.get("assignee").getAsString());
+				jsonObj.addProperty("workflow_model",obj.get("workflow_model").getAsString());
+				jsonObj.addProperty("status",obj.get("status").getAsString());
+				String startDate = obj.get("start_date").getAsString();
+				
 
 				if (StringUtils.isNotBlank(startDate)) {
 					Date formattedStartDate = CSUFUtils.convertStringToDate(startDate, DATE_FORMAT_DB);
@@ -1081,26 +1096,46 @@ public class TaskServiceImpl implements TaskService {
 						}
 					}
 				}
-				String dueDate = resultSet.getString(DUE_DATE);
+				//String dueDate = resultSet.getString(DUE_DATE);
+				String dueDate = obj.get("DUE_DATE").getAsString();
 				jsonObj.addProperty(DUE_DATE, StringUtils.isNotBlank(dueDate) ? dueDate : StringUtils.EMPTY);
 
-				String workItemId = resultSet.getString("workitem_id");
+				//String workItemId = resultSet.getString("workitem_id");
+				String workItemId = obj.get("workitem_id").getAsString();
 				String actionTaken = null;
 				String workitemComment = null;
-				jsonObj.addProperty("workflow_instance_id", resultSet.getString("workflow_instance_id"));
+				/*jsonObj.addProperty("workflow_instance_id", resultSet.getString("workflow_instance_id"));
 				jsonObj.addProperty("workitem_id", resultSet.getString("workitem_id"));
 				jsonObj.addProperty("action_taken", actionTaken);
 				jsonObj.addProperty("task_submit_comment", workitemComment);
-				jsonObj.addProperty("routes_data", resultSet.getString("routes_data"));
+				jsonObj.addProperty("routes_data", resultSet.getString("routes_data"));*/
+				
+				jsonObj.addProperty("workflow_instance_id", obj.get("workflow_instance_id").getAsString());
+				jsonObj.addProperty("workitem_id", obj.get("workitem_id").getAsString());
+				jsonObj.addProperty("action_taken", actionTaken);
+				jsonObj.addProperty("task_submit_comment", workitemComment);
+				jsonObj.addProperty("routes_data", obj.get("routes_data").getAsString());
 
 				if (!processingConfig.dbType().equalsIgnoreCase("ORACLE")) {
-					jsonObj.addProperty("show_submit", String.valueOf(resultSet.getBoolean("show_submit")));
+					/*jsonObj.addProperty("show_submit", String.valueOf(resultSet.getBoolean("show_submit")));
 					jsonObj.addProperty("show_save", String.valueOf(resultSet.getBoolean("show_save")));
 					jsonObj.addProperty("show_reset", String.valueOf(resultSet.getBoolean("show_reset")));
 					jsonObj.addProperty("show_action_taken", String.valueOf(resultSet.getBoolean("show_action_taken")));
-					jsonObj.addProperty("show_comment", String.valueOf(resultSet.getBoolean("show_comment")));
+					jsonObj.addProperty("show_comment", String.valueOf(resultSet.getBoolean("show_comment")));*/
+					
+					/*jsonObj.addProperty("show_submit", String.valueOf(resultSet.getBoolean("show_submit")));
+					jsonObj.addProperty("show_save", String.valueOf(resultSet.getBoolean("show_save")));
+					jsonObj.addProperty("show_reset", String.valueOf(resultSet.getBoolean("show_reset")));
+					jsonObj.addProperty("show_action_taken", String.valueOf(resultSet.getBoolean("show_action_taken")));
+					jsonObj.addProperty("show_comment", String.valueOf(resultSet.getBoolean("show_comment")));*/
+					
+					jsonObj.addProperty("show_submit", obj.get("show_submit").getAsString());
+					jsonObj.addProperty("show_save", obj.get("show_save").getAsString());
+					jsonObj.addProperty("show_reset", obj.get("show_reset").getAsString());
+					jsonObj.addProperty("show_action_taken", obj.get("show_action_taken").getAsString());
+					jsonObj.addProperty("show_comment", obj.get("show_comment").getAsString());
 				} else {
-					jsonObj.addProperty("show_submit",
+					/*jsonObj.addProperty("show_submit",
 							String.valueOf(CSUFUtils.getBooleanEquivalent(resultSet.getString("show_submit"))));
 					jsonObj.addProperty("show_save",
 							String.valueOf(CSUFUtils.getBooleanEquivalent(resultSet.getString("show_save"))));
@@ -1109,18 +1144,34 @@ public class TaskServiceImpl implements TaskService {
 					jsonObj.addProperty("show_action_taken",
 							String.valueOf(CSUFUtils.getBooleanEquivalent(resultSet.getString("show_action_taken"))));
 					jsonObj.addProperty("show_comment",
-							String.valueOf(CSUFUtils.getBooleanEquivalent(resultSet.getString("show_comment"))));
+							String.valueOf(CSUFUtils.getBooleanEquivalent(resultSet.getString("show_comment"))));*/
+					
+					jsonObj.addProperty("show_submit",
+							String.valueOf(CSUFUtils.getBooleanEquivalent(obj.get("show_submit").getAsString())));
+					jsonObj.addProperty("show_save",
+							String.valueOf(CSUFUtils.getBooleanEquivalent(obj.get("show_save").getAsString())));
+					jsonObj.addProperty("show_reset",
+							String.valueOf(CSUFUtils.getBooleanEquivalent(obj.get("show_reset").getAsString())));
+					jsonObj.addProperty("show_action_taken",
+							String.valueOf(CSUFUtils.getBooleanEquivalent(obj.get("show_action_taken").getAsString())));
+					jsonObj.addProperty("show_comment",
+							String.valueOf(CSUFUtils.getBooleanEquivalent(obj.get("show_comment").getAsString())));
 				}
 				jsonArray.add(jsonObj);
 
 				// log.debug("checkpoint 3 : {}", LocalTime.now());
 
 			}
-			// log.debug("after while loop : {}", LocalTime.now());
+			log.debug("after for loop : {}", LocalTime.now());
+			
+			log.debug("Pushpa Array", jsonArray);
+			
 			return jsonArray;
-		} catch (Exception e) {
-			//log.error(Arrays.toString(e.getStackTrace()));
-		}*/
+			}
+			catch(Exception e) {
+				
+			}
+	
 		return null;
 	}
 }
