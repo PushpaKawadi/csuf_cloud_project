@@ -1036,6 +1036,8 @@ public class TaskServiceImpl implements TaskService {
 		try {
 			for (JsonElement element : resultArray) {
 				JsonObject obj = element.getAsJsonObject();
+				log.info("Json: {}", LocalTime.now());
+				log.info("Pushpa Task Title=" +obj.get("task_title").getAsString());
 
 				// Validate assignee
 				String assignee = getSafe(obj, "assignee");
@@ -1058,14 +1060,16 @@ public class TaskServiceImpl implements TaskService {
 				log.info("Test2=" +inboxService.getCurrentUserId(currentUserSession));*/
 
 				// ----- Standard Fields -----
-				jsonObj.addProperty("task_title", getSafe(obj, "task_title"));
+				jsonObj.addProperty("task_title", obj.get("task_title").getAsString());
+				
+			
 				jsonObj.addProperty("priority", getSafe(obj, "priority"));
 				jsonObj.addProperty("task_description", getSafe(obj, "task_description"));
 				jsonObj.addProperty("assignee", assignee);
 				jsonObj.addProperty("workflow_model", getSafe(obj, "workflow_model"));
 				jsonObj.addProperty("status", getSafe(obj, "status"));
 				
-				log.info("Test3=" +getSafe(obj, "task_title"));
+				
 
 				// ----- START DATE conversion -----
 				String startDate = getSafe(obj, "start_date");
