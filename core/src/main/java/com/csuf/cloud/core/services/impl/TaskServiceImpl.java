@@ -59,7 +59,6 @@ import com.csuf.cloud.core.utils.XMLUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonParser;
 
-
 @Component(service = TaskService.class, immediate = true, property = {
 		Constants.SERVICE_DESCRIPTION + "=Task Service Implementation" })
 public class TaskServiceImpl implements TaskService {
@@ -1005,173 +1004,118 @@ public class TaskServiceImpl implements TaskService {
 		}
 		return null;
 	}
-	
+
 	@Override
 	public JsonArray getAllTasks(Session currentUserSession) {
-		String dbServiceUrl = "https://myformstst.fullerton.edu/bin/getMyTasksData";
-		  JsonArray resultArray = new JsonArray();
-		log.info("GetAllTask");
-		try {
-			CloseableHttpClient client = HttpClients.createDefault();
+
+		final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/getMyTasksData";
+		JsonArray resultArray = new JsonArray();
+		JsonArray jsonArray = new JsonArray();
+
+		log.info("GetAllTask - Started at: {}", LocalTime.now());
+		try (CloseableHttpClient client = HttpClients.createDefault()) {
 			HttpPost post = new HttpPost(dbServiceUrl);
 			post.addHeader("Content-Type", "application/json");
-			//post.setEntity(new StringEntity(json.toString()));
-			
-			//log.info("Pushpa Json:=" +json.toString());
-			
+			try (CloseableHttpResponse response = client.execute(post)) {
+				log.info("DB Service Response: {}", response.getStatusLine());
+				BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
+				StringBuilder sb = new StringBuilder();
+				String line;
+				while ((line = reader.readLine()) != null) {
+					sb.append(line);
+				}
+				resultArray = JsonParser.parseString(sb.toString()).getAsJsonArray();
+				log.info("DB JSON Parsed Successfully. Count = {}", resultArray.size());
+			}
 
-			CloseableHttpResponse response = client.execute(post);
-			log.info("California DB Service Response: =" + response.getStatusLine());
-			log.info("Best: =" + response.getEntity().getContent());
-			
-			
-			 BufferedReader reader = new BufferedReader(
-		                new InputStreamReader(response.getEntity().getContent()));
-
-		        StringBuilder sb = new StringBuilder();
-		        String line;
-
-		        while ((line = reader.readLine()) != null) {
-		            sb.append(line);
-		        }
-
-		         resultArray = JsonParser.parseString(sb.toString()).getAsJsonArray();
-		        
-		        log.info("Best value =" +resultArray);
-			
-			client.close();
-		}catch(Exception e) {
-			log.error(Arrays.toString(e.getStackTrace()));
+		} catch (Exception e) {
+			log.error("Error calling DB service: {}", e.getMessage(), e);
+			return jsonArray; // return empty array
 		}
-		
-		log.info("After results="+ LocalTime.now());
-		
-			JsonArray jsonArray = new JsonArray();
-			log.info("before while loop : {}", LocalTime.now());
-			
-			//while (resultSet.next()) {
-			try {
+		log.info("After DB fetch (before parsing tasks): {}", LocalTime.now());
+		try {
 			for (JsonElement element : resultArray) {
-				log.info("Pushpa value =" +resultArray);
 				JsonObject obj = element.getAsJsonObject();
-				//String assignee = resultSet.getString("assignee");
-				String assignee = obj.get("assignee").getAsString();
-				boolean isViewTaskAllowed = inboxService.isViewInboxTaskAllowed(currentUserSession, assignee);
-				if (!isViewTaskAllowed)
-					continue;
-				JsonObject jsonObj = new JsonObject();
-				jsonObj.addProperty("isViewTaskAllowed", String.valueOf(isViewTaskAllowed));
-				boolean isAssigneeAGroup = CSUFUtils.isAuthorizableAGroup(currentUserSession, assignee);
-				boolean isViewTaskDetailsAllowed = inboxService.isViewTaskDetailsAllowed(currentUserSession, assignee);
-				boolean isCurrentUserAdmin = inboxService.isCurrentUserAdmin(currentUserSession);
-				String currentUserId = inboxService.getCurrentUserId(currentUserSession);
-				jsonObj.addProperty("isCurrentUserAdmin", String.valueOf(isCurrentUserAdmin));
-				jsonObj.addProperty("isViewTaskDetailsAllowed", String.valueOf(isViewTaskDetailsAllowed));
-				jsonObj.addProperty("isAssigneeAGroup", String.valueOf(isAssigneeAGroup));
-				jsonObj.addProperty("currentUserId", currentUserId);
-				/*jsonObj.addProperty("task_title", resultSet.getString("task_title"));
-				jsonObj.addProperty("priority", resultSet.getString("priority"));
-				jsonObj.addProperty("task_description", resultSet.getString("task_description"));
-				jsonObj.addProperty("assignee", resultSet.getString("assignee"));
-				jsonObj.addProperty("workflow_model", resultSet.getString("workflow_model"));
-				jsonObj.addProperty("status", resultSet.getString("status"));
-				String startDate = resultSet.getString("start_date");*/
-				
-				jsonObj.addProperty("task_title",obj.get("task_title").getAsString());
-				jsonObj.addProperty("priority",obj.get("priority").getAsString());
-				jsonObj.addProperty("task_description",obj.get("task_description").getAsString());
-				jsonObj.addProperty("assignee",obj.get("assignee").getAsString());
-				jsonObj.addProperty("workflow_model",obj.get("workflow_model").getAsString());
-				jsonObj.addProperty("status",obj.get("status").getAsString());
-				String startDate = obj.get("start_date").getAsString();
-				
 
+				// Validate assignee
+				String assignee = getSafe(obj, "assignee");
+				boolean isViewTaskAllowed = inboxService.isViewInboxTaskAllowed(currentUserSession, assignee);
+				log.info("isViewTaskAllowed=" +isViewTaskAllowed);
+				if (!isViewTaskAllowed) {
+					continue;
+				}
+				JsonObject jsonObj = new JsonObject();
+
+				// ----- AEM Permission Block -----
+				jsonObj.addProperty("isViewTaskAllowed", isViewTaskAllowed);
+				jsonObj.addProperty("isAssigneeAGroup", CSUFUtils.isAuthorizableAGroup(currentUserSession, assignee));
+				jsonObj.addProperty("isViewTaskDetailsAllowed",
+						inboxService.isViewTaskDetailsAllowed(currentUserSession, assignee));
+				jsonObj.addProperty("isCurrentUserAdmin", inboxService.isCurrentUserAdmin(currentUserSession));
+				jsonObj.addProperty("currentUserId", inboxService.getCurrentUserId(currentUserSession));
+
+				// ----- Standard Fields -----
+				jsonObj.addProperty("task_title", getSafe(obj, "task_title"));
+				jsonObj.addProperty("priority", getSafe(obj, "priority"));
+				jsonObj.addProperty("task_description", getSafe(obj, "task_description"));
+				jsonObj.addProperty("assignee", assignee);
+				jsonObj.addProperty("workflow_model", getSafe(obj, "workflow_model"));
+				jsonObj.addProperty("status", getSafe(obj, "status"));
+
+				// ----- START DATE conversion -----
+				String startDate = getSafe(obj, "start_date");
 				if (StringUtils.isNotBlank(startDate)) {
-					Date formattedStartDate = CSUFUtils.convertStringToDate(startDate, DATE_FORMAT_DB);
-					if (null != formattedStartDate) {
-						String finalStartDate = CSUFUtils.convertDateToString(formattedStartDate, DATE_FORMAT_US);
-						if (StringUtils.isNotBlank(finalStartDate)) {
-							jsonObj.addProperty("start_date",
-									StringUtils.isNotBlank(finalStartDate) ? finalStartDate : StringUtils.EMPTY);
-						}
+					Date formattedDate = CSUFUtils.convertStringToDate(startDate, DATE_FORMAT_DB);
+					if (formattedDate != null) {
+						jsonObj.addProperty("start_date", CSUFUtils.convertDateToString(formattedDate, DATE_FORMAT_US));
 					}
 				}
-				//String dueDate = resultSet.getString(DUE_DATE);
-				String dueDate = obj.get("DUE_DATE").getAsString();
-				jsonObj.addProperty(DUE_DATE, StringUtils.isNotBlank(dueDate) ? dueDate : StringUtils.EMPTY);
 
-				//String workItemId = resultSet.getString("workitem_id");
-				String workItemId = obj.get("workitem_id").getAsString();
-				String actionTaken = null;
-				String workitemComment = null;
-				/*jsonObj.addProperty("workflow_instance_id", resultSet.getString("workflow_instance_id"));
-				jsonObj.addProperty("workitem_id", resultSet.getString("workitem_id"));
-				jsonObj.addProperty("action_taken", actionTaken);
-				jsonObj.addProperty("task_submit_comment", workitemComment);
-				jsonObj.addProperty("routes_data", resultSet.getString("routes_data"));*/
-				
-				jsonObj.addProperty("workflow_instance_id", obj.get("workflow_instance_id").getAsString());
-				jsonObj.addProperty("workitem_id", obj.get("workitem_id").getAsString());
-				jsonObj.addProperty("action_taken", actionTaken);
-				jsonObj.addProperty("task_submit_comment", workitemComment);
-				jsonObj.addProperty("routes_data", obj.get("routes_data").getAsString());
+				// ----- DUE DATE -----
+				jsonObj.addProperty("DUE_DATE", getSafe(obj, "DUE_DATE"));
 
+				// ----- Workflow identifiers -----
+				jsonObj.addProperty("workflow_instance_id", getSafe(obj, "workflow_instance_id"));
+				jsonObj.addProperty("workitem_id", getSafe(obj, "workitem_id"));
+
+				jsonObj.addProperty("action_taken", (String) null);
+				jsonObj.addProperty("task_submit_comment", (String) null);
+
+				// Routes
+				jsonObj.addProperty("routes_data", getSafe(obj, "routes_data"));
+
+				// ----- Flags -----
 				if (!processingConfig.dbType().equalsIgnoreCase("ORACLE")) {
-					/*jsonObj.addProperty("show_submit", String.valueOf(resultSet.getBoolean("show_submit")));
-					jsonObj.addProperty("show_save", String.valueOf(resultSet.getBoolean("show_save")));
-					jsonObj.addProperty("show_reset", String.valueOf(resultSet.getBoolean("show_reset")));
-					jsonObj.addProperty("show_action_taken", String.valueOf(resultSet.getBoolean("show_action_taken")));
-					jsonObj.addProperty("show_comment", String.valueOf(resultSet.getBoolean("show_comment")));*/
-					
-					/*jsonObj.addProperty("show_submit", String.valueOf(resultSet.getBoolean("show_submit")));
-					jsonObj.addProperty("show_save", String.valueOf(resultSet.getBoolean("show_save")));
-					jsonObj.addProperty("show_reset", String.valueOf(resultSet.getBoolean("show_reset")));
-					jsonObj.addProperty("show_action_taken", String.valueOf(resultSet.getBoolean("show_action_taken")));
-					jsonObj.addProperty("show_comment", String.valueOf(resultSet.getBoolean("show_comment")));*/
-					
-					jsonObj.addProperty("show_submit", obj.get("show_submit").getAsString());
-					jsonObj.addProperty("show_save", obj.get("show_save").getAsString());
-					jsonObj.addProperty("show_reset", obj.get("show_reset").getAsString());
-					jsonObj.addProperty("show_action_taken", obj.get("show_action_taken").getAsString());
-					jsonObj.addProperty("show_comment", obj.get("show_comment").getAsString());
+					jsonObj.addProperty("show_submit", getSafe(obj, "show_submit"));
+					jsonObj.addProperty("show_save", getSafe(obj, "show_save"));
+					jsonObj.addProperty("show_reset", getSafe(obj, "show_reset"));
+					jsonObj.addProperty("show_action_taken", getSafe(obj, "show_action_taken"));
+					jsonObj.addProperty("show_comment", getSafe(obj, "show_comment"));
 				} else {
-					/*jsonObj.addProperty("show_submit",
-							String.valueOf(CSUFUtils.getBooleanEquivalent(resultSet.getString("show_submit"))));
-					jsonObj.addProperty("show_save",
-							String.valueOf(CSUFUtils.getBooleanEquivalent(resultSet.getString("show_save"))));
-					jsonObj.addProperty("show_reset",
-							String.valueOf(CSUFUtils.getBooleanEquivalent(resultSet.getString("show_reset"))));
-					jsonObj.addProperty("show_action_taken",
-							String.valueOf(CSUFUtils.getBooleanEquivalent(resultSet.getString("show_action_taken"))));
-					jsonObj.addProperty("show_comment",
-							String.valueOf(CSUFUtils.getBooleanEquivalent(resultSet.getString("show_comment"))));*/
-					
-					jsonObj.addProperty("show_submit",
-							String.valueOf(CSUFUtils.getBooleanEquivalent(obj.get("show_submit").getAsString())));
-					jsonObj.addProperty("show_save",
-							String.valueOf(CSUFUtils.getBooleanEquivalent(obj.get("show_save").getAsString())));
-					jsonObj.addProperty("show_reset",
-							String.valueOf(CSUFUtils.getBooleanEquivalent(obj.get("show_reset").getAsString())));
-					jsonObj.addProperty("show_action_taken",
-							String.valueOf(CSUFUtils.getBooleanEquivalent(obj.get("show_action_taken").getAsString())));
-					jsonObj.addProperty("show_comment",
-							String.valueOf(CSUFUtils.getBooleanEquivalent(obj.get("show_comment").getAsString())));
+					jsonObj.addProperty("show_submit", bool(obj, "show_submit"));
+					jsonObj.addProperty("show_save", bool(obj, "show_save"));
+					jsonObj.addProperty("show_reset", bool(obj, "show_reset"));
+					jsonObj.addProperty("show_action_taken", bool(obj, "show_action_taken"));
+					jsonObj.addProperty("show_comment", bool(obj, "show_comment"));
 				}
+
 				jsonArray.add(jsonObj);
+			}
 
-				// log.debug("checkpoint 3 : {}", LocalTime.now());
+		} catch (Exception e) {
+			log.error("Error processing JSON: {}", e.getMessage(), e);
+		}
 
-			}
-			log.debug("after for loop : {}", LocalTime.now());
-			
-			log.debug("Pushpa Array", jsonArray);
-			
-			return jsonArray;
-			}
-			catch(Exception e) {
-				
-			}
-	
-		return null;
+		log.info("Completed processing tasks at {}", LocalTime.now());
+		return jsonArray;
 	}
+
+	private String getSafe(JsonObject obj, String key) {
+		return obj.has(key) && !obj.get(key).isJsonNull() ? obj.get(key).getAsString() : "";
+	}
+
+	private String bool(JsonObject obj, String key) {
+		return String.valueOf(CSUFUtils.getBooleanEquivalent(getSafe(obj, key)));
+	}
+
 }
