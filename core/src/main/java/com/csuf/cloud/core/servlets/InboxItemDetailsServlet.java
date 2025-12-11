@@ -79,7 +79,7 @@ public class InboxItemDetailsServlet extends SlingSafeMethodsServlet {
 	@Override
 	protected void doGet(final SlingHttpServletRequest request, final SlingHttpServletResponse response)
 			throws ServletException, IOException {
-		log.info("Anagha entered InboxItemDetailsServlet doGet method");
+		log.info("entered InboxItemDetailsServlet doGet method");
 		JsonObject json = null;
 		JsonArray jsonArray = null;
 		PrintWriter out = response.getWriter();
@@ -101,7 +101,6 @@ public class InboxItemDetailsServlet extends SlingSafeMethodsServlet {
 
 		try {
 			String historyItemId = (String) request.getAttribute("fd.dashboard.tm.historyitemid");
-			log.info("Anagha historyItemId ="+historyItemId);
 			if (StringUtils.isNotBlank(workItemId) && action.equalsIgnoreCase(ActionType.PREVIOUS_STEP_DATA.name())) {
 				// log.debug("entry with workItemId : {} at {}", workItemId, LocalTime.now());
 				try {
@@ -133,11 +132,9 @@ public class InboxItemDetailsServlet extends SlingSafeMethodsServlet {
 				out.print(jsonArray);
 			} else if (action.equalsIgnoreCase(ActionType.FORMS_CATALOG.name())) {
 				Session session = request.getResourceResolver().adaptTo(Session.class);
-				log.info("Anagha session ="+session);
 				//String ldapName = inboxService.getldapAccountName(session, request.getResourceResolver());
 				try {
 					jsonArray = inboxService.getFormsCatalog(session);
-					log.info("Pushpa jsonArray="+jsonArray);
 					JsonArray jsonArrayCopy = inboxService.getFormsCatalog(session);
 					for (int i = 0; i < jsonArrayCopy.size(); i++) {
 						JsonElement jsonElement = jsonArrayCopy.get(i);
