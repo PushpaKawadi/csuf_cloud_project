@@ -1043,9 +1043,9 @@ public class TaskServiceImpl implements TaskService {
 				String assignee = getSafe(obj, "assignee");
 				boolean isViewTaskAllowed = inboxService.isViewInboxTaskAllowed(currentUserSession, assignee);
 				log.info("isViewTaskAllowed=" +isViewTaskAllowed);
-				if (!isViewTaskAllowed) {
+				/*if (!isViewTaskAllowed) {
 					continue;
-				}
+				}*/
 				JsonObject jsonObj = new JsonObject();
 
 				// ----- AEM Permission Block -----
