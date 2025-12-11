@@ -1049,10 +1049,13 @@ public class TaskServiceImpl implements TaskService {
 				// ----- AEM Permission Block -----
 				jsonObj.addProperty("isViewTaskAllowed", isViewTaskAllowed);
 				jsonObj.addProperty("isAssigneeAGroup", CSUFUtils.isAuthorizableAGroup(currentUserSession, assignee));
+				log.info("Test1=" +CSUFUtils.isAuthorizableAGroup(currentUserSession, assignee));
+				
 				jsonObj.addProperty("isViewTaskDetailsAllowed",
 						inboxService.isViewTaskDetailsAllowed(currentUserSession, assignee));
 				jsonObj.addProperty("isCurrentUserAdmin", inboxService.isCurrentUserAdmin(currentUserSession));
 				jsonObj.addProperty("currentUserId", inboxService.getCurrentUserId(currentUserSession));
+				log.info("Test2=" +inboxService.getCurrentUserId(currentUserSession));
 
 				// ----- Standard Fields -----
 				jsonObj.addProperty("task_title", getSafe(obj, "task_title"));
@@ -1061,6 +1064,8 @@ public class TaskServiceImpl implements TaskService {
 				jsonObj.addProperty("assignee", assignee);
 				jsonObj.addProperty("workflow_model", getSafe(obj, "workflow_model"));
 				jsonObj.addProperty("status", getSafe(obj, "status"));
+				
+				log.info("Test3=" +getSafe(obj, "task_title"));
 
 				// ----- START DATE conversion -----
 				String startDate = getSafe(obj, "start_date");
@@ -1068,21 +1073,27 @@ public class TaskServiceImpl implements TaskService {
 					Date formattedDate = CSUFUtils.convertStringToDate(startDate, DATE_FORMAT_DB);
 					if (formattedDate != null) {
 						jsonObj.addProperty("start_date", CSUFUtils.convertDateToString(formattedDate, DATE_FORMAT_US));
+						log.info("Test4=" +CSUFUtils.convertDateToString(formattedDate, DATE_FORMAT_US));
+						
 					}
 				}
 
 				// ----- DUE DATE -----
 				jsonObj.addProperty("DUE_DATE", getSafe(obj, "DUE_DATE"));
+				
+				log.info("Test5=" +getSafe(obj, "DUE_DATE"));
 
 				// ----- Workflow identifiers -----
 				jsonObj.addProperty("workflow_instance_id", getSafe(obj, "workflow_instance_id"));
 				jsonObj.addProperty("workitem_id", getSafe(obj, "workitem_id"));
+				log.info("Test6=" +getSafe(obj, "workitem_id"));
 
 				jsonObj.addProperty("action_taken", (String) null);
 				jsonObj.addProperty("task_submit_comment", (String) null);
 
 				// Routes
 				jsonObj.addProperty("routes_data", getSafe(obj, "routes_data"));
+				log.info("Test7=" +getSafe(obj, "routes_data"));
 
 				// ----- Flags -----
 				if (!processingConfig.dbType().equalsIgnoreCase("ORACLE")) {
@@ -1098,7 +1109,7 @@ public class TaskServiceImpl implements TaskService {
 					jsonObj.addProperty("show_action_taken", bool(obj, "show_action_taken"));
 					jsonObj.addProperty("show_comment", bool(obj, "show_comment"));
 				}
-
+				log.info("Test8=" +jsonObj.size());
 				jsonArray.add(jsonObj);
 			}
 
@@ -1107,6 +1118,7 @@ public class TaskServiceImpl implements TaskService {
 		}
 
 		log.info("Completed processing tasks at {}", LocalTime.now());
+		log.info("Test9=" +jsonArray.size());
 		return jsonArray;
 	}
 
