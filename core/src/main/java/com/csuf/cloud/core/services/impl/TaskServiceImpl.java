@@ -1044,10 +1044,10 @@ public class TaskServiceImpl implements TaskService {
 			log.error(Arrays.toString(e.getStackTrace()));
 		}
 		
-		
+		log.info("After results="+ LocalTime.now());
 		
 			JsonArray jsonArray = new JsonArray();
-			// log.debug("before while loop : {}", LocalTime.now());
+			log.info("before while loop : {}", LocalTime.now());
 			
 			//while (resultSet.next()) {
 			try {
