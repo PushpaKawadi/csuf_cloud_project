@@ -4,10 +4,14 @@ import com.adobe.fd.fp.common.PortalUtilsComponent;
 import com.adobe.fd.fp.exception.FormsPortalException;
 import com.adobe.fd.fp.service.*;
 import com.adobe.fd.fp.util.FormsPortalConstants;
+import com.csuf.cloud.core.services.impl.AIChatbotServiceImpl;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.commons.json.JSONArray;
 import org.apache.sling.commons.json.JSONObject;
 import org.osgi.service.component.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.osgi.framework.BundleContext;
 
 import org.apache.sling.api.resource.ResourceResolver;
@@ -26,7 +30,7 @@ import java.util.stream.Collectors;
         name = "Forms Portal Custom Metadata Service"
 )
 public class FormsPortalCustomMetadataServiceImpl implements SubmitMetadataService, DraftMetadataService, PendingSignMetadataService {
-
+	private static final Logger log = LoggerFactory.getLogger(FormsPortalCustomMetadataServiceImpl.class);
     @Reference
     private PortalUtilsComponent portalUtilsComponent;
 
@@ -43,6 +47,7 @@ public class FormsPortalCustomMetadataServiceImpl implements SubmitMetadataServi
 
     @Activate
     protected void activate(BundleContext context, Map<String, Object> props) {
+    	log.info("Pushpa FormsPortalCustomMetadataServiceImpl class");
         dataSourceName = Optional.ofNullable((String) props.getOrDefault("datasource", FormsPortalConstants.STR_DEFAULT_DATA_SOURCE_NAME))
                                  .orElse(FormsPortalConstants.STR_DEFAULT_DATA_SOURCE_NAME);
         metadataTable = Optional.ofNullable((String) props.getOrDefault("metadatatable", FormsPortalConstants.STR_DEFAULT_METADATA_TABLE))
@@ -54,6 +59,7 @@ public class FormsPortalCustomMetadataServiceImpl implements SubmitMetadataServi
     }
 
     private ResourceResolver getServiceResourceResolver() throws FormsPortalException {
+    	log.info("Pushpa FormsPortalCustomMetadataServiceImpl ResourceResolver");
         try {
             Map<String, Object> param = new HashMap<>();
             param.put(ResourceResolverFactory.SUBSERVICE, "formsPortalService"); // Service user must be mapped in OSGi
@@ -64,6 +70,7 @@ public class FormsPortalCustomMetadataServiceImpl implements SubmitMetadataServi
     }
 
     private Connection getConnection() throws FormsPortalException {
+    	log.info("Pushpa FormsPortalCustomMetadataServiceImpl getConnection");
         try (ResourceResolver resolver = getServiceResourceResolver()) {
             DataSource ds = resolver.adaptTo(DataSource.class);
             if (ds == null) throw new FormsPortalException("DataSource not available");
@@ -75,6 +82,7 @@ public class FormsPortalCustomMetadataServiceImpl implements SubmitMetadataServi
 
     @Override
     public String saveMetadata(Map<String, Object> metadataMap) throws FormsPortalException {
+    	log.info("Pushpa FormsPortalCustomMetadataServiceImpl saveMetadata");
         String draftId = metadataMap.get(FormsPortalConstants.STR_DRAFT_ID).toString();
         metadataMap.put(FormsPortalConstants.STR_ID, draftId);
         try (Connection conn = getConnection()) {
@@ -89,6 +97,7 @@ public class FormsPortalCustomMetadataServiceImpl implements SubmitMetadataServi
 
     @Override
     public JSONObject submitMetadata(Map<String, Object> metadataMap) throws FormsPortalException {
+    	log.info("Pushpa FormsPortalCustomMetadataServiceImpl submitMetadata");
         try (Connection conn = getConnection()) {
             conn.setAutoCommit(false);
             String submitId = metadataMap.containsKey(FormsPortalConstants.STR_SUBMIT_ID)
@@ -120,6 +129,7 @@ public class FormsPortalCustomMetadataServiceImpl implements SubmitMetadataServi
     }
 
     private void insertMetadata(String id, Map<String, Object> metadataMap, Connection conn) throws FormsPortalException {
+    	log.info("Pushpa FormsPortalCustomMetadataServiceImpl insertMetadata");
         try {
             // Get table columns
             List<String> columnsList = new ArrayList<>();

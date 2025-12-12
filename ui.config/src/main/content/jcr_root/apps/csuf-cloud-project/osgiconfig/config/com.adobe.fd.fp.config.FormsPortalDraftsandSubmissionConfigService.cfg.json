@@ -1,0 +1,12 @@
+{
+  "portal_outboxes": [
+    "outbox"
+  ],
+  "draft_data_service": "formsportal.customdataservice",
+  "draft_metadata_service": "formsportal.custommetadataservice",
+  "submit_data_service": "formsportal.customdataservice",
+  "submit_metadata_service": "formsportal.custommetadataservice",
+  "pendingSign_data_service": "formsportal.customdataservice",
+  "pendingSign_metadata_service": "formsportal.custommetadataservice",
+  "validateCustomTemplatePath": true
+}

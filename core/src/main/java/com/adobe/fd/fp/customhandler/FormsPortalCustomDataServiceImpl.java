@@ -12,12 +12,15 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.service.component.annotations.*;
 import org.osgi.service.metatype.annotations.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.adobe.fd.fp.exception.FormsPortalException;
 import com.adobe.fd.fp.service.DraftDataService;
 import com.adobe.fd.fp.service.PendingSignDataService;
 import com.adobe.fd.fp.service.SubmitDataService;
 import com.adobe.fd.fp.util.FormsPortalConstants;
+import com.csuf.cloud.core.services.impl.AIChatbotServiceImpl;
 
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
@@ -28,6 +31,8 @@ import org.apache.sling.api.resource.ResourceResolverFactory;
 )
 @Designate(ocd = FormsPortalCustomDataServiceImpl.Config.class)
 public class FormsPortalCustomDataServiceImpl implements SubmitDataService, DraftDataService, PendingSignDataService {
+	private static final Logger log = LoggerFactory.getLogger(AIChatbotServiceImpl.class);
+	
 
     private static final String DEFAULT_DATA_TABLE = FormsPortalConstants.STR_DEFAULT_DATA_TABLE;
     private static final String DEFAULT_DATA_SOURCE = FormsPortalConstants.STR_DEFAULT_DATA_SOURCE_NAME;
@@ -73,6 +78,7 @@ public class FormsPortalCustomDataServiceImpl implements SubmitDataService, Draf
     }
 
     private Connection getConnection() throws FormsPortalException {
+    	log.info("Pushpa FormsPortalCustomDataServiceImpl getConnection");
         try {
             String filter = "(&(objectclass=javax.sql.DataSource)(datasource.name=" + getDataSourceName() + "))";
             ServiceReference<?>[] refs = bundleContext.getAllServiceReferences(null, filter);
@@ -87,6 +93,7 @@ public class FormsPortalCustomDataServiceImpl implements SubmitDataService, Draf
     }
 
     private ResourceResolver getServiceResourceResolver() throws FormsPortalException {
+    	log.info("Pushpa FormsPortalCustomDataServiceImpl ResourceResolver");
         try {
             // Using service user mapping in AEM
             return resolverFactory.getServiceResourceResolver(Map.of(
@@ -99,6 +106,7 @@ public class FormsPortalCustomDataServiceImpl implements SubmitDataService, Draf
 
     @Override
     public String saveData(String id, String formName, String formdata) throws FormsPortalException {
+    	log.info("Pushpa FormsPortalCustomDataServiceImpl saveData");
         try (ResourceResolver resolver = getServiceResourceResolver()) {
             String userName = resolver.getUserID();
             return saveDataInternal(id, formdata.getBytes(), userName);
@@ -106,6 +114,9 @@ public class FormsPortalCustomDataServiceImpl implements SubmitDataService, Draf
     }
 
     private String saveDataInternal(String id, byte[] formData, String userName) throws FormsPortalException {
+    	
+    	log.info("Pushpa FormsPortalCustomDataServiceImpl saveDataInternal");
+    	
         try (Connection connection = getConnection()) {
             String sql = "INSERT INTO " + getDataTableName() + " (id, data, owner) VALUES (?, ?, ?) "
                     + "ON DUPLICATE KEY UPDATE data = ?";
