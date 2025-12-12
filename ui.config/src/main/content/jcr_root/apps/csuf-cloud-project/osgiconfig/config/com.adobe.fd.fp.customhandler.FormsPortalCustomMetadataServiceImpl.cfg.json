@@ -1,0 +1,12 @@
+{
+"com.adobe.fd.fp.customhandler.FormsPortalCustomMetadataServiceImpl.aem.formsportal.impl.prop.name":"formsportal.custommetadataservice",
+
+"com.adobe.fd.fp.customhandler.FormsPortalCustomMetadataServiceImpl.datasource.name":"FormsPortal",
+
+"com.adobe.fd.fp.customhandler.FormsPortalCustomMetadataServiceImpl.metadatatable.name":"metadata",
+
+"com.adobe.fd.fp.customhandler.FormsPortalCustomMetadataServiceImpl.additionalmetadatatable.name":"additionalmetadatatable",
+
+"com.adobe.fd.fp.customhandler.FormsPortalCustomMetadataServiceImpl.commenttable.name":"commenttable"
+
+}

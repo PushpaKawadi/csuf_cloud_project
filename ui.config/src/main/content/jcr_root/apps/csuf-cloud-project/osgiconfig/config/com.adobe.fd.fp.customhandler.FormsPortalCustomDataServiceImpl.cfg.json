@@ -1,0 +1,7 @@
+{
+"com.adobe.fd.fp.customhandler.FormsPortalCustomDataServiceImpl.aem.formsportal.impl.prop.name":"formsportal.customdataservice",
+
+"com.adobe.fd.fp.customhandler.FormsPortalCustomDataServiceImpl.datatable.name":"data",
+
+"com.adobe.fd.fp.customhandler.FormsPortalCustomDataServiceImpl.datasource.name":"FormsPortal"
+}

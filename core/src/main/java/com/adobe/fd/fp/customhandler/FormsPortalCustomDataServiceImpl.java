@@ -20,7 +20,7 @@ import com.adobe.fd.fp.service.DraftDataService;
 import com.adobe.fd.fp.service.PendingSignDataService;
 import com.adobe.fd.fp.service.SubmitDataService;
 import com.adobe.fd.fp.util.FormsPortalConstants;
-import com.csuf.cloud.core.services.impl.AIChatbotServiceImpl;
+
 
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.api.resource.ResourceResolverFactory;
@@ -31,7 +31,7 @@ import org.apache.sling.api.resource.ResourceResolverFactory;
 )
 @Designate(ocd = FormsPortalCustomDataServiceImpl.Config.class)
 public class FormsPortalCustomDataServiceImpl implements SubmitDataService, DraftDataService, PendingSignDataService {
-	private static final Logger log = LoggerFactory.getLogger(AIChatbotServiceImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(FormsPortalCustomDataServiceImpl.class);
 	
 
     private static final String DEFAULT_DATA_TABLE = FormsPortalConstants.STR_DEFAULT_DATA_TABLE;
