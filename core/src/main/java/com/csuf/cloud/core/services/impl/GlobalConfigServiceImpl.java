@@ -56,13 +56,10 @@ public class GlobalConfigServiceImpl implements GlobalConfigService {
 	}*/
 	
 	 
-    @Override
+    /*@Override
     public ResourceResolver getResourceResolver() throws LoginException {
 
-        /*Map<String, Object> authInfo = Collections.singletonMap(
-                ResourceResolverFactory.SUBSERVICE,
-                SUB_SERVICE_NAME
-        );*/
+       
     	
         Map<String, Object> params = new HashMap<>();
         params.put(ResourceResolverFactory.SUBSERVICE, SUB_SERVICE_NAME);
@@ -79,6 +76,31 @@ public class GlobalConfigServiceImpl implements GlobalConfigService {
         }
 
         return resolver;
+    }*/
+    
+    @Override
+    public ResourceResolver getResourceResolver() {
+        ResourceResolver resolver = null;
+        log.info("Requesting service resolver for subservice '{}'", SUB_SERVICE_NAME);
+
+        Map<String, Object> params = new HashMap<>();
+        params.put(ResourceResolverFactory.SUBSERVICE, SUB_SERVICE_NAME);
+
+        try {
+            resolver = resolverFactory.getServiceResourceResolver(params);
+
+            if (resolver != null && resolver.isLive()) {
+                log.info("Service resolver obtained successfully: {}", resolver);
+            } else {
+                log.error("Service resolver is null or not live for subservice '{}'", SUB_SERVICE_NAME);
+            }
+        } catch (LoginException e) {
+            log.error("Failed to get service resolver for subservice '{}': {}", SUB_SERVICE_NAME, e.getMessage(), e);
+        } catch (Exception e) {
+            log.error("Unexpected error while getting service resolver: {}", e.getMessage(), e);
+        }
+
+        return resolver; // may be null, handle safely in caller
     }
 
 	@Override

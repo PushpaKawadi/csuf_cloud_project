@@ -72,13 +72,10 @@ public class WorkflowListener implements EventHandler {
 		Session adminSession = null;
 		try {
 			resolver = globalConfigService.getResourceResolver();
-			log.info("Irvine resolver="+resolver);
-			wfSession = resolver.adaptTo(WorkflowSession.class);
-			log.info("Irvine wfSession="+wfSession);
+			log.info("resolver="+resolver);
+			adminSession = globalConfigService.getAdminSession();
 			
-			//adminSession = globalConfigService.getAdminSession();
-
-			//wfSession = resolver.adaptTo(WorkflowSession.class);
+			wfSession = resolver.adaptTo(WorkflowSession.class);
 			WorkflowEvent wfevent = (WorkflowEvent) event;
 
 			log.info("Irvine wfevent : {}", wfevent.toString());
@@ -113,8 +110,6 @@ public class WorkflowListener implements EventHandler {
 			}
 
 			WorkItem item = wfevent.getWorkItem();
-			log.debug("Irvine item="+item.getCurrentAssignee());
-			adminSession = globalConfigService.getAdminSession();
 			
 			if (null != item && StringUtils.isNotBlank(item.getItemSubType())
 					&& item.getItemSubType().equalsIgnoreCase(ASSIGN_TASK_STEP)) {
