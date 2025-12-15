@@ -89,13 +89,14 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public String saveTask(WorkItem item, ResourceResolver resolver, Session session) throws Exception {
-		// log.debug("inside saveTask 1");
+		log.info("Pushpa inside saveTask 1");
 		String taskTitle = item.getNode().getTitle();
 		// String taskDescription = item.getNode().getDescription();
 		String taskDescription = item.getWorkflow().getMetaDataMap().get("extendedDesc", String.class);
-		log.debug("taskDescription : {}", taskDescription);
+		log.info("Pushpa taskDescription : {}", taskDescription);
 		String taskPriority = item.getPriority().toString();
 		String assignee = item.getCurrentAssignee();
+		log.info("Pushpa assignee="+assignee);
 		// String workflowModel = item.getWorkflow().getWorkflowModel().getTitle();
 		String workflowModel = null;
 		Object workflowModelTitle = item.getWorkflow().getWorkflowData().getMetaDataMap().get("workflowTitle");
@@ -105,6 +106,7 @@ public class TaskServiceImpl implements TaskService {
 		if (StringUtils.isBlank(workflowModel)) {
 			workflowModel = item.getWorkflow().getWorkflowModel().getTitle();
 		}
+		log.info("Pushpa workflowModel="+workflowModel);
 		String status = item.getStatus().name();
 		Date startDate = item.getTimeStarted();
 		Date dueDate = item.getDueTime();
@@ -112,6 +114,7 @@ public class TaskServiceImpl implements TaskService {
 		String workflowInstanceId = item.getWorkflow().getId();
 		String workitemId = item.getId();
 		int index = workitemId.lastIndexOf('/');
+		log.info("Pushpa index="+index);
 		String workitemNodeId = workitemId.substring(index + 1, workitemId.length());
 		JsonObject json = inboxService
 				.getPreviousStepData((session != null ? session : globalConfigService.getAdminSession()), item);
@@ -1037,7 +1040,6 @@ public class TaskServiceImpl implements TaskService {
 			for (JsonElement element : resultArray) {
 				JsonObject obj = element.getAsJsonObject();
 				log.info("Json: {}", LocalTime.now());
-				log.info("Pushpa Task Title=" +obj.get("task_title").getAsString());
 
 				// Validate assignee
 				String assignee = getSafe(obj, "assignee");
@@ -1113,7 +1115,7 @@ public class TaskServiceImpl implements TaskService {
 					jsonObj.addProperty("show_action_taken", bool(obj, "show_action_taken"));
 					jsonObj.addProperty("show_comment", bool(obj, "show_comment"));
 				}
-				log.info("Test8=" +jsonObj.size());
+				
 				jsonArray.add(jsonObj);
 			}
 
@@ -1122,7 +1124,6 @@ public class TaskServiceImpl implements TaskService {
 		}
 
 		log.info("Completed processing tasks at {}", jsonArray);
-		//log.info("Test9=" +jsonArray.size());
 		return jsonArray;
 	}
 
