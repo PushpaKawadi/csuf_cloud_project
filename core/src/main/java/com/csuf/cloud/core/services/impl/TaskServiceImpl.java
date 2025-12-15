@@ -89,14 +89,14 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public String saveTask(WorkItem item, ResourceResolver resolver, Session session) throws Exception {
-		log.info("Pushpa inside saveTask 1");
+		log.info("Irvine inside saveTask 1");
 		String taskTitle = item.getNode().getTitle();
 		// String taskDescription = item.getNode().getDescription();
 		String taskDescription = item.getWorkflow().getMetaDataMap().get("extendedDesc", String.class);
-		log.info("Pushpa taskDescription : {}", taskDescription);
+		log.info("Irvine taskDescription : {}", taskDescription);
 		String taskPriority = item.getPriority().toString();
 		String assignee = item.getCurrentAssignee();
-		log.info("Pushpa assignee="+assignee);
+		log.info("Irvine assignee="+assignee);
 		// String workflowModel = item.getWorkflow().getWorkflowModel().getTitle();
 		String workflowModel = null;
 		Object workflowModelTitle = item.getWorkflow().getWorkflowData().getMetaDataMap().get("workflowTitle");

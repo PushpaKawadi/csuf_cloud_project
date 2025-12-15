@@ -58,8 +58,9 @@ public class WorkflowListener implements EventHandler {
 
 	@Override
 	public void handleEvent(Event event) {
-		log.debug("entered WorkflowListener");
+		log.info("Pushpa entered WorkflowListener");
 		String topic = event.getTopic();
+		log.info("Pushpa topic");
 		if (!topic.equals(WorkflowEvent.EVENT_TOPIC)) {
 			log.debug("event topic is not a WorkflowEvent, so returning without further processing!");
 			return;

@@ -121,7 +121,7 @@ public class ProcessWorkitemsScheduler implements Runnable {
 	 */
 	@Override
 	public void run() {
-		log.debug("starting Process Active Workitems on Processing Instance Scheduler Service...");
+		log.info("Irvine starting Process Active Workitems on Processing Instance Scheduler Service...");
 		WorkflowSession wfSession = null;
 		ResourceResolver resolver = null;
 		Session session = null;
