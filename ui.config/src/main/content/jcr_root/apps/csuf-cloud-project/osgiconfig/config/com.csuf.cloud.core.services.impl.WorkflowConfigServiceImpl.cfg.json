@@ -1,0 +1,61 @@
+{
+  "getWorkflowModels": [
+    "STD 682 Overtime - Distributed"
+  ],
+
+  "reportViewersGroupList": [
+    "HR-Reviewers",
+    "ARSC-Reviewers"
+  ],
+
+  "reminderInterval": 30,
+
+  "reminderTaskTitles": [
+  ],
+
+  "reminderEmailFromAddress": "",
+
+  "reminderEmailToAddresses": [
+    ""
+  ],
+
+  "reminderEmailCcAddresses": [
+    ""
+  ],
+
+  "reminderEmailBccAddresses": [],
+
+  "reminderEmailSubject": "",
+
+  "reminderEmailTemplatePath": "",
+
+  "reminderEmailEmbeddedImagePath": "",
+
+  "isStartTLS": true,
+
+  "assignTaskToDelegateeInterval": 120,
+
+  "delegateeTaskTitles": [
+    "Manager Review"
+  ],
+
+  "isSendEmailAfterDelegation": true,
+
+  "taskAutoAdvanceInterval": 180,
+
+  "autoAdvanceTaskTitles": [
+    "Employee Review",
+	"Requestor Review"
+  ],
+
+  "autoAdvanceRoutes": [
+    "Save Workflow History",
+    "Save Workflow History After Requestor Review - CSARF"
+  ],
+
+  "autoAdvanceMetadataField": "ExpiryKey",
+
+  "isSendEmailAfterAutoAdvance": false
+}
+
+
