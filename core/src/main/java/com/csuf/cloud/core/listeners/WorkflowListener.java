@@ -80,8 +80,10 @@ public class WorkflowListener implements EventHandler {
 		WorkflowSession wfSession = null;
 		ResourceResolver resolver = null;
 		Session adminSession = null;
-		try {
-			//resolver = globalConfigService.getResourceResolver();
+		
+		resolver = globalConfigService.getResourceResolver();
+		/*try {
+			resolver = globalConfigService.getResourceResolver();
 			 Map<String, Object> params = new HashMap<>();
 		        params.put(ResourceResolverFactory.SUBSERVICE, SUB_SERVICE_NAME);
 
@@ -98,10 +100,10 @@ public class WorkflowListener implements EventHandler {
 		            log.error("Failed to get service resolver for subservice '{}': {}", SUB_SERVICE_NAME, e.getMessage(), e);
 		        } catch (Exception e) {
 		            log.error("Rishabh Unexpected error while getting service resolver: {}", e.getMessage(), e);
-		        }
+		        }*/
 
 		       
-			log.info("Rishabh Ancestry resolver="+resolver);
+			log.info("Trincy Ancestry resolver="+resolver);
 			adminSession = resolver.adaptTo(Session.class);//globalConfigService.getAdminSession();
 			
 			wfSession = resolver.adaptTo(WorkflowSession.class);
