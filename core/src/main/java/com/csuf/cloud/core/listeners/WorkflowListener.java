@@ -58,9 +58,9 @@ public class WorkflowListener implements EventHandler {
 
 	@Override
 	public void handleEvent(Event event) {
-		log.info("Pushpa entered WorkflowListener");
+		log.info("Ancestry entered WorkflowListener");
 		String topic = event.getTopic();
-		log.info("Pushpa topic");
+		log.info("Ancestry topic");
 		if (!topic.equals(WorkflowEvent.EVENT_TOPIC)) {
 			log.debug("event topic is not a WorkflowEvent, so returning without further processing!");
 			return;
@@ -72,16 +72,16 @@ public class WorkflowListener implements EventHandler {
 		Session adminSession = null;
 		try {
 			resolver = globalConfigService.getResourceResolver();
-			log.info("resolver="+resolver);
+			log.info("Ancestry resolver="+resolver);
 			adminSession = globalConfigService.getAdminSession();
 			
 			wfSession = resolver.adaptTo(WorkflowSession.class);
 			WorkflowEvent wfevent = (WorkflowEvent) event;
 
-			log.info("Irvine wfevent : {}", wfevent.toString());
+			log.info("Ancestry wfevent : {}", wfevent.toString());
 
 			instanceId = wfevent.getWorkflowInstanceId();
-			log.debug("Irvine wfevent instanceId is set to ".concat(instanceId));
+			log.debug("Ancestry wfevent instanceId is set to ".concat(instanceId));
 
 			Workflow workflowInstance = wfSession.getWorkflow(instanceId);
 

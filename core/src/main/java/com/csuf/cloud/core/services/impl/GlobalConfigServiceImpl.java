@@ -88,11 +88,12 @@ public class GlobalConfigServiceImpl implements GlobalConfigService {
 
         try {
             resolver = resolverFactory.getServiceResourceResolver(params);
+            log.info("Adarsh resolver="+resolver);
 
             if (resolver != null && resolver.isLive()) {
-                log.info("Service resolver obtained successfully: {}", resolver);
+                log.info("Ancestry Service resolver obtained successfully: {}", resolver);
             } else {
-                log.error("Service resolver is null or not live for subservice '{}'", SUB_SERVICE_NAME);
+                log.error("Ancestry Service resolver is null or not live for subservice '{}'", SUB_SERVICE_NAME);
             }
         } catch (LoginException e) {
             log.error("Failed to get service resolver for subservice '{}': {}", SUB_SERVICE_NAME, e.getMessage(), e);

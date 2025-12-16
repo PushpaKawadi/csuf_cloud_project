@@ -396,13 +396,13 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
  * @param {scope} scope in which code inside function will be executed.
  */
 std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPanel_init2 = function(scope) {
-    alert("init2");
+   // alert("init2");
 
     with(this) {
         with(scope) {
             debugger;
             if (StageIndicator.value === null && formSavedStatus.value != "1") {
- alert("init2 inside func");
+ //alert("init2 inside func");
                 $.ajax({
                     type: 'GET',
                     url: "/bin/getLoggedUserId",
@@ -410,17 +410,17 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
                     success: function(myresponse) {
                         gifModal.style.display = "block";
                         var userValue = myresponse.userId;
-						alert("myresponse.userId="+myresponse.userId);
+						//alert("myresponse.userId="+myresponse.userId);
                         var userID = userValue;
-						alert("userID="+userID);
+						//alert("userID="+userID);
                         hidden_userID.value = userValue;
-						alert("hidden_userID="+hidden_userID.value);
+						//alert("hidden_userID="+hidden_userID.value);
                         workflow_initiator.value = userValue;
-						alert("workflow_initiator="+workflow_initiator.value);
+						//alert("workflow_initiator="+workflow_initiator.value);
                         hidden_employeeEmail.value = "pushpa.kawadi@thoughtfocus.com";
-                        alert("workflow_initiator.value= " + workflow_initiator.value);
+                        //alert("workflow_initiator.value= " + workflow_initiator.value);
 						var urrl11 = window.location.origin + "/bin/fullertonProxy";
-						alert("urrl11="+urrl11);
+						//alert("urrl11="+urrl11);
                       
                         $.ajax({
 							url: window.location.origin + "/bin/fullertonProxy",
@@ -441,7 +441,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
 
                                 if (myresponse.length === 1) {
 
-                                alert("init2 inside func 1");
+                                //alert("init2 inside func 1");
 
                                     empl_Id.value = myresponse[0].EMPLID;
                                     hidden_cwid.value = myresponse[0].EMPLID;
@@ -466,7 +466,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
 
                                 } else if (myresponse.length > 1) {
 
-                                alert("init2 inside func 2");
+                                //alert("init2 inside func 2");
 
 
                                     gifModal.style.display = "none";
@@ -1826,10 +1826,10 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_saveguidedra
  * @param {scope} scope in which code inside function will be executed.
  */
 std_682_overtime_distributed_std_682_overtime_distributed.generated_submit1589890835750_click0 = function(scope) {
-    alert("submit");
+    //alert("submit");
     with(this) {
         with(scope) {
-    alert("submit inside func");
+    //alert("submit inside func");
 
             aftiaDescCWID.value = employee_first_name.value + ", " + employee_last_name.value + " " + empl_Id.value;
 
