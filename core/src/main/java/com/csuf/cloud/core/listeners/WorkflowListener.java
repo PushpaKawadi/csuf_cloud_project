@@ -1,12 +1,16 @@
 package com.csuf.cloud.core.listeners;
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jcr.Session;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.osgi.framework.Constants;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -35,12 +39,18 @@ import com.csuf.cloud.core.utils.XMLUtils;
 public class WorkflowListener implements EventHandler {
 
 	protected final Logger log = LoggerFactory.getLogger(WorkflowListener.class);
+	private static final String SUB_SERVICE_NAME = "datawrite";
+
 
 	@Reference
 	private WorkflowConfigService workflowConfig;
 
 	@Reference
 	private GlobalConfigService globalConfigService;
+	
+	@Reference
+	private ResourceResolverFactory resolverFactory;
+	
 
 	@Reference
 	private TaskService taskService;
@@ -71,9 +81,28 @@ public class WorkflowListener implements EventHandler {
 		ResourceResolver resolver = null;
 		Session adminSession = null;
 		try {
-			resolver = globalConfigService.getResourceResolver();
-			log.info("Ancestry resolver="+resolver);
-			adminSession = globalConfigService.getAdminSession();
+			//resolver = globalConfigService.getResourceResolver();
+			 Map<String, Object> params = new HashMap<>();
+		        params.put(ResourceResolverFactory.SUBSERVICE, SUB_SERVICE_NAME);
+
+		        try {
+		            resolver = resolverFactory.getServiceResourceResolver(params);
+		            log.info("rishabh resolver="+resolver);
+
+		            if (resolver != null && resolver.isLive()) {
+		                log.info("Rishabh Ancestry Service resolver obtained successfully: {}", resolver);
+		            } else {
+		                log.error("Rishabh Ancestry Service resolver is null or not live for subservice '{}'", SUB_SERVICE_NAME);
+		            }
+		        } catch (LoginException e) {
+		            log.error("Failed to get service resolver for subservice '{}': {}", SUB_SERVICE_NAME, e.getMessage(), e);
+		        } catch (Exception e) {
+		            log.error("Rishabh Unexpected error while getting service resolver: {}", e.getMessage(), e);
+		        }
+
+		       
+			log.info("Rishabh Ancestry resolver="+resolver);
+			adminSession = resolver.adaptTo(Session.class);//globalConfigService.getAdminSession();
 			
 			wfSession = resolver.adaptTo(WorkflowSession.class);
 			WorkflowEvent wfevent = (WorkflowEvent) event;
