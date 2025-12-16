@@ -1,6 +1,0 @@
-{
-  "scripts": [
-    "create service user data",
-    "set principal ACL for data\n    allow jcr:read on /apps\n    allow jcr:read on /libs\n    allow jcr:read on /conf\n    allow jcr:read on /var\n    allow jcr:all on /content\n    allow jcr:all on /home\nend"
-  ]
-}
