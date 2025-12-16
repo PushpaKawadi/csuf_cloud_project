@@ -1,7 +1,7 @@
 {
   "scripts": [
-    "create service user csuf-datawrite-user",
-    "create service user csuf-forms-reader",
+    "create service user csuf-datawrite-user with path /home/users/system/csuf-cloud-project",
+    "create service user csuf-forms-reader with path /home/users/system/csuf-cloud-project",
 
     "set ACL for csuf-datawrite-user",
     "  allow jcr:read, jcr:write on /content",
