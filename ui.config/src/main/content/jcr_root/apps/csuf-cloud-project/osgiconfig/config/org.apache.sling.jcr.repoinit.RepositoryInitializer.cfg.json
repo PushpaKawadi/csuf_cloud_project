@@ -2,14 +2,26 @@
   "scripts": [
     "create service user csuf-datawrite-user",
     "create service user csuf-forms-reader",
+
     "set ACL for csuf-datawrite-user",
-    "    allow jcr:read, jcr:write on /",
+    "  allow jcr:read, jcr:write on /content",
+    "  allow jcr:read, jcr:write on /content/dam",
+    "  allow jcr:read, jcr:write on /conf",
+    "  allow jcr:read, jcr:write on /var",
+    "  allow jcr:read, jcr:write on /etc",
     "end",
+
     "set ACL for csuf-forms-reader",
-    "    allow jcr:read on /",
+    "  allow jcr:read on /content",
+    "  allow jcr:read on /content/dam",
     "end",
-	"create path (sling:OrderedFolder) /content/dam/csuf-cloud-project",
-   "create path (nt:unstructured) /content/dam/csuf-cloud-project/jcr:content",
-   "set properties on /content/dam/csuf-cloud-project/jcr:content\n  set cq:conf{String} to /conf/csuf-cloud-project\n  set jcr:title{String} to \"CSUF Cloud Project\"\nend"
+
+    "create path (sling:OrderedFolder) /content/dam/csuf-cloud-project",
+    "create path (nt:unstructured) /content/dam/csuf-cloud-project/jcr:content",
+
+    "set properties on /content/dam/csuf-cloud-project/jcr:content",
+    "  set cq:conf{String} to /conf/csuf-cloud-project",
+    "  set jcr:title{String} to \"CSUF Cloud Project\"",
+    "end"
   ]
 }
