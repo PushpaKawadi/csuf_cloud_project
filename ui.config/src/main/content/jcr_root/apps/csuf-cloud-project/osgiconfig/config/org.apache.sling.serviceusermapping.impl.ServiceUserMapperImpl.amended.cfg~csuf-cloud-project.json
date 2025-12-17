@@ -1,0 +1,6 @@
+{
+  "user.mapping": [
+	"csuf-cloud-project.core:datawrite=[csuf-datawrite-user]"
+  ]
+}
+
