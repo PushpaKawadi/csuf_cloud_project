@@ -1,12 +1,16 @@
 package com.csuf.cloud.core.listeners;
 
 import java.io.InputStream;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.jcr.Session;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.apache.sling.api.resource.ResourceResolverFactory;
 import org.osgi.framework.Constants;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -45,6 +49,10 @@ public class WorkflowListener implements EventHandler {
 	@Reference
 	private TaskService taskService;
 
+	@Reference
+	private ResourceResolverFactory resolverFactory;
+	
+	private static final String SUB_SERVICE_NAME = "datawrite";
 	// public static final String JOB_TOPIC =
 	// "workflow/workitem/af-assign-task/delegate/job";
 	private static final String ASSIGN_TASK_STEP = "forms:assigntask";
@@ -70,11 +78,30 @@ public class WorkflowListener implements EventHandler {
 		ResourceResolver resolver = null;
 		Session adminSession = null;
 		try {
-			resolver = globalConfigService.getResourceResolver();
-			log.info("Trincy resolver="+resolver);
+			log.info("Rishabh Requesting service resolver for subservice '{}'", SUB_SERVICE_NAME);
 
-			adminSession = globalConfigService.getAdminSession();
-			log.info("Trincy adminSession="+adminSession);
+	        Map<String, Object> params = new HashMap<>();
+	        params.put(ResourceResolverFactory.SUBSERVICE, SUB_SERVICE_NAME);
+
+	        try {
+	            resolver = resolverFactory.getServiceResourceResolver(params);
+	            log.info("Trincy resolver="+resolver);
+
+	            if (resolver != null && resolver.isLive()) {
+	                log.info("Rishabh Service resolver obtained successfully: {}", resolver);
+	            } else {
+	                log.error("Rishabh Service resolver is null or not live for subservice '{}'", SUB_SERVICE_NAME);
+	            }
+	        } catch (LoginException e) {
+	            log.error("Rishabh Failed to get service resolver for subservice '{}': {}", SUB_SERVICE_NAME, e.getMessage(), e);
+	        } catch (Exception e) {
+	            log.error("Rishabh Unexpected error while getting service resolver: {}", e.getMessage(), e);
+	        }
+			//resolver = globalConfigService.getResourceResolver();
+			log.info("Rishabh resolver="+resolver);
+
+			adminSession = resolver.adaptTo(Session.class);//.getAdminSession();
+			log.info("Rishabh adminSession="+adminSession);
 
 
 			wfSession = resolver.adaptTo(WorkflowSession.class);

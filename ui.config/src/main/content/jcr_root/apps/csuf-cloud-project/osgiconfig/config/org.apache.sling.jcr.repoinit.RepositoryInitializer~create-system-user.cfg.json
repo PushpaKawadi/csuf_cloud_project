@@ -6,7 +6,7 @@
     "add csuf-datawrite-user to group administrators",
 
     "set principal ACL for csuf-datawrite-user",
-    "allow jcr:write on /apps",
+    "allow jcr:read, jcr:write on /apps",
     "allow jcr:write on /libs",
     "allow jcr:write on /conf",
     "allow jcr:write on /var",
