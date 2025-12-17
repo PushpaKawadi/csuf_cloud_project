@@ -1,17 +1,8 @@
 {
-  "scripts": [
-    "create service user csuf-datawrite-user",
-    "create service user csuf-forms-reader",
-
-    "add csuf-datawrite-user to group administrators",
-
-    "set principal ACL for csuf-datawrite-user",
-    "allow jcr:read, jcr:write on /apps",
-    "allow jcr:write on /libs",
-    "allow jcr:write on /conf",
-    "allow jcr:write on /var",
-    "allow jcr:all on /content",
-    "allow jcr:all on /home",
-    "end"
-  ]
+    "scripts": [
+"create service user csuf-datawrite-user",
+"create service user csuf-forms-reader",
+"add csuf-datawrite-user to group administrators",
+"set ACL for csuf-datawrite-user\n allow jcr:read, jcr:write on /apps\n allow jcr:write on /libs\n allow jcr:write on /conf\n allow jcr:write on /var\n allow jcr:all on /content\n allow jcr:all on /home\nend"
+    ]
 }
