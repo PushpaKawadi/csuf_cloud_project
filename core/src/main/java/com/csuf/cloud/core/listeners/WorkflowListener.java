@@ -100,7 +100,6 @@ public class WorkflowListener implements EventHandler {
 	        }
 			//resolver = globalConfigService.getResourceResolver();
 			log.info("Rishabh resolver==={}",resolver);
-
 			adminSession = resolver.adaptTo(Session.class);//.getAdminSession();
 			log.info("Rishabh adminSession===={}",adminSession);
 
