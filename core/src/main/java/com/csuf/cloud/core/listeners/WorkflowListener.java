@@ -84,8 +84,9 @@ public class WorkflowListener implements EventHandler {
 	        params.put(ResourceResolverFactory.SUBSERVICE, SUB_SERVICE_NAME);
 
 	        try {
+	        	log.info("Befoe fetching resolver");
 	            resolver = resolverFactory.getServiceResourceResolver(params);
-	            log.info("Trincy resolver="+resolver);
+	            log.info("Rishabh initial resolver ---{}",resolver);
 
 	            if (resolver != null && resolver.isLive()) {
 	                log.info("Rishabh Service resolver obtained successfully: {}", resolver);
