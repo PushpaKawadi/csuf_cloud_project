@@ -78,7 +78,7 @@ public class WorkflowListener implements EventHandler {
 		ResourceResolver resolver = null;
 		Session adminSession = null;
 		try {
-			log.info("Rishabh Requesting service resolver for subservice '{}'", SUB_SERVICE_NAME);
+			log.info("Texas Requesting service resolver for subservice '{}'", SUB_SERVICE_NAME);
 
 	        Map<String, Object> params = new HashMap<>();
 	        params.put(ResourceResolverFactory.SUBSERVICE, SUB_SERVICE_NAME);
@@ -86,31 +86,31 @@ public class WorkflowListener implements EventHandler {
 	        try {
 	        	log.info("Befoe fetching resolver---{}",resolverFactory);
 	            resolver = resolverFactory.getServiceResourceResolver(params);
-	            log.info("Rishabh initial resolver ---{}",resolver);
+	            log.info("Texas initial resolver ---{}",resolver);
 
 	            if (resolver != null) {
-	                log.info("Rishabh Service resolver obtained successfully: {}", resolver);
+	                log.info("Texas Service resolver obtained successfully: {}", resolver);
 	            } else {
-	                log.error("Rishabh Service resolver is null or not live for subservice '{}'", SUB_SERVICE_NAME);
+	                log.error("Texas Service resolver is null or not live for subservice '{}'", SUB_SERVICE_NAME);
 	            }
 	        } catch (LoginException e) {
-	            log.error("Rishabh Failed to get service resolver for subservice '{}': {}", SUB_SERVICE_NAME, e.getMessage(), e);
+	            log.error("Texas Failed to get service resolver for subservice '{}': {}", SUB_SERVICE_NAME, e.getMessage(), e);
 	        } catch (Exception e) {
-	            log.error("Rishabh Unexpected error while getting service resolver: {}", e.getMessage(), e);
+	            log.error("Texas Unexpected error while getting service resolver: {}", e.getMessage(), e);
 	        }
 			//resolver = globalConfigService.getResourceResolver();
-			log.info("Rishabh resolver==={}",resolver);
+			log.info("Texas resolver==={}",resolver);
 			adminSession = resolver.adaptTo(Session.class);//.getAdminSession();
-			log.info("Rishabh adminSession===={}",adminSession);
+			log.info("Texas adminSession===={}",adminSession);
 
 
 			wfSession = resolver.adaptTo(WorkflowSession.class);
 			WorkflowEvent wfevent = (WorkflowEvent) event;
 
-			log.info("Trincy wfevent : {}", wfevent.toString());
+			log.info("Texas wfevent : {}", wfevent.toString());
 
 			instanceId = wfevent.getWorkflowInstanceId();
-			log.info("Trincy wfevent instanceId is set to ".concat(instanceId));
+			log.info("Texas wfevent instanceId is set to ".concat(instanceId));
 
 			Workflow workflowInstance = wfSession.getWorkflow(instanceId);
 
@@ -144,6 +144,9 @@ public class WorkflowListener implements EventHandler {
 			}
 
 			WorkItem item = wfevent.getWorkItem();
+			log.info("Texas item="+item);
+			log.info("Texas item subtype="+item.getItemSubType());
+			log.info("Texas item ID="+item.getId());
 
 			if (null != item && StringUtils.isNotBlank(item.getItemSubType())
 					&& item.getItemSubType().equalsIgnoreCase(ASSIGN_TASK_STEP)) {
