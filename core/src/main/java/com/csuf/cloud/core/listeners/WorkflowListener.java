@@ -116,24 +116,29 @@ public class WorkflowListener implements EventHandler {
 
 			// If there is nothing to work on then we will return immediately
 			if (!this.doesInstanceIdContainWorkflows(workflowInstance.getWorkflowModel())) {
-				log.debug("Workflow Model having title as {} is not added in Workflow Scheduler Configuration",
+				log.info("Workflow Model having title as {} is not added in Workflow Scheduler Configuration",
 						workflowInstance.getWorkflowModel().getTitle());
 				return;
 			}
 
 			if (wfevent.getEventType().equalsIgnoreCase(WorkflowEvent.WORKFLOW_RESUMED_EVENT)) {
+				log.info("Maha Resumed");
 				taskService.updateWorkflowInstanceStatus(instanceId, WorkflowStatus.RUNNING.name());
 				return;
 			} else if (wfevent.getEventType().equalsIgnoreCase(WorkflowEvent.WORKFLOW_ABORTED_EVENT)) {
+				log.info("Maha Terminated");
 				taskService.updateWorkflowInstanceStatus(instanceId, WorkflowStatus.TERMINATED.name());
 				return;
 			} else if (wfevent.getEventType().equalsIgnoreCase(WorkflowEvent.WORKFLOW_COMPLETED_EVENT)) {
+				log.info("Maha completed");
 				taskService.updateWorkflowInstanceStatus(instanceId, WorkflowStatus.COMPLETED.name());
 				return;
 			} else if (wfevent.getEventType().equalsIgnoreCase(WorkflowEvent.WORKFLOW_SUSPENDED_EVENT)) {
+				log.info("Maha Suspended");
 				taskService.updateWorkflowInstanceStatus(instanceId, WorkflowStatus.SUSPENDED.name());
 				return;
 			} else if (wfevent.getEventType().equalsIgnoreCase(WorkflowEvent.JOB_FAILED_EVENT)) {
+				log.info("Maha Jobfailed");
 				taskService.updateWorkflowInstanceStatus(instanceId, WorkflowStatus.FAILED.name());
 				return;
 			}
@@ -142,9 +147,9 @@ public class WorkflowListener implements EventHandler {
 
 			if (null != item && StringUtils.isNotBlank(item.getItemSubType())
 					&& item.getItemSubType().equalsIgnoreCase(ASSIGN_TASK_STEP)) {
-				log.debug("Current workItem Id : {} ", item.getId());
+				log.info("Maha Current workItem Id : {} ", item.getId());
 				boolean isTaskExist = taskService.isTaskExist(item.getId());
-				log.debug("isTaskExist : {}", isTaskExist);
+				log.info("Maha isTaskExist : {}", isTaskExist);
 				if (!isTaskExist && wfevent.getEventType().equalsIgnoreCase("NodeTransition")
 						&& !item.getId().startsWith("VolatileWorkItem")) {
 					log.debug("Task Does not exist, saving it in database");
