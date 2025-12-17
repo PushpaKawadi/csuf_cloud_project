@@ -111,47 +111,51 @@ public class WorkflowListener implements EventHandler {
 
 			instanceId = wfevent.getWorkflowInstanceId();
 			log.info("Hello wfevent instanceId is set to ".concat(instanceId));
+			
+			WorkItem item = wfevent.getWorkItem();
+			log.info("Pinky item="+item);
+			log.info("Pinky item subtype="+item.getItemSubType());
+			log.info("Pinky item ID="+item.getId());
 
-			Workflow workflowInstance = wfSession.getWorkflow(instanceId);
-			log.info("Hello workflowInstance= "+workflowInstance);
+			/*Workflow workflowInstance = wfSession.getWorkflow(instanceId);
+			log.info("Pinky wfSession= "+wfSession);
+			log.info("Pinky workflowInstance= "+workflowInstance);*/
+			
 
 			// If there is nothing to work on then we will return immediately
-			if (!this.doesInstanceIdContainWorkflows(workflowInstance.getWorkflowModel())) {
+			/*if (!this.doesInstanceIdContainWorkflows(workflowInstance.getWorkflowModel())) {
 				log.info("Workflow Model having title as {} is not added in Workflow Scheduler Configuration",
 						workflowInstance.getWorkflowModel().getTitle());
 				return;
-			}
+			}*/
 
 			if (wfevent.getEventType().equalsIgnoreCase(WorkflowEvent.WORKFLOW_RESUMED_EVENT)) {
-				log.info("Maha Resumed");
+				log.info("Resumed");
 				taskService.updateWorkflowInstanceStatus(instanceId, WorkflowStatus.RUNNING.name());
 				return;
 			} else if (wfevent.getEventType().equalsIgnoreCase(WorkflowEvent.WORKFLOW_ABORTED_EVENT)) {
-				log.info("Maha Terminated");
+				log.info("Terminated");
 				taskService.updateWorkflowInstanceStatus(instanceId, WorkflowStatus.TERMINATED.name());
 				return;
 			} else if (wfevent.getEventType().equalsIgnoreCase(WorkflowEvent.WORKFLOW_COMPLETED_EVENT)) {
-				log.info("Maha completed");
+				log.info("completed");
 				taskService.updateWorkflowInstanceStatus(instanceId, WorkflowStatus.COMPLETED.name());
 				return;
 			} else if (wfevent.getEventType().equalsIgnoreCase(WorkflowEvent.WORKFLOW_SUSPENDED_EVENT)) {
-				log.info("Maha Suspended");
+				log.info("Suspended");
 				taskService.updateWorkflowInstanceStatus(instanceId, WorkflowStatus.SUSPENDED.name());
 				return;
 			} else if (wfevent.getEventType().equalsIgnoreCase(WorkflowEvent.JOB_FAILED_EVENT)) {
-				log.info("Maha Jobfailed");
+				log.info("Jobfailed");
 				taskService.updateWorkflowInstanceStatus(instanceId, WorkflowStatus.FAILED.name());
 				return;
 			}
 
-			WorkItem item = wfevent.getWorkItem();
-			log.info("Texas item="+item);
-			log.info("Texas item subtype="+item.getItemSubType());
-			log.info("Texas item ID="+item.getId());
+			
 
 			if (null != item && StringUtils.isNotBlank(item.getItemSubType())
 					&& item.getItemSubType().equalsIgnoreCase(ASSIGN_TASK_STEP)) {
-				log.info("Maha Current workItem Id : {} ", item.getId());
+				log.info("Pinky Current workItem Id : {} ", item.getId());
 				boolean isTaskExist = taskService.isTaskExist(item.getId());
 				log.info("Maha isTaskExist : {}", isTaskExist);
 				if (!isTaskExist && wfevent.getEventType().equalsIgnoreCase("NodeTransition")
