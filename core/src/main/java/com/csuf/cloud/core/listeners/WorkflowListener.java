@@ -99,10 +99,10 @@ public class WorkflowListener implements EventHandler {
 	            log.error("Rishabh Unexpected error while getting service resolver: {}", e.getMessage(), e);
 	        }
 			//resolver = globalConfigService.getResourceResolver();
-			log.info("Rishabh resolver="+resolver);
+			log.info("Rishabh resolver==={}",resolver);
 
 			adminSession = resolver.adaptTo(Session.class);//.getAdminSession();
-			log.info("Rishabh adminSession="+adminSession);
+			log.info("Rishabh adminSession===={}",adminSession);
 
 
 			wfSession = resolver.adaptTo(WorkflowSession.class);
