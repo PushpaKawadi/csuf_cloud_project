@@ -84,11 +84,11 @@ public class WorkflowListener implements EventHandler {
 	        params.put(ResourceResolverFactory.SUBSERVICE, SUB_SERVICE_NAME);
 
 	        try {
-	        	log.info("Befoe fetching resolver");
+	        	log.info("Befoe fetching resolver---{}",resolverFactory);
 	            resolver = resolverFactory.getServiceResourceResolver(params);
 	            log.info("Rishabh initial resolver ---{}",resolver);
 
-	            if (resolver != null && resolver.isLive()) {
+	            if (resolver != null) {
 	                log.info("Rishabh Service resolver obtained successfully: {}", resolver);
 	            } else {
 	                log.error("Rishabh Service resolver is null or not live for subservice '{}'", SUB_SERVICE_NAME);
