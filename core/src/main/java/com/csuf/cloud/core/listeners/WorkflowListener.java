@@ -110,9 +110,10 @@ public class WorkflowListener implements EventHandler {
 			log.info("Texas wfevent : {}", wfevent.toString());
 
 			instanceId = wfevent.getWorkflowInstanceId();
-			log.info("Texas wfevent instanceId is set to ".concat(instanceId));
+			log.info("Hello wfevent instanceId is set to ".concat(instanceId));
 
 			Workflow workflowInstance = wfSession.getWorkflow(instanceId);
+			log.info("Hello workflowInstance= "+workflowInstance);
 
 			// If there is nothing to work on then we will return immediately
 			if (!this.doesInstanceIdContainWorkflows(workflowInstance.getWorkflowModel())) {
