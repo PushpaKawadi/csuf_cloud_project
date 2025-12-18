@@ -20,10 +20,12 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
+import javax.jcr.Node;
 import javax.jcr.Session;
 
 import org.apache.commons.codec.binary.Base64;
@@ -38,6 +40,7 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
+import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.json.JSONObject;
 import org.osgi.framework.Constants;
@@ -174,11 +177,22 @@ public class TaskServiceImpl implements TaskService {
 			dataXMLName = dataXMLName.substring(dataXMLName.lastIndexOf(":") + 1);
 		}
 		log.info("India dataXMLName after=" +dataXMLName);
-		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
-				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
-		log.info("Amma resolver=" +resolver);
-		log.info("Amma  Content =" +item.getContentPath());
-		log.info("Amma  dataXMLName=" +dataXMLName);
+		InputStream is = null;
+		/*InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
+				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");*/
+		
+		
+		Resource  xmlNode = resolver.getResource(item.getContentPath());
+		Iterator<Resource> xmlFiles = xmlNode.listChildren();
+		while (xmlFiles.hasNext()) {
+			Resource attachmentXml = xmlFiles.next();
+			String filePath = attachmentXml.getPath();
+			if (filePath.contains(dataXMLName)) {
+				filePath = attachmentXml.getPath().concat("/jcr:content");
+				Node subNode = resolver.getResource(filePath).adaptTo(Node.class);
+				log.info("Apple subNode =" +subNode);
+				log.info("Amma Stream =" +subNode.getProperty("jcr:data").getBinary().getStream());
+				is =  subNode.getProperty("jcr:data").getBinary().getStream();
 		
 		if (null != is) {
 			Document doc = XMLUtils.getDomDocument(is);
