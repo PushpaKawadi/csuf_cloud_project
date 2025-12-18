@@ -176,18 +176,19 @@ public class TaskServiceImpl implements TaskService {
 		log.info("India dataXMLName after=" +dataXMLName);
 		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
-		log.info("Testabc resolver=" +resolver);
-		log.info("Testabc  Content =" +item.getContentPath());
-		log.info("Testabc  dataXMLName=" +dataXMLName);
+		log.info("Amma resolver=" +resolver);
+		log.info("Amma  Content =" +item.getContentPath());
+		log.info("Amma  dataXMLName=" +dataXMLName);
+		
 		if (null != is) {
 			Document doc = XMLUtils.getDomDocument(is);
-			log.info("Testabc inside="+doc);
+			log.info("Amma inside=");
 			dataXML = XMLUtils.prettyPrintAsString(doc);
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
-				log.info("Testabc task desc =" +taskDescription);
-				log.info("taskDescription from XML : {}", taskDescription);
-				log.info("Testabc actionTaken =" +actionTaken);
+				log.info("Amma task desc =" +taskDescription);
+				log.info("Amma from XML : {}", taskDescription);
+				log.info("Amma actionTaken =" +actionTaken);
 				if (StringUtils.isBlank(actionTaken)) {
 					log.info("initial task, actionTaken should be blank : {}", actionTaken);
 					String workflowInitiator = XMLUtils.getWorkflowInitiator(doc);
@@ -201,10 +202,11 @@ public class TaskServiceImpl implements TaskService {
 				}
 			}
 		} else {
+			log.info("Raghu Exception");
 			throw new RuntimeException(
 					"Fatal Error, Data.xml could not be retrieved for workItemId : ".concat(item.getId()));
 		}
-		// log.debug("inside saveTask 3");
+		log.info("inside saveTask 3");
 		String routes = ArgumentParser.getRoutes(item);
 		log.info("routes : {}", routes);
 		String dueDateString = (null != dueDate ? convertDate(dueDate) : null);

@@ -235,21 +235,16 @@ public class CSUFUtils {
 
 	public static InputStream getDataXMLStreamFromPayloadPath(ResourceResolver resolver, String payloadPath,
 			String dataXMLName) throws RepositoryException {
-		log.info("Apple getDataXMLStreamFromPayloadPath="+resolver);
-		log.info("Apple payloadPath="+payloadPath);
-		log.info("Apple dataXMLName="+dataXMLName);
 		Resource xmlNode = resolver.getResource(payloadPath);
-		log.info("Apple xmlNode="+xmlNode);
 		Iterator<Resource> xmlFiles = xmlNode.listChildren();
-		log.info("Apple xmlNode="+xmlFiles);
 		while (xmlFiles.hasNext()) {
 			Resource attachmentXml = xmlFiles.next();
 			String filePath = attachmentXml.getPath();
 			if (filePath.contains(dataXMLName)) {
-				log.info("Apple FileName : {}", filePath);
 				filePath = attachmentXml.getPath().concat("/jcr:content");
 				Node subNode = resolver.getResource(filePath).adaptTo(Node.class);
 				log.info("Apple subNode =" +subNode);
+				log.info("Amma Stream =" +subNode.getProperty("jcr:data").getBinary().getStream());
 				return subNode.getProperty("jcr:data").getBinary().getStream();
 			}
 		}
