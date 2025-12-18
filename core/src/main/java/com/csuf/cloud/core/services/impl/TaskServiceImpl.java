@@ -176,8 +176,10 @@ public class TaskServiceImpl implements TaskService {
 		log.info("India dataXMLName after=" +dataXMLName);
 		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
+		log.info("Apple dataXMLName after=" +is);
 		if (null != is) {
 			Document doc = XMLUtils.getDomDocument(is);
+			log.info("Apple inside");
 			dataXML = XMLUtils.prettyPrintAsString(doc);
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
@@ -199,7 +201,7 @@ public class TaskServiceImpl implements TaskService {
 		}
 		// log.debug("inside saveTask 3");
 		String routes = ArgumentParser.getRoutes(item);
-		log.debug("routes : {}", routes);
+		log.info("routes : {}", routes);
 		String dueDateString = (null != dueDate ? convertDate(dueDate) : null);
 		String endDateString = (null != endDate ? convertDate(endDate) : null);
 		String statement = StringUtils.EMPTY;
