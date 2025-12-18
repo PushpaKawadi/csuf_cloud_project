@@ -176,19 +176,24 @@ public class TaskServiceImpl implements TaskService {
 		log.info("India dataXMLName after=" +dataXMLName);
 		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
-		log.info("Apple dataXMLName after=" +is);
+		log.info("Testabc resolver=" +resolver);
+		log.info("Testabc  Content =" +item.getContentPath());
+		log.info("Testabc  dataXMLName=" +dataXMLName);
 		if (null != is) {
 			Document doc = XMLUtils.getDomDocument(is);
-			log.info("Apple inside");
+			log.info("Testabc inside="+doc);
 			dataXML = XMLUtils.prettyPrintAsString(doc);
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
+				log.info("Testabc task desc =" +taskDescription);
 				log.info("taskDescription from XML : {}", taskDescription);
+				log.info("Testabc actionTaken =" +actionTaken);
 				if (StringUtils.isBlank(actionTaken)) {
 					log.info("initial task, actionTaken should be blank : {}", actionTaken);
 					String workflowInitiator = XMLUtils.getWorkflowInitiator(doc);
+					log.info("Testabc workflowInitiator=" +workflowInitiator);
 					if (StringUtils.isNotBlank(workflowInitiator)) {
-						log.info("workflow initiator modified as {} with status {}", workflowInitiator,
+						log.info("Testabc workflow initiator modified as {} with status {}", workflowInitiator,
 								CSUFUtils.modifyWorkflowInitiator(
 										(session != null ? session : globalConfigService.getAdminSession()),
 										workflowInstanceId, workflowInitiator));
@@ -312,7 +317,7 @@ public class TaskServiceImpl implements TaskService {
 			log.error("Error Message : {} with error stacktrace : {}", e.getMessage(),
 					Arrays.toString(e.getStackTrace()));
 		}
-		// log.debug("inside saveTask 5");
+		 log.info("inside saveTask 5");
 		return null;
 	}
 

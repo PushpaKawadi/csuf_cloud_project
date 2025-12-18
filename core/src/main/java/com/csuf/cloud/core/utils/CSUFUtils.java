@@ -655,9 +655,12 @@ public class CSUFUtils {
 
 	public static boolean modifyWorkflowInitiator(Session session, String workflowInstanceId,
 			String modifiedInitiator) {
+		log.info("Testabc modifyWorkflowInitiator");
 		try {
 			if (session.nodeExists(workflowInstanceId)) {
+				log.info("Testabc modifyWorkflowInitiator="+workflowInstanceId);
 				Node workflowNode = session.getNode(workflowInstanceId);
+				log.info("Testabc workflowNode="+workflowNode);
 				Node workflowMetadataNode = workflowNode.getNode("metaData");
 				if (null != workflowNode && workflowNode.hasProperty("initiator")) {
 					workflowNode.setProperty("initiator", modifiedInitiator);
@@ -666,7 +669,7 @@ public class CSUFUtils {
 //							"workflowMetadataNode initiator property value inside modifyWorkflowInitiator method : {}",
 //							workflowMetadataNode.getProperty("initiator"));
 					try {
-						log.debug("Session User Id : {}", session.getUserID());
+						log.info("Session User Id : {}", session.getUserID());
 						session.save();
 					} catch (Exception e) {
 						log.error("Session save method failed : {}", Arrays.toString(e.getStackTrace()));
