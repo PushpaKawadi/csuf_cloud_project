@@ -157,6 +157,7 @@ public class TaskServiceImpl implements TaskService {
 			}
 
 		}
+		log.info("USA item="+item);
 		String dataXMLName = ArgumentParser.getInputDataXMLPath(item);
 		log.info("India dataXMLName="+dataXMLName);
 		if (StringUtils.isBlank(dataXMLName)) {

@@ -1,14 +1,19 @@
 package com.csuf.cloud.core.utils;
 
 import org.apache.commons.lang3.StringUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.adobe.granite.workflow.WorkflowException;
 import com.adobe.granite.workflow.exec.WorkItem;
 import com.adobe.granite.workflow.metadata.MetaDataMap;
+import com.csuf.cloud.core.services.impl.InboxItemServiceImpl;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class ArgumentParser {
+	private static final Logger log = LoggerFactory.getLogger(InboxItemServiceImpl.class);
+
 
 	public enum FormType {
 		AF, PDF, READ_ONLY_AF;
@@ -18,6 +23,7 @@ public class ArgumentParser {
 	}
 
 	public static String getInputDataXMLPath(WorkItem workItem) {
+		log.info("USA getInputDataXMLPath");
 		return getStringValueWithBackwardCompatibilty(workItem, "INPUT_DATAXML", "INPUT_COMBINED_DATAXML",
 				"FOLDER_PAYLOAD");
 	}
@@ -184,13 +190,20 @@ public class ArgumentParser {
 
 	private static String getStringValueWithBackwardCompatibilty(WorkItem workItem, String oldPropertyName,
 			String newPropertyName, String defaultPrefix) {
+		log.info("USA workItem="+workItem);
+		log.info("USA oldPropertyName="+oldPropertyName);
+		log.info("USA newPropertyName="+newPropertyName);
+		log.info("USA defaultPrefix="+defaultPrefix);
 		MetaDataMap args = workItem.getNode().getMetaDataMap();
+		log.info("USA args="+args);
 		String property = (String) args.get(newPropertyName, String.class);
+		log.info("USA property="+property);
 		if (property == null || property.isEmpty()) {
 			property = (String) args.get(oldPropertyName, String.class);
 			if (property != null && !property.isEmpty())
 				property = defaultPrefix + ":" + property;
 		}
+		log.info("USA property="+property);
 		return property;
 	}
 
