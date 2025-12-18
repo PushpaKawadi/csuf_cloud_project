@@ -148,7 +148,7 @@ public class TaskServiceImpl implements TaskService {
 		log.info("Here 2");
 		String dataXML = StringUtils.EMPTY;
 		log.info("Here 3");
-		if (!json.isJsonNull() && json.isJsonObject()) {
+		/*if (!json.isJsonNull() && json.isJsonObject()) {
 			if (json.has("actionTaken"))
 				log.info("India first condition");
 				actionTaken = json.get("actionTaken").getAsString();
@@ -160,7 +160,7 @@ public class TaskServiceImpl implements TaskService {
 				}
 			}
 
-		}
+		}*/
 		
 		String dataXMLName = ArgumentParser.getInputDataXMLPath(item);
 		log.info("India dataXMLName="+dataXMLName);
