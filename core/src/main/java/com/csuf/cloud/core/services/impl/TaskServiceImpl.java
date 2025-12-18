@@ -157,7 +157,7 @@ public class TaskServiceImpl implements TaskService {
 			}
 
 		}
-		log.info("USA item="+item);
+		
 		String dataXMLName = ArgumentParser.getInputDataXMLPath(item);
 		log.info("India dataXMLName="+dataXMLName);
 		if (StringUtils.isBlank(dataXMLName)) {
@@ -169,7 +169,7 @@ public class TaskServiceImpl implements TaskService {
 		if (StringUtils.isNotBlank(dataXMLName) && dataXMLName.contains(":")) {
 			dataXMLName = dataXMLName.substring(dataXMLName.lastIndexOf(":") + 1);
 		}
-		log.info("India dataXMLName : {}", dataXMLName);
+		log.info("India dataXMLName after=" +dataXMLName);
 		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
 		if (null != is) {
