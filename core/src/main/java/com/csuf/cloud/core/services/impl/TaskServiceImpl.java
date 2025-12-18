@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -13,6 +15,7 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
@@ -24,14 +27,19 @@ import java.util.ResourceBundle;
 import javax.jcr.Session;
 
 import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
+import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.json.JSONObject;
 import org.osgi.framework.Constants;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -44,9 +52,6 @@ import com.adobe.granite.workflow.exec.HistoryItem;
 import com.adobe.granite.workflow.exec.Status;
 import com.adobe.granite.workflow.exec.WorkItem;
 import com.adobe.granite.workflow.exec.Workflow;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import com.csuf.cloud.core.services.GlobalConfigService;
 import com.csuf.cloud.core.services.InboxItemService;
 import com.csuf.cloud.core.services.JDBCConnectionHelperService;
@@ -56,7 +61,10 @@ import com.csuf.cloud.core.services.WorkflowService;
 import com.csuf.cloud.core.utils.ArgumentParser;
 import com.csuf.cloud.core.utils.CSUFUtils;
 import com.csuf.cloud.core.utils.XMLUtils;
+import com.day.util.NameValuePair;
 import com.google.gson.JsonArray;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 @Component(service = TaskService.class, immediate = true, property = {
@@ -888,7 +896,7 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	@Override
-	public boolean isTaskExist(String workItemId) {
+	public boolean isTaskExistOld(String workItemId) {
 		String getTaskDataStmt = "select workitem_id from task_details where workitem_id = ?";
 		try (Connection connection = jdbcService.getInboxDBConnection();) {
 
@@ -1134,5 +1142,42 @@ public class TaskServiceImpl implements TaskService {
 	private String bool(JsonObject obj, String key) {
 		return String.valueOf(CSUFUtils.getBooleanEquivalent(getSafe(obj, key)));
 	}
+	
+	@Override
+	public boolean isTaskExist(String workItemId) {
+		log.info("Inside Task Exist");
 
+		if (StringUtils.isBlank(workItemId)) {
+	        return false;
+	    }
+
+		log.info("Trincy="+workItemId);
+	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/TaskServletNew";
+	    boolean taskExists = false;
+	    
+	    JSONObject json = new JSONObject();
+	    json.put("workItemId", workItemId);
+		json.put("action", "isTaskExists");
+		try {
+		CloseableHttpClient client = HttpClients.createDefault();
+		HttpPost post = new HttpPost(dbServiceUrl);
+		post.addHeader("Content-Type", "application/json");
+		post.setEntity(new StringEntity(json.toString()));
+		
+		CloseableHttpResponse response = client.execute(post);
+		log.info("Trincy DB Service Response: =" + response.getStatusLine());
+		
+		String responseStr = EntityUtils.toString(response.getEntity()).trim();
+		log.info("Trincy responseStr =" + responseStr);
+		 
+        taskExists = Boolean.parseBoolean(responseStr);
+        log.info("Trincy taskExists =" + taskExists);
+		
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	    return taskExists;
+	}
 }
