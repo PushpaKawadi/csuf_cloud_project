@@ -140,10 +140,14 @@ public class TaskServiceImpl implements TaskService {
 			log.error("Fatal Exception: AF_PATH is blank in workitem metadata for workItemId : {}", item.getId());
 		} else if (StringUtils.isNotBlank(afPath) && afPath.contains("/content/dam/formsanddocuments/")) {
 			afPath = afPath.replace("/content/dam/formsanddocuments/", "/content/forms/af/");
+			log.info("After afPath="+afPath);
 		}
 		String actionTaken = StringUtils.EMPTY;
+		log.info("Here 1");
 		String workitemComment = StringUtils.EMPTY;
+		log.info("Here 2");
 		String dataXML = StringUtils.EMPTY;
+		log.info("Here 3");
 		if (!json.isJsonNull() && json.isJsonObject()) {
 			if (json.has("actionTaken"))
 				log.info("India first condition");
