@@ -155,9 +155,11 @@ public class WorkflowListener implements EventHandler {
 
 			if (null != item && StringUtils.isNotBlank(item.getItemSubType())
 					&& item.getItemSubType().equalsIgnoreCase(ASSIGN_TASK_STEP)) {
-				log.info("Pinky Current workItem Id : {} ", item.getId());
+				log.info("Current workItem Id : {} ", item.getId());
 				boolean isTaskExist = taskService.isTaskExist(item.getId());
-				log.info("Maha isTaskExist : {}", isTaskExist);
+				log.info("skywalk isTaskExist : {}", isTaskExist);
+				log.info("skywalk wfevent.getEventType() ="+ wfevent.getEventType());
+				log.info("skywalk item.getId ="+ item.getId());
 				if (!isTaskExist && wfevent.getEventType().equalsIgnoreCase("NodeTransition")
 						&& !item.getId().startsWith("VolatileWorkItem")) {
 					log.debug("Task Does not exist, saving it in database");

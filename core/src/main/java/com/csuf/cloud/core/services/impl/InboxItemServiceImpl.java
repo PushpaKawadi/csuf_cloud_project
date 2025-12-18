@@ -371,11 +371,14 @@ public class InboxItemServiceImpl implements InboxItemService {
 
 	@Override
 	public JsonObject getPreviousStepData(Session serviceUserSession, WorkItem workItem) throws Exception {
+		log.info("India getPreviousStepData");
 		JsonObject json = null;
 		try {
 			if (workItem != null) {
+				log.info("India getPreviousStepData workItem="+workItem);
 				json = new JsonObject();
 				String historyNodePath = workItem.getMetaDataMap().get("historyEntryPath").toString();
+				log.info("India historyNodePath="+historyNodePath);
 				if (serviceUserSession.nodeExists(historyNodePath)) {
 					Node historyNode = serviceUserSession.getNode(historyNodePath);
 					if ((historyNode != null) && (serviceUserSession.nodeExists(historyNodePath + "/" + "workItem"))) {

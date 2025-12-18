@@ -124,15 +124,18 @@ public class TaskServiceImpl implements TaskService {
 		int index = workitemId.lastIndexOf('/');
 		log.info("Pushpa index="+index);
 		String workitemNodeId = workitemId.substring(index + 1, workitemId.length());
+		log.info("India workitemNodeId="+workitemNodeId);
+		log.info("India Admin Session="+globalConfigService.getAdminSession());
 		JsonObject json = inboxService
 				.getPreviousStepData((session != null ? session : globalConfigService.getAdminSession()), item);
+		log.info("India json="+json.toString());
 		boolean showActionTaken = ArgumentParser.showActionTaken(item);
 		boolean showComment = ArgumentParser.showComment(item);
 		boolean showResetButton = ArgumentParser.showReset(item);
 		boolean showSaveButton = ArgumentParser.showSave(item);
 		boolean showSubmitButton = ArgumentParser.showSubmit(item);
 		String afPath = ArgumentParser.getAFPath(item);
-
+		log.info("India afPath="+afPath);
 		if (StringUtils.isBlank(afPath)) {
 			log.error("Fatal Exception: AF_PATH is blank in workitem metadata for workItemId : {}", item.getId());
 		} else if (StringUtils.isNotBlank(afPath) && afPath.contains("/content/dam/formsanddocuments/")) {
@@ -143,8 +146,10 @@ public class TaskServiceImpl implements TaskService {
 		String dataXML = StringUtils.EMPTY;
 		if (!json.isJsonNull() && json.isJsonObject()) {
 			if (json.has("actionTaken"))
+				log.info("India first condition");
 				actionTaken = json.get("actionTaken").getAsString();
 			if (json.has("workitemComment")) {
+				log.info("India second condition");
 				workitemComment = json.get("workitemComment").getAsString();
 				if (workitemComment.length() > 4000) {
 					workitemComment = workitemComment.substring(0, MAX_CHARS_ALLOWED_LIMIT);
@@ -153,6 +158,7 @@ public class TaskServiceImpl implements TaskService {
 
 		}
 		String dataXMLName = ArgumentParser.getInputDataXMLPath(item);
+		log.info("India dataXMLName="+dataXMLName);
 		if (StringUtils.isBlank(dataXMLName)) {
 			String combinedName = ArgumentParser.getInputCombinedDataXMLPath(item);
 			if (StringUtils.isNotBlank(combinedName) && combinedName.contains(":")) {
@@ -162,7 +168,7 @@ public class TaskServiceImpl implements TaskService {
 		if (StringUtils.isNotBlank(dataXMLName) && dataXMLName.contains(":")) {
 			dataXMLName = dataXMLName.substring(dataXMLName.lastIndexOf(":") + 1);
 		}
-		log.debug("dataXMLName : {}", dataXMLName);
+		log.info("India dataXMLName : {}", dataXMLName);
 		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
 		if (null != is) {
@@ -170,12 +176,12 @@ public class TaskServiceImpl implements TaskService {
 			dataXML = XMLUtils.prettyPrintAsString(doc);
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
-				log.debug("taskDescription from XML : {}", taskDescription);
+				log.info("taskDescription from XML : {}", taskDescription);
 				if (StringUtils.isBlank(actionTaken)) {
-					log.debug("initial task, actionTaken should be blank : {}", actionTaken);
+					log.info("initial task, actionTaken should be blank : {}", actionTaken);
 					String workflowInitiator = XMLUtils.getWorkflowInitiator(doc);
 					if (StringUtils.isNotBlank(workflowInitiator)) {
-						log.debug("workflow initiator modified as {} with status {}", workflowInitiator,
+						log.info("workflow initiator modified as {} with status {}", workflowInitiator,
 								CSUFUtils.modifyWorkflowInitiator(
 										(session != null ? session : globalConfigService.getAdminSession()),
 										workflowInstanceId, workflowInitiator));
