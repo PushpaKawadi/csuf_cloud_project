@@ -5,6 +5,6 @@
   "smtp.password": "$[secret:SMTP_PASSWORD]",
   "from.address": "erpimaging@fullerton.edu",
   "smtp.starttls": false,
-  "smtp.ssl": true,
+  "smtp.ssl": "$[env:SMTP_USE_SSL]",
   "debug.email": false
 }
