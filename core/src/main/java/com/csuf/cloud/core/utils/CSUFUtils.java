@@ -243,8 +243,8 @@ public class CSUFUtils {
 			if (filePath.contains(dataXMLName)) {
 				filePath = attachmentXml.getPath().concat("/jcr:content");
 				Node subNode = resolver.getResource(filePath).adaptTo(Node.class);
-				log.info("Apple subNode =" +subNode);
-				log.info("Amma Stream =" +subNode.getProperty("jcr:data").getBinary().getStream());
+				log.info("Apple17 subNode =" +subNode);
+				log.info("Apple17 Stream =" +subNode.getProperty("jcr:data").getBinary().getStream());
 				return subNode.getProperty("jcr:data").getBinary().getStream();
 			}
 		}

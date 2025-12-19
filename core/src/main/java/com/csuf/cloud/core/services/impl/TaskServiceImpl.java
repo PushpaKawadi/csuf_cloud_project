@@ -171,12 +171,11 @@ public class TaskServiceImpl implements TaskService {
 		
 		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
-		log.info("iphone stream  =" +is);
-
+		log.info("Pushpa IS object");
 		
 		if (null != is) {
 			Document doc = XMLUtils.getDomDocument(is);
-			log.info("iphone inside=");
+			log.info("iphone inside");
 			dataXML = XMLUtils.prettyPrintAsString(doc);
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
