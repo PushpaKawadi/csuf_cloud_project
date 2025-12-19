@@ -190,25 +190,25 @@ public class TaskServiceImpl implements TaskService {
 			if (filePath.contains(dataXMLName)) {
 				filePath = attachmentXml.getPath().concat("/jcr:content");
 				Node subNode = resolver.getResource(filePath).adaptTo(Node.class);
-				log.info("Apple subNode =" +subNode);
-				log.info("Amma Stream =" +subNode.getProperty("jcr:data").getBinary().getStream());
+				log.info("iphone subNode =" +subNode);
+				log.info("iphone Stream =" +subNode.getProperty("jcr:data").getBinary().getStream());
 				is =  subNode.getProperty("jcr:data").getBinary().getStream();
 		
 		if (null != is) {
 			Document doc = XMLUtils.getDomDocument(is);
-			log.info("Amma inside=");
+			log.info("iphone inside=");
 			dataXML = XMLUtils.prettyPrintAsString(doc);
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
-				log.info("Amma task desc =" +taskDescription);
-				log.info("Amma from XML : {}", taskDescription);
-				log.info("Amma actionTaken =" +actionTaken);
+				log.info("iphone task desc =" +taskDescription);
+				log.info("iphone from XML : {}", taskDescription);
+				log.info("iphone actionTaken =" +actionTaken);
 				if (StringUtils.isBlank(actionTaken)) {
 					log.info("initial task, actionTaken should be blank : {}", actionTaken);
 					String workflowInitiator = XMLUtils.getWorkflowInitiator(doc);
-					log.info("Testabc workflowInitiator=" +workflowInitiator);
+					log.info("iphone workflowInitiator=" +workflowInitiator);
 					if (StringUtils.isNotBlank(workflowInitiator)) {
-						log.info("Testabc workflow initiator modified as {} with status {}", workflowInitiator,
+						log.info("iphone workflow initiator modified as {} with status {}", workflowInitiator,
 								CSUFUtils.modifyWorkflowInitiator(
 										(session != null ? session : globalConfigService.getAdminSession()),
 										workflowInstanceId, workflowInitiator));
@@ -216,7 +216,7 @@ public class TaskServiceImpl implements TaskService {
 				}
 			}
 		} else {
-			log.info("Raghu Exception");
+			log.info("iphone Exception");
 			throw new RuntimeException(
 					"Fatal Error, Data.xml could not be retrieved for workItemId : ".concat(item.getId()));
 		}
@@ -227,73 +227,55 @@ public class TaskServiceImpl implements TaskService {
 		String endDateString = (null != endDate ? convertDate(endDate) : null);
 		String statement = StringUtils.EMPTY;
 
-		statement = "INSERT INTO task_details"
-				+ " (task_title, priority, task_description, assignee, project, workflow_model, status, start_date, due_date,"
-				+ " workflow_instance_id, workitem_id, workitem_node_id, end_date, data, action_taken, task_submit_comment, "
-				+ "show_action_taken, show_comment, routes_data, show_submit, show_save, show_reset, workflow_status, af_path)"
-				+ " VALUES(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-
-		try (Connection connection = jdbcService.getInboxDBConnection();) {
-			log.debug("saveTask SQL Statement : {}", statement);
-			// log.debug("jdbc connection schema name : ".concat(connection.getSchema()));
-
-			// Setting auto commit false here to maintain atomic transactional behavior
-			connection.setAutoCommit(false);
-
-			try (PreparedStatement prStmt = connection.prepareStatement(statement)) {
-				prStmt.setString(1, taskTitle);
-				prStmt.setString(2, taskPriority);
-				prStmt.setString(3, taskDescription);
-				prStmt.setString(4, assignee);
-				prStmt.setString(5, StringUtils.EMPTY);
-				prStmt.setString(6, workflowModel);
-				prStmt.setString(7, status);
-				prStmt.setString(8, convertDate(startDate));
-				prStmt.setString(9, null != dueDate ? convertDate(dueDate) : null);
-				prStmt.setString(10, workflowInstanceId);
-				prStmt.setString(11, workitemId);
-				prStmt.setString(12, workitemNodeId);
-				prStmt.setString(13, null != endDate ? convertDate(endDate) : null);
-				prStmt.setString(14, dataXML);
-				prStmt.setString(15, actionTaken);
-				prStmt.setString(16, workitemComment);
-				prStmt.setString(19, routes);
-				prStmt.setString(23, "RUNNING");
-				prStmt.setString(24, afPath);
-
-				if (!processingConfig.dbType().equalsIgnoreCase("ORACLE")) {
-					prStmt.setBoolean(17, showActionTaken);
-					prStmt.setBoolean(18, showComment);
-					prStmt.setBoolean(20, showSubmitButton);
-					prStmt.setBoolean(21, showSaveButton);
-					prStmt.setBoolean(22, showResetButton);
-				} else {
-					prStmt.setString(17, CSUFUtils.getStringEquivalent(showActionTaken));
-					prStmt.setString(18, CSUFUtils.getStringEquivalent(showComment));
-					prStmt.setString(20, CSUFUtils.getStringEquivalent(showSubmitButton));
-					prStmt.setString(21, CSUFUtils.getStringEquivalent(showSaveButton));
-					prStmt.setString(22, CSUFUtils.getStringEquivalent(showResetButton));
-					// log.debug("inside saveTask 4");
-				}
-
-				// log.debug("saveTask SQL Statement getParameterMetaData: {}",
-				// prStmt.toString());
-
-				prStmt.execute();
-
-				/**
-				 * Committing after all the operations
-				 */
-				connection.commit();
-				// log.debug("task saved successfully with id : ".concat(id));
-
-				return workitemNodeId;
-
-			} catch (Exception e) {
+		
+	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/saveTaskDeatils";
+	    
+	    JSONObject payload = new JSONObject();
+	    
+		
+		
+	    payload.put("taskTitle", taskTitle);
+	    payload.put("taskPriority", taskPriority);
+	    payload.put("taskDescription", taskDescription);
+	    payload.put("assignee", assignee);
+	    payload.put("workflowModel", workflowModel);
+	    payload.put("status", status);
+	    payload.put("startDate", startDate);
+	    payload.put("dueDate", dueDate);
+	    payload.put("endDate", endDate);
+	    payload.put("workflowInstanceId", workflowInstanceId);
+	    payload.put("workitemId", workitemId);
+	    payload.put("workitemNodeId", workitemNodeId);
+	    payload.put("dataXML", dataXML);
+	    payload.put("actionTaken", actionTaken);
+	    payload.put("workitemComment", workitemComment);
+	    payload.put("routes", routes);
+	    payload.put("afPath", afPath);
+	    payload.put("showActionTaken", showActionTaken);
+	    payload.put("showComment", showComment);
+	    payload.put("showSubmit", showSubmitButton);
+	    payload.put("showSave", showSaveButton);
+	    payload.put("showReset", showResetButton);
+		try {
+		CloseableHttpClient client = HttpClients.createDefault();
+		HttpPost post = new HttpPost(dbServiceUrl);
+		post.addHeader("Content-Type", "application/json");
+		post.setEntity(new StringEntity(payload.toString()));
+		
+		CloseableHttpResponse response = client.execute(post);
+		log.info("Trincy DB Service Response: =" + response.getStatusLine());
+		
+		String responseStr = EntityUtils.toString(response.getEntity()).trim();
+		log.info("Trincy responseStr =" + responseStr);
+		 
+		workitemNodeId = responseStr;
+       
+		
+		} catch (Exception e) {
 				/**
 				 * In case of any error, rollback
 				 */
-				String fallbackSaveTaskSQLQuery = "INSERT INTO task_details"
+				/*String fallbackSaveTaskSQLQuery = "INSERT INTO task_details"
 						+ " (task_title, priority, task_description, assignee, project, workflow_model, status, start_date, due_date,"
 						+ " workflow_instance_id, workitem_id, workitem_node_id, end_date, data, action_taken, task_submit_comment, "
 						+ "show_action_taken, show_comment, routes_data, show_submit, show_save, show_reset, workflow_status, af_path)"
@@ -310,11 +292,11 @@ public class TaskServiceImpl implements TaskService {
 
 				log.debug("fallbackSaveTaskSQLQuery : {}", fallbackSaveTaskSQLQuery);
 				connection.rollback();
-				connection.setAutoCommit(true);
+				connection.setAutoCommit(true);*/
 				log.error("Error Message : {} with error stacktrace : {}", e.getMessage(),
 						Arrays.toString(e.getStackTrace()));
 			}
-		} catch (SQLException e) {
+		} /*catch (SQLException e) {
 			String fallbackSaveTaskSQLQuery = "INSERT INTO task_details"
 					+ " (task_title, priority, task_description, assignee, project, workflow_model, status, start_date, due_date,"
 					+ " workflow_instance_id, workitem_id, workitem_node_id, end_date, data, action_taken, task_submit_comment, "
@@ -332,11 +314,13 @@ public class TaskServiceImpl implements TaskService {
 			log.debug("fallbackSaveTaskSQLQuery : {}", fallbackSaveTaskSQLQuery);
 			log.error("Error Message : {} with error stacktrace : {}", e.getMessage(),
 					Arrays.toString(e.getStackTrace()));
-		}
+		}*/
 		 log.info("inside saveTask 5");
 		return null;
+		
 	}
-
+		 return workitemNodeId;
+	}
 	@Override
 	public JsonArray getAllTasksCloud(Session currentUserSession) {
 		String getTasksStmt = "select task_title, priority, task_description, assignee, "
