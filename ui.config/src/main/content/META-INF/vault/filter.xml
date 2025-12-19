@@ -6,5 +6,5 @@
 	
 
     
-    <filter root="/apps/csuf-cloud-project/osgiconfig"/>
+    <filter root="/apps/csuf-cloud-project/osgiconfig" mode="update"/>
 </workspaceFilter>
