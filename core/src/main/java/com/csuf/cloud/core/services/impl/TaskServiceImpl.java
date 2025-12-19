@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -15,32 +14,25 @@ import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 
-import javax.jcr.Node;
 import javax.jcr.Session;
 
 import org.apache.commons.codec.binary.Base64;
-import org.apache.commons.httpclient.HttpStatus;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
-import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.util.EntityUtils;
-import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.json.JSONObject;
 import org.osgi.framework.Constants;
@@ -64,7 +56,6 @@ import com.csuf.cloud.core.services.WorkflowService;
 import com.csuf.cloud.core.utils.ArgumentParser;
 import com.csuf.cloud.core.utils.CSUFUtils;
 import com.csuf.cloud.core.utils.XMLUtils;
-import com.day.util.NameValuePair;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -177,22 +168,11 @@ public class TaskServiceImpl implements TaskService {
 			dataXMLName = dataXMLName.substring(dataXMLName.lastIndexOf(":") + 1);
 		}
 		log.info("India dataXMLName after=" +dataXMLName);
-		InputStream is = null;
-		/*InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
-				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");*/
 		
-		
-		Resource  xmlNode = resolver.getResource(item.getContentPath());
-		Iterator<Resource> xmlFiles = xmlNode.listChildren();
-		while (xmlFiles.hasNext()) {
-			Resource attachmentXml = xmlFiles.next();
-			String filePath = attachmentXml.getPath();
-			if (filePath.contains(dataXMLName)) {
-				filePath = attachmentXml.getPath().concat("/jcr:content");
-				Node subNode = resolver.getResource(filePath).adaptTo(Node.class);
-				log.info("iphone subNode =" +subNode);
-				log.info("iphone Stream =" +subNode.getProperty("jcr:data").getBinary().getStream());
-				is =  subNode.getProperty("jcr:data").getBinary().getStream();
+		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
+				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
+		log.info("iphone stream  =" +is);
+
 		
 		if (null != is) {
 			Document doc = XMLUtils.getDomDocument(is);
@@ -269,7 +249,7 @@ public class TaskServiceImpl implements TaskService {
 		log.info("Trincy responseStr =" + responseStr);
 		 
 		workitemNodeId = responseStr;
-       
+		return workitemNodeId;
 		
 		} catch (Exception e) {
 				/**
@@ -296,6 +276,7 @@ public class TaskServiceImpl implements TaskService {
 				log.error("Error Message : {} with error stacktrace : {}", e.getMessage(),
 						Arrays.toString(e.getStackTrace()));
 			}
+		return null;
 		} /*catch (SQLException e) {
 			String fallbackSaveTaskSQLQuery = "INSERT INTO task_details"
 					+ " (task_title, priority, task_description, assignee, project, workflow_model, status, start_date, due_date,"
@@ -315,12 +296,11 @@ public class TaskServiceImpl implements TaskService {
 			log.error("Error Message : {} with error stacktrace : {}", e.getMessage(),
 					Arrays.toString(e.getStackTrace()));
 		}*/
-		 log.info("inside saveTask 5");
-		return null;
+		 
 		
-	}
-		 return workitemNodeId;
-	}
+		
+	
+	
 	@Override
 	public JsonArray getAllTasksCloud(Session currentUserSession) {
 		String getTasksStmt = "select task_title, priority, task_description, assignee, "
