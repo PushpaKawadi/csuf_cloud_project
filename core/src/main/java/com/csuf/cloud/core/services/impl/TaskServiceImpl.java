@@ -173,7 +173,7 @@ public class TaskServiceImpl implements TaskService {
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
 		log.info("Pushpa IS object");
 		
-		if (null != is) {
+		/*if (null != is) {
 			Document doc = XMLUtils.getDomDocument(is);
 			log.info("iphone inside");
 			dataXML = XMLUtils.prettyPrintAsString(doc);
@@ -198,13 +198,16 @@ public class TaskServiceImpl implements TaskService {
 			log.info("iphone Exception");
 			throw new RuntimeException(
 					"Fatal Error, Data.xml could not be retrieved for workItemId : ".concat(item.getId()));
-		}
+		}*/
 		log.info("inside saveTask 3");
 		String routes = ArgumentParser.getRoutes(item);
 		log.info("routes : {}", routes);
 		String dueDateString = (null != dueDate ? convertDate(dueDate) : null);
 		String endDateString = (null != endDate ? convertDate(endDate) : null);
 		String statement = StringUtils.EMPTY;
+		
+		log.info("inside saveTask 4");
+		
 
 		
 	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/saveTaskDeatils";
@@ -214,18 +217,37 @@ public class TaskServiceImpl implements TaskService {
 		
 		
 	    payload.put("taskTitle", taskTitle);
+	    log.info("pushpa taskTitle="+taskTitle);
+	    
 	    payload.put("taskPriority", taskPriority);
+	    log.info("pushpa taskPriority="+taskPriority);
+	    
 	    payload.put("taskDescription", taskDescription);
+	    log.info("pushpa taskDescription="+taskDescription);
+	    
 	    payload.put("assignee", assignee);
+	    log.info("pushpa assignee="+assignee);
+	    
 	    payload.put("workflowModel", workflowModel);
+	    log.info("pushpa workflowModel="+workflowModel);
+
 	    payload.put("status", status);
-	    payload.put("startDate", startDate);
+	    log.info("pushpa status="+status);
+	    
+	    /*payload.put("startDate", startDate);
 	    payload.put("dueDate", dueDate);
-	    payload.put("endDate", endDate);
+	    payload.put("endDate", endDate);*/
+	    
 	    payload.put("workflowInstanceId", workflowInstanceId);
+	    log.info("pushpa workflowInstanceId="+workflowInstanceId);
+	    
 	    payload.put("workitemId", workitemId);
+	    log.info("pushpa workitemId="+workitemId);
+	    
 	    payload.put("workitemNodeId", workitemNodeId);
-	    payload.put("dataXML", dataXML);
+	    log.info("pushpa workitemNodeId="+workitemNodeId);
+	    
+	    /*payload.put("dataXML", dataXML);
 	    payload.put("actionTaken", actionTaken);
 	    payload.put("workitemComment", workitemComment);
 	    payload.put("routes", routes);
@@ -234,7 +256,10 @@ public class TaskServiceImpl implements TaskService {
 	    payload.put("showComment", showComment);
 	    payload.put("showSubmit", showSubmitButton);
 	    payload.put("showSave", showSaveButton);
-	    payload.put("showReset", showResetButton);
+	    payload.put("showReset", showResetButton);*/
+	    
+		log.info("inside saveTask 5");
+
 		try {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpPost post = new HttpPost(dbServiceUrl);
@@ -242,12 +267,14 @@ public class TaskServiceImpl implements TaskService {
 		post.setEntity(new StringEntity(payload.toString()));
 		
 		CloseableHttpResponse response = client.execute(post);
-		log.info("Trincy DB Service Response: =" + response.getStatusLine());
+		log.info("Raghu DB Service Response: =" + response.getStatusLine());
 		
 		String responseStr = EntityUtils.toString(response.getEntity()).trim();
-		log.info("Trincy responseStr =" + responseStr);
+		log.info("Raghu responseStr =" + responseStr);
 		 
 		workitemNodeId = responseStr;
+		log.info("Raghu workitemNodeId =" + responseStr);
+
 		return workitemNodeId;
 		
 		} catch (Exception e) {
