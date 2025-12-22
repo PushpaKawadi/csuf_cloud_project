@@ -64,7 +64,7 @@ public class CSUFRequestFilter implements Filter {
 	@Override
 	public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain filterChain)
 			throws IOException, ServletException {
-		logger.info("Adarsh CSUFSystemMaintenanceFilter, request path is");
+		logger.info("Entered CSUFSystemMaintenanceFilter");
 
 		Session session = null;
 		ResourceResolver resolver = null;
