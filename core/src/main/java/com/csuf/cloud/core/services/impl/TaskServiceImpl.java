@@ -247,7 +247,9 @@ public class TaskServiceImpl implements TaskService {
 	    payload.put("workitemNodeId", workitemNodeId);
 	    log.info("pushpa workitemNodeId="+workitemNodeId);
 	    
-	    /*payload.put("dataXML", dataXML);
+	    payload.put("startDate", convertDate(startDate));
+
+	    payload.put("dataXML", dataXML);
 	    payload.put("actionTaken", actionTaken);
 	    payload.put("workitemComment", workitemComment);
 	    payload.put("routes", routes);
@@ -256,7 +258,7 @@ public class TaskServiceImpl implements TaskService {
 	    payload.put("showComment", showComment);
 	    payload.put("showSubmit", showSubmitButton);
 	    payload.put("showSave", showSaveButton);
-	    payload.put("showReset", showResetButton);*/
+	    payload.put("showReset", showResetButton);
 	    
 		log.info("inside saveTask 5");
 
@@ -265,6 +267,7 @@ public class TaskServiceImpl implements TaskService {
 		HttpPost post = new HttpPost(dbServiceUrl);
 		post.addHeader("Content-Type", "application/json");
 		post.setEntity(new StringEntity(payload.toString()));
+		log.info("Raghu Json:=" +payload.toString());
 		
 		CloseableHttpResponse response = client.execute(post);
 		log.info("Raghu DB Service Response: =" + response.getStatusLine());
@@ -273,7 +276,7 @@ public class TaskServiceImpl implements TaskService {
 		log.info("Raghu responseStr =" + responseStr);
 		 
 		workitemNodeId = responseStr;
-		log.info("Raghu workitemNodeId =" + responseStr);
+		log.info("Focus workitemNodeId =" + responseStr);
 
 		return workitemNodeId;
 		
