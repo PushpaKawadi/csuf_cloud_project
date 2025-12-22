@@ -71,18 +71,19 @@ public class CSUFRequestFilter implements Filter {
 			final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) request;
 			final SlingHttpServletResponse slingResponse = (SlingHttpServletResponse) response;
 
-			/*
-			 * logger.debug("enter CSUFSystemMaintenanceFilter, request path is {}",
-			 * slingRequest.getRequestPathInfo().getResourcePath());
-			 */
+			logger.info("enter CSUFSystemMaintenanceFilter, request path is");
+
+			logger.info("enter CSUFSystemMaintenanceFilter, request path is {}",
+					slingRequest.getRequestPathInfo().getResourcePath());
 
 			String formAccessType = null;
 			resolver = slingRequest.getResourceResolver();
 			session = resolver.adaptTo(Session.class);
 
 			String ldapName = inboxService.getldapAccountName(session, resolver);
-			logger.debug("ldapName : {}", ldapName);
+			logger.info("ldapName : {}", ldapName);
 			if (StringUtils.isBlank(ldapName)) {
+				logger.info("inside ldapName : {}", ldapName);
 				slingResponse.sendRedirect(ACCESS_DENIED_PAGE_PATH);
 			} else if (Arrays.asList(globalConfigCSUFService.whitelistedURLPathsForAnonymousAccess())
 					.contains(slingRequest.getRequestPathInfo().getResourcePath())) {
@@ -110,7 +111,7 @@ public class CSUFRequestFilter implements Filter {
 							formAccessType = UserType.FACULTY.name();
 						}
 					}
-					
+
 					if (StringUtils.isNotBlank(formAccessType)
 							&& formAccessType.equalsIgnoreCase(UserType.STUDENT.name())
 							&& ldapName.equalsIgnoreCase(UserType.STUDENT.name())) {
@@ -132,7 +133,7 @@ public class CSUFRequestFilter implements Filter {
 						if (ldapName.equalsIgnoreCase(UserType.FACULTY.name())
 								|| ldapName.equalsIgnoreCase(UserType.STUDENT.name())) {
 							filterChain.doFilter(request, response);
-						}else {
+						} else {
 							slingResponse.sendRedirect(ACCESS_DENIED_PAGE_PATH);
 						}
 					} else {
@@ -143,9 +144,9 @@ public class CSUFRequestFilter implements Filter {
 		} catch (Exception e) {
 			logger.error(Arrays.toString(e.getStackTrace()));
 		} finally {
-            if (session != null) {
-                session.logout();
-            }
+			if (session != null) {
+				session.logout();
+			}
 			if (resolver != null && resolver.isLive()) {
 				resolver.close();
 			}

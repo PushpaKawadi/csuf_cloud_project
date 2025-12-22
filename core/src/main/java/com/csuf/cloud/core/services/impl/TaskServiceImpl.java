@@ -248,7 +248,13 @@ public class TaskServiceImpl implements TaskService {
 	    log.info("pushpa workitemNodeId="+workitemNodeId);
 	    
 	    payload.put("startDate", convertDate(startDate));
+	    
+	    payload.put("startDate", convertDate(startDate));
+	    payload.put("dueDate", convertDate(dueDate));
 
+	    
+	    payload.put("endDate", convertDate(endDate));
+	    
 	    payload.put("dataXML", dataXML);
 	    payload.put("actionTaken", actionTaken);
 	    payload.put("workitemComment", workitemComment);
