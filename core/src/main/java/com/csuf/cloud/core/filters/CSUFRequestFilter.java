@@ -64,6 +64,8 @@ public class CSUFRequestFilter implements Filter {
 	@Override
 	public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain filterChain)
 			throws IOException, ServletException {
+		logger.info("Adarsh CSUFSystemMaintenanceFilter, request path is");
+
 		Session session = null;
 		ResourceResolver resolver = null;
 
@@ -71,8 +73,7 @@ public class CSUFRequestFilter implements Filter {
 			final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) request;
 			final SlingHttpServletResponse slingResponse = (SlingHttpServletResponse) response;
 
-			logger.info("enter CSUFSystemMaintenanceFilter, request path is");
-
+		
 			logger.info("enter CSUFSystemMaintenanceFilter, request path is {}",
 					slingRequest.getRequestPathInfo().getResourcePath());
 
