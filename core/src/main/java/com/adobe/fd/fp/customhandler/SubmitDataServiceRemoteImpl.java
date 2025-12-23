@@ -44,13 +44,20 @@ public class SubmitDataServiceRemoteImpl extends FPRemoteOperations implements S
 
     @Reference
     private SlingRepository slingRepository;
+    
+    @Activate
+    protected void activate() {
+        logger.info("Malabar SubmitDataServiceRemoteImpl ACTIVATED");
+    }
 
     protected String getInstanceType() {
         return "submit";
     }
+    
+    
 
     private ResourceResolver getServiceResolver() throws FormsPortalException {
-    	logger.info("Pushpa SubmitDataServiceRemoteImpl class");
+    	logger.info("Malabar SubmitDataServiceRemoteImpl class");
 
         Map<String, Object> authInfo = new HashMap<>();
         authInfo.put(ResourceResolverFactory.SUBSERVICE, "formsService"); // configure service user in AEM
@@ -69,19 +76,19 @@ public class SubmitDataServiceRemoteImpl extends FPRemoteOperations implements S
 
     // Helper method - not part of the interface
     public String saveData(String userDataID, String formData) throws FormsPortalException {
-    	logger.info("Pushpa SubmitDataServiceRemoteImpl saveData");
+    	logger.info("Malabar SubmitDataServiceRemoteImpl saveData");
         byte[] dataBytes = formData != null ? formData.getBytes(StandardCharsets.UTF_8) : null;
         return saveData(userDataID, dataBytes, "data", null);
     }
 
     @Override
     public String saveAttachment(byte[] attachmentBytes) throws FormsPortalException {
-    	logger.info("Pushpa SubmitDataServiceRemoteImpl saveAttachment");
+    	logger.info("Malabar SubmitDataServiceRemoteImpl saveAttachment");
         return saveData(null, attachmentBytes, "attachments", null);
     }
 
     protected String saveData(String id, byte[] data, String itemType, String owner) throws FormsPortalException {
-    	logger.info("Pushpa SubmitDataServiceRemoteImpl saveData");
+    	logger.info("Malabar SubmitDataServiceRemoteImpl saveData");
         try (ResourceResolver resolver = getServiceResolver()) {
             String userName = owner != null ? owner : resolver.getUserID();
             userName = URLEncoder.encode(userName, StandardCharsets.UTF_8);
@@ -126,18 +133,18 @@ public class SubmitDataServiceRemoteImpl extends FPRemoteOperations implements S
 
     @Override
     public boolean deleteData(String dataID) throws FormsPortalException {
-    	logger.info("Pushpa SubmitDataServiceRemoteImpl deleteData");
+    	logger.info("Malabar SubmitDataServiceRemoteImpl deleteData");
         return deleteItem(dataID, "submission");
     }
 
     @Override
     public boolean deleteAttachment(String attachmentID) throws FormsPortalException {
-    	logger.info("Pushpa SubmitDataServiceRemoteImpl deleteAttachment");
+    	logger.info("Malabar SubmitDataServiceRemoteImpl deleteAttachment");
         return deleteItem(attachmentID, "attachment");
     }
 
     private boolean deleteItem(String id, String itemType) throws FormsPortalException {
-    	logger.info("Pushpa SubmitDataServiceRemoteImpl deleteItem");
+    	logger.info("Malabar SubmitDataServiceRemoteImpl deleteItem");
         if (StringUtils.isBlank(id)) {
             logger.warn("Invalid {} ID", itemType);
             return false;

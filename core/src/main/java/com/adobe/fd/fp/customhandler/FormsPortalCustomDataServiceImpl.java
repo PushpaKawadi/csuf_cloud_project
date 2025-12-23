@@ -78,7 +78,7 @@ public class FormsPortalCustomDataServiceImpl implements SubmitDataService, Draf
     }
 
     private Connection getConnection() throws FormsPortalException {
-    	log.info("Pushpa FormsPortalCustomDataServiceImpl getConnection");
+    	log.info("Malabar FormsPortalCustomDataServiceImpl getConnection");
         try {
             String filter = "(&(objectclass=javax.sql.DataSource)(datasource.name=" + getDataSourceName() + "))";
             ServiceReference<?>[] refs = bundleContext.getAllServiceReferences(null, filter);
@@ -93,7 +93,7 @@ public class FormsPortalCustomDataServiceImpl implements SubmitDataService, Draf
     }
 
     private ResourceResolver getServiceResourceResolver() throws FormsPortalException {
-    	log.info("Pushpa FormsPortalCustomDataServiceImpl ResourceResolver");
+    	log.info("Malabar FormsPortalCustomDataServiceImpl ResourceResolver");
         try {
             // Using service user mapping in AEM
             return resolverFactory.getServiceResourceResolver(Map.of(
@@ -106,7 +106,7 @@ public class FormsPortalCustomDataServiceImpl implements SubmitDataService, Draf
 
     @Override
     public String saveData(String id, String formName, String formdata) throws FormsPortalException {
-    	log.info("Pushpa FormsPortalCustomDataServiceImpl saveData");
+    	log.info("Malabar FormsPortalCustomDataServiceImpl saveData");
         try (ResourceResolver resolver = getServiceResourceResolver()) {
             String userName = resolver.getUserID();
             return saveDataInternal(id, formdata.getBytes(), userName);
@@ -115,7 +115,7 @@ public class FormsPortalCustomDataServiceImpl implements SubmitDataService, Draf
 
     private String saveDataInternal(String id, byte[] formData, String userName) throws FormsPortalException {
     	
-    	log.info("Pushpa FormsPortalCustomDataServiceImpl saveDataInternal");
+    	log.info("Malabar FormsPortalCustomDataServiceImpl saveDataInternal");
     	
         try (Connection connection = getConnection()) {
             String sql = "INSERT INTO " + getDataTableName() + " (id, data, owner) VALUES (?, ?, ?) "

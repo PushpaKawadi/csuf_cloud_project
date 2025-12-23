@@ -47,7 +47,7 @@ public class FormsPortalCustomMetadataServiceImpl implements SubmitMetadataServi
 
     @Activate
     protected void activate(BundleContext context, Map<String, Object> props) {
-    	log.info("Pushpa FormsPortalCustomMetadataServiceImpl class");
+    	log.info("Malabar FormsPortalCustomMetadataServiceImpl class");
         dataSourceName = Optional.ofNullable((String) props.getOrDefault("datasource", FormsPortalConstants.STR_DEFAULT_DATA_SOURCE_NAME))
                                  .orElse(FormsPortalConstants.STR_DEFAULT_DATA_SOURCE_NAME);
         metadataTable = Optional.ofNullable((String) props.getOrDefault("metadatatable", FormsPortalConstants.STR_DEFAULT_METADATA_TABLE))
@@ -82,7 +82,7 @@ public class FormsPortalCustomMetadataServiceImpl implements SubmitMetadataServi
 
     @Override
     public String saveMetadata(Map<String, Object> metadataMap) throws FormsPortalException {
-    	log.info("Pushpa FormsPortalCustomMetadataServiceImpl saveMetadata");
+    	log.info("Malabar FormsPortalCustomMetadataServiceImpl saveMetadata");
         String draftId = metadataMap.get(FormsPortalConstants.STR_DRAFT_ID).toString();
         metadataMap.put(FormsPortalConstants.STR_ID, draftId);
         try (Connection conn = getConnection()) {
