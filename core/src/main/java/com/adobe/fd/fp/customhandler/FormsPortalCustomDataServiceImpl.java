@@ -64,9 +64,13 @@ public class FormsPortalCustomDataServiceImpl implements SubmitDataService, Draf
 
     @Activate
     protected void activate(Config config, BundleContext context) {
+    	log.info("Rainy activated");
         this.dataTable = config.datatable();
+        log.info("Rainy activated1="+this.dataTable);
         this.dataSource = config.datasource();
+        log.info("Rainy activated2="+this.dataSource);
         this.bundleContext = context;
+        log.info("Rainy activated3="+this.bundleContext);
     }
 
     private String getDataSourceName() {

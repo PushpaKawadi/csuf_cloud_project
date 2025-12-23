@@ -45,10 +45,7 @@ public class SubmitDataServiceRemoteImpl extends FPRemoteOperations implements S
     @Reference
     private SlingRepository slingRepository;
     
-    @Activate
-    protected void activate() {
-        logger.info("Malabar SubmitDataServiceRemoteImpl ACTIVATED");
-    }
+    
 
     protected String getInstanceType() {
         return "submit";
