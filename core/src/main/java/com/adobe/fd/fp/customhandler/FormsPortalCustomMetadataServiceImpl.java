@@ -26,9 +26,10 @@ import java.util.stream.Collectors;
 @Component(
         service = {SubmitMetadataService.class, DraftMetadataService.class, PendingSignMetadataService.class},
         immediate = true,
-        property = {"aem.formsportal.impl.prop=formsportal.samplemetadataservice"},
-        name = "Forms Portal Custom Metadata Service"
+        property = {"aem.formsportal.impl.prop=formsportal.customdataservice"},
+        name = "Forms Portal Custom Data Service Impl"
 )
+
 public class FormsPortalCustomMetadataServiceImpl implements SubmitMetadataService, DraftMetadataService, PendingSignMetadataService {
 	private static final Logger log = LoggerFactory.getLogger(FormsPortalCustomMetadataServiceImpl.class);
     @Reference
