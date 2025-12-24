@@ -64,13 +64,15 @@ public class FormsPortalCustomDataServiceImpl implements SubmitDataService, Draf
 
     @Activate
     protected void activate(Config config, BundleContext context) {
-    	log.info("Rainy activated");
+    	log.info("peppa activated");
         this.dataTable = config.datatable();
-        log.info("Rainy activated1="+this.dataTable);
+        log.info("peppa activated1="+this.dataTable);
         this.dataSource = config.datasource();
-        log.info("Rainy activated2="+this.dataSource);
+        log.info("peppa activated2="+this.dataSource);
         this.bundleContext = context;
-        log.info("Rainy activated3="+this.bundleContext);
+        log.info("peppa activated3="+this.bundleContext);
+        String id = getId();
+        log.info("Gold ID ="+id);
     }
 
     private String getDataSourceName() {
@@ -119,7 +121,7 @@ public class FormsPortalCustomDataServiceImpl implements SubmitDataService, Draf
 
     private String saveDataInternal(String id, byte[] formData, String userName) throws FormsPortalException {
     	
-    	log.info("Malabar FormsPortalCustomDataServiceImpl saveDataInternal");
+    	log.info("Gold FormsPortalCustomDataServiceImpl saveDataInternal");
     	
         try (Connection connection = getConnection()) {
             String sql = "INSERT INTO " + getDataTableName() + " (id, data, owner) VALUES (?, ?, ?) "
@@ -175,5 +177,9 @@ public class FormsPortalCustomDataServiceImpl implements SubmitDataService, Draf
 	public byte[] getData(String userDataID) throws FormsPortalException {
 		// TODO Auto-generated method stub
 		return null;
+	}
+	
+	private String getId() {
+		return String.valueOf(System.nanoTime());
 	}
 }
