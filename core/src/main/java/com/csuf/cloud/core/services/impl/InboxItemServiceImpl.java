@@ -327,7 +327,7 @@ public class InboxItemServiceImpl implements InboxItemService {
 	public boolean isViewInboxTaskAllowed(Session currentUserSession, String assignee) throws Exception {
 		try {
 			String currentUserId = currentUserSession.getUserID();
-			// log.debug(" currentUserId : - " + currentUserId);
+			log.debug(" currentUserId : - " + currentUserId);
 			if ((currentUserSession instanceof JackrabbitSession)) {
 				UserManager userManager = ((JackrabbitSession) currentUserSession).getUserManager();
 				Authorizable workItemAssignee = userManager.getAuthorizable(assignee);
@@ -335,7 +335,7 @@ public class InboxItemServiceImpl implements InboxItemService {
 				Group adminGroup = (Group) userManager.getAuthorizable("administrators");
 				if ((null != adminGroup && adminGroup.isMember(currentUser)) || currentUserId.equalsIgnoreCase("admin")
 						|| currentUserId.equals(assignee)) {
-					// log.debug(currentUserId + " user is either an admin or the task assignee");
+					log.debug(currentUserId + " user is either an admin or the task assignee");
 					return true;
 				}
 				if (null != workItemAssignee && workItemAssignee.isGroup()) {

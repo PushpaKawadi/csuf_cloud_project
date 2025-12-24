@@ -1056,12 +1056,12 @@ public class TaskServiceImpl implements TaskService {
 		JsonArray resultArray = new JsonArray();
 		JsonArray jsonArray = new JsonArray();
 
-		log.info("GetAllTask - Started at: {}", LocalTime.now());
+		log.info("Girija GetAllTask - Started at: {}", LocalTime.now());
 		try (CloseableHttpClient client = HttpClients.createDefault()) {
 			HttpPost post = new HttpPost(dbServiceUrl);
 			post.addHeader("Content-Type", "application/json");
 			try (CloseableHttpResponse response = client.execute(post)) {
-				log.info("DB Service Response: {}", response.getStatusLine());
+				log.info("Girija DB Service Response: {}", response.getStatusLine());
 				BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 				StringBuilder sb = new StringBuilder();
 				String line;
@@ -1069,7 +1069,7 @@ public class TaskServiceImpl implements TaskService {
 					sb.append(line);
 				}
 				resultArray = JsonParser.parseString(sb.toString()).getAsJsonArray();
-				log.info("DB JSON Parsed Successfully. Count = {}", resultArray.size());
+				log.info("Girija DB JSON Parsed Successfully. Count = {}", resultArray.size());
 			}
 
 		} catch (Exception e) {
@@ -1080,16 +1080,24 @@ public class TaskServiceImpl implements TaskService {
 		try {
 			for (JsonElement element : resultArray) {
 				JsonObject obj = element.getAsJsonObject();
-				log.info("Json: {}", LocalTime.now());
+				log.info("Girija Json: {}", LocalTime.now());
 
 				// Validate assignee
 				String assignee = getSafe(obj, "assignee");
 				boolean isViewTaskAllowed = inboxService.isViewInboxTaskAllowed(currentUserSession, assignee);
-				log.info("isViewTaskAllowed=" +isViewTaskAllowed);
+				log.info("Girija isViewTaskAllowed=" +isViewTaskAllowed);
 				/*if (!isViewTaskAllowed) {
 					continue;
 				}*/
 				JsonObject jsonObj = new JsonObject();
+				
+				jsonObj.addProperty("isViewTaskAllowed", false);
+				jsonObj.addProperty("isAssigneeAGroup", false);
+				
+				
+				jsonObj.addProperty("isViewTaskDetailsAllowed", false);
+				jsonObj.addProperty("isCurrentUserAdmin", "admin");
+				jsonObj.addProperty("currentUserId", "yjayaram@fullerton.edu");
 
 				// ----- AEM Permission Block -----
 				/*jsonObj.addProperty("isViewTaskAllowed", isViewTaskAllowed);
@@ -1144,13 +1152,15 @@ public class TaskServiceImpl implements TaskService {
 
 				// ----- Flags -----
 				if (!processingConfig.dbType().equalsIgnoreCase("ORACLE")) {
-					jsonObj.addProperty("show_submit", getSafe(obj, "show_submit"));
+					//jsonObj.addProperty("show_submit", getSafe(obj, "show_submit"));
+					jsonObj.addProperty("show_submit", true);
 					jsonObj.addProperty("show_save", getSafe(obj, "show_save"));
 					jsonObj.addProperty("show_reset", getSafe(obj, "show_reset"));
 					jsonObj.addProperty("show_action_taken", getSafe(obj, "show_action_taken"));
 					jsonObj.addProperty("show_comment", getSafe(obj, "show_comment"));
 				} else {
-					jsonObj.addProperty("show_submit", bool(obj, "show_submit"));
+					//jsonObj.addProperty("show_submit", bool(obj, "show_submit"));
+					jsonObj.addProperty("show_submit", true);
 					jsonObj.addProperty("show_save", bool(obj, "show_save"));
 					jsonObj.addProperty("show_reset", bool(obj, "show_reset"));
 					jsonObj.addProperty("show_action_taken", bool(obj, "show_action_taken"));
@@ -1164,7 +1174,7 @@ public class TaskServiceImpl implements TaskService {
 			log.error("Error processing JSON: {}", e.getMessage(), e);
 		}
 
-		log.info("Completed processing tasks at {}", jsonArray);
+		log.info("Girija Completed processing tasks at {}", jsonArray);
 		return jsonArray;
 	}
 
