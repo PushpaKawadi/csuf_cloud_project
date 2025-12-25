@@ -680,6 +680,7 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public String getTaskData(String workItemId) {
+		log.info("Inside Orange getTaskData");
 		String getTaskDataStmt = "select data from task_details where workitem_id = ?";
 		try (Connection connection = jdbcService.getInboxDBConnection();) {
 

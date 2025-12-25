@@ -58,13 +58,15 @@ public class AFFormPrefillFilter implements Filter {
 		try {
 			final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) request;
 			final SlingHttpServletResponse slingResponse = (SlingHttpServletResponse) response;
-
-			log.debug("AFFormPrefillFilter request for {}, with selector {}",
+			log.info("Orange AFFormPrefillFilter");
+			log.info("AFFormPrefillFilter request for {}, with selector {}",
 					slingRequest.getRequestPathInfo().getResourcePath(),
 					slingRequest.getRequestPathInfo().getSelectorString());
 
 			resolver = slingRequest.getResourceResolver();
+			log.info("Orange resolver="+resolver);
 			wfSession = resolver.adaptTo(WorkflowSession.class);
+			log.info("Orange wfSession="+wfSession);
 
 			if (StringUtils.isNotBlank(workItemId)) {
 				String dataXML = taskService.getTaskData(workItemId);
