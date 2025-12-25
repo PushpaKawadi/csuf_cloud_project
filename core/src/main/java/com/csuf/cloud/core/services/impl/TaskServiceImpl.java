@@ -1091,12 +1091,12 @@ public class TaskServiceImpl implements TaskService {
 				}*/
 				JsonObject jsonObj = new JsonObject();
 				
-				jsonObj.addProperty("isViewTaskAllowed", false);
+				jsonObj.addProperty("isViewTaskAllowed", true);
 				jsonObj.addProperty("isAssigneeAGroup", false);
 				
 				
-				jsonObj.addProperty("isViewTaskDetailsAllowed", false);
-				jsonObj.addProperty("isCurrentUserAdmin", "admin");
+				jsonObj.addProperty("isViewTaskDetailsAllowed", true);
+				jsonObj.addProperty("isCurrentUserAdmin", false);
 				jsonObj.addProperty("currentUserId", "yjayaram@fullerton.edu");
 
 				// ----- AEM Permission Block -----
