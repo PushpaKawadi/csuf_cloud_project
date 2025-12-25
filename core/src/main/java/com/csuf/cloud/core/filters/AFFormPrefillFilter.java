@@ -49,8 +49,11 @@ public class AFFormPrefillFilter implements Filter {
 	@Override
 	public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain filterChain)
 			throws IOException, ServletException {
+		log.info("Orange AFFormPrefillFilter");
+		
 
 		String workItemId = request.getParameter("taskId");
+		log.info("Orange workItemId="+workItemId);
 
 		WorkflowSession wfSession = null;
 		ResourceResolver resolver = null;
@@ -58,7 +61,7 @@ public class AFFormPrefillFilter implements Filter {
 		try {
 			final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) request;
 			final SlingHttpServletResponse slingResponse = (SlingHttpServletResponse) response;
-			log.info("Orange AFFormPrefillFilter");
+			
 			log.info("AFFormPrefillFilter request for {}, with selector {}",
 					slingRequest.getRequestPathInfo().getResourcePath(),
 					slingRequest.getRequestPathInfo().getSelectorString());
