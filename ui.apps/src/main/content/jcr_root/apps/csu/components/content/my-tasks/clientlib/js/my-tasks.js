@@ -211,6 +211,7 @@ $(document).ready(function() {
         //lastActionTaken = $(".chb:checked").closest(".clickable-row").data("lastactiontaken");
         //lastActionComment = $(".chb:checked").closest(".clickable-row").data("lastactioncomment");        
         console.log(workItemId);
+		console.log(isCurrentUserAdmin);
 
         var currentRow = $(".chb:checked").closest("tr");
         var taskTitle = currentRow.find("td:eq(1)").text(); // get current row 2nd TD        
@@ -265,9 +266,12 @@ $(document).ready(function() {
 
     $('#open-details').click(function() {
         if (!isViewTaskDetailsAllowed) {
+			console.log("ifcond="+isViewTaskDetailsAllowed);
             // show access-not-allowed screen
             window.location = '/content/csu/us/en/access-denied.html?wcmmode=disabled';
         } else {
+			console.log("else="+isViewTaskDetailsAllowed);
+
             window.location = '/content/csu/us/en/task-details.html?wcmmode=disabled';
         }
     });
