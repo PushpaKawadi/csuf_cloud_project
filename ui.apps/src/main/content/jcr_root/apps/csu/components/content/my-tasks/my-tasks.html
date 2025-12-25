@@ -65,7 +65,7 @@
                    </sly>-->
                    
                       <sly data-sly-list="${tasks}">                  
-                       <tr class="clickable-row" data-sly-test="${item.isViewTaskAllowed}" data-id="${item.workitem_id}" data-iscurrentuseradmin="${item.isCurrentUserAdmin}" data-isviewtaskdetailsallowed="${item.isViewTaskDetailsAllowed}">
+                       <tr class="clickable-row" data-sly-test="${item.isViewTaskAllowed}" data-id="${item.workitem_id}" data-iscurrentuseradmin="${item.isCurrentUserAdmin}" data-isviewtaskdetailsallowed="${item.isViewTaskDetailsAllowed}" data-isassigneeagroup="${item.isAssigneeAGroup}">
                          <td scope="row">
                             <div class="checkbox-wrapper my-tasks-checkbox">
                                 <input type="checkbox" class="chb" name="mytaskscheckbox" value="${itemList.count}">
