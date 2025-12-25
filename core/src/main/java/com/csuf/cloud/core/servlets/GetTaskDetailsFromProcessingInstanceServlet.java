@@ -33,9 +33,11 @@ public class GetTaskDetailsFromProcessingInstanceServlet extends SlingSafeMethod
 	@Override
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
+		log.info("Orange doget");
 		PrintWriter out = response.getWriter();
 		try {
 			String url = request.getParameter("url");
+			log.info("Orange url="+url);
 			out.write(taskService.getTaskDetailsFromProcessingInstance(url));
 		} catch (Exception e) {
 			log.error(Arrays.toString(e.getStackTrace()));

@@ -2,7 +2,10 @@
     "scripts": [
 "create service user csuf-datawrite-user",
 "create service user csuf-forms-reader",
+"create service user service_user",
 "add csuf-datawrite-user to group administrators",
+"add service_user to group administrators",
+"add service_user to group everyone",
 "set ACL for csuf-datawrite-user\n allow jcr:read, jcr:write on /apps\n allow jcr:write on /libs\n allow jcr:write on /conf\n allow jcr:write on /var\n allow jcr:all on /content\n allow jcr:all on /home\nend"
     ]
 }

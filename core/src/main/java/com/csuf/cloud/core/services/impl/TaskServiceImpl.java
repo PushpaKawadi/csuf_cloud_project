@@ -1027,13 +1027,19 @@ public class TaskServiceImpl implements TaskService {
 		CloseableHttpResponse response = null;
 		try (CloseableHttpClient httpclient = HttpClients.createDefault();) {
 			get = new HttpGet(processingConfig.processingUrl().concat(url));
-			log.debug("url=" + url);
+			log.info("getTaskDetailsFromProcessingInstance url=" + url);
 			String auth = new StringBuffer(processingConfig.userName()).append(":")
 					.append(processingConfig.userSecurity()).toString();
+			log.info(" auth=" +  auth);
 			byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.US_ASCII));
+			log.info("encodedAuth=" +  encodedAuth);
 			String authHeader = "Basic " + new String(encodedAuth);
+			log.info("authHeader=" +  authHeader);
 			get.setHeader("AUTHORIZATION", authHeader);
+			
 			response = httpclient.execute(get);
+			log.info("response=" +  response);
+			
 			if (null != response && response.getStatusLine().getStatusCode() == 200) {
 				return EntityUtils.toString(response.getEntity());
 			}
