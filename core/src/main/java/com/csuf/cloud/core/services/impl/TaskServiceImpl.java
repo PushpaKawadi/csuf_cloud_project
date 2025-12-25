@@ -1174,7 +1174,7 @@ public class TaskServiceImpl implements TaskService {
 			log.error("Error processing JSON: {}", e.getMessage(), e);
 		}
 
-		log.info("Girija Completed processing tasks at {}", jsonArray);
+		log.info("Coffee Completed processing tasks at {}", jsonArray);
 		return jsonArray;
 	}
 

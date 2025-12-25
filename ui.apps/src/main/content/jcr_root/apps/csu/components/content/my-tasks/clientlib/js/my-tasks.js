@@ -266,11 +266,13 @@ $(document).ready(function() {
 
     $('#open-details').click(function() {
         if (!isViewTaskDetailsAllowed) {
-			console.log("ifcond="+isViewTaskDetailsAllowed);
+			alert("IF Cond");
+			alert(!isViewTaskDetailsAllowed);
             // show access-not-allowed screen
             window.location = '/content/csu/us/en/access-denied.html?wcmmode=disabled';
         } else {
-			console.log("else="+isViewTaskDetailsAllowed);
+			alert("else Cond");
+			alert(isViewTaskDetailsAllowed);
 
             window.location = '/content/csu/us/en/task-details.html?wcmmode=disabled';
         }
