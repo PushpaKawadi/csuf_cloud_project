@@ -61,6 +61,8 @@ function showLeftSection(x) {
 }
 
 function isUploadTaskAttachmentAllowed() {
+	alert("UPLOAD_TASK_ATTACHMENTS_ALLOWED");
+	alert(itemId);
 $(".cls-task-attachments").css('display', 'none');
 var requestURL = '/bin/getInboxItemDetails?action=UPLOAD_TASK_ATTACHMENTS_ALLOWED&workItemId=' + encodeURIComponent(itemId);
 $.ajax({
@@ -83,6 +85,8 @@ $(".cls-task-attachments").css('display', 'none');
 }
 
 function getTaskAttachments() {
+	alert("TASK_ATTACHMENTS");
+	alert(itemId);
     //console.log("workItemId : " + itemId);
     $("#attachments-table").find("tr:gt(0)").remove();
     var requestURL = '/bin/getInboxItemDetails?action=TASK_ATTACHMENTS&workItemId=' + encodeURIComponent(itemId);
@@ -114,6 +118,8 @@ function getTaskAttachments() {
 
 function getWorkflowHistory() {
     //console.log("workItemId : " + itemId);
+	alert("WORKITEM_HISTORY");
+	alert(itemId);
     $("#tb-workflow-history").find("tr:gt(0)").remove();
     var requestURL = '/bin/manageTask?action=WORKITEM_HISTORY&workItemId=' + encodeURIComponent(itemId);
     $.ajax({
@@ -144,6 +150,8 @@ function getWorkflowHistory() {
 }
 
 function getLastActionAndCommentDetails() {
+	alert("PREVIOUS_STEP_DATA");
+	alert(itemId);
     var requestURL = '/bin/getInboxItemDetails?action=PREVIOUS_STEP_DATA&workItemId=' + encodeURIComponent(itemId);
     $.ajax({
         type: "GET",
@@ -164,6 +172,8 @@ function getLastActionAndCommentDetails() {
 }
 
 function isViewTaskDetailsAllowed() {
+	alert("VIEW_TASK_DETAILS_ALLOWED");
+	alert(taskAssignee);
     var requestURL = '/bin/getInboxItemDetails?action=VIEW_TASK_DETAILS_ALLOWED&assignee=' + taskAssignee;
     $.ajax({
         type: "GET",
@@ -214,6 +224,9 @@ $(document).ready(function () {
 
     // hide form save,submit,reset buttons inside iframe
     $('#task-iframe').load(function () {
+		alert("iframe");
+		alert(contentWindow.guideBridge);
+		
         //$('#task-iframe').contents().find('.toolbar').hide();
         /*$('#task-iframe').contents().find('#guideContainer-toolbar-reset___guide-item').hide();
         $('#task-iframe').contents().find('#guideContainer-rootPanel-toolbar-reset___guide-item').hide(); 
