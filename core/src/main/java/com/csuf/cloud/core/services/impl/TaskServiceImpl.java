@@ -1058,7 +1058,6 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public JsonArray getAllTasks(Session currentUserSession) {
-
 		final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/getMyTasksData";
 		JsonArray resultArray = new JsonArray();
 		JsonArray jsonArray = new JsonArray();
