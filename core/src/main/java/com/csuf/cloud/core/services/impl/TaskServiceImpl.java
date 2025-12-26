@@ -1023,9 +1023,11 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public String getTaskDetailsFromProcessingInstance(String url) throws IOException {
+		log.info("orange enter getTaskDetailsFromProcessingInstance");
 		HttpGet get = null;
 		CloseableHttpResponse response = null;
 		try (CloseableHttpClient httpclient = HttpClients.createDefault();) {
+			log.info("orange enter httpclient="+httpclient);
 			get = new HttpGet(processingConfig.processingUrl().concat(url));
 			log.info("getTaskDetailsFromProcessingInstance url=" + url);
 			String auth = new StringBuffer(processingConfig.userName()).append(":")
