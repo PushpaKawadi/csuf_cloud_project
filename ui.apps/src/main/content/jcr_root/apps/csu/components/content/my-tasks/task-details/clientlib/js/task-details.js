@@ -225,7 +225,7 @@ $(document).ready(function () {
     // hide form save,submit,reset buttons inside iframe
     $('#task-iframe').load(function () {
 		alert("iframe");
-		alert(contentWindow.guideBridge);
+		//alert(contentWindow.guideBridge);
 		
         //$('#task-iframe').contents().find('.toolbar').hide();
         /*$('#task-iframe').contents().find('#guideContainer-toolbar-reset___guide-item').hide();
