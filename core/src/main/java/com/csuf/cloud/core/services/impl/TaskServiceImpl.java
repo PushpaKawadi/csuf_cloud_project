@@ -677,38 +677,78 @@ public class TaskServiceImpl implements TaskService {
 		}
 		return false;
 	}
+	
+@Override
+public String getTaskDataOld(String workItemId) {
+	log.info("Inside Orange getTaskData");
+	String getTaskDataStmt = "select data from task_details where workitem_id = ?";
+	try (Connection connection = jdbcService.getInboxDBConnection();) {
+
+		// Setting auto commit false here to maintain atomic transactional behavior
+		connection.setAutoCommit(false);
+
+		try (PreparedStatement prStmt = connection.prepareStatement(getTaskDataStmt);) {
+			prStmt.setString(1, workItemId);
+			try (ResultSet resultSet = prStmt.executeQuery();) {
+				while (resultSet.next()) {
+					String data = resultSet.getString("data");
+					connection.commit();
+					return data;
+				}
+			}
+		} catch (Exception e) {
+			/**
+			 * In case of any error, rollback
+			 */
+			connection.rollback();
+			connection.setAutoCommit(true);
+			log.error(Arrays.toString(e.getStackTrace()));
+		}
+	} catch (SQLException e) {
+		log.error(Arrays.toString(e.getStackTrace()));
+	}
+	return null;
+	
+	}
 
 	@Override
 	public String getTaskData(String workItemId) {
-		log.info("Inside Orange getTaskData");
-		String getTaskDataStmt = "select data from task_details where workitem_id = ?";
-		try (Connection connection = jdbcService.getInboxDBConnection();) {
+		log.info("Lego="+workItemId);
+		
+		String data ="";
 
-			// Setting auto commit false here to maintain atomic transactional behavior
-			connection.setAutoCommit(false);
-
-			try (PreparedStatement prStmt = connection.prepareStatement(getTaskDataStmt);) {
-				prStmt.setString(1, workItemId);
-				try (ResultSet resultSet = prStmt.executeQuery();) {
-					while (resultSet.next()) {
-						String data = resultSet.getString("data");
-						connection.commit();
-						return data;
-					}
-				}
-			} catch (Exception e) {
-				/**
-				 * In case of any error, rollback
-				 */
-				connection.rollback();
-				connection.setAutoCommit(true);
-				log.error(Arrays.toString(e.getStackTrace()));
-			}
-		} catch (SQLException e) {
-			log.error(Arrays.toString(e.getStackTrace()));
+		log.info("Lego="+workItemId);
+	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/TaskDetailsServlet";
+	    boolean taskExists = false;
+	    
+	    JSONObject json = new JSONObject();
+	    json.put("workItemId", workItemId);
+		
+		try {
+		CloseableHttpClient client = HttpClients.createDefault();
+		HttpPost post = new HttpPost(dbServiceUrl);
+		post.addHeader("Content-Type", "application/json");
+		post.setEntity(new StringEntity(json.toString()));
+		
+		CloseableHttpResponse response = client.execute(post);
+		log.info("Lego DB Service Response: =" + response.getStatusLine());
+		
+		String responseStr = EntityUtils.toString(response.getEntity()).trim();
+		log.info("Lego responseStr =" + responseStr);
+		 
+        data = responseStr;
+        log.info("Lego taskExists =" + data);
+		
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
-		return null;
+	    return data;
 	}
+		
+		
+		
 
 	@Override
 	public String getWorkflowInstanceId(String workItemId) {
@@ -1023,20 +1063,20 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public String getTaskDetailsFromProcessingInstance(String url) throws IOException {
-		log.info("orange enter getTaskDetailsFromProcessingInstance");
+		log.info("Lego enter getTaskDetailsFromProcessingInstance");
 		HttpGet get = null;
 		CloseableHttpResponse response = null;
 		try (CloseableHttpClient httpclient = HttpClients.createDefault();) {
-			log.info("orange enter httpclient="+httpclient);
+			log.info("Lego enter httpclient="+httpclient);
 			get = new HttpGet(processingConfig.processingUrl().concat(url));
 			log.info("getTaskDetailsFromProcessingInstance url=" + url);
 			String auth = new StringBuffer(processingConfig.userName()).append(":")
 					.append(processingConfig.userSecurity()).toString();
 			log.info(" auth=" +  auth);
 			byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.US_ASCII));
-			log.info("encodedAuth=" +  encodedAuth);
+			log.info("Lego=" +  encodedAuth);
 			String authHeader = "Basic " + new String(encodedAuth);
-			log.info("authHeader=" +  authHeader);
+			log.info("Lego=" +  authHeader);
 			get.setHeader("AUTHORIZATION", authHeader);
 			
 			response = httpclient.execute(get);

@@ -54,6 +54,7 @@ public interface TaskService {
 	JsonArray getAllTasksCloud(Session currentUserSession);
 	
 	boolean isTaskExistOld(String workItemId);
-
+	
+	String getTaskDataOld(String workItemId);
 	
 }

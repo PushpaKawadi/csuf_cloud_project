@@ -2,6 +2,7 @@ package com.csuf.cloud.core.servlets;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -79,7 +80,7 @@ public class InboxItemDetailsServlet extends SlingSafeMethodsServlet {
 	@Override
 	protected void doGet(final SlingHttpServletRequest request, final SlingHttpServletResponse response)
 			throws ServletException, IOException {
-		log.info("entered InboxItemDetailsServlet doGet method");
+		log.info("India entered InboxItemDetailsServlet doGet method");
 		JsonObject json = null;
 		JsonArray jsonArray = null;
 		PrintWriter out = response.getWriter();
@@ -98,11 +99,13 @@ public class InboxItemDetailsServlet extends SlingSafeMethodsServlet {
 		TagManager tagManager = jcrTagManagerFactory.getTagManager(resourceResolver);
 
 		// String tagGroupConfig = COBRA_TAG_ID.concat("~").concat(WELLNESS_GROUP);
+		
+		log.info("India ="+(String) request.getAttribute("fd.dashboard.tm.historyitemid"));
 
 		try {
 			String historyItemId = (String) request.getAttribute("fd.dashboard.tm.historyitemid");
 			if (StringUtils.isNotBlank(workItemId) && action.equalsIgnoreCase(ActionType.PREVIOUS_STEP_DATA.name())) {
-				// log.debug("entry with workItemId : {} at {}", workItemId, LocalTime.now());
+				log.info("entry with workItemId : {} at {}", workItemId, LocalTime.now());
 				try {
 					workItem = wfSession.getWorkItem(workItemId);
 				} catch (WorkflowException e) {
