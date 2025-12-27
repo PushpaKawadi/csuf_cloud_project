@@ -828,6 +828,44 @@ public String getTaskDataOld(String workItemId) {
 
 	@Override
 	public String getAfPath(String workItemId) {
+		
+		log.info("Inside getAfPath");
+		String afPath = "";
+
+		log.info("AFPath Param="+workItemId);
+	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/AFPathServlet";
+	  
+	    JSONObject json = new JSONObject();
+	    json.put("workItemId", workItemId);
+		
+		try {
+		CloseableHttpClient client = HttpClients.createDefault();
+		HttpPost post = new HttpPost(dbServiceUrl);
+		post.addHeader("Content-Type", "application/json");
+		post.setEntity(new StringEntity(json.toString()));
+		
+		CloseableHttpResponse response = client.execute(post);
+		log.info("Trincy afPath DB Service Response: =" + response.getStatusLine());
+		
+		String responseStr = EntityUtils.toString(response.getEntity()).trim();
+		log.info("Trincy afPath responseStr =" + responseStr);
+		 
+		afPath = responseStr;
+        log.info("Trincy afPath =" + afPath);
+		
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	    return afPath;
+	}
+		
+		
+		
+	
+	@Override
+	public String getAfPathOld(String workItemId) {
 		String getStmt = "select af_path from task_details where workitem_id = ?";
 		try (Connection connection = jdbcService.getInboxDBConnection();) {
 			connection.setAutoCommit(false);
@@ -851,6 +889,7 @@ public String getTaskDataOld(String workItemId) {
 		}
 		return null;
 	}
+	
 
 	@Override
 	public String fetchWorkflowHistory(String workItemId, ResourceResolver resolver, ResourceBundle resourceBundle)

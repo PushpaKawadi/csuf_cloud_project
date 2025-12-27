@@ -57,4 +57,6 @@ public interface TaskService {
 	
 	String getTaskDataOld(String workItemId);
 	
+	String getAfPathOld(String workItemId);
+	
 }
