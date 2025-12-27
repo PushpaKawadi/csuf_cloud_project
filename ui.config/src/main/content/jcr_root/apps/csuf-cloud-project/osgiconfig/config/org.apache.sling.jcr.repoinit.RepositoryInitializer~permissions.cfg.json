@@ -1,0 +1,5 @@
+{
+    "scripts": [
+"set ACL for everyone\n allow jcr:read on /home\n allow jcr:read on /var/fd/dashboard\nend"
+    ]
+}
