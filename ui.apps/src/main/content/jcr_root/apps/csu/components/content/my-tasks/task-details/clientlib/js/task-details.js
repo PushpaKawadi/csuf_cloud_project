@@ -236,12 +236,11 @@ $(document).ready(function () {
         $('#task-iframe').contents().find('#guideContainer-toolbar-submit___guide-item').hide();        
         $('#task-iframe').contents().find('#guideContainer-rootPanel-toolbar-submit___guide-item').hide();*/
         guideBridge = $("#task-iframe")[0].contentWindow.guideBridge;
-       guideBridge.onReady(function () {
-           guideBridge.hideSubmitButtons();
-                   guideBridge.hideSaveButtons();
-                   guideBridge.hideResetButtons();
-                   guideBridge.hideSummaryPanel();
-       });
+
+        /*guideBridge.hideSubmitButtons();
+        guideBridge.hideSaveButtons();
+        guideBridge.hideResetButtons();
+        guideBridge.hideSummaryPanel();*/
     });
 
     $(".toggle-show").click(function () {
