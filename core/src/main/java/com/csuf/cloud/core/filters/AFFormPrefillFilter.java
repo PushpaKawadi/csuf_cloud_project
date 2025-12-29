@@ -75,7 +75,7 @@ public class AFFormPrefillFilter implements Filter {
 				String dataXML = taskService.getTaskData(workItemId);
 				slingRequest.setAttribute("data", dataXML);
 				log.debug("workitem payload data successfully set as slingRequest attribute");
-				//slingRequest.getRequestDispatcher(slingRequest.getResource()).forward(slingRequest, slingResponse);
+				slingRequest.getRequestDispatcher(slingRequest.getResource()).forward(slingRequest, slingResponse);
 				log.debug("slingRequest forward successful");
 			}
 		} catch (Exception e) {
