@@ -74,9 +74,9 @@ public class AFFormPrefillFilter implements Filter {
 			if (StringUtils.isNotBlank(workItemId)) {
 				String dataXML = taskService.getTaskData(workItemId);
 				slingRequest.setAttribute("data", dataXML);
-				log.debug("workitem payload data successfully set as slingRequest attribute");
+				log.info("workitem payload data successfully set as slingRequest attribute---{}",dataXML);
 				slingRequest.getRequestDispatcher(slingRequest.getResource()).forward(slingRequest, slingResponse);
-				log.debug("slingRequest forward successful");
+				log.info("slingRequest forward successful");
 			}
 		} catch (Exception e) {
 			log.error(Arrays.toString(e.getStackTrace()));
