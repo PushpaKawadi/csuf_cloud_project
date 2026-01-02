@@ -239,7 +239,6 @@ $(document).ready(function () {
         guideBridge.hideSummaryPanel();
     });*/
 	
-	
 	  $("#task-iframe").on("load", function () {
 		  alert("inside iframe");
         try {
