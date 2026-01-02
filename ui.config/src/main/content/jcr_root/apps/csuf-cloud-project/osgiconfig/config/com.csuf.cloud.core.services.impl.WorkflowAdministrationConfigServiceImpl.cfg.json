@@ -1,0 +1,17 @@
+{
+  "delegateGroupList": [
+    "Security-Admin-Reviewers~DOA Finance Access Request Form"
+  ],
+  "delegateInReportGroupList": [
+    "Admission Appeals~ARSC-Reviewers"
+  ],
+  "groupWFList": [
+    "ARSC-Reviewers"
+  ],
+  "terminateInReportGroupList": [
+    "Admission Appeals~ARSC-Reviewers"
+  ],
+  "supDocAllowedTypesWFList": [
+    "Staff Performance Evaluation"
+  ]
+}
