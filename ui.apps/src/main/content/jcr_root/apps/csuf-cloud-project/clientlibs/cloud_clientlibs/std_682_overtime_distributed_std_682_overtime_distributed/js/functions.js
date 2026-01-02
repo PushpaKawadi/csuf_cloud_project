@@ -3,6 +3,7 @@
  * @this currentComponent
  * @param {scope} scope in which code inside function will be executed.
  */
+ debugger;
 alert("Start JS");
 std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPanel_init0 = function(scope) {
  
@@ -101,6 +102,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
  * @this currentComponent
  * @param {scope} scope in which code inside function will be executed.
  */
+  debugger;
 std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPanel_init1 = function(scope) {
 
     with(this) {
@@ -395,6 +397,8 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
  * @this currentComponent
  * @param {scope} scope in which code inside function will be executed.
  */
+  debugger;
+  
 std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPanel_init2 = function(scope) {
    // alert("init2");
 
@@ -734,6 +738,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
  * @this currentComponent
  * @param {scope} scope in which code inside function will be executed.
  */
+  debugger;
 std_682_overtime_distributed_std_682_overtime_distributed.generated_StudentInformationPanel_init0 = function(scope) {
     with(this) {
         with(scope) {
@@ -746,6 +751,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_StudentInfor
  * @this currentComponent
  * @param {scope} scope in which code inside function will be executed.
  */
+  debugger;
 std_682_overtime_distributed_std_682_overtime_distributed.generated_chrsId_valueCommit0 = function(scope) {
     with(this) {
         with(scope) {
@@ -1023,6 +1029,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_chrsId_value
  * @this currentComponent
  * @param {scope} scope in which code inside function will be executed.
  */
+  debugger;
 std_682_overtime_distributed_std_682_overtime_distributed.generated_empl_Id_valueCommit0 = function(scope) {
     with(this) {
         with(scope) {
@@ -1298,6 +1305,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_empl_Id_valu
  * @this currentComponent
  * @param {scope} scope in which code inside function will be executed.
  */
+  debugger;
 std_682_overtime_distributed_std_682_overtime_distributed.generated_employee_last_name_init0 = function(scope) {
     with(this) {
         with(scope) {
@@ -1310,6 +1318,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_employee_las
  * @this currentComponent
  * @param {scope} scope in which code inside function will be executed.
  */
+  debugger;
 std_682_overtime_distributed_std_682_overtime_distributed.generated_employee_first_name_init0 = function(scope) {
     with(this) {
         with(scope) {
@@ -1322,6 +1331,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_employee_fir
  * @this currentComponent
  * @param {scope} scope in which code inside function will be executed.
  */
+  debugger;
 std_682_overtime_distributed_std_682_overtime_distributed.generated_ApprovingOfficialSignatureCHK_valueCommit0 = function(scope) {
     with(this) {
         with(scope) {
@@ -1356,6 +1366,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_ApprovingOff
  * @this currentComponent
  * @param {scope} scope in which code inside function will be executed.
  */
+  debugger;
 std_682_overtime_distributed_std_682_overtime_distributed.generated_ApprovingOfficialSignatureCHK_valueCommit1 = function(scope) {
     with(this) {
         with(scope) {
@@ -1399,6 +1410,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_approving_of
  * @this currentComponent
  * @param {scope} scope in which code inside function will be executed.
  */
+  debugger;
 std_682_overtime_distributed_std_682_overtime_distributed.generated_ManagerSignatureCHK_valueCommit0 = function(scope) {
     with(this) {
         with(scope) {
@@ -1436,6 +1448,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_ManagerSigna
  * @this currentComponent
  * @param {scope} scope in which code inside function will be executed.
  */
+  debugger;
 std_682_overtime_distributed_std_682_overtime_distributed.generated_ManagerSignatureCHK_valueCommit1 = function(scope) {
     with(this) {
         with(scope) {
