@@ -239,21 +239,34 @@ $(document).ready(function () {
         guideBridge.hideSummaryPanel();
     });*/
 	
-	  $("#task-iframe").on("load", function () {
-		  alert("inside iframe");
-        try {
-            var iframeWin = this.contentWindow;
-			 alert("iframeWin="+iframeWin);
-            if (iframeWin && iframeWin.guideBridge) {
-                iframeWin.guideBridge.hideSubmitButtons();
-                iframeWin.guideBridge.hideSaveButtons();
-                iframeWin.guideBridge.hideResetButtons();
-                iframeWin.guideBridge.hideSummaryPanel();
-            }
-        } catch (e) {
-            console.warn("guideBridge not available yet", e);
+	$('#task-iframe').on('load', function () {
+		alert("here");
+    var iframeWindow = $("#task-iframe")[0].contentWindow;
+
+    if (!iframeWindow) {
+        console.error("Iframe window not available");
+        return;
+    }
+
+    // Listen INSIDE iframe for GuideBridge init
+    iframeWindow.document.addEventListener("guideBridgeInitialized", function (e) {
+        var guideBridge = e.detail.guideBridge;
+
+        if (!guideBridge) {
+            console.error("GuideBridge not initialized");
+            return;
         }
+
+        console.log("GuideBridge ready in iframe", guideBridge);
+
+        guideBridge.hideSubmitButtons();
+        guideBridge.hideSaveButtons();
+        guideBridge.hideResetButtons();
+        guideBridge.hideSummaryPanel();
     });
+});
+	
+	  
 
     $(".toggle-show").click(function () {
         $(".toggle-hide").show();
