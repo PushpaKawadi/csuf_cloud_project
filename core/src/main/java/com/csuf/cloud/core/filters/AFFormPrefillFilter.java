@@ -77,6 +77,7 @@ public class AFFormPrefillFilter implements Filter {
 				log.info("workitem payload data successfully set as slingRequest attribute---{}",dataXML);
 				slingRequest.getRequestDispatcher(slingRequest.getResource()).forward(slingRequest, slingResponse);
 				log.info("slingRequest forward successful");
+                return;
 			}
 		} catch (Exception e) {
 			log.error(Arrays.toString(e.getStackTrace()));
@@ -88,7 +89,7 @@ public class AFFormPrefillFilter implements Filter {
 				resolver.close();
 			}
 		}
-		filterChain.doFilter(request, response);
+        filterChain.doFilter(request, response);
 	}
 
 	@Override
