@@ -713,7 +713,7 @@ public String getTaskDataOld(String workItemId) {
 
 	@Override
 	public String getTaskData(String workItemId) {
-		log.info("Lego="+workItemId);
+		log.info("Lego---{}",workItemId);
 		
 		String data ="";
 
