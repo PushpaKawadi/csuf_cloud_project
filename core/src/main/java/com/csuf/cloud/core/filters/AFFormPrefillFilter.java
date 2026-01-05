@@ -79,7 +79,9 @@ public class AFFormPrefillFilter implements Filter {
 				log.info("slingRequest forward successful");
                 return;
 			}
-		} catch (Exception e) {
+            filterChain.doFilter(request, response);
+        } catch (Exception e) {
+            log.error(e.getMessage(), e);
 			log.error(Arrays.toString(e.getStackTrace()));
 		} finally {
 			if (wfSession != null) {
@@ -89,7 +91,6 @@ public class AFFormPrefillFilter implements Filter {
 				resolver.close();
 			}
 		}
-        filterChain.doFilter(request, response);
 	}
 
 	@Override
