@@ -223,7 +223,7 @@ $(document).ready(function () {
 
     // hide form save,submit,reset buttons inside iframe
    
-    /*$('#task-iframe').load(function () {
+    $('#task-iframe').load(function () {
         //$('#task-iframe').contents().find('.toolbar').hide();
         /*$('#task-iframe').contents().find('#guideContainer-toolbar-reset___guide-item').hide();
         $('#task-iframe').contents().find('#guideContainer-rootPanel-toolbar-reset___guide-item').hide(); 
@@ -232,12 +232,12 @@ $(document).ready(function () {
         $('#task-iframe').contents().find('#guideContainer-toolbar-saveGuideDraft___guide-item').hide(); 
         $('#task-iframe').contents().find('#guideContainer-toolbar-submit___guide-item').hide();        
         $('#task-iframe').contents().find('#guideContainer-rootPanel-toolbar-submit___guide-item').hide();*/
-        /*guideBridge = $("#task-iframe")[0].contentWindow.guideBridge;
+        guideBridge = $("#task-iframe")[0].contentWindow.guideBridge;
         guideBridge.hideSubmitButtons();
         guideBridge.hideSaveButtons();
         guideBridge.hideResetButtons();
         guideBridge.hideSummaryPanel();
-    });*/
+    });
 	
 	$('#task-iframe').on('load', function () {
 		alert("here");
