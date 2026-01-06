@@ -45,6 +45,8 @@ public interface TaskService {
 
 	boolean saveCurrentTaskComment(String workItemId, String comment);
 
+	String getWorkflowInstanceIdOld(String workItemId);	
+	
 	String getWorkflowInstanceId(String workItemId);
 
 	String getAfPath(String workItemId);

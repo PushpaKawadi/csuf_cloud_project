@@ -751,7 +751,7 @@ public String getTaskDataOld(String workItemId) {
 		
 
 	@Override
-	public String getWorkflowInstanceId(String workItemId) {
+	public String getWorkflowInstanceIdOld(String workItemId) {
 		String getStmt = "select workflow_instance_id from task_details where workitem_id = ?";
 		try (Connection connection = jdbcService.getInboxDBConnection();) {
 			connection.setAutoCommit(false);
@@ -775,8 +775,43 @@ public String getTaskDataOld(String workItemId) {
 		}
 		return null;
 	}
+	
+	@Override
+	public String getWorkflowInstanceId(String workItemId) {
+		
+		String workflowInstanceId ="";
 
-	private String getCurrentTaskAction(String workItemId) {
+		log.info("ABC="+workItemId);
+	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/WorkflowInstanceID";
+	    boolean taskExists = false;
+	    
+	    JSONObject json = new JSONObject();
+	    json.put("workItemId", workItemId);
+		
+		try {
+		CloseableHttpClient client = HttpClients.createDefault();
+		HttpPost post = new HttpPost(dbServiceUrl);
+		post.addHeader("Content-Type", "application/json");
+		post.setEntity(new StringEntity(json.toString()));
+		
+		CloseableHttpResponse response = client.execute(post);
+		log.info("Lego DB Service Response: =" + response.getStatusLine());
+		
+		String responseStr = EntityUtils.toString(response.getEntity()).trim();
+		log.info("Lego responseStr =" + responseStr);
+		 
+		workflowInstanceId = responseStr;
+        log.info("Lego taskExists =" + workflowInstanceId);
+		
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	    return workflowInstanceId;
+	}
+	
+	private String getCurrentTaskActionOld(String workItemId) {
 		String getStmt = "select current_task_action from task_details where workitem_id = ?";
 		try (Connection connection = jdbcService.getInboxDBConnection();) {
 			connection.setAutoCommit(false);
@@ -799,6 +834,40 @@ public String getTaskDataOld(String workItemId) {
 			log.error(Arrays.toString(e.getStackTrace()));
 		}
 		return null;
+	}
+
+
+	private String getCurrentTaskAction(String workItemId) {
+		String current_task_action ="";
+
+		log.info("ABC="+workItemId);
+	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/CurrentTaskAction";
+	    boolean taskExists = false;
+	    
+	    JSONObject json = new JSONObject();
+	    json.put("workItemId", workItemId);
+		
+		try {
+		CloseableHttpClient client = HttpClients.createDefault();
+		HttpPost post = new HttpPost(dbServiceUrl);
+		post.addHeader("Content-Type", "application/json");
+		post.setEntity(new StringEntity(json.toString()));
+		
+		CloseableHttpResponse response = client.execute(post);
+		log.info("Lego DB Service Response: =" + response.getStatusLine());
+		
+		String responseStr = EntityUtils.toString(response.getEntity()).trim();
+		log.info("Lego responseStr =" + responseStr);
+		 
+		current_task_action = responseStr;
+        log.info("Lego taskExists =" + current_task_action);
+		
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
+		}
+	    return current_task_action;
 	}
 
 	private String getCurrentTaskComment(String workItemId) {
