@@ -49,11 +49,11 @@ public class AFFormPrefillFilter implements Filter {
 	@Override
 	public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain filterChain)
 			throws IOException, ServletException {
-		log.info("Orange AFFormPrefillFilter");
+		log.info("National AFFormPrefillFilter");
 		
 
 		String workItemId = request.getParameter("taskId");
-		log.info("Orange workItemId="+workItemId);
+		log.info("National workItemId="+workItemId);
 
 		WorkflowSession wfSession = null;
 		ResourceResolver resolver = null;
@@ -83,14 +83,15 @@ public class AFFormPrefillFilter implements Filter {
         } catch (Exception e) {
             log.error(e.getMessage(), e);
 			log.error(Arrays.toString(e.getStackTrace()));
-		} finally {
+		} 
+		/*finally {
 			if (wfSession != null) {
 				wfSession.logout();
 			}
 			if (resolver != null && resolver.isLive()) {
 				resolver.close();
 			}
-		}
+		}*/
 	}
 
 	@Override
