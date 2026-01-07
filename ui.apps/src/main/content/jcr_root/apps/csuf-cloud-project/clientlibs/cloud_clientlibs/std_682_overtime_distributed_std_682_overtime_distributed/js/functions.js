@@ -11,8 +11,8 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
      debugger;
     with(this) {
         with(scope) {
-              /*alert(StageIndicator.value);
-			  alert('before STD Servlet unique method')
+              alert(StageIndicator.value);
+			  /*alert('before STD Servlet unique method')
 			  $.ajax({
 			      type: 'GET',
 			      url: window.location.origin + "/bin/fullertonProxy",
@@ -50,6 +50,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
                 ManagerSignaturePanel.visible = false;
                 ApprovingOfficialPanel.visible = false;
             } else if (StageIndicator.value == "ToTimeKeeper") {
+				alert("Inside Timekeeper="+StageIndicator.value);
                 gifModal.style.display = "none";
                 StudentInformationPanel.enabled = false;
                 WorkingHoursInformationPanel.enabled = false;
@@ -406,7 +407,8 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
         with(scope) {
             debugger;
             if (StageIndicator.value === null && formSavedStatus.value != "1") {
- //alert("init2 inside func");
+				alert("init2 inside StageIndicator="+StageIndicator.value);
+				alert("formSavedStatus="+formSavedStatus.value);
                 $.ajax({
                     type: 'GET',
                     url: "/bin/getLoggedUserId",
