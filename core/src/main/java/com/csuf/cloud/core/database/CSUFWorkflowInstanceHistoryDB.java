@@ -122,7 +122,7 @@ public class CSUFWorkflowInstanceHistoryDB implements WorkflowProcess {
 			json.put("DB_CONNECTION", "AEMDBDEV");
 			json.put("TABLE_NAME", "AEM_WORKFLOW_INSTANCE_HISTORY");
 			json.put("PROCESS_STEP_VAL", "Start of the Workflow Instance");
-
+			json.put("WORKFLOW_INSTANCE_ID", workflowInstance);
 			json.put("DATA_MAP", dataMap);
 
 			String dbServiceUrl = "https://myformstst.fullerton.edu/bin/wfInsDBSaveforCloud";
