@@ -111,17 +111,18 @@ public class CSUFWorkflowInstanceHistoryDB implements WorkflowProcess {
 			dataMap.put("WORKFLOW_INSTANCE_ID", workflowInstance);
 			dataMap.put("WORKFLOW_PAYLOAD", payloadPath);
 			dataMap.put("WORKFLOW_MODEL_NAME", workflowName);
-			//dataMap.put("WORKFLOW_START_TIME", workflowStartTime);
+			// dataMap.put("WORKFLOW_START_TIME", workflowStartTime);
 			dataMap.put("WORKFLOW_INITIATOR", workflowInitiator);
 			dataMap.put("WORKFLOW_TITLE", workflowTitle);
-			//dataMap.put("WORKFLOW_COMPLETE_TIME", workflowCompleteTime);
+			// dataMap.put("WORKFLOW_COMPLETE_TIME", workflowCompleteTime);
 			dataMap.put("WORKFLOW_STATUS", workflowStatus);
 			dataMap.put("WORKFLOW_VERSION", Float.parseFloat(workflowVersion));
 
 			JSONObject json = new JSONObject();
 			json.put("DB_CONNECTION", "AEMDBDEV");
-			json.put("TABLE_NAME", "AEM_WORKFLOW_HISTORY");
+			json.put("TABLE_NAME", "AEM_WORKFLOW_INSTANCE_HISTORY");
 			json.put("PROCESS_STEP_VAL", "Start of the Workflow Instance");
+
 			json.put("DATA_MAP", dataMap);
 
 			String dbServiceUrl = "https://myformstst.fullerton.edu/bin/wfInsDBSaveforCloud";
@@ -141,6 +142,7 @@ public class CSUFWorkflowInstanceHistoryDB implements WorkflowProcess {
 
 				client.close();
 			} catch (Exception e) {
+				e.printStackTrace();
 
 			}
 
@@ -156,13 +158,46 @@ public class CSUFWorkflowInstanceHistoryDB implements WorkflowProcess {
 			workflowCompleteTime = new java.sql.Timestamp(System.currentTimeMillis());
 			workflowStatus = "COMPLETED";
 			workflowInstance = workItem.getWorkflow().getId();
-			String dataSourceVal = globalConfigCSUFService.getAEMFormsDatabaseSource();
-			log.info("DataSourceVal==========" + dataSourceVal);
-			conn = jdbcConnectionService.getDBConn(dataSourceVal);
-			if (conn != null) {
-				log.info("Connection Successfull");
-				DatabaseUtils.updateWFInstanceHistory(conn, workflowInstance, workflowCompleteTime, workflowStatus);
+
+			JSONObject json = new JSONObject();
+			json.put("DB_CONNECTION", "AEMDBDEV");
+			json.put("TABLE_NAME", "AEM_WORKFLOW_INSTANCE_HISTORY");
+			json.put("PROCESS_STEP_VAL", "End of the Workflow Instance");
+
+			dataMap = new LinkedHashMap<String, Object>();
+			dataMap.put("WORKFLOW_INSTANCE_ID", workflowInstance);
+
+			json.put("DATA_MAP", dataMap);
+
+			String dbServiceUrl = "https://myformstst.fullerton.edu/bin/wfInsDBSaveforCloud";
+
+			log.info("Pushpa dbServiceUrl =" + dbServiceUrl);
+
+			try {
+				CloseableHttpClient client = HttpClients.createDefault();
+				HttpPost post = new HttpPost(dbServiceUrl);
+				post.addHeader("Content-Type", "application/json");
+				post.setEntity(new StringEntity(json.toString()));
+
+				log.info("Pushpa Json:=" + json.toString());
+
+				CloseableHttpResponse response = client.execute(post);
+				log.info("DB Service Response: =" + response.getStatusLine());
+
+				client.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+
 			}
+
+			/*
+			 * String dataSourceVal = globalConfigCSUFService.getAEMFormsDatabaseSource();
+			 * log.info("DataSourceVal==========" + dataSourceVal); conn =
+			 * jdbcConnectionService.getDBConn(dataSourceVal); if (conn != null) {
+			 * log.info("Connection Successfull");
+			 * DatabaseUtils.updateWFInstanceHistory(conn, workflowInstance,
+			 * workflowCompleteTime, workflowStatus); }
+			 */
 
 		}
 
