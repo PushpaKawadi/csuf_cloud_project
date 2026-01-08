@@ -100,7 +100,7 @@ public class InboxItemDetailsServlet extends SlingSafeMethodsServlet {
 
 		// String tagGroupConfig = COBRA_TAG_ID.concat("~").concat(WELLNESS_GROUP);
 		
-		log.info("India ="+(String) request.getAttribute("fd.dashboard.tm.historyitemid"));
+		log.info("Lakme India ="+(String) request.getAttribute("fd.dashboard.tm.historyitemid"));
 
 		try {
 			String historyItemId = (String) request.getAttribute("fd.dashboard.tm.historyitemid");
@@ -114,6 +114,7 @@ public class InboxItemDetailsServlet extends SlingSafeMethodsServlet {
 				json = inboxService.getPreviousStepData(serviceUserSession, workItem);
 				out.print(json);
 			} else if (StringUtils.isNotBlank(workItemId) && action.equalsIgnoreCase(ActionType.STEP_DETAILS.name())) {
+				log.info("Lakme STEP_DETAILS");
 				json = inboxService.getInboxItemStepDetails(resourceResolver, wfSession, workItemId, historyItemId);
 				out.print(json);
 			} else if (StringUtils.isNotBlank(workItemId)

@@ -81,15 +81,20 @@ public class InboxItemServiceImpl implements InboxItemService {
 	@Override
 	public JsonObject getInboxItemStepDetails(ResourceResolver resourceResolver, WorkflowSession wfSession,
 			String workItemId, String historyItemId) {
+		log.info("Lakme getInboxItemStepDetails");
 		try {
 			Session session = resourceResolver.adaptTo(Session.class);
 			JsonObject json = new JsonObject();
 			boolean isHistoryView = false, isCompleteView = false, isAssigneeAGroup = false, isDelegate = false;
 			WorkItem workItem = wfSession.getWorkItem(workItemId);
+			log.info("Lakme workItem="+workItem);
+
 			if (!StringUtils.isEmpty(historyItemId)) {
 				isHistoryView = true;
 			} else if (workItem != null) {
+				log.info("Lakme workItem else");
 				if (workItem.getStatus().equals(Status.COMPLETE)) {
+					log.info("Lakme workItem else="+workItem.getStatus());
 					isCompleteView = true;
 
 					String parentPath = workItem.getId().substring(0, workItemId.lastIndexOf("/"));
@@ -102,14 +107,20 @@ public class InboxItemServiceImpl implements InboxItemService {
 						isDelegate = true;
 					}
 				}
+				log.info("Lakme workItem else");
 				isAssigneeAGroup = CSUFUtils.isAuthorizableAGroup(session, workItem.getCurrentAssignee());
+				log.info("Lakme workItem ="+isAssigneeAGroup);
 				json.addProperty("isassigneeagroup", isAssigneeAGroup);
 			}
 
 			if (workItem != null) {
+				log.info("Lakme workItem123 ="+workItem);
+
 				boolean isCommentAllowed = ArgumentParser.isCommentAllowed(workItem);
 				boolean isAttachmentAllowed = ArgumentParser.isUploadTaskAttachmentAllowed(workItem);
 				FormType type = ArgumentParser.getFormType(workItem);
+				log.info("Lakme type ="+type);
+				
 				String formPath = StringUtils.EMPTY;
 				boolean isReadOnlyForm = true;
 
@@ -126,16 +137,36 @@ public class InboxItemServiceImpl implements InboxItemService {
 				default:
 					break;
 				}
+
 				json.addProperty("formPath", formPath);
+				log.info("Lakme formPath ="+formPath);
+				
 				json.addProperty("workItemId", workItemId);
+				log.info("Lakme workItemId end ="+formPath);
+				
 				json.addProperty("isreadonlyform", isReadOnlyForm);
+				log.info("Lakme isReadOnlyForm ="+isReadOnlyForm);
+				
 				json.addProperty("formtype", type.name());
+				log.info("Lakme formtype ="+type.name());
+				
 				json.addProperty("isCommentAllowed", isCommentAllowed);
+				log.info("Lakme isCommentAllowed ="+isCommentAllowed);
 
 				json.addProperty("isAttachmentAllowed", isAttachmentAllowed);
+				log.info("Lakme isAttachmentAllowed ="+isAttachmentAllowed);
+				
 				json.addProperty("isCompleteView", isCompleteView);
+				log.info("Lakme isCompleteView ="+isCompleteView);
+				
 				json.addProperty("isHistoryView", isHistoryView);
+				log.info("Lakme isHistoryView ="+isHistoryView);
+				
 				json.addProperty("isDelegateView", isDelegate);
+				log.info("Lakme isDelegateView ="+isDelegate);
+				
+				log.info("Lakme json ="+json.toString());
+				
 				return json;
 			}
 		} catch (Exception e) {
