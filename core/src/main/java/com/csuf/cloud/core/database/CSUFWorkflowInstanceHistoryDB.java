@@ -10,7 +10,13 @@ import javax.jcr.RepositoryException;
 import javax.xml.parsers.ParserConfigurationException;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
 import org.apache.sling.api.resource.ResourceResolver;
+import org.json.JSONObject;
 import org.osgi.framework.Constants;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
@@ -96,7 +102,7 @@ public class CSUFWorkflowInstanceHistoryDB implements WorkflowProcess {
 		if (param.equalsIgnoreCase("Start of the Workflow Instance")) {
 			log.info("inside start");
 			workflowInstance = workItem.getWorkflow().getId();
-			workflowStartTime = new java.sql.Timestamp(workItem.getTimeStarted().getTime());			
+			workflowStartTime = new java.sql.Timestamp(workItem.getTimeStarted().getTime());
 			workflowName = workItem.getWorkflow().getWorkflowModel().getId();
 			workflowTitle = workItem.getWorkflow().getWorkflowModel().getTitle();
 			workflowVersion = workItem.getWorkflow().getWorkflowModel().getVersion();
@@ -105,18 +111,45 @@ public class CSUFWorkflowInstanceHistoryDB implements WorkflowProcess {
 			dataMap.put("WORKFLOW_INSTANCE_ID", workflowInstance);
 			dataMap.put("WORKFLOW_PAYLOAD", payloadPath);
 			dataMap.put("WORKFLOW_MODEL_NAME", workflowName);
-			dataMap.put("WORKFLOW_START_TIME", workflowStartTime);
+			//dataMap.put("WORKFLOW_START_TIME", workflowStartTime);
 			dataMap.put("WORKFLOW_INITIATOR", workflowInitiator);
 			dataMap.put("WORKFLOW_TITLE", workflowTitle);
-			dataMap.put("WORKFLOW_COMPLETE_TIME", workflowCompleteTime);
+			//dataMap.put("WORKFLOW_COMPLETE_TIME", workflowCompleteTime);
 			dataMap.put("WORKFLOW_STATUS", workflowStatus);
 			dataMap.put("WORKFLOW_VERSION", Float.parseFloat(workflowVersion));
-			String dataSourceVal = globalConfigCSUFService.getAEMFormsDatabaseSource();
-			conn = jdbcConnectionService.getDBConn(dataSourceVal);
-			if (conn != null) {
-				log.info("Connection Successfull");
-				DatabaseUtils.insertWFInstanceHistory(conn, dataMap);
+
+			JSONObject json = new JSONObject();
+			json.put("DB_CONNECTION", "AEMDBDEV");
+			json.put("TABLE_NAME", "AEM_WORKFLOW_HISTORY");
+			json.put("PROCESS_STEP_VAL", "Start of the Workflow Instance");
+			json.put("DATA_MAP", dataMap);
+
+			String dbServiceUrl = "https://myformstst.fullerton.edu/bin/wfInsDBSaveforCloud";
+
+			log.info("Pushpa dbServiceUrl =" + dbServiceUrl);
+
+			try {
+				CloseableHttpClient client = HttpClients.createDefault();
+				HttpPost post = new HttpPost(dbServiceUrl);
+				post.addHeader("Content-Type", "application/json");
+				post.setEntity(new StringEntity(json.toString()));
+
+				log.info("Pushpa Json:=" + json.toString());
+
+				CloseableHttpResponse response = client.execute(post);
+				log.info("DB Service Response: =" + response.getStatusLine());
+
+				client.close();
+			} catch (Exception e) {
+
 			}
+
+			/*
+			 * String dataSourceVal = globalConfigCSUFService.getAEMFormsDatabaseSource();
+			 * conn = jdbcConnectionService.getDBConn(dataSourceVal); if (conn != null) {
+			 * log.info("Connection Successfull");
+			 * DatabaseUtils.insertWFInstanceHistory(conn, dataMap); }
+			 */
 
 		}
 		if (param.equalsIgnoreCase("End of the Workflow Instance")) {
