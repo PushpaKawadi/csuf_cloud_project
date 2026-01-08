@@ -85,8 +85,11 @@ public class InboxItemDetailsServlet extends SlingSafeMethodsServlet {
 		JsonArray jsonArray = null;
 		PrintWriter out = response.getWriter();
 		ResourceResolver resourceResolver = request.getResourceResolver();
+		log.info("Lakme India="+resourceResolver);
 		Session serviceUserSession = resourceResolver.adaptTo(Session.class);
+		log.info("Lakme serviceUserSession="+serviceUserSession);
 		WorkflowSession wfSession = resourceResolver.adaptTo(WorkflowSession.class);
+		log.info("Lakme wfSession="+wfSession);
 		String action = request.getParameter("action");
 		String workItemId = request.getParameter("workItemId");
 		String historyWorkItemId = request.getParameter("historyWorkItemId");
@@ -115,6 +118,11 @@ public class InboxItemDetailsServlet extends SlingSafeMethodsServlet {
 				out.print(json);
 			} else if (StringUtils.isNotBlank(workItemId) && action.equalsIgnoreCase(ActionType.STEP_DETAILS.name())) {
 				log.info("Lakme STEP_DETAILS");
+				log.info("Lakme STEP_DETAILS resourceResolver="+resourceResolver);
+				log.info("Lakme STEP_DETAILS wfSession="+wfSession);
+				log.info("Lakme STEP_DETAILS workItemId="+workItemId);
+				log.info("Lakme STEP_DETAILS historyItemId="+historyItemId);
+				
 				json = inboxService.getInboxItemStepDetails(resourceResolver, wfSession, workItemId, historyItemId);
 				out.print(json);
 			} else if (StringUtils.isNotBlank(workItemId)

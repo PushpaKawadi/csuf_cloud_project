@@ -84,6 +84,7 @@ public class InboxItemServiceImpl implements InboxItemService {
 		log.info("Lakme getInboxItemStepDetails");
 		try {
 			Session session = resourceResolver.adaptTo(Session.class);
+			log.info("Lakme session="+session);
 			JsonObject json = new JsonObject();
 			boolean isHistoryView = false, isCompleteView = false, isAssigneeAGroup = false, isDelegate = false;
 			WorkItem workItem = wfSession.getWorkItem(workItemId);
