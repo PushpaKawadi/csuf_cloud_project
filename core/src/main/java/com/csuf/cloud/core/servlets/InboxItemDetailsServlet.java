@@ -117,12 +117,6 @@ public class InboxItemDetailsServlet extends SlingSafeMethodsServlet {
 				json = inboxService.getPreviousStepData(serviceUserSession, workItem);
 				out.print(json);
 			} else if (StringUtils.isNotBlank(workItemId) && action.equalsIgnoreCase(ActionType.STEP_DETAILS.name())) {
-				log.info("Lakme STEP_DETAILS");
-				log.info("Lakme STEP_DETAILS resourceResolver="+resourceResolver);
-				log.info("Lakme STEP_DETAILS wfSession="+wfSession);
-				log.info("Lakme STEP_DETAILS workItemId="+workItemId);
-				log.info("Lakme STEP_DETAILS historyItemId="+historyItemId);
-				
 				json = inboxService.getInboxItemStepDetails(resourceResolver, wfSession, workItemId, historyItemId);
 				out.print(json);
 			} else if (StringUtils.isNotBlank(workItemId)

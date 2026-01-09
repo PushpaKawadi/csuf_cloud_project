@@ -205,22 +205,22 @@ public class InboxItemServiceImpl implements InboxItemService {
 
 	@Override
 	public JsonArray getTaskAttachments(ResourceResolver resourceResolver, String workItemId) throws Exception {
-		log.debug("Entered task attchment = {}", workItemId);
+		log.info("Entered task attchment = {}", workItemId);
 		JsonArray formsJson = new JsonArray();
 		Iterator<Node> itr = null;
 		Session session = resourceResolver.adaptTo(Session.class);
 		WorkflowSession wfSession = resourceResolver.adaptTo(WorkflowSession.class);
 		WorkItem workItem = wfSession.getWorkItem(workItemId);
-		log.debug("Entered task attchment workItem = {}", workItem);
+		log.info("Entered task attchment workItem = {}", workItem);
 		boolean isViewAttachmentNotAllowed = ArgumentParser.isViewAttachmentNotAllowed(workItem);
-		log.debug("isViewAttachmentNotAllowed = {} for workItem with id = {}", isViewAttachmentNotAllowed,
+		log.info("isViewAttachmentNotAllowed = {} for workItem with id = {}", isViewAttachmentNotAllowed,
 				workItem.getId());
 		if (!isViewAttachmentNotAllowed) {
 
 			String attachmentsFolderPath = ArgumentParser.getInputFormAttachmentsPath(workItem);
 			if (StringUtils.isBlank(attachmentsFolderPath)) {
 				String combinedName = ArgumentParser.getInputCombinedFormAttachmentsPath(workItem);
-				log.debug("combinedName inside getTaskAttachments method : {}", combinedName);
+				log.info("combinedName inside getTaskAttachments method : {}", combinedName);
 				if (StringUtils.isNotBlank(combinedName) && combinedName.contains(":")) {
 					attachmentsFolderPath = combinedName.substring(combinedName.lastIndexOf(":") + 1);
 				}
@@ -229,9 +229,9 @@ public class InboxItemServiceImpl implements InboxItemService {
 			if (StringUtils.isNotBlank(attachmentsFolderPath) && attachmentsFolderPath.contains(":")) {
 				attachmentsFolderPath = attachmentsFolderPath.substring(attachmentsFolderPath.lastIndexOf(":") + 1);
 			}
-			log.debug("attachmentsFolderPath inside getTaskAttachments method : {}", attachmentsFolderPath);
+			log.info("attachmentsFolderPath inside getTaskAttachments method : {}", attachmentsFolderPath);
 			String payloadPath = workItem.getContentPath();
-			log.debug("payloadPath inside getTaskAttachments method : {}", payloadPath);
+			log.info("payloadPath inside getTaskAttachments method : {}", payloadPath);
 
 			if (StringUtils.isNotBlank(payloadPath) && StringUtils.isNotBlank(attachmentsFolderPath)) {
 				itr = CSUFUtils.searchNodes(queryBuilder, session, "nt:file",
@@ -251,7 +251,7 @@ public class InboxItemServiceImpl implements InboxItemService {
 						JsonObject json = new JsonObject();
 						json.addProperty("fileName", fileName);
 						json.addProperty("path", path);
-
+						log.info("inside getTaskAttachments json : {}", json.toString());
 						formsJson.add(json);
 					}
 				}
@@ -263,18 +263,20 @@ public class InboxItemServiceImpl implements InboxItemService {
 	@Override
 	public JsonArray getTaskAttachmentsFromWorkflowInstanceId(ResourceResolver resourceResolver,
 			String workflowInstanceId, String attachmentFolderName) throws Exception {
+		log.info("Inside getTaskAttachmentsFromWorkflowInstanceId method");
 		Iterator<Node> itr = null;
 		JsonArray formsJson = new JsonArray();
 		Session session = resourceResolver.adaptTo(Session.class);
 		WorkflowSession wfSession = resourceResolver.adaptTo(WorkflowSession.class);
 		String payloadPath = wfSession.getWorkflow(workflowInstanceId).getWorkflowData().getPayload().toString();
-		log.debug("payloadPath inside getTaskAttachmentsFromWorkflowInstanceId method : {}", payloadPath);
+		log.info("payloadPath inside getTaskAttachmentsFromWorkflowInstanceId method : {}", payloadPath);
 		if (StringUtils.isNotBlank(payloadPath)) {
 			// itr = CSUFUtils.searchNodes(queryBuilder, session, "nt:file",
 			// payloadPath.concat("/Attachments"));
 			itr = CSUFUtils.searchNodes(queryBuilder, session, "nt:file",
 					payloadPath.concat("/".concat(attachmentFolderName)));
 			while (itr.hasNext()) {
+				log.info("Inside Iterator method");
 				Node node = itr.next();
 				String path = node.getPath();
 				String fileName = node.getName();
@@ -284,6 +286,7 @@ public class InboxItemServiceImpl implements InboxItemService {
 						JsonObject json = new JsonObject();
 						json.addProperty("fileName", fileName);
 						json.addProperty("path", path);
+						log.info("Inside Iterator json="+json.toString());
 						formsJson.add(json);
 					}
 				}
