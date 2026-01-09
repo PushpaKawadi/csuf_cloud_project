@@ -63,9 +63,9 @@ import com.google.gson.JsonParser;
 
 @Component(service = TaskService.class, immediate = true, property = {
 		Constants.SERVICE_DESCRIPTION + "=Task Service Implementation" })
-public class TaskServiceImpl implements TaskService {
+public class TaskServiceImplOld implements TaskService {
 
-	private static final Logger log = LoggerFactory.getLogger(TaskServiceImpl.class);
+	private static final Logger log = LoggerFactory.getLogger(TaskServiceImplOld.class);
 	private static final String ASSIGN_TASK_STEP = "forms:assigntask";
 	private static final String DUE_DATE = "due_date";
 	private static final String DATE_FORMAT_DB = "yyyy-MM-dd HH:mm:ss";
@@ -574,47 +574,67 @@ public class TaskServiceImpl implements TaskService {
 		return false;
 	}
 
+	@Override
 	public boolean updateTaskStatus(String workItemId, String taskStatus, boolean isUpdateTaskStartDate) {
+		String getTaskStatusStmt = "select status from task_details where workitem_id = ?";
+		try (Connection connection = jdbcService.getInboxDBConnection();) {
 
-	    log.info("Pushpa Task workItemId=" + workItemId);
-	    log.info("Pushpa Task taskStatus=" + taskStatus);
-	    log.info("Pushpa Task isUpdateTaskStartDate=" + isUpdateTaskStartDate);
+			// Setting auto commit false here to maintain atomic transactional behavior
+			connection.setAutoCommit(false);
 
-	    boolean data = false;
+			try (PreparedStatement prStmt = connection.prepareStatement(getTaskStatusStmt);) {
+				prStmt.setString(1, workItemId);
+				try (ResultSet resultSet = prStmt.executeQuery();) {
+					while (resultSet.next()) {
+						String status = resultSet.getString("status");
+						String updateTaskStmt = null;
+						if (StringUtils.isNotBlank(status) && !status.equalsIgnoreCase(taskStatus)) {
+							if (isUpdateTaskStartDate)
+								updateTaskStmt = "update task_details set status = ?, start_date = ? where workitem_node_id = ?";
+							else
+								updateTaskStmt = "update task_details set status = ? where workitem_node_id = ?";
+							try (PreparedStatement prStmt1 = connection.prepareStatement(updateTaskStmt);) {
 
-	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/UpdateTaskData";
+								int lastSlashIndex = workItemId.lastIndexOf('/');
+								String workitemNodeId = workItemId.substring(lastSlashIndex + 1, workItemId.length());
 
-	    JSONObject json = new JSONObject();
-	    json.put("workItemId", workItemId);
-	    json.put("taskStatus", taskStatus);
-	    json.put("isUpdateTaskStartDate", isUpdateTaskStartDate);
+								prStmt1.setString(1, taskStatus);
 
-	    try (CloseableHttpClient client = HttpClients.createDefault()) {
+								if (isUpdateTaskStartDate) {
+									prStmt1.setString(2, convertDate(Calendar.getInstance().getTime()));
+									prStmt1.setString(3, workitemNodeId);
+								} else
+									prStmt1.setString(2, workitemNodeId);
 
-	        HttpPost post = new HttpPost(dbServiceUrl);
-	        post.addHeader("Content-Type", "application/json");
-	        post.setEntity(new StringEntity(json.toString()));
+								// log.debug("updateTaskStatus :::: sql : {}", prStmt1.toString());
 
-	        try (CloseableHttpResponse response = client.execute(post)) {
+								int rowAffected = prStmt1.executeUpdate();
+								log.debug("updateTaskStatus :::: rowAffected : {}", rowAffected);
 
-	            log.info("Pushpa DB Service Response: {}", response.getStatusLine());
-
-	            String responseStr = EntityUtils.toString(response.getEntity()).trim();
-	            log.info("Pushpa responseStr = {}", responseStr);
-
-	            data = Boolean.parseBoolean(responseStr);
-
-	            log.info("Pushpa value = {}", data);
-	            return data;
-	        }
-
-	    } catch (UnsupportedEncodingException e) {
-	        log.error("Encoding error", e);
-	    } catch (Exception e) {
-	        log.error("Error calling UpdateTaskData servlet", e);
-	    }
-
-	    return false;
+								/**
+								 * Committing after all the operations
+								 */
+								connection.commit();
+								if (rowAffected > 0)
+									return true;
+							} catch (Exception e) {
+								/**
+								 * In case of any error, rollback
+								 */
+								connection.rollback();
+								connection.setAutoCommit(true);
+								log.error(Arrays.toString(e.getStackTrace()));
+							}
+						} else {
+							log.debug("task status is already updated, no update query fired!");
+						}
+					}
+				}
+			}
+		} catch (SQLException e2) {
+			log.error(Arrays.toString(e2.getStackTrace()));
+		}
+		return false;
 	}
 
 	@Override
