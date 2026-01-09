@@ -64,48 +64,78 @@ public class UploadTaskAttachmentOnProcessingInstanceServlet extends SlingAllMet
 
 	@Override
 	protected void doPost(SlingHttpServletRequest request, SlingHttpServletResponse response) throws IOException {
-		log.debug("entered UploadTaskAttachmentOnProcessingInstanceServlet doPost method");
+		log.info("entered UploadTaskAttachmentOnProcessingInstanceServlet doPost method");
 		HttpPost httpPost = null;
 		String workItemId = null;
 
 		try (PrintWriter out = response.getWriter();) {
+			log.info("Country="+out);
 			JsonArray jsonResponse = new JsonArray();
 			JsonParser parser = new JsonParser();
 			final Map<String, RequestParameter[]> params = request.getRequestParameterMap();
-			// log.debug("params : {}", params.toString());
+			log.info("Country params : {}", params.toString());
 			final boolean isMultipart = ServletFileUpload.isMultipartContent(request);
+			log.info("Country isMultipart : {}", isMultipart);
 			if (isMultipart) {
+				log.info("Inside isMultipart");
 				if (params.containsKey("workItemId")) {
+					log.info("Country Inside workItemId="+workItemId);
 					workItemId = params.get("workItemId")[0].toString().trim();
+					log.info("Country Inside workItemId="+workItemId);
 					if (StringUtils.isNotBlank(workItemId) && params.containsKey("file")) {
+						log.info("Country Inside File");
 						for (Map.Entry<String, RequestParameter[]> pairs : params.entrySet()) {
+							log.info("Country Inside pairs="+pairs);
 							RequestParameter[] pArr = pairs.getValue();
+							log.info("Country Inside pArr="+pArr.length);
 							for (RequestParameter param : pArr) {
+								log.info("Country Inside For");
 								boolean formField = param.isFormField();
+								log.info("Country formField="+formField);
+								
 								String fileName = param.getFileName();
-								log.debug("param fileName : {}", fileName);
-								log.debug("param Name : {}", param.getName());
+								
+								log.info("param fileName : {}", fileName);
+								log.info("param Name : {}", param.getName());
 								if (StringUtils.isNotBlank(fileName) && !formField) {
+									log.info("param formField : {}", formField);
 									InputStream stream = param.getInputStream();
+									log.info("Country stream : {}", stream);
+									
 									try (CloseableHttpClient client = HttpClients.createDefault();) {
 										httpPost = new HttpPost(processingInstanceConfigService.processingUrl()
 												.concat(FILE_SERVLET_URL));
+										log.info("Country httpPost : {}", httpPost);
 										String loginTokenJson = inboxService
 												.getResponseFromProcessingInstance(CSRF_TOKEN_URL);
+										
+										log.info("Country loginTokenJson : {}", loginTokenJson);
 
 										if (StringUtils.isNotBlank(loginTokenJson)) {
+											log.info("Country loginTokenJson  Inside: {}", loginTokenJson);
+											
 											JsonObject json = parser.parse(loginTokenJson).getAsJsonObject();
+											log.info("Country json: {}", json);
+											
 											String loginToken = json.get("token").getAsString();
+											log.info("Country loginToken: {}", loginToken);
+											
 											httpPost.addHeader("CSRF-Token", loginToken);
+											
 										}
 
 										String auth = new StringBuffer(processingInstanceConfigService.userName())
 												.append(":").append(processingInstanceConfigService.userSecurity())
 												.toString();
+										log.info("Country auth: {}", auth);
+										
 										byte[] encodedAuth = Base64
 												.encodeBase64(auth.getBytes(StandardCharsets.US_ASCII));
 										String authHeader = "Basic " + new String(encodedAuth);
 										httpPost.addHeader("Authorization", authHeader);
+										
+										log.info("Country authHeader: {}", authHeader);
+
 
 										MultipartEntityBuilder builder = MultipartEntityBuilder.create();
 										builder.setMode(HttpMultipartMode.BROWSER_COMPATIBLE);
@@ -114,12 +144,19 @@ public class UploadTaskAttachmentOnProcessingInstanceServlet extends SlingAllMet
 										builder.addTextBody("workItemId", workItemId, ContentType.TEXT_PLAIN);
 										builder.addTextBody("fileName", fileName, ContentType.TEXT_PLAIN);
 										builder.addBinaryBody("file", stream, ContentType.DEFAULT_BINARY, fileName);
+										
+										log.info("Country builder: {}", builder.toString());
 
 										HttpEntity multipart = builder.build();
 										httpPost.setEntity(multipart);
 
 										try (CloseableHttpResponse httpResponse = client.execute(httpPost);) {
+											log.info("Inside HTTP");
+
+											
 											int statusCode = httpResponse.getStatusLine().getStatusCode();
+											log.info("Inside statusCode="+statusCode);
+											
 											if (statusCode == 200) {
 												HttpEntity entity = httpResponse.getEntity();
 												String responseString = EntityUtils.toString(entity, "UTF-8");
