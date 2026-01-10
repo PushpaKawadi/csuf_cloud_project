@@ -582,7 +582,7 @@ public class TaskServiceImpl implements TaskService {
 
 	    boolean data = false;
 
-	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/UpdateTaskData";
+	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/updateTaskStatus";
 
 	    JSONObject json = new JSONObject();
 	    json.put("workItemId", workItemId);
@@ -619,43 +619,44 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public boolean updateTaskAssignee(String workItemId, String assignee) {
-		try (Connection connection = jdbcService.getInboxDBConnection();) {
+		log.info("Pushpa Task workItemId=" + workItemId);
+	    log.info("Pushpa Task taskStatus=" + assignee);
 
-			// Setting auto commit false here to maintain atomic transactional behavior
-			connection.setAutoCommit(false);
+	    boolean data = false;
 
-			String updateTaskAssigneeStmt = "update task_details set assignee = ? where workitem_node_id = ?";
-			try (PreparedStatement prStmt = connection.prepareStatement(updateTaskAssigneeStmt);) {
+	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/UpdateTaskAssignee";
 
-				int lastSlashIndex = workItemId.lastIndexOf('/');
-				String workitemNodeId = workItemId.substring(lastSlashIndex + 1, workItemId.length());
+	    JSONObject json = new JSONObject();
+	    json.put("workItemId", workItemId);
+	    json.put("assignee", assignee);
+	    
 
-				prStmt.setString(1, assignee);
-				prStmt.setString(2, workitemNodeId);
+	    try (CloseableHttpClient client = HttpClients.createDefault()) {
 
-				// log.debug("updateTaskAssigneeStmt :::: sql : {}", prStmt.toString());
+	        HttpPost post = new HttpPost(dbServiceUrl);
+	        post.addHeader("Content-Type", "application/json");
+	        post.setEntity(new StringEntity(json.toString()));
 
-				int rowAffected = prStmt.executeUpdate();
-				log.debug("updateTaskAssigneeStmt :::: rowAffected : {}", rowAffected);
+	        try (CloseableHttpResponse response = client.execute(post)) {
 
-				/**
-				 * Committing after all the operations
-				 */
-				connection.commit();
-				if (rowAffected > 0)
-					return true;
-			} catch (Exception e) {
-				/**
-				 * In case of any error, rollback
-				 */
-				connection.rollback();
-				connection.setAutoCommit(true);
-				log.error(Arrays.toString(e.getStackTrace()));
-			}
-		} catch (SQLException e2) {
-			log.error(Arrays.toString(e2.getStackTrace()));
-		}
-		return false;
+	            log.info("Pushpa DB Service Response: {}", response.getStatusLine());
+
+	            String responseStr = EntityUtils.toString(response.getEntity()).trim();
+	            log.info("Pushpa responseStr = {}", responseStr);
+
+	            data = Boolean.parseBoolean(responseStr);
+
+	            log.info("Pushpa value = {}", data);
+	            return data;
+	        }
+
+	    } catch (UnsupportedEncodingException e) {
+	        log.error("Encoding error", e);
+	    } catch (Exception e) {
+	        log.error("Error calling UpdateTaskData servlet", e);
+	    }
+
+	    return false;
 	}
 	
 @Override
@@ -1028,33 +1029,36 @@ public String getTaskDataOld(String workItemId) {
 
 	@Override
 	public String getTaskAssignee(String workItemId) {
-		String getTaskDataStmt = "select assignee from task_details where workitem_id = ?";
-		try (Connection connection = jdbcService.getInboxDBConnection();) {
+		log.info("Inside getTaskAssignee");
+		String assignee = "";
 
-			// Setting auto commit false here to maintain atomic transactional behavior
-			connection.setAutoCommit(false);
-
-			try (PreparedStatement prStmt = connection.prepareStatement(getTaskDataStmt);) {
-				prStmt.setString(1, workItemId);
-				try (ResultSet resultSet = prStmt.executeQuery();) {
-					while (resultSet.next()) {
-						String assignee = resultSet.getString("assignee");
-						connection.commit();
-						return assignee;
-					}
-				}
-			} catch (Exception e) {
-				/**
-				 * In case of any error, rollback
-				 */
-				connection.rollback();
-				connection.setAutoCommit(true);
-				log.error(Arrays.toString(e.getStackTrace()));
-			}
-		} catch (SQLException e) {
-			log.error(Arrays.toString(e.getStackTrace()));
+		log.info("getTaskAssignee Param="+workItemId);
+	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/TaskAssignee";
+	  
+	    JSONObject json = new JSONObject();
+	    json.put("workItemId", workItemId);
+		
+		try {
+		CloseableHttpClient client = HttpClients.createDefault();
+		HttpPost post = new HttpPost(dbServiceUrl);
+		post.addHeader("Content-Type", "application/json");
+		post.setEntity(new StringEntity(json.toString()));
+		
+		CloseableHttpResponse response = client.execute(post);
+		log.info("getTaskAssignee Service Response: =" + response.getStatusLine());
+		
+		String responseStr = EntityUtils.toString(response.getEntity()).trim();
+		log.info("getTaskAssignee responseStr =" + responseStr);
+		 
+		assignee = responseStr;
+        log.info("getTaskAssignee =" + assignee);
+		
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		}catch (Exception e) {
+			e.printStackTrace();
 		}
-		return null;
+	    return assignee;
 	}
 
 	@Override
