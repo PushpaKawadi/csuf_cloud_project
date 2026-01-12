@@ -169,9 +169,9 @@ public class TaskServiceImpl implements TaskService {
 		}
 		log.info("India dataXMLName after=" +dataXMLName);
 		
-		/*InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
+		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
-		log.info("Pushpa IS object");*/
+		log.info("Pushpa IS object="+is.available());
 		
 		/*if (null != is) {
 			Document doc = XMLUtils.getDomDocument(is);
