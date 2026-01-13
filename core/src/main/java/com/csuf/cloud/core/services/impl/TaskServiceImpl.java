@@ -169,7 +169,7 @@ public class TaskServiceImpl implements TaskService {
 		}
 		log.info("India dataXMLName after=" +dataXMLName);
 		
-		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
+		/*InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
 		
 		if (null != is) {
@@ -198,7 +198,7 @@ public class TaskServiceImpl implements TaskService {
 			log.info("iphone Exception");
 			throw new RuntimeException(
 					"Fatal Error, Data.xml could not be retrieved for workItemId : ".concat(item.getId()));
-		}
+		}*/
 		log.info("inside saveTask 3");
 		String routes = ArgumentParser.getRoutes(item);
 		log.info("routes : {}", routes);
