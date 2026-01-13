@@ -1,6 +1,7 @@
 package com.csuf.cloud.core.utils;
 
 import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -37,6 +38,7 @@ import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
 
+import javax.jcr.Binary;
 import javax.jcr.Node;
 import javax.jcr.NodeIterator;
 import javax.jcr.RepositoryException;
@@ -50,6 +52,7 @@ import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
 import org.apache.commons.io.FilenameUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.client.HttpClient;
@@ -253,6 +256,59 @@ public class CSUFUtils {
 		}
 		return null;
 	}
+	public static InputStream getDataXMLStreamFromPayloadPathNew(
+	        ResourceResolver resolver,
+	        String payloadPath,
+	        String dataXMLName) {
+
+	    log.info("Apple17 getDataXMLStreamFromPayloadPath payloadPath={}", payloadPath);
+
+	    Resource xmlNode = resolver.getResource(payloadPath);
+	    if (xmlNode == null) {
+	        log.error("Payload path not found: {}", payloadPath);
+	        return null;
+	    }
+
+	    Iterator<Resource> children = xmlNode.listChildren();
+	    while (children.hasNext()) {
+	        Resource attachmentXml = children.next();
+
+	        if (!attachmentXml.getName().equalsIgnoreCase(dataXMLName)) {
+	            continue;
+	        }
+
+	        Resource contentRes = attachmentXml.getChild("jcr:content");
+	        if (contentRes == null) {
+	            log.error("jcr:content missing for {}", attachmentXml.getPath());
+	            return null;
+	        }
+
+	        try {
+	            Node node = contentRes.adaptTo(Node.class);
+	            if (node == null || !node.hasProperty("jcr:data")) {
+	                log.error("jcr:data missing for {}", contentRes.getPath());
+	                return null;
+	            }
+
+	            Binary binary = node.getProperty("jcr:data").getBinary();
+
+	            // 🔥 DETACH FROM JCR (MOST IMPORTANT FIX)
+	            byte[] bytes = IOUtils.toByteArray(binary.getStream());
+
+	            log.info("Apple17 Data.xml loaded successfully, size={} bytes", bytes.length);
+
+	            return new ByteArrayInputStream(bytes);
+
+	        } catch (Exception e) {
+	            log.error("Error reading Data.xml from {}", attachmentXml.getPath(), e);
+	            return null;
+	        }
+	    }
+
+	    log.error("Data.xml not found under payload path {}", payloadPath);
+	    return null;
+	}
+
 
 	public static NodeIterator getQueryResult(Session session, String sqlStatement) {
 		try {

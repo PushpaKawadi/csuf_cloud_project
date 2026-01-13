@@ -169,10 +169,48 @@ public class TaskServiceImpl implements TaskService {
 		}
 		log.info("India dataXMLName after=" +dataXMLName);
 		
-		/*InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
+		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPathNew(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
+		log.info("Data.xml stream null? {}", (is == null));
 		
-		if (null != is) {
+		if (is == null) {
+		    throw new RuntimeException(
+		            "Fatal Error, Data.xml could not be retrieved for workItemId : "
+		                    .concat(item.getId()));
+		}
+		Document doc;
+		try (InputStream domStream = is) {
+		    doc = XMLUtils.getDomDocument(domStream);
+		}
+
+		dataXML = XMLUtils.prettyPrintAsString(doc);
+
+		if (StringUtils.isBlank(taskDescription)) {
+		    taskDescription = XMLUtils.getExtendedDesc(doc);
+		    log.info("iphone task desc = {}", taskDescription);
+
+		    if (StringUtils.isBlank(actionTaken)) {
+		        log.info("initial task, actionTaken should be blank");
+
+		        String workflowInitiator = XMLUtils.getWorkflowInitiator(doc);
+		        log.info("iphone workflowInitiator = {}", workflowInitiator);
+
+		        if (StringUtils.isNotBlank(workflowInitiator)) {
+		            log.info(
+		                "iphone workflow initiator modified as {} with status {}",
+		                workflowInitiator,
+		                CSUFUtils.modifyWorkflowInitiator(
+		                        (session != null ? session : globalConfigService.getAdminSession()),
+		                        workflowInstanceId,
+		                        workflowInitiator
+		                )
+		            );
+		        }
+		    }
+		}
+
+		
+		/*if (null != is) {
 			log.info("California inside");
 			Document doc = XMLUtils.getDomDocument(is);
 			
