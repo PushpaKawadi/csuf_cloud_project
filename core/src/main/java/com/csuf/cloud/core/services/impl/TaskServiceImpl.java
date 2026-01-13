@@ -171,7 +171,7 @@ public class TaskServiceImpl implements TaskService {
 		
 		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPathNew(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
-		log.info("Data.xml stream null? {}", (is == null));
+		/*log.info("Data.xml stream null? {}", (is == null));
 		
 		if (is == null) {
 		    throw new RuntimeException(
@@ -207,7 +207,7 @@ public class TaskServiceImpl implements TaskService {
 		            );
 		        }
 		    }
-		}
+		}*/
 
 		
 		/*if (null != is) {
