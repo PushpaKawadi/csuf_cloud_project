@@ -171,7 +171,7 @@ public class TaskServiceImpl implements TaskService {
 		
 		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPathNew(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
-		/*log.info("Data.xml stream null? {}", (is == null));
+		log.info("Data.xml stream null? {}", (is == null));
 		
 		if (is == null) {
 		    throw new RuntimeException(
@@ -182,22 +182,24 @@ public class TaskServiceImpl implements TaskService {
 		try (InputStream domStream = is) {
 		    doc = XMLUtils.getDomDocument(domStream);
 		}
+		
+		log.info("Anagha dataXMLName after=" +dataXMLName);
 
 		dataXML = XMLUtils.prettyPrintAsString(doc);
 
 		if (StringUtils.isBlank(taskDescription)) {
 		    taskDescription = XMLUtils.getExtendedDesc(doc);
-		    log.info("iphone task desc = {}", taskDescription);
+		    log.info("Anagha task desc = {}", taskDescription);
 
 		    if (StringUtils.isBlank(actionTaken)) {
-		        log.info("initial task, actionTaken should be blank");
+		        log.info("Anagha task, actionTaken should be blank");
 
 		        String workflowInitiator = XMLUtils.getWorkflowInitiator(doc);
-		        log.info("iphone workflowInitiator = {}", workflowInitiator);
+		        log.info("Anagha workflowInitiator = {}", workflowInitiator);
 
 		        if (StringUtils.isNotBlank(workflowInitiator)) {
 		            log.info(
-		                "iphone workflow initiator modified as {} with status {}",
+		                "Anagha workflow initiator modified as {} with status {}",
 		                workflowInitiator,
 		                CSUFUtils.modifyWorkflowInitiator(
 		                        (session != null ? session : globalConfigService.getAdminSession()),
@@ -207,7 +209,7 @@ public class TaskServiceImpl implements TaskService {
 		            );
 		        }
 		    }
-		}*/
+		}
 
 		
 		/*if (null != is) {
@@ -237,9 +239,9 @@ public class TaskServiceImpl implements TaskService {
 			throw new RuntimeException(
 					"Fatal Error, Data.xml could not be retrieved for workItemId : ".concat(item.getId()));
 		}*/
-		log.info("inside saveTask 3");
+		log.info("Anagha inside saveTask 3");
 		String routes = ArgumentParser.getRoutes(item);
-		log.info("routes : {}", routes);
+		log.info("Anagha routes : {}", routes);
 		String dueDateString = (null != dueDate ? convertDate(dueDate) : null);
 		String endDateString = (null != endDate ? convertDate(endDate) : null);
 		String statement = StringUtils.EMPTY;
@@ -255,7 +257,7 @@ public class TaskServiceImpl implements TaskService {
 		
 		
 	    payload.put("taskTitle", taskTitle);
-	    log.info("pushpa taskTitle="+taskTitle);
+	    log.info("Anagha taskTitle="+taskTitle);
 	    
 	    payload.put("taskPriority", taskPriority);
 	    log.info("pushpa taskPriority="+taskPriority);
@@ -294,6 +296,7 @@ public class TaskServiceImpl implements TaskService {
 	    payload.put("endDate", convertDate(endDate));
 	    
 	    payload.put("dataXML", dataXML);
+	    log.info("Anagha dataXML="+dataXML);
 	    payload.put("actionTaken", actionTaken);
 	    payload.put("workitemComment", workitemComment);
 	    payload.put("routes", routes);
@@ -303,6 +306,8 @@ public class TaskServiceImpl implements TaskService {
 	    payload.put("showSubmit", showSubmitButton);
 	    payload.put("showSave", showSaveButton);
 	    payload.put("showReset", showResetButton);
+	    
+	    log.info("Movie saveTask 5="+payload.toString());
 	    
 		log.info("inside saveTask 5");
 
