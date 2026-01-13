@@ -186,6 +186,7 @@ public class TaskServiceImpl implements TaskService {
 		log.info("Anagha dataXMLName after=" +dataXMLName);
 
 		dataXML = XMLUtils.prettyPrintAsString(doc);
+		log.info("Anagha dataXML=" +dataXML);
 
 		if (StringUtils.isBlank(taskDescription)) {
 		    taskDescription = XMLUtils.getExtendedDesc(doc);
@@ -246,7 +247,7 @@ public class TaskServiceImpl implements TaskService {
 		String endDateString = (null != endDate ? convertDate(endDate) : null);
 		String statement = StringUtils.EMPTY;
 		
-		log.info("inside saveTask 4");
+		log.info("Anagha inside saveTask 4");
 		
 
 		
@@ -260,32 +261,32 @@ public class TaskServiceImpl implements TaskService {
 	    log.info("Anagha taskTitle="+taskTitle);
 	    
 	    payload.put("taskPriority", taskPriority);
-	    log.info("pushpa taskPriority="+taskPriority);
+	    log.info("Anagha taskPriority="+taskPriority);
 	    
 	    payload.put("taskDescription", taskDescription);
-	    log.info("pushpa taskDescription="+taskDescription);
+	    log.info("Anagha taskDescription="+taskDescription);
 	    
 	    payload.put("assignee", assignee);
-	    log.info("pushpa assignee="+assignee);
+	    log.info("Anagha assignee="+assignee);
 	    
 	    payload.put("workflowModel", workflowModel);
-	    log.info("pushpa workflowModel="+workflowModel);
+	    log.info("Anagha workflowModel="+workflowModel);
 
 	    payload.put("status", status);
-	    log.info("pushpa status="+status);
+	    log.info("Anagha status="+status);
 	    
 	    /*payload.put("startDate", startDate);
 	    payload.put("dueDate", dueDate);
 	    payload.put("endDate", endDate);*/
 	    
 	    payload.put("workflowInstanceId", workflowInstanceId);
-	    log.info("pushpa workflowInstanceId="+workflowInstanceId);
+	    log.info("Anagha workflowInstanceId="+workflowInstanceId);
 	    
 	    payload.put("workitemId", workitemId);
-	    log.info("pushpa workitemId="+workitemId);
+	    log.info("Anagha workitemId="+workitemId);
 	    
 	    payload.put("workitemNodeId", workitemNodeId);
-	    log.info("pushpa workitemNodeId="+workitemNodeId);
+	    log.info("Anagha workitemNodeId="+workitemNodeId);
 	    
 	    payload.put("startDate", convertDate(startDate));
 	    
