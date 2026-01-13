@@ -171,11 +171,11 @@ public class TaskServiceImpl implements TaskService {
 		
 		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
-		log.info("Pushpa IS object="+is.available());
 		
-		/*if (null != is) {
+		if (null != is) {
+			log.info("California inside");
 			Document doc = XMLUtils.getDomDocument(is);
-			log.info("iphone inside");
+			
 			dataXML = XMLUtils.prettyPrintAsString(doc);
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
@@ -198,7 +198,7 @@ public class TaskServiceImpl implements TaskService {
 			log.info("iphone Exception");
 			throw new RuntimeException(
 					"Fatal Error, Data.xml could not be retrieved for workItemId : ".concat(item.getId()));
-		}*/
+		}
 		log.info("inside saveTask 3");
 		String routes = ArgumentParser.getRoutes(item);
 		log.info("routes : {}", routes);
