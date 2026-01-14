@@ -15,7 +15,6 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalTime;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -40,7 +39,6 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.w3c.dom.Document;
 
 import com.adobe.granite.workflow.WorkflowSession;
 import com.adobe.granite.workflow.exec.HistoryItem;
@@ -55,7 +53,6 @@ import com.csuf.cloud.core.services.TaskService;
 import com.csuf.cloud.core.services.WorkflowService;
 import com.csuf.cloud.core.utils.ArgumentParser;
 import com.csuf.cloud.core.utils.CSUFUtils;
-import com.csuf.cloud.core.utils.XMLUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -169,49 +166,9 @@ public class TaskServiceImpl implements TaskService {
 		}
 		log.info("India dataXMLName after=" +dataXMLName);
 		
-		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPathNew(resolver, item.getContentPath(),
+		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
-		log.info("Data.xml stream null? {}", (is == null));
-		
-		if (is == null) {
-		    throw new RuntimeException(
-		            "Fatal Error, Data.xml could not be retrieved for workItemId : "
-		                    .concat(item.getId()));
-		}
-		Document doc;
-		try (InputStream domStream = is) {
-		    doc = XMLUtils.getDomDocument(domStream);
-		}
-		
-		log.info("Anagha dataXMLName after=" +dataXMLName);
-
-		dataXML = XMLUtils.prettyPrintAsString(doc);
-		log.info("Anagha dataXML=" +dataXML);
-
-		if (StringUtils.isBlank(taskDescription)) {
-		    taskDescription = XMLUtils.getExtendedDesc(doc);
-		    log.info("Anagha task desc = {}", taskDescription);
-
-		    if (StringUtils.isBlank(actionTaken)) {
-		        log.info("Anagha task, actionTaken should be blank");
-
-		        String workflowInitiator = XMLUtils.getWorkflowInitiator(doc);
-		        log.info("Anagha workflowInitiator = {}", workflowInitiator);
-
-		        if (StringUtils.isNotBlank(workflowInitiator)) {
-		            log.info(
-		                "Anagha workflow initiator modified as {} with status {}",
-		                workflowInitiator,
-		                CSUFUtils.modifyWorkflowInitiator(
-		                        (session != null ? session : globalConfigService.getAdminSession()),
-		                        workflowInstanceId,
-		                        workflowInitiator
-		                )
-		            );
-		        }
-		    }
-		}
-
+		//log.info("Data.xml stream null? {}", (is == null));
 		
 		/*if (null != is) {
 			log.info("California inside");
@@ -240,9 +197,9 @@ public class TaskServiceImpl implements TaskService {
 			throw new RuntimeException(
 					"Fatal Error, Data.xml could not be retrieved for workItemId : ".concat(item.getId()));
 		}*/
-		log.info("Anagha inside saveTask 3");
+		log.info("India inside saveTask 3");
 		String routes = ArgumentParser.getRoutes(item);
-		log.info("Anagha routes : {}", routes);
+		log.info("India routes : {}", routes);
 		String dueDateString = (null != dueDate ? convertDate(dueDate) : null);
 		String endDateString = (null != endDate ? convertDate(endDate) : null);
 		String statement = StringUtils.EMPTY;
@@ -258,35 +215,35 @@ public class TaskServiceImpl implements TaskService {
 		
 		
 	    payload.put("taskTitle", taskTitle);
-	    log.info("Anagha taskTitle="+taskTitle);
+	    log.info("India taskTitle="+taskTitle);
 	    
 	    payload.put("taskPriority", taskPriority);
-	    log.info("Anagha taskPriority="+taskPriority);
+	    log.info("India taskPriority="+taskPriority);
 	    
 	    payload.put("taskDescription", taskDescription);
-	    log.info("Anagha taskDescription="+taskDescription);
+	    log.info("India taskDescription="+taskDescription);
 	    
 	    payload.put("assignee", assignee);
-	    log.info("Anagha assignee="+assignee);
+	    log.info("India assignee="+assignee);
 	    
 	    payload.put("workflowModel", workflowModel);
-	    log.info("Anagha workflowModel="+workflowModel);
+	    log.info("India workflowModel="+workflowModel);
 
 	    payload.put("status", status);
-	    log.info("Anagha status="+status);
+	    log.info("India status="+status);
 	    
 	    /*payload.put("startDate", startDate);
 	    payload.put("dueDate", dueDate);
 	    payload.put("endDate", endDate);*/
 	    
 	    payload.put("workflowInstanceId", workflowInstanceId);
-	    log.info("Anagha workflowInstanceId="+workflowInstanceId);
+	    log.info("India workflowInstanceId="+workflowInstanceId);
 	    
 	    payload.put("workitemId", workitemId);
-	    log.info("Anagha workitemId="+workitemId);
+	    log.info("India workitemId="+workitemId);
 	    
 	    payload.put("workitemNodeId", workitemNodeId);
-	    log.info("Anagha workitemNodeId="+workitemNodeId);
+	    log.info("India workitemNodeId="+workitemNodeId);
 	    
 	    payload.put("startDate", convertDate(startDate));
 	    
@@ -297,7 +254,7 @@ public class TaskServiceImpl implements TaskService {
 	    payload.put("endDate", convertDate(endDate));
 	    
 	    payload.put("dataXML", dataXML);
-	    log.info("Anagha dataXML="+dataXML);
+	    log.info("India dataXML="+dataXML);
 	    payload.put("actionTaken", actionTaken);
 	    payload.put("workitemComment", workitemComment);
 	    payload.put("routes", routes);
@@ -308,7 +265,7 @@ public class TaskServiceImpl implements TaskService {
 	    payload.put("showSave", showSaveButton);
 	    payload.put("showReset", showResetButton);
 	    
-	    log.info("Movie saveTask 5="+payload.toString());
+	    log.info("India saveTask 5="+payload.toString());
 	    
 		log.info("inside saveTask 5");
 
@@ -317,16 +274,16 @@ public class TaskServiceImpl implements TaskService {
 		HttpPost post = new HttpPost(dbServiceUrl);
 		post.addHeader("Content-Type", "application/json");
 		post.setEntity(new StringEntity(payload.toString()));
-		log.info("Raghu Json:=" +payload.toString());
+		log.info("India Json:=" +payload.toString());
 		
 		CloseableHttpResponse response = client.execute(post);
-		log.info("Raghu DB Service Response: =" + response.getStatusLine());
+		log.info("India DB Service Response: =" + response.getStatusLine());
 		
 		String responseStr = EntityUtils.toString(response.getEntity()).trim();
-		log.info("Raghu responseStr =" + responseStr);
+		log.info("India responseStr =" + responseStr);
 		 
 		workitemNodeId = responseStr;
-		log.info("Focus workitemNodeId =" + responseStr);
+		log.info("India workitemNodeId =" + responseStr);
 
 		return workitemNodeId;
 		
