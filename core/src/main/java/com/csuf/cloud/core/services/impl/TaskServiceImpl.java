@@ -39,6 +39,7 @@ import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.w3c.dom.Document;
 
 import com.adobe.granite.workflow.WorkflowSession;
 import com.adobe.granite.workflow.exec.HistoryItem;
@@ -53,6 +54,7 @@ import com.csuf.cloud.core.services.TaskService;
 import com.csuf.cloud.core.services.WorkflowService;
 import com.csuf.cloud.core.utils.ArgumentParser;
 import com.csuf.cloud.core.utils.CSUFUtils;
+import com.csuf.cloud.core.utils.XMLUtils;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -170,7 +172,7 @@ public class TaskServiceImpl implements TaskService {
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
 		//log.info("Data.xml stream null? {}", (is == null));
 		
-		/*if (null != is) {
+		if (null != is) {
 			log.info("California inside");
 			Document doc = XMLUtils.getDomDocument(is);
 			
@@ -196,7 +198,7 @@ public class TaskServiceImpl implements TaskService {
 			log.info("iphone Exception");
 			throw new RuntimeException(
 					"Fatal Error, Data.xml could not be retrieved for workItemId : ".concat(item.getId()));
-		}*/
+		}
 		log.info("India inside saveTask 3");
 		String routes = ArgumentParser.getRoutes(item);
 		log.info("India routes : {}", routes);

@@ -464,10 +464,13 @@
 
             <!-- Admin menu -->
                 <li class="nav-divider"></li>
-                <li class="nav-item dropdown" data-sly-test="${userMenu.isAdmin}">
+                <!-- <li class="nav-item dropdown" data-sly-test="${userMenu.isAdmin}">-->
+                <li class="nav-item dropdown">
                     <a class="nav-link  dropdown-toggle" href="#" data-toggle="dropdown">Administration</a>
                     <ul class="dropdown-menu dropdown-nav-menu">
-                        <li class="nav-item dropdown-nav-item" data-sly-test="${userMenu.isAdmin}">
+                        <!-- <li class="nav-item dropdown-nav-item" data-sly-test="${userMenu.isAdmin}"> -->
+                         <li class="nav-item dropdown-nav-item">
+                        
                             <a class="nav-link nav-dropdown-link" id="pills-sysconfig-tab" href="${userMenu.domain}/content/csu/us/configure-system-maintenence.html" role="tab">System Configuration</a>
                             </li>
                             <li class="nav-item" data-sly-test="${userMenu.isAdmin}">
