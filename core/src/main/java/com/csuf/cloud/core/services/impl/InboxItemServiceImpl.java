@@ -205,7 +205,7 @@ public class InboxItemServiceImpl implements InboxItemService {
 
 	@Override
 	public JsonArray getTaskAttachments(ResourceResolver resourceResolver, String workItemId) throws Exception {
-		log.info("Entered task attchment = {}", workItemId);
+		log.info("California Entered task attchment = {}", workItemId);
 		JsonArray formsJson = new JsonArray();
 		Iterator<Node> itr = null;
 		Session session = resourceResolver.adaptTo(Session.class);
@@ -241,6 +241,8 @@ public class InboxItemServiceImpl implements InboxItemService {
 			} else {
 				throw new Exception("payload path is empty inside getTaskAttachments method");
 			}
+			log.info("California ITR = {}", itr);
+			
 			while (itr.hasNext()) {
 				Node node = itr.next();
 				String path = node.getPath();
@@ -275,6 +277,7 @@ public class InboxItemServiceImpl implements InboxItemService {
 			// payloadPath.concat("/Attachments"));
 			itr = CSUFUtils.searchNodes(queryBuilder, session, "nt:file",
 					payloadPath.concat("/".concat(attachmentFolderName)));
+			log.info("California itr: {}", itr);
 			while (itr.hasNext()) {
 				log.info("Inside Iterator method");
 				Node node = itr.next();

@@ -121,6 +121,8 @@ public class InboxItemDetailsServlet extends SlingSafeMethodsServlet {
 				out.print(json);
 			} else if (StringUtils.isNotBlank(workItemId)
 					&& action.equalsIgnoreCase(ActionType.TASK_ATTACHMENTS.name())) {
+				log.info("California TASK_ATTACHMENTS resourceResolver="+resourceResolver);
+				log.info("California TASK_ATTACHMENTS workItemId="+workItemId);
 				jsonArray = inboxService.getTaskAttachments(resourceResolver, workItemId);
 				out.print(jsonArray);
 			} else if (StringUtils.isNotBlank(workItemId)
