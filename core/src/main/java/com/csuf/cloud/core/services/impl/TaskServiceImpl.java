@@ -168,8 +168,8 @@ public class TaskServiceImpl implements TaskService {
 		}
 		log.info("India dataXMLName after=" +dataXMLName);
 		
-		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
-				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
+		/*InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
+				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");*/
 		//log.info("Data.xml stream null? {}", (is == null));
 		
 		/*if (null != is) {
