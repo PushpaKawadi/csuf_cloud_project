@@ -1158,24 +1158,24 @@ public String getTaskDataOld(String workItemId) {
 
 	@Override
 	public String getTaskDetailsFromProcessingInstance(String url) throws IOException {
-		log.info("Lego enter getTaskDetailsFromProcessingInstance");
+		log.info("Homestead Lego enter getTaskDetailsFromProcessingInstance");
 		HttpGet get = null;
 		CloseableHttpResponse response = null;
 		try (CloseableHttpClient httpclient = HttpClients.createDefault();) {
-			log.info("Lego enter httpclient="+httpclient);
+			log.info("Homestead enter httpclient="+httpclient);
 			get = new HttpGet(processingConfig.processingUrl().concat(url));
 			log.info("getTaskDetailsFromProcessingInstance url=" + url);
 			String auth = new StringBuffer(processingConfig.userName()).append(":")
 					.append(processingConfig.userSecurity()).toString();
-			log.info(" auth=" +  auth);
+			log.info("Homestead=" +  auth);
 			byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.US_ASCII));
-			log.info("Lego=" +  encodedAuth);
+			log.info("Homestead=" +  encodedAuth);
 			String authHeader = "Basic " + new String(encodedAuth);
-			log.info("Lego=" +  authHeader);
+			log.info("Homestead=" +  authHeader);
 			get.setHeader("AUTHORIZATION", authHeader);
 			
 			response = httpclient.execute(get);
-			log.info("response=" +  response);
+			log.info("Homestead response=" +  response);
 			
 			if (null != response && response.getStatusLine().getStatusCode() == 200) {
 				return EntityUtils.toString(response.getEntity());
