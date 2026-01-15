@@ -80,6 +80,7 @@ public class ManageWorkflowInstancesServlet extends SlingSafeMethodsServlet {
 					&& StringUtils.isNotBlank(workflowInstanceId)) {
 				out.print(workflowService.terminateWorkflow(workflowSession, workflowInstanceId));
 			} else if (action.equalsIgnoreCase(ActionType.GET_ALL_ACTIVE_WORKFLOW_INSTANCES_DATA_FOR_DELEGATE.name())) {
+				log.info("Inside Manage GET_ALL_ACTIVE_WORKFLOW_INSTANCES_DATA_FOR_DELEGATE");
 				out.print(workflowService.getAllActiveWorkitemData(req, workflowSession, workflowFilterVO, session,
 						userId));
 			} else if (action

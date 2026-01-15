@@ -432,19 +432,27 @@ public class WorkflowServiceImpl implements WorkflowService {
 	public JsonArray getAllActiveWorkitemData(SlingHttpServletRequest request, WorkflowSession workflowSession,
 			WorkflowFilterVO workflowFilterVO, Session session, String userid)
 			throws WorkflowException, ParseException {
+		log.info("Adarsh getAllActiveWorkitemData");
 		JsonArray responseJson = new JsonArray();
 		JsonArray wfModelJson = new JsonArray();
 		Set<String> wfModels = new TreeSet<>();
 		String[] states = { "RUNNING" };
 		Workflow[] workflows = workflowSession.getWorkflows(states);
+		log.info("Adarsh workflows="+workflows);
 		String[] workflowArray = wfConfig.groupWFList();
+		log.info("Adarsh workflowArray="+workflowArray);
 		ResourceResolver resolver = request.getResourceResolver();
-		log.debug("userid=" + userid);
+		log.info("userid=" + userid);
 		try {
 			for (Workflow wfInstance : workflows) {
+				log.info("Adarsh wfInstance=" + wfInstance);
+
 				if (null != wfInstance && StringUtils.isNotBlank(wfInstance.getId()) && !userid.equals("anonymous")) {
+					log.info("Adarsh confition=" + wfInstance);
 					String title = wfInstance.getWorkflowData().getMetaDataMap().get("workflowTitle", String.class);
+					log.info("Adarsh title=" + title);
 					List<WorkItem> workitems = wfInstance.getWorkItems();
+					log.info("Adarsh workitems=" + workitems);
 					for (WorkItem wItem : workitems) {
 						log.info("wItemid=" + wItem.getId());
 						log.info("wItem type=" + wItem.getItemSubType());
