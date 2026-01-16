@@ -212,7 +212,9 @@ public class InboxItemServiceImpl implements InboxItemService {
 		WorkflowSession wfSession = resourceResolver.adaptTo(WorkflowSession.class);
 		WorkItem workItem = wfSession.getWorkItem(workItemId);
 		log.info("Entered task attchment workItem = {}", workItem);
-		boolean isViewAttachmentNotAllowed = ArgumentParser.isViewAttachmentNotAllowed(workItem);
+		//boolean isViewAttachmentNotAllowed = ArgumentParser.isViewAttachmentNotAllowed(workItem);
+		//Hard coded just for testing - use above line later
+		boolean isViewAttachmentNotAllowed = true;
 		log.info("isViewAttachmentNotAllowed = {} for workItem with id = {}", isViewAttachmentNotAllowed,
 				workItem.getId());
 		if (!isViewAttachmentNotAllowed) {
