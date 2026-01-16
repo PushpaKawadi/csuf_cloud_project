@@ -37,6 +37,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Random;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import javax.jcr.Binary;
 import javax.jcr.Node;
@@ -251,6 +252,11 @@ public class CSUFUtils {
 				Node subNode = resolver.getResource(filePath).adaptTo(Node.class);
 				log.info("Apple17 subNode =" +subNode.getIndex());
 				log.info("Apple17 Stream =" +subNode.getProperty("jcr:data").getBinary().getStream());
+				String result = new BufferedReader(
+				        new InputStreamReader(subNode.getProperty("jcr:data").getBinary().getStream(), StandardCharsets.UTF_8))
+				        .lines()
+				        .collect(Collectors.joining("\n"));
+				log.info("Input stream returned value--{}", result);
 				return subNode.getProperty("jcr:data").getBinary().getStream();
 			}
 		}
