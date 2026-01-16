@@ -215,9 +215,12 @@ public class InboxItemServiceImpl implements InboxItemService {
 		//boolean isViewAttachmentNotAllowed = ArgumentParser.isViewAttachmentNotAllowed(workItem);
 		//Hard coded just for testing - use above line later
 		boolean isViewAttachmentNotAllowed = true;
+		isViewAttachmentNotAllowed = true;
+		
 		log.info("isViewAttachmentNotAllowed = {} for workItem with id = {}", isViewAttachmentNotAllowed,
 				workItem.getId());
-		if (!isViewAttachmentNotAllowed) {
+		if (isViewAttachmentNotAllowed) {
+			//if (!isViewAttachmentNotAllowed) {
 
 			String attachmentsFolderPath = ArgumentParser.getInputFormAttachmentsPath(workItem);
 			if (StringUtils.isBlank(attachmentsFolderPath)) {
