@@ -89,6 +89,7 @@ function getTaskAttachments() {
     alert("workItemId : " + itemId);
     $("#attachments-table").find("tr:gt(0)").remove();
     var requestURL = '/bin/getInboxItemDetails?action=TASK_ATTACHMENTS&workItemId=' + encodeURIComponent(itemId);
+	alert("requestURL : " + requestURL);
     $.ajax({
         type: "GET",
         contentType: "application/text; charset=utf-8",
