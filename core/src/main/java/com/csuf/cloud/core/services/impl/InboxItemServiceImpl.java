@@ -220,19 +220,24 @@ public class InboxItemServiceImpl implements InboxItemService {
 		log.info("isViewAttachmentNotAllowed = {} for workItem with id = {}", isViewAttachmentNotAllowed,
 				workItem.getId());
 		if (isViewAttachmentNotAllowed) {
+			log.info("Inside isViewAttachmentNotAllowed");
+			
 			//if (!isViewAttachmentNotAllowed) {
 
 			String attachmentsFolderPath = ArgumentParser.getInputFormAttachmentsPath(workItem);
+			log.info("California attachmentsFolderPath="+attachmentsFolderPath);
 			if (StringUtils.isBlank(attachmentsFolderPath)) {
 				String combinedName = ArgumentParser.getInputCombinedFormAttachmentsPath(workItem);
 				log.info("combinedName inside getTaskAttachments method : {}", combinedName);
 				if (StringUtils.isNotBlank(combinedName) && combinedName.contains(":")) {
 					attachmentsFolderPath = combinedName.substring(combinedName.lastIndexOf(":") + 1);
+					log.info("California attachmentsFolderPath1234="+attachmentsFolderPath);
 				}
 			}
 
 			if (StringUtils.isNotBlank(attachmentsFolderPath) && attachmentsFolderPath.contains(":")) {
 				attachmentsFolderPath = attachmentsFolderPath.substring(attachmentsFolderPath.lastIndexOf(":") + 1);
+				log.info("California attachmentsFolderPath222222222222="+attachmentsFolderPath);
 			}
 			log.info("attachmentsFolderPath inside getTaskAttachments method : {}", attachmentsFolderPath);
 			String payloadPath = workItem.getContentPath();
@@ -241,14 +246,17 @@ public class InboxItemServiceImpl implements InboxItemService {
 			if (StringUtils.isNotBlank(payloadPath) && StringUtils.isNotBlank(attachmentsFolderPath)) {
 				itr = CSUFUtils.searchNodes(queryBuilder, session, "nt:file",
 						payloadPath.concat("/").concat(attachmentsFolderPath));
+				log.info("Pushpa itr : {}", itr);
 			} else if (StringUtils.isNotBlank(payloadPath)) {
 				itr = CSUFUtils.searchNodes(queryBuilder, session, "nt:file", payloadPath);
+				log.info("Pushpa itr 123: {}", itr);
 			} else {
 				throw new Exception("payload path is empty inside getTaskAttachments method");
 			}
 			log.info("California ITR = {}", itr);
 			
 			while (itr.hasNext()) {
+				log.info("inside itr");
 				Node node = itr.next();
 				String path = node.getPath();
 				String fileName = node.getName();
