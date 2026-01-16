@@ -85,9 +85,8 @@ $(".cls-task-attachments").css('display', 'none');
 }
 
 function getTaskAttachments() {
-	/*alert("TASK_ATTACHMENTS");
-	alert(itemId);*/
-    //console.log("workItemId : " + itemId);
+	alert("TASK_ATTACHMENTS");
+    alert("workItemId : " + itemId);
     $("#attachments-table").find("tr:gt(0)").remove();
     var requestURL = '/bin/getInboxItemDetails?action=TASK_ATTACHMENTS&workItemId=' + encodeURIComponent(itemId);
     $.ajax({
@@ -99,15 +98,18 @@ function getTaskAttachments() {
         dataType: "json",
         success: function (attachmentsArray) {
             if (attachmentsArray && attachmentsArray.length > 0) {
+				alert("attachmentsArray : " + attachmentsArray.length);
                 var x = window.matchMedia("(min-width: 991px)")
                 showLeftSection(x);
                 for (i in attachmentsArray) {  
                     var jsonData = attachmentsArray[i];
+					alert("jsonData : " + jsonData);
                     var row = $("<tr/>");
                     $("#attachments-table").append(row);
                     row.append($("<td class='left-menu-text'>" + jsonData.fileName + "</td>"));
                     row.append($("<td style='text-align:center'><a class='action-icn' href='/bin/getTaskAttachmentFromProcessingInstance?assetPath=" + encodeURIComponent(jsonData.path) + "'><i class='fas fa-eye' tool-tip-toggle='tooltip-icon' data-original-title='View Supporting Document'></i></a>"));
                   /*  row.append($("<td style='text-align:center'><a class='action-icn' href='/bin/viewTaskAttachment?assetPath=" + encodeURIComponent(jsonData.path) + "' target='_blank'><i class='fas fa-eye' tool-tip-toggle='tooltip-icon' data-original-title='View Supporting Document'></i></a></td>"));*/
+				  alert("row : " + row);
                 }
             } else {
                 $(".cls-supporting-documents").css('display', 'none');
