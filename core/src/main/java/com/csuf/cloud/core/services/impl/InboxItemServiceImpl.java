@@ -253,7 +253,12 @@ public class InboxItemServiceImpl implements InboxItemService {
 			} else {
 				throw new Exception("payload path is empty inside getTaskAttachments method");
 			}
-			log.info("California ITR = {}", itr);
+			log.info("LosAngles ITR = {}", itr.hashCode());
+			log.info("LosAngles ITR = {}", itr.hasNext());
+			log.info("LosAngles ITR = {}", itr.toString());
+			log.info("LosAngles ITR = {}", itr.getClass());
+
+			
 			
 			while (itr.hasNext()) {
 				log.info("inside itr");
