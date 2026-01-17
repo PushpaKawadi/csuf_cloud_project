@@ -257,7 +257,7 @@ public class InboxItemServiceImpl implements InboxItemService {
 			log.info("LosAngles ITR = {}", itr.hasNext());
 			log.info("LosAngles ITR = {}", itr.toString());
 			log.info("LosAngles ITR = {}", itr.getClass());*/
-			log.info("LosAngles ITR = {}", itr.next());
+			log.info("Diego ITR = {}", itr.next());
 
 			
 			
