@@ -185,6 +185,7 @@ public class TaskServiceImpl implements TaskService {
 			Document doc = XMLUtils.getDomDocument(is);
 			
 			dataXML = XMLUtils.prettyPrintAsString(doc);
+			log.info("California dataXML="+dataXML);
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
 				log.info("iphone task desc =" +taskDescription);
@@ -264,7 +265,7 @@ public class TaskServiceImpl implements TaskService {
 	    payload.put("endDate", convertDate(endDate));
 	    
 	    payload.put("dataXML", dataXML);
-	    log.info("India dataXML="+dataXML);
+	    log.info("Ammu dataXML="+dataXML);
 	    payload.put("actionTaken", actionTaken);
 	    payload.put("workitemComment", workitemComment);
 	    payload.put("routes", routes);
@@ -284,7 +285,7 @@ public class TaskServiceImpl implements TaskService {
 		HttpPost post = new HttpPost(dbServiceUrl);
 		post.addHeader("Content-Type", "application/json");
 		post.setEntity(new StringEntity(payload.toString()));
-		log.info("India Json:=" +payload.toString());
+		log.info("Republic Json:=" +payload.toString());
 		
 		CloseableHttpResponse response = client.execute(post);
 		log.info("India DB Service Response: =" + response.getStatusLine());
