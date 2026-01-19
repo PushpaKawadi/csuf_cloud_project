@@ -46,13 +46,13 @@ public class XMLUtils {
 
 	public static Document getDomDocument(InputStream is)
 			throws SAXException, IOException, ParserConfigurationException {
-		log.info("Life getDomDocument="+is.available());
+		log.info("Honey getDomDocument="+is.available());
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document doc = dBuilder.parse(is);
-		log.info("Life doc="+doc.getTextContent());
+		log.info("Honey doc="+doc.getTextContent());
 		doc.getDocumentElement().normalize();
-		log.info("Life doc="+doc);
+		log.info("Honey doc1="+doc);
 		return doc;
 	}
 

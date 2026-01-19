@@ -184,9 +184,9 @@ public class TaskServiceImpl implements TaskService {
 		if (null != is) {
 			log.info("Life inside");
 			Document doc = XMLUtils.getDomDocument(is);
-			log.info("Life doc="+doc.getTextContent());
+			log.info("Dabur doc="+doc.getTextContent());
 			dataXML = XMLUtils.prettyPrintAsString(doc);
-			log.info("Life dataXML="+dataXML);
+			log.info("Dabur dataXML="+dataXML);
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
 				log.info("iphone task desc =" +taskDescription);
