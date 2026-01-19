@@ -180,7 +180,7 @@ public class TaskServiceImpl implements TaskService {
 		log.info("Input stream returned value rishi--{}", result);
 		log.info("Data.xml stream null? {}", is);
 		
-		/*if (null != is) {
+		if (null != is) {
 			log.info("California inside");
 			Document doc = XMLUtils.getDomDocument(is);
 			
@@ -206,7 +206,7 @@ public class TaskServiceImpl implements TaskService {
 			log.info("iphone Exception");
 			throw new RuntimeException(
 					"Fatal Error, Data.xml could not be retrieved for workItemId : ".concat(item.getId()));
-		}*/
+		}
 		log.info("India inside saveTask 3");
 		String routes = ArgumentParser.getRoutes(item);
 		log.info("India routes : {}", routes);
