@@ -3,6 +3,6 @@
 "create service user csuf-datawrite-user",
 "create service user csuf-forms-reader",
 "add csuf-datawrite-user to group administrators",
-"set ACL for csuf-datawrite-user\n allow jcr:read, jcr:write on /apps\n allow jcr:write on /libs\n allow jcr:write on /conf\n allow jcr:write on /var\n allow jcr:all on /content\n allow jcr:all on /home\nend"
+"set ACL for csuf-datawrite-user\n allow jcr:read, jcr:write on /apps\n allow jcr:write on /libs\n allow jcr:write on /conf\n allow jcr:read,jcr:write on /var\n allow jcr:all on /content\n allow jcr:all on /home\nend"
     ]
 }
