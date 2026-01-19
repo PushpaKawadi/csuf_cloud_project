@@ -227,7 +227,7 @@ public class WorkflowListener implements EventHandler {
 				}
 			}
 		} catch (Exception e) {
-			log.error(e.getMessage());
+			e.printStackTrace();
 		} finally {
 			if (wfSession != null) {
 				wfSession.logout();

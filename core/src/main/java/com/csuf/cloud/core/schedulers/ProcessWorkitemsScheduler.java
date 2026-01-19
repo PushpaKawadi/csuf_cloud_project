@@ -141,7 +141,7 @@ public class ProcessWorkitemsScheduler implements Runnable {
 						boolean isTaskExist = taskService.isTaskExist(item.getId());
 						// log.debug("isTaskExist : {}", isTaskExist);
 						if (!isTaskExist) {
-							log.debug("Task Does not exist, inserting it in task_details table with workitem id {}", item.getId());
+							log.info("Task Does not exist, inserting it in task_details table with workitem id {}", item.getId());
 							String workitemNodeId = taskService.saveTask(item, resolver, session);
 							log.info("workitem_node_id returned from task_details table for saveTask operation : {}",
 									workitemNodeId);
@@ -152,7 +152,7 @@ public class ProcessWorkitemsScheduler implements Runnable {
 				}
 			}
 			if (count > 0 && config.isNotifytoAdminViaEmail()) {
-				sendEmailNotification(config, count, processedWorkItems.toString());
+				//sendEmailNotification(config, count, processedWorkItems.toString());
 			}
 		} catch (Exception e) {
 			log.error("Error while running Process Active Workitems on Processing Instance Scheduler Service", e);

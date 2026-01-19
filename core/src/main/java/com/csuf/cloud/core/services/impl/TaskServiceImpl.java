@@ -173,19 +173,20 @@ public class TaskServiceImpl implements TaskService {
 		
 		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
+		@SuppressWarnings("resource")
 		String result = new BufferedReader(
 		        new InputStreamReader(is, StandardCharsets.UTF_8))
 		        .lines()
 		        .collect(Collectors.joining("\n"));
-		log.info("Input stream returned value rishi--{}", result);
-		log.info("Data.xml stream null? {}", is);
+		log.info("Republic Input stream returned value rishi--{}", result);
+		log.info("Republic Data.xml stream null? {}", is);
 		
 		if (null != is) {
-			log.info("California inside");
+			log.info("Republic inside");
 			Document doc = XMLUtils.getDomDocument(is);
 			
 			dataXML = XMLUtils.prettyPrintAsString(doc);
-			log.info("California dataXML="+dataXML);
+			log.info("Republic dataXML="+dataXML);
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
 				log.info("iphone task desc =" +taskDescription);
@@ -265,7 +266,7 @@ public class TaskServiceImpl implements TaskService {
 	    payload.put("endDate", convertDate(endDate));
 	    
 	    payload.put("dataXML", dataXML);
-	    log.info("Ammu dataXML="+dataXML);
+	    log.info("Republic dataXML="+dataXML);
 	    payload.put("actionTaken", actionTaken);
 	    payload.put("workitemComment", workitemComment);
 	    payload.put("routes", routes);
@@ -276,9 +277,9 @@ public class TaskServiceImpl implements TaskService {
 	    payload.put("showSave", showSaveButton);
 	    payload.put("showReset", showResetButton);
 	    
-	    log.info("India saveTask 5="+payload.toString());
+	    log.info("Republic saveTask 5="+payload.toString());
 	    
-		log.info("inside saveTask 5");
+		log.info("Republic saveTask 5");
 
 		try {
 		CloseableHttpClient client = HttpClients.createDefault();
@@ -288,13 +289,13 @@ public class TaskServiceImpl implements TaskService {
 		log.info("Republic Json:=" +payload.toString());
 		
 		CloseableHttpResponse response = client.execute(post);
-		log.info("India DB Service Response: =" + response.getStatusLine());
+		log.info("Republic DB Service Response: =" + response.getStatusLine());
 		
 		String responseStr = EntityUtils.toString(response.getEntity()).trim();
-		log.info("India responseStr =" + responseStr);
+		log.info("Republic responseStr =" + responseStr);
 		 
 		workitemNodeId = responseStr;
-		log.info("India workitemNodeId =" + responseStr);
+		log.info("Republic workitemNodeId =" + responseStr);
 
 		return workitemNodeId;
 		
