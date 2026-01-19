@@ -248,7 +248,10 @@ public class CSUFUtils {
 			String dataXMLName) throws RepositoryException {
 		log.info("Apple17 getDataXMLStreamFromPayloadPath--{}", payloadPath );
 		Resource xmlNode = resolver.getResource(payloadPath);
-		log.info("Apple17 getDataXMLStreamFromPayloadPath xmlNode rishabh="+xmlNode );
+		log.info("Apple17 getDataXMLStreamFromPayloadPath resolver before xml node rishabh---{}",resolver );
+		log.info("Apple17 getDataXMLStreamFromPayloadPath xmlNode rishabh initial ---{}",xmlNode);
+		log.info("Apple17 getDataXMLStreamFromPayloadPath resolver id before xml node rishabh---{}",resolver.getUserID() );
+		log.info("Apple17 getDataXMLStreamFromPayloadPath xmlNode rishabh2222="+xmlNode.getPath());
 		if(null != xmlNode) {
 			Iterator<Resource> xmlFiles = xmlNode.listChildren();
 			log.info("Apple17 getDataXMLStreamFromPayloadPath xmlFiles="+xmlFiles.toString());
