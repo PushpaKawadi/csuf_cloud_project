@@ -246,25 +246,23 @@ public class CSUFUtils {
 
 	public static InputStream getDataXMLStreamFromPayloadPath(ResourceResolver resolver, String payloadPath,
 			String dataXMLName) throws RepositoryException {
-		log.info("Apple17 getDataXMLStreamFromPayloadPath" );
+		log.info("Apple17 getDataXMLStreamFromPayloadPath--{}", payloadPath );
 		Resource xmlNode = resolver.getResource(payloadPath);
-		log.info("Apple17 getDataXMLStreamFromPayloadPath xmlNode="+xmlNode );
-		Iterator<Resource> xmlFiles = xmlNode.listChildren();
-		log.info("Apple17 getDataXMLStreamFromPayloadPath xmlFiles="+xmlFiles.toString());
-		while (xmlFiles.hasNext()) {
-			Resource attachmentXml = xmlFiles.next();
-			String filePath = attachmentXml.getPath();
-			if (filePath.contains(dataXMLName)) {
-				filePath = attachmentXml.getPath().concat("/jcr:content");
-				Node subNode = resolver.getResource(filePath).adaptTo(Node.class);
-				log.info("Apple17 subNode =" +subNode.getIndex());
-				log.info("Apple17 Stream =" +subNode.getProperty("jcr:data").getBinary().getStream());
-				String result = new BufferedReader(
-				        new InputStreamReader(subNode.getProperty("jcr:data").getBinary().getStream(), StandardCharsets.UTF_8))
-				        .lines()
-				        .collect(Collectors.joining("\n"));
-				log.info("Input stream returned value--{}", result);
-				return subNode.getProperty("jcr:data").getBinary().getStream();
+		log.info("Apple17 getDataXMLStreamFromPayloadPath xmlNode rishabh="+xmlNode );
+		if(null != xmlNode) {
+			Iterator<Resource> xmlFiles = xmlNode.listChildren();
+			log.info("Apple17 getDataXMLStreamFromPayloadPath xmlFiles="+xmlFiles.toString());
+			while (xmlFiles.hasNext()) {
+				Resource attachmentXml = xmlFiles.next();
+				String filePath = attachmentXml.getPath();
+				if (filePath.contains(dataXMLName)) {
+					filePath = attachmentXml.getPath().concat("/jcr:content");
+					Node subNode = resolver.getResource(filePath).adaptTo(Node.class);
+					log.info("Apple17 subNode =" +subNode.getIndex());
+					log.info("Apple17 Stream =" +subNode.getProperty("jcr:data").getBinary().getStream());
+					
+					return subNode.getProperty("jcr:data").getBinary().getStream();
+				}
 			}
 		}
 		return null;

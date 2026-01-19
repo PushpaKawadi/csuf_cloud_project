@@ -20,6 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
+import java.util.stream.Collectors;
 
 import javax.jcr.Session;
 
@@ -166,11 +167,18 @@ public class TaskServiceImpl implements TaskService {
 		if (StringUtils.isNotBlank(dataXMLName) && dataXMLName.contains(":")) {
 			dataXMLName = dataXMLName.substring(dataXMLName.lastIndexOf(":") + 1);
 		}
-		log.info("India dataXMLName after=" +dataXMLName);
+		log.info("India dataXMLName after rishi=" +dataXMLName);
+		log.info("India Item content path after=" +item.getContentPath());
+		log.info("India resolver after rishi=" +resolver);
 		
 		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
-		//log.info("Data.xml stream null? {}", (is == null));
+		String result = new BufferedReader(
+		        new InputStreamReader(is, StandardCharsets.UTF_8))
+		        .lines()
+		        .collect(Collectors.joining("\n"));
+		log.info("Input stream returned value rishi--{}", result);
+		log.info("Data.xml stream null? {}", is);
 		
 		/*if (null != is) {
 			log.info("California inside");
