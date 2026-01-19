@@ -142,11 +142,13 @@ public class ProcessWorkitemsScheduler implements Runnable {
 						// log.debug("isTaskExist : {}", isTaskExist);
 						if (!isTaskExist) {
 							log.info("Task Does not exist, inserting it in task_details table with workitem id {}", item.getId());
-							String workitemNodeId = taskService.saveTask(item, resolver, session);
+							//Uncomment the line - once its Data.xml save fixed
+							/*String workitemNodeId = taskService.saveTask(item, resolver, session);
 							log.info("workitem_node_id returned from task_details table for saveTask operation : {}",
 									workitemNodeId);
 							count += 1;
-							processedWorkItems.add(item.getId());
+							processedWorkItems.add(item.getId());*/
+							//Uncomment the line - once its Data.xml save fixed
 						}
 					}
 				}

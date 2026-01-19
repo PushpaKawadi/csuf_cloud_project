@@ -182,11 +182,11 @@ public class TaskServiceImpl implements TaskService {
 		log.info("Republic Data.xml stream null? {}", is);
 		
 		if (null != is) {
-			log.info("Republic inside");
+			log.info("Life inside");
 			Document doc = XMLUtils.getDomDocument(is);
-			
+			log.info("Life doc="+doc.getTextContent());
 			dataXML = XMLUtils.prettyPrintAsString(doc);
-			log.info("Republic dataXML="+dataXML);
+			log.info("Life dataXML="+dataXML);
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
 				log.info("iphone task desc =" +taskDescription);
@@ -227,35 +227,35 @@ public class TaskServiceImpl implements TaskService {
 		
 		
 	    payload.put("taskTitle", taskTitle);
-	    log.info("India taskTitle="+taskTitle);
+	    log.info("Life taskTitle="+taskTitle);
 	    
 	    payload.put("taskPriority", taskPriority);
-	    log.info("India taskPriority="+taskPriority);
+	    log.info("Life taskPriority="+taskPriority);
 	    
 	    payload.put("taskDescription", taskDescription);
-	    log.info("India taskDescription="+taskDescription);
+	    log.info("Life taskDescription="+taskDescription);
 	    
 	    payload.put("assignee", assignee);
-	    log.info("India assignee="+assignee);
+	    log.info("Life assignee="+assignee);
 	    
 	    payload.put("workflowModel", workflowModel);
-	    log.info("India workflowModel="+workflowModel);
+	    log.info("Life workflowModel="+workflowModel);
 
 	    payload.put("status", status);
-	    log.info("India status="+status);
+	    log.info("Life status="+status);
 	    
 	    /*payload.put("startDate", startDate);
 	    payload.put("dueDate", dueDate);
 	    payload.put("endDate", endDate);*/
 	    
 	    payload.put("workflowInstanceId", workflowInstanceId);
-	    log.info("India workflowInstanceId="+workflowInstanceId);
+	    log.info("Life workflowInstanceId="+workflowInstanceId);
 	    
 	    payload.put("workitemId", workitemId);
-	    log.info("India workitemId="+workitemId);
+	    log.info("Life workitemId="+workitemId);
 	    
 	    payload.put("workitemNodeId", workitemNodeId);
-	    log.info("India workitemNodeId="+workitemNodeId);
+	    log.info("Life workitemNodeId="+workitemNodeId);
 	    
 	    payload.put("startDate", convertDate(startDate));
 	    
@@ -266,7 +266,8 @@ public class TaskServiceImpl implements TaskService {
 	    payload.put("endDate", convertDate(endDate));
 	    
 	    payload.put("dataXML", dataXML);
-	    log.info("Republic dataXML="+dataXML);
+	    log.info("Life dataXML="+dataXML);
+	    
 	    payload.put("actionTaken", actionTaken);
 	    payload.put("workitemComment", workitemComment);
 	    payload.put("routes", routes);
@@ -277,25 +278,25 @@ public class TaskServiceImpl implements TaskService {
 	    payload.put("showSave", showSaveButton);
 	    payload.put("showReset", showResetButton);
 	    
-	    log.info("Republic saveTask 5="+payload.toString());
+	    log.info("Life saveTask 5="+payload.toString());
 	    
-		log.info("Republic saveTask 5");
+		log.info("Life saveTask 5");
 
 		try {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpPost post = new HttpPost(dbServiceUrl);
 		post.addHeader("Content-Type", "application/json");
 		post.setEntity(new StringEntity(payload.toString()));
-		log.info("Republic Json:=" +payload.toString());
+		log.info("Life Json:=" +payload.toString());
 		
 		CloseableHttpResponse response = client.execute(post);
-		log.info("Republic DB Service Response: =" + response.getStatusLine());
+		log.info("Life DB Service Response: =" + response.getStatusLine());
 		
 		String responseStr = EntityUtils.toString(response.getEntity()).trim();
-		log.info("Republic responseStr =" + responseStr);
+		log.info("Life responseStr =" + responseStr);
 		 
 		workitemNodeId = responseStr;
-		log.info("Republic workitemNodeId =" + responseStr);
+		log.info("Life workitemNodeId =" + responseStr);
 
 		return workitemNodeId;
 		
