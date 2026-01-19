@@ -93,13 +93,20 @@ public class CSUFUtils {
 	}
 
 	public static Iterator<Node> searchNodes(QueryBuilder queryBuilder, Session session, String nodeType, String path) {
+		log.info("Pushpa Test inside loop");
 		Map<String, String> predicateMap = new HashMap<>();
 		predicateMap.put("path", path);
+		log.info("Pushpa path="+path);
 		predicateMap.put("type", nodeType);
+		log.info("Pushpa nodeType="+nodeType);
 		predicateMap.put("p.limit", "-1");
+		log.info("Pushpa predicateMap="+predicateMap);
 		com.day.cq.search.Query query = queryBuilder.createQuery(PredicateGroup.create(predicateMap), session);
+		log.info("Pushpa query="+query);
 		SearchResult result = query.getResult();
+		log.info("Pushpa result="+result);
 		Iterator<Node> itr = result.getNodes();
+		log.info("Pushpa itr="+itr);
 		return itr;
 	}
 

@@ -244,24 +244,19 @@ public class InboxItemServiceImpl implements InboxItemService {
 			log.info("payloadPath inside getTaskAttachments method : {}", payloadPath);
 
 			if (StringUtils.isNotBlank(payloadPath) && StringUtils.isNotBlank(attachmentsFolderPath)) {
+				log.info("Pushpa Test : {}", payloadPath);
 				itr = CSUFUtils.searchNodes(queryBuilder, session, "nt:file",
 						payloadPath.concat("/").concat(attachmentsFolderPath));
 				log.info("Pushpa itr : {}", itr);
 			} else if (StringUtils.isNotBlank(payloadPath)) {
+				log.info("Pushpa Test11 : {}", payloadPath);
 				itr = CSUFUtils.searchNodes(queryBuilder, session, "nt:file", payloadPath);
 				log.info("Pushpa itr 123: {}", itr);
 			} else {
 				throw new Exception("payload path is empty inside getTaskAttachments method");
 			}
-			/*log.info("LosAngles ITR = {}", itr.hashCode());
-			log.info("LosAngles ITR = {}", itr.hasNext());
-			log.info("LosAngles ITR = {}", itr.toString());
-			log.info("LosAngles ITR = {}", itr.getClass());*/
-			log.info("Diego ITR = {}", itr.next());
-
-			
-			
-			//while (itr.hasNext()) {
+						
+			while (itr.hasNext()) {
 				log.info("inside itr");
 				Node node = itr.next();
 				String path = node.getPath();
@@ -276,7 +271,7 @@ public class InboxItemServiceImpl implements InboxItemService {
 						formsJson.add(json);
 					}
 				}
-			//}
+			}
 		}
 		return formsJson;
 	}
