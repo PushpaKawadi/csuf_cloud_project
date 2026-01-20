@@ -205,13 +205,13 @@ public class InboxItemServiceImpl implements InboxItemService {
 
 	@Override
 	public JsonArray getTaskAttachments(ResourceResolver resourceResolver, String workItemId) throws Exception {
-		log.info("California Entered task attchment = {}", workItemId);
+		log.info("Vista Entered task attchment = {}", workItemId);
 		JsonArray formsJson = new JsonArray();
 		Iterator<Node> itr = null;
 		Session session = resourceResolver.adaptTo(Session.class);
 		WorkflowSession wfSession = resourceResolver.adaptTo(WorkflowSession.class);
 		WorkItem workItem = wfSession.getWorkItem(workItemId);
-		log.info("Entered task attchment workItem = {}", workItem);
+		log.info("Vista Entered task attchment workItem = {}", workItem);
 		//boolean isViewAttachmentNotAllowed = ArgumentParser.isViewAttachmentNotAllowed(workItem);
 		//Hard coded just for testing - use above line later
 		boolean isViewAttachmentNotAllowed = true;
@@ -220,44 +220,44 @@ public class InboxItemServiceImpl implements InboxItemService {
 		log.info("isViewAttachmentNotAllowed = {} for workItem with id = {}", isViewAttachmentNotAllowed,
 				workItem.getId());
 		if (isViewAttachmentNotAllowed) {
-			log.info("Inside isViewAttachmentNotAllowed");
+			log.info("Vista Inside isViewAttachmentNotAllowed");
 			
 			//if (!isViewAttachmentNotAllowed) {
 
 			String attachmentsFolderPath = ArgumentParser.getInputFormAttachmentsPath(workItem);
-			log.info("California attachmentsFolderPath="+attachmentsFolderPath);
+			log.info("Vista attachmentsFolderPath="+attachmentsFolderPath);
 			if (StringUtils.isBlank(attachmentsFolderPath)) {
 				String combinedName = ArgumentParser.getInputCombinedFormAttachmentsPath(workItem);
-				log.info("combinedName inside getTaskAttachments method : {}", combinedName);
+				log.info("Vista combinedName inside getTaskAttachments method : {}", combinedName);
 				if (StringUtils.isNotBlank(combinedName) && combinedName.contains(":")) {
 					attachmentsFolderPath = combinedName.substring(combinedName.lastIndexOf(":") + 1);
-					log.info("California attachmentsFolderPath1234="+attachmentsFolderPath);
+					log.info("Vista attachmentsFolderPath1234="+attachmentsFolderPath);
 				}
 			}
 
 			if (StringUtils.isNotBlank(attachmentsFolderPath) && attachmentsFolderPath.contains(":")) {
 				attachmentsFolderPath = attachmentsFolderPath.substring(attachmentsFolderPath.lastIndexOf(":") + 1);
-				log.info("California attachmentsFolderPath222222222222="+attachmentsFolderPath);
+				log.info("Vista school="+attachmentsFolderPath);
 			}
-			log.info("attachmentsFolderPath inside getTaskAttachments method : {}", attachmentsFolderPath);
+			log.info("Vista attachmentsFolderPath inside getTaskAttachments method : {}", attachmentsFolderPath);
 			String payloadPath = workItem.getContentPath();
-			log.info("payloadPath inside getTaskAttachments method : {}", payloadPath);
+			log.info("Vista payloadPath inside getTaskAttachments method : {}", payloadPath);
 
 			if (StringUtils.isNotBlank(payloadPath) && StringUtils.isNotBlank(attachmentsFolderPath)) {
-				log.info("Pushpa Test : {}", payloadPath);
+				log.info("Vista Test : {}", payloadPath);
 				itr = CSUFUtils.searchNodes(queryBuilder, session, "nt:file",
 						payloadPath.concat("/").concat(attachmentsFolderPath));
-				log.info("Pushpa itr : {}", itr);
+				log.info("Vista itr : {}", itr);
 			} else if (StringUtils.isNotBlank(payloadPath)) {
-				log.info("Pushpa Test11 : {}", payloadPath);
+				log.info("Vista Test11 : {}", payloadPath);
 				itr = CSUFUtils.searchNodes(queryBuilder, session, "nt:file", payloadPath);
-				log.info("Pushpa itr 123: {}", itr);
+				log.info("Vista itr 123: {}", itr);
 			} else {
-				throw new Exception("payload path is empty inside getTaskAttachments method");
+				throw new Exception("Vista payload path is empty inside getTaskAttachments method");
 			}
 						
 			while (itr.hasNext()) {
-				log.info("inside itr");
+				log.info("Vista inside itr");
 				Node node = itr.next();
 				String path = node.getPath();
 				String fileName = node.getName();
@@ -267,7 +267,7 @@ public class InboxItemServiceImpl implements InboxItemService {
 						JsonObject json = new JsonObject();
 						json.addProperty("fileName", fileName);
 						json.addProperty("path", path);
-						log.info("inside getTaskAttachments json : {}", json.toString());
+						log.info("Vista inside getTaskAttachments json : {}", json.toString());
 						formsJson.add(json);
 					}
 				}
