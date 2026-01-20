@@ -183,19 +183,15 @@ public class TaskServiceImpl implements TaskService {
 		        .lines()
 		        .collect(Collectors.joining("\n"));
 		log.info("Adarsh Inputstream {}", result);*/
-		log.info("Adarsh Result {}", is);
+		log.info("Orange Result {}", is);
 		
-		Document doc = XMLUtils.getDomDocument(is);
-		log.info("Adarsh doc="+doc);
-		dataXML = XMLUtils.prettyPrintAsString(doc);
-		log.info("Adarsh doc dataXML="+dataXML);
-		
+	
 		
 		if (null != is) {
-			log.info("Adarsh If loop inside");
-			/*Document doc = XMLUtils.getDomDocument(is);
-			dataXML = XMLUtils.prettyPrintAsString(doc);*/
-			log.info("Adarsh Looping Testing="+doc);
+			log.info("Orange If loop inside");
+			Document doc = XMLUtils.getDomDocument(is);
+			dataXML = XMLUtils.prettyPrintAsString(doc);
+			log.info("Orange Looping Testing="+doc);
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
 				log.info("iphone task desc =" +taskDescription);
