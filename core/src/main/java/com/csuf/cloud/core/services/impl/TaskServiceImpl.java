@@ -182,19 +182,20 @@ public class TaskServiceImpl implements TaskService {
 		        new InputStreamReader(is, StandardCharsets.UTF_8))
 		        .lines()
 		        .collect(Collectors.joining("\n"));
-		log.info("Republic Input stream returned value rishi--{}", result);
-		log.info("Republic Data.xml stream null? {}", is);
+		log.info("Adarsh Inputstream {}", result);
+		log.info("Adarsh Result {}", is);
 		
 		Document doc = XMLUtils.getDomDocument(is);
+		log.info("Adarsh doc="+doc);
 		dataXML = XMLUtils.prettyPrintAsString(doc);
-		log.info("Republic dataXML="+dataXML);
+		log.info("Adarsh doc dataXML="+dataXML);
 		
 		
 		if (null != is) {
-			log.info("Republic inside");
+			log.info("Adarsh If loop inside");
 			/*Document doc = XMLUtils.getDomDocument(is);
 			dataXML = XMLUtils.prettyPrintAsString(doc);*/
-			log.info("Republic inside doc="+doc);
+			log.info("Adarsh Looping Testing="+doc);
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
 				log.info("iphone task desc =" +taskDescription);
@@ -274,7 +275,7 @@ public class TaskServiceImpl implements TaskService {
 	    payload.put("endDate", convertDate(endDate));
 	    
 	    payload.put("dataXML", dataXML);
-	    log.info("Life dataXML="+dataXML);
+	    log.info("Adarsh111111111111111 dataXML="+dataXML);
 	    
 	    payload.put("actionTaken", actionTaken);
 	    payload.put("workitemComment", workitemComment);
