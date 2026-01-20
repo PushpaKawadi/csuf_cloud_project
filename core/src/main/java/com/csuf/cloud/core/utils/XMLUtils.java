@@ -50,7 +50,6 @@ public class XMLUtils {
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document doc = dBuilder.parse(is);
-		log.info("Netflix={}", doc.getDocumentElement().getNodeName());
 		doc.getDocumentElement().normalize();
 		return doc;
 	}

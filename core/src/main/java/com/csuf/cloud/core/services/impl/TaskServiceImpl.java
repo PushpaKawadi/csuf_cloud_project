@@ -185,13 +185,12 @@ public class TaskServiceImpl implements TaskService {
 		log.info("Adarsh Inputstream {}", result);*/
 		log.info("Orange Result {}", is);
 		
-	
-		
 		if (null != is) {
-			log.info("Orange If loop inside");
+			log.info("If loop inside");
 			Document doc = XMLUtils.getDomDocument(is);
 			dataXML = XMLUtils.prettyPrintAsString(doc);
-			log.info("Orange Looping Testing="+doc);
+			log.info("Orange dataXML {}", dataXML);
+			
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
 				log.info("iphone task desc =" +taskDescription);
@@ -214,15 +213,14 @@ public class TaskServiceImpl implements TaskService {
 			throw new RuntimeException(
 					"Fatal Error, Data.xml could not be retrieved for workItemId : ".concat(item.getId()));
 		}
-		log.info("India inside saveTask 3");
+		log.info("inside saveTask 3");
 		String routes = ArgumentParser.getRoutes(item);
-		log.info("India routes : {}", routes);
+		log.info("routes : {}", routes);
 		String dueDateString = (null != dueDate ? convertDate(dueDate) : null);
 		String endDateString = (null != endDate ? convertDate(endDate) : null);
 		String statement = StringUtils.EMPTY;
 		
-		log.info("Anagha inside saveTask 4");
-		
+		log.info("inside saveTask 4");
 
 		
 	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/saveTaskDeatils";
@@ -271,7 +269,6 @@ public class TaskServiceImpl implements TaskService {
 	    payload.put("endDate", convertDate(endDate));
 	    
 	    payload.put("dataXML", dataXML);
-	    log.info("Adarsh111111111111111 dataXML="+dataXML);
 	    
 	    payload.put("actionTaken", actionTaken);
 	    payload.put("workitemComment", workitemComment);
@@ -292,16 +289,16 @@ public class TaskServiceImpl implements TaskService {
 		HttpPost post = new HttpPost(dbServiceUrl);
 		post.addHeader("Content-Type", "application/json");
 		post.setEntity(new StringEntity(payload.toString()));
-		log.info("Life Json:=" +payload.toString());
+		log.info("Testing Json:=" +payload.toString());
 		
 		CloseableHttpResponse response = client.execute(post);
-		log.info("Life DB Service Response: =" + response.getStatusLine());
+		log.info("Testing DB Service Response: =" + response.getStatusLine());
 		
 		String responseStr = EntityUtils.toString(response.getEntity()).trim();
-		log.info("Life responseStr =" + responseStr);
+		log.info("Testing responseStr =" + responseStr);
 		 
 		workitemNodeId = responseStr;
-		log.info("Life workitemNodeId =" + responseStr);
+		log.info("Testing workitemNodeId =" + responseStr);
 
 		return workitemNodeId;
 		
