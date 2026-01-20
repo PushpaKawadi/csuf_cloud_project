@@ -186,19 +186,9 @@ public class TaskServiceImpl implements TaskService {
 		log.info("Republic Data.xml stream null? {}", is);
 		
 		if (null != is) {
-			log.info("Life inside");
-			
-			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
-			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
-			Document doc1 = dBuilder.parse(is);
-			log.info("Honey doc="+doc1.getTextContent());
-			doc1.getDocumentElement().normalize();
-			
-			log.info("Dabur doc="+doc1.getTextContent());
-			dataXML = XMLUtils.prettyPrintAsString(doc1);
-			log.info("Dabur dataXML="+dataXML);
-			
-			/*Document doc = XMLUtils.getDomDocument(is);
+			log.info("Republic inside");
+			Document doc = XMLUtils.getDomDocumentNew(is);
+			log.info("Republic inside doc="+doc);
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
 				log.info("iphone task desc =" +taskDescription);
@@ -215,7 +205,7 @@ public class TaskServiceImpl implements TaskService {
 										workflowInstanceId, workflowInitiator));
 					}
 				}
-			}*/
+			}
 		} else {
 			log.info("iphone Exception");
 			throw new RuntimeException(

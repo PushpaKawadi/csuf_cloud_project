@@ -27,6 +27,7 @@ import javax.xml.transform.dom.DOMSource;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
 
+import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -46,14 +47,37 @@ public class XMLUtils {
 
 	public static Document getDomDocument(InputStream is)
 			throws SAXException, IOException, ParserConfigurationException {
-		log.info("Honey getDomDocument="+is.available());
+		log.info("Test getDomDocument="+is.available());
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document doc = dBuilder.parse(is);
-		log.info("Honey doc="+doc.getTextContent());
+		log.info("Test doc111111111111="+doc.getTextContent());
 		doc.getDocumentElement().normalize();
-		log.info("Honey doc1="+doc);
+		log.info("Test doc13333="+doc);
 		return doc;
+	}
+	
+	public static Document getDomDocumentNew(InputStream is)
+	        throws SAXException, IOException, ParserConfigurationException {
+
+	    if (is == null) {
+	        throw new IllegalArgumentException("InputStream is null");
+	    }
+
+	    byte[] xmlBytes = IOUtils.toByteArray(is);
+
+	    if (xmlBytes.length == 0) {
+	        throw new IOException("InputStream is empty");
+	    }
+
+	    try (ByteArrayInputStream bais = new ByteArrayInputStream(xmlBytes)) {
+	        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+	        dbFactory.setNamespaceAware(true);
+	        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+	        Document doc = dBuilder.parse(bais);
+	        doc.getDocumentElement().normalize();
+	        return doc;
+	    }
 	}
 
 	public static Document getDomDocument1(InputStream is)
