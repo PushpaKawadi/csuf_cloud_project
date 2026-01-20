@@ -177,12 +177,12 @@ public class TaskServiceImpl implements TaskService {
 		
 		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
-		@SuppressWarnings("resource")
+		/*@SuppressWarnings("resource")
 		String result = new BufferedReader(
 		        new InputStreamReader(is, StandardCharsets.UTF_8))
 		        .lines()
 		        .collect(Collectors.joining("\n"));
-		log.info("Adarsh Inputstream {}", result);
+		log.info("Adarsh Inputstream {}", result);*/
 		log.info("Adarsh Result {}", is);
 		
 		Document doc = XMLUtils.getDomDocument(is);
