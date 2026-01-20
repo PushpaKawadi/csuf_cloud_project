@@ -23,6 +23,8 @@ import java.util.ResourceBundle;
 import java.util.stream.Collectors;
 
 import javax.jcr.Session;
+import javax.xml.parsers.DocumentBuilder;
+import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
@@ -60,6 +62,8 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import javax.xml.parsers.DocumentBuilderFactory;
+
 
 @Component(service = TaskService.class, immediate = true, property = {
 		Constants.SERVICE_DESCRIPTION + "=Task Service Implementation" })
@@ -183,10 +187,18 @@ public class TaskServiceImpl implements TaskService {
 		
 		if (null != is) {
 			log.info("Life inside");
-			Document doc = XMLUtils.getDomDocument(is);
-			log.info("Dabur doc="+doc.getTextContent());
-			dataXML = XMLUtils.prettyPrintAsString(doc);
+			
+			DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
+			DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
+			Document doc1 = dBuilder.parse(is);
+			log.info("Honey doc="+doc1.getTextContent());
+			doc1.getDocumentElement().normalize();
+			
+			log.info("Dabur doc="+doc1.getTextContent());
+			dataXML = XMLUtils.prettyPrintAsString(doc1);
 			log.info("Dabur dataXML="+dataXML);
+			
+			/*Document doc = XMLUtils.getDomDocument(is);
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
 				log.info("iphone task desc =" +taskDescription);
@@ -203,7 +215,7 @@ public class TaskServiceImpl implements TaskService {
 										workflowInstanceId, workflowInitiator));
 					}
 				}
-			}
+			}*/
 		} else {
 			log.info("iphone Exception");
 			throw new RuntimeException(
