@@ -185,9 +185,15 @@ public class TaskServiceImpl implements TaskService {
 		log.info("Republic Input stream returned value rishi--{}", result);
 		log.info("Republic Data.xml stream null? {}", is);
 		
+		Document doc = XMLUtils.getDomDocument(is);
+		dataXML = XMLUtils.prettyPrintAsString(doc);
+		log.info("Republic dataXML="+dataXML);
+		
+		
 		if (null != is) {
 			log.info("Republic inside");
-			Document doc = XMLUtils.getDomDocumentNew(is);
+			/*Document doc = XMLUtils.getDomDocument(is);
+			dataXML = XMLUtils.prettyPrintAsString(doc);*/
 			log.info("Republic inside doc="+doc);
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);

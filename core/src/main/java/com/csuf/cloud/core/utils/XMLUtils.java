@@ -47,13 +47,11 @@ public class XMLUtils {
 
 	public static Document getDomDocument(InputStream is)
 			throws SAXException, IOException, ParserConfigurationException {
-		log.info("Test getDomDocument="+is.available());
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 		DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 		Document doc = dBuilder.parse(is);
-		log.info("Test doc111111111111="+doc.getTextContent());
+		log.info("Netflix={}", doc.getDocumentElement().getNodeName());
 		doc.getDocumentElement().normalize();
-		log.info("Test doc13333="+doc);
 		return doc;
 	}
 	
