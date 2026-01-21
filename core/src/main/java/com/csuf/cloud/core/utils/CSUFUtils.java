@@ -99,11 +99,12 @@ public class CSUFUtils {
 		log.info("Pushpa path="+path);
 		predicateMap.put("type", nodeType);
 		log.info("Pushpa nodeType="+nodeType);
-		predicateMap.put("p.nodedepth", "1");
+		//predicateMap.put("p.nodedepth", "1");
 		predicateMap.put("p.limit", "-1");
-		log.info("Pushpa predicateMap="+predicateMap);
+		log.info("Pushpa predicateMap initoal ="+predicateMap);
 		com.day.cq.search.Query query = queryBuilder.createQuery(PredicateGroup.create(predicateMap), session);
-		log.info("Pushpa query="+query);
+		log.info("Pushpa predicateMap final ={}",predicateMap);
+		log.info("Pushpa query={}",query);
 		SearchResult result = query.getResult();
 		log.info("Pushpa result="+result);
 		Iterator<Node> itr = result.getNodes();

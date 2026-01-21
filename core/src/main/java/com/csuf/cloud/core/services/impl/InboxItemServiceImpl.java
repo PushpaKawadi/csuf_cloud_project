@@ -245,7 +245,7 @@ public class InboxItemServiceImpl implements InboxItemService {
 
 			if (StringUtils.isNotBlank(payloadPath) && StringUtils.isNotBlank(attachmentsFolderPath)) {
 				log.info("Vista Test : {}", payloadPath);
-				itr = CSUFUtils.searchNodes(queryBuilder, session, "nt:file",
+				itr = CSUFUtils.searchNodes(queryBuilder, session, "nt:base",
 						payloadPath.concat("/").concat(attachmentsFolderPath));
 				log.info("Vista itr : {}", itr);
 			} else if (StringUtils.isNotBlank(payloadPath)) {
