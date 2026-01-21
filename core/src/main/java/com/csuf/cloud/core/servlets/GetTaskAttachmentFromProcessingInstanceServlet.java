@@ -1,0 +1,109 @@
+package com.csuf.cloud.core.servlets;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
+
+import javax.servlet.Servlet;
+import javax.servlet.ServletException;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.codec.binary.Base64;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.http.HttpEntity;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.impl.client.HttpClients;
+import org.apache.sling.api.SlingHttpServletRequest;
+import org.apache.sling.api.SlingHttpServletResponse;
+import org.apache.sling.api.servlets.SlingSafeMethodsServlet;
+import org.osgi.service.component.annotations.Component;
+import org.osgi.service.component.annotations.Reference;
+import org.osgi.service.component.propertytypes.ServiceDescription;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.csuf.cloud.core.services.ProcessingInstanceConfigService;
+import com.csuf.cloud.core.utils.CSUFUtils;
+
+@Component(service = { Servlet.class }, immediate = true, property = {
+		"sling.servlet.paths=/bin/getTaskAttachmentFromProcessingInstance" })
+@ServiceDescription("Get Task Attachment From Processing Instance Servlet")
+public class GetTaskAttachmentFromProcessingInstanceServlet extends SlingSafeMethodsServlet {
+
+	private static final long serialVersionUID = 1L;
+
+	private final transient Logger log = LoggerFactory.getLogger(this.getClass());
+
+	private static String RES_FILE_NAME = "download";
+
+	@Reference
+	private ProcessingInstanceConfigService processingInstanceConfigService;
+
+	@Override
+	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
+			throws ServletException, IOException {
+		try {
+			log.debug("entered Get Task Attachment From Processing Instance Servlet");
+			String assetPath = request.getParameter("assetPath");
+			assetPath = assetPath.trim().replaceAll("\\s", "%20");
+			if (StringUtils.isNotBlank(assetPath)) {
+				InputStream assetStream = getTaskAttachmentFromProcessingInstance(assetPath);
+				if (null != assetStream) {
+					String fileName = CSUFUtils.getFileNameFromCRXPath(assetPath);
+					String contentType = StringUtils.isNotBlank(request.getContentType()) ? request.getContentType()
+							: "application/octet-stream";
+					response.setContentType(contentType);
+
+					response.setHeader("Content-Disposition", "attachment; filename="
+							.concat(StringUtils.isNotBlank(fileName) ? fileName : RES_FILE_NAME));
+
+					ServletOutputStream out = response.getOutputStream();
+					out.write(CSUFUtils.toByteArrayFromInputStream(assetStream));
+					out.flush();
+					out.close();
+				} else {
+					log.error("asset stream is empty");
+					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				}
+			} else {
+				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+				log.error("file could not be downloaded from processing instance");
+				response.getWriter().write("Error");
+			}
+		} catch (Exception e) {
+			log.error(Arrays.toString(e.getStackTrace()));
+		}
+		log.debug("exit Get Task Attachment From Processing Instance Servlet");
+	}
+
+	private InputStream getTaskAttachmentFromProcessingInstance(String url) throws IOException {
+		CloseableHttpClient httpClient = HttpClients.createDefault();
+		HttpGet get = null;
+		try {
+			get = new HttpGet(processingInstanceConfigService.processingUrl().concat(url));
+			String auth = new StringBuffer(processingInstanceConfigService.userName()).append(":")
+					.append(processingInstanceConfigService.userSecurity()).toString();
+			byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.US_ASCII));
+			String authHeader = "Basic " + new String(encodedAuth);
+			get.setHeader("AUTHORIZATION", authHeader);
+			CloseableHttpResponse response = httpClient.execute(get);
+			if (null != response && response.getStatusLine().getStatusCode() == 200) {
+				HttpEntity entity = response.getEntity();
+				log.debug("Content Length : {}", entity.getContentLength());
+				return entity.getContent();
+			}
+		} catch (IOException e) {
+			log.error(Arrays.toString(e.getStackTrace()));
+		} finally {
+			if (null != get) {
+				get.completed();
+				get.releaseConnection();
+			}
+		}
+		return null;
+	}
+}
