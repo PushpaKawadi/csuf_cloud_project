@@ -82,6 +82,7 @@ public class GetTaskAttachmentFromProcessingInstanceServlet extends SlingSafeMet
 
 	private InputStream getTaskAttachmentFromProcessingInstance(String url) throws IOException {
 		CloseableHttpClient httpClient = HttpClients.createDefault();
+		
 		HttpGet get = null;
 		try {
 			get = new HttpGet(processingInstanceConfigService.processingUrl().concat(url));
