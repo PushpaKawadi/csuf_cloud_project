@@ -48,25 +48,30 @@ public class GetTaskAttachmentFromProcessingInstanceServlet extends SlingSafeMet
             throws ServletException, IOException {
         try {
             log.debug("entered Get Task Attachment From Processing Instance Servlet");
+
             String assetPath = request.getParameter("assetPath");
             assetPath = assetPath.trim().replaceAll("\\s", "%20");
+
             if (StringUtils.isNotBlank(assetPath)) {
+
                 InputStream assetStream = getTaskAttachmentFromProcessingInstance(assetPath);
-                if (null != assetStream) {
+
+                if (assetStream != null) {
+
                     String fileName = CSUFUtils.getFileNameFromCRXPath(assetPath);
                     String contentType = StringUtils.isNotBlank(request.getContentType())
                             ? request.getContentType()
                             : "application/octet-stream";
-                    response.setContentType(contentType);
 
+                    response.setContentType(contentType);
                     response.setHeader("Content-Disposition",
                             "attachment; filename="
                                     .concat(StringUtils.isNotBlank(fileName) ? fileName : RES_FILE_NAME));
 
-                    ServletOutputStream out = response.getOutputStream();
-                    out.write(CSUFUtils.toByteArrayFromInputStream(assetStream));
-                    out.flush();
-                    out.close();
+                    try (ServletOutputStream out = response.getOutputStream()) {
+                        out.write(CSUFUtils.toByteArrayFromInputStream(assetStream));
+                        out.flush();
+                    }
                 } else {
                     log.error("asset stream is empty");
                     response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
@@ -77,19 +82,17 @@ public class GetTaskAttachmentFromProcessingInstanceServlet extends SlingSafeMet
                 response.getWriter().write("Error");
             }
         } catch (Exception e) {
-            log.error(Arrays.toString(e.getStackTrace()));
+            log.error("Exception in servlet", e);
         }
+
         log.debug("exit Get Task Attachment From Processing Instance Servlet");
     }
 
     private InputStream getTaskAttachmentFromProcessingInstance(String url) throws IOException {
 
-        CloseableHttpClient httpClient = null;
-        CloseableHttpResponse response = null;
         HttpGet get = null;
 
-        try {
-            httpClient = HttpClients.createDefault();
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
 
             get = new HttpGet(processingInstanceConfigService.processingUrl().concat(url));
 
@@ -100,25 +103,19 @@ public class GetTaskAttachmentFromProcessingInstanceServlet extends SlingSafeMet
 
             byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.US_ASCII));
             String authHeader = "Basic " + new String(encodedAuth, StandardCharsets.US_ASCII);
-            get.setHeader("AUTHORIZATION", authHeader);
+            get.setHeader("Authorization", authHeader);
 
-            response = httpClient.execute(get);
+            CloseableHttpResponse response = httpClient.execute(get);
 
-            if (null != response && response.getStatusLine().getStatusCode() == 200) {
+            if (response != null && response.getStatusLine().getStatusCode() == 200) {
                 HttpEntity entity = response.getEntity();
                 log.debug("Content Length : {}", entity.getContentLength());
-                return entity.getContent();
+                return entity.getContent(); // stream consumed in servlet
             }
 
         } catch (IOException e) {
             log.error(Arrays.toString(e.getStackTrace()));
         } finally {
-            if (response != null) {
-                response.close();
-            }
-            if (httpClient != null) {
-                httpClient.close();
-            }
             if (get != null) {
                 get.releaseConnection();
             }
