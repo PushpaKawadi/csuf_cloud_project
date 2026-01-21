@@ -154,14 +154,14 @@ public class CSUFUtils {
 	}
 
 	public static byte[] toByteArrayFromInputStream(InputStream is) throws IOException {
-		log.info("India inside toByteArrayFromInputStream");
+		log.info("Pushpa inside toByteArrayFromInputStream");
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		int reads = is.read();
 		while (reads != -1) {
 			baos.write(reads);
 			reads = is.read();
 		}
-		log.info("India end method= "+baos.toByteArray());
+		log.info("Pushpa end method= "+baos.toByteArray());
 		return baos.toByteArray();
 	}
 
