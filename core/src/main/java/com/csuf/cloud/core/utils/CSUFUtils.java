@@ -154,15 +154,28 @@ public class CSUFUtils {
 	}
 
 	public static byte[] toByteArrayFromInputStream(InputStream is) throws IOException {
-		log.info("Pushpa inside toByteArrayFromInputStream");
-		ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		int reads = is.read();
-		while (reads != -1) {
-			baos.write(reads);
-			reads = is.read();
-		}
-		log.info("Pushpa end method= "+baos.toByteArray());
-		return baos.toByteArray();
+		log.info("Pushpa Rishabh123 inside toByteArrayFromInputStream");
+		String result = new BufferedReader(
+		        new InputStreamReader(is, StandardCharsets.UTF_8))
+		        .lines()
+		        .collect(Collectors.joining("\n"));
+		log.info("Rishabh123 Inputstream {}", result);
+		  try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
+		        byte[] buffer = new byte[8192]; // 8 KB buffer
+		        int bytesRead;
+
+		        while ((bytesRead = is.read(buffer)) != -1) {
+		    		log.info("Rishabh123 read value {}", bytesRead);
+
+		            baos.write(buffer, 0, bytesRead);
+		        }
+
+		        byte[] resultNew = baos.toByteArray();
+		        log.info("Rishabh123 Read {} bytes from InputStream", resultNew.length);
+				log.info("Rishabh123 Pushpa end method= "+baos.toByteArray());
+
+		        return resultNew;
+		    }		
 	}
 
 	public static File copyInputStreamToFile(InputStream inputStream, File file) throws IOException {
