@@ -155,11 +155,7 @@ public class CSUFUtils {
 
 	public static byte[] toByteArrayFromInputStream(InputStream is) throws IOException {
 		log.info("Pushpa Rishabh123 inside toByteArrayFromInputStream");
-		String result = new BufferedReader(
-		        new InputStreamReader(is, StandardCharsets.UTF_8))
-		        .lines()
-		        .collect(Collectors.joining("\n"));
-		log.info("Rishabh123 Inputstream {}", result);
+		
 		  try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
 		        byte[] buffer = new byte[8192]; // 8 KB buffer
 		        int bytesRead;

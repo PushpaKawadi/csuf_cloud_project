@@ -1,9 +1,12 @@
 package com.csuf.cloud.core.servlets;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
+import java.util.stream.Collectors;
 
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
@@ -57,7 +60,11 @@ public class GetTaskAttachmentFromProcessingInstanceServlet extends SlingSafeMet
 			if (StringUtils.isNotBlank(assetPath)) {
 				InputStream assetStream = getTaskAttachmentFromProcessingInstance(assetPath);
 				log.info("Pushpa assetStream=" + assetStream);
-
+				String result = new BufferedReader(
+				        new InputStreamReader(assetStream, StandardCharsets.UTF_8))
+				        .lines()
+				        .collect(Collectors.joining("\n"));
+				log.info("Rishabh123 Inputstream {}", result);
 				if (assetStream != null) {
 					String fileName = CSUFUtils.getFileNameFromCRXPath(assetPath);
 					log.info("Pushpa fileName=" + fileName);
@@ -112,6 +119,7 @@ public class GetTaskAttachmentFromProcessingInstanceServlet extends SlingSafeMet
 				log.info("Inside Response");
 				if (response != null && response.getStatusLine().getStatusCode() == 200) {
 					log.info("Inside Response if 200="+response);
+					log.info("Inside Response Length if 200="+response.getEntity().getContent().read());
 					HttpEntity entity = response.getEntity();
 					log.info("Content Length : {}", entity.getContentLength());
 					log.debug("Content Length : {}", entity.getContentLength());
