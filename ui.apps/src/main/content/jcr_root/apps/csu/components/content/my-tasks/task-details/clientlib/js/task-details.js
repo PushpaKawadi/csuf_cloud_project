@@ -108,10 +108,10 @@ function getTaskAttachments() {
                     $("#attachments-table").append(row);
                     row.append($("<td class='left-menu-text'>" + jsonData.fileName + "</td>"));
                     row.append($("<td style='text-align:center'><a class='action-icn' href='/bin/getTaskAttachmentFromProcessingInstance?assetPath=" + encodeURIComponent(jsonData.path) + "'><i class='fas fa-eye' tool-tip-toggle='tooltip-icon' data-original-title='View Supporting Document'></i></a>"));
-					var test ="/bin/getTaskAttachmentFromProcessingInstance?assetPath=" + encodeURIComponent(jsonData.path);
+					//var test ="/bin/getTaskAttachmentFromProcessingInstance?assetPath=" + encodeURIComponent(jsonData.path);
                   /*  row.append($("<td style='text-align:center'><a class='action-icn' href='/bin/viewTaskAttachment?assetPath=" + encodeURIComponent(jsonData.path) + "' target='_blank'><i class='fas fa-eye' tool-tip-toggle='tooltip-icon' data-original-title='View Supporting Document'></i></a></td>"));*/
 				  console.log("jsonData.path : " + jsonData.path);
-				  console.log("test : " + test);
+				  //console.log("test : " + test);
                 }
             } else {
                 $(".cls-supporting-documents").css('display', 'none');
