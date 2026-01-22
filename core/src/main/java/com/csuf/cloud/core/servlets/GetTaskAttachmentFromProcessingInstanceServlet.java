@@ -1,5 +1,6 @@
 package com.csuf.cloud.core.servlets;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.charset.StandardCharsets;
@@ -12,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.io.IOUtils;
 import org.apache.http.HttpEntity;
 import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
@@ -29,102 +31,134 @@ import org.slf4j.LoggerFactory;
 import com.csuf.cloud.core.services.ProcessingInstanceConfigService;
 import com.csuf.cloud.core.utils.CSUFUtils;
 
-@Component(service = { Servlet.class }, immediate = true, property = {
-		"sling.servlet.paths=/bin/getTaskAttachmentFromProcessingInstance" })
+@Component(
+        service = { Servlet.class },
+        immediate = true,
+        property = {
+                "sling.servlet.paths=/bin/getTaskAttachmentFromProcessingInstance"
+        }
+)
 @ServiceDescription("Get Task Attachment From Processing Instance Servlet")
 public class GetTaskAttachmentFromProcessingInstanceServlet extends SlingSafeMethodsServlet {
 
-	private static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
-	private final transient Logger log = LoggerFactory.getLogger(this.getClass());
+    private final transient Logger log = LoggerFactory.getLogger(this.getClass());
 
-	private static String RES_FILE_NAME = "download";
+    private static String RES_FILE_NAME = "download";
 
-	@Reference
-	private ProcessingInstanceConfigService processingInstanceConfigService;
+    @Reference
+    private ProcessingInstanceConfigService processingInstanceConfigService;
 
-	@Override
-	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
-			throws ServletException, IOException {
-		try {
-			log.info("entered Get Task Attachment From Processing Instance Servlet");
-			String assetPath = request.getParameter("assetPath");
-			log.info("Pushpa assetPath=" + assetPath);
+    @Override
+    protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
+            throws ServletException, IOException {
 
-			assetPath = assetPath.trim().replaceAll("\\s", "%20");
-			log.info("Pushpa assetPath1=" + assetPath);
+        try {
+            log.info("entered Get Task Attachment From Processing Instance Servlet");
 
-			if (StringUtils.isNotBlank(assetPath)) {
-				InputStream assetStream = getTaskAttachmentFromProcessingInstance(assetPath);
-				log.info("Pushpa assetStream=" + assetStream);
+            String assetPath = request.getParameter("assetPath");
+            log.info("Pushpa assetPath=" + assetPath);
 
-				if (assetStream != null) {
-					String fileName = CSUFUtils.getFileNameFromCRXPath(assetPath);
-					log.info("Pushpa fileName=" + fileName);
+            assetPath = assetPath.trim().replaceAll("\\s", "%20");
+            log.info("Pushpa assetPath1=" + assetPath);
 
-					String contentType = StringUtils.isNotBlank(request.getContentType())
-							? request.getContentType()
-							: "application/octet-stream";
+            if (StringUtils.isNotBlank(assetPath)) {
 
-					response.setContentType(contentType);
-					response.setHeader("Content-Disposition",
-							"attachment; filename=" + (StringUtils.isNotBlank(fileName) ? fileName : RES_FILE_NAME));
+                InputStream assetStream = getTaskAttachmentFromProcessingInstance(assetPath);
+                log.info("Pushpa assetStream=" + assetStream);
 
-					ServletOutputStream out = response.getOutputStream();
-					out.write(CSUFUtils.toByteArrayFromInputStream(assetStream));
-					out.flush();
-					out.close();
-				} else {
-					log.error("asset stream is empty");
-					response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				}
-			} else {
-				log.error("file could not be downloaded from processing instance");
-				response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
-				response.getWriter().write("Error");
-			}
-		} catch (Exception e) {
-			log.error(Arrays.toString(e.getStackTrace()));
-		}
+                if (assetStream != null) {
 
-		log.debug("exit Get Task Attachment From Processing Instance Servlet");
-	}
+                    String fileName = CSUFUtils.getFileNameFromCRXPath(assetPath);
+                    log.info("Pushpa fileName=" + fileName);
 
-	private InputStream getTaskAttachmentFromProcessingInstance(String url) throws IOException {
-		log.info("Inside getTaskAttachmentFromProcessingInstance");
+                    String contentType = StringUtils.isNotBlank(request.getContentType())
+                            ? request.getContentType()
+                            : "application/octet-stream";
 
-		HttpGet get = null;
+                    response.setContentType(contentType);
+                    response.setHeader(
+                            "Content-Disposition",
+                            "attachment; filename=" +
+                                    (StringUtils.isNotBlank(fileName) ? fileName : RES_FILE_NAME)
+                    );
 
-		try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+                    ServletOutputStream out = response.getOutputStream();
+                    out.write(CSUFUtils.toByteArrayFromInputStream(assetStream));
+                    out.flush();
+                    out.close();
 
-			get = new HttpGet(processingInstanceConfigService.processingUrl().concat(url));
-			log.info("Inside Try=" + get);
+                } else {
+                    log.error("asset stream is empty");
+                    response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                }
 
-			String auth = processingInstanceConfigService.userName() + ":"
-					+ processingInstanceConfigService.userSecurity();
+            } else {
+                log.error("file could not be downloaded from processing instance");
+                response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+                response.getWriter().write("Error");
+            }
 
-			byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.US_ASCII));
-			String authHeader = "Basic " + new String(encodedAuth);
+        } catch (Exception e) {
+            log.error(Arrays.toString(e.getStackTrace()));
+        }
 
-			get.setHeader("AUTHORIZATION", authHeader);
+        log.debug("exit Get Task Attachment From Processing Instance Servlet");
+    }
 
-			try (CloseableHttpResponse response = httpClient.execute(get)) {
-				if (response != null && response.getStatusLine().getStatusCode() == 200) {
-					HttpEntity entity = response.getEntity();
-					log.info("Content Length : {}", entity.getContentLength());
-					log.debug("Content Length : {}", entity.getContentLength());
-					return entity.getContent();
-				}
-			}
+    /**
+     * IMPORTANT:
+     * Old logic kept intact.
+     * The ONLY fix is reading the HTTP entity content
+     * BEFORE the HttpClient/Response is closed.
+     */
+    private InputStream getTaskAttachmentFromProcessingInstance(String url) throws IOException {
 
-		} catch (IOException e) {
-			log.error(Arrays.toString(e.getStackTrace()));
-		} finally {
-			if (get != null) {
-				get.releaseConnection();
-			}
-		}
+        log.info("Inside getTaskAttachmentFromProcessingInstance");
 
-		return null;
-	}
+        HttpGet get = null;
+
+        try (CloseableHttpClient httpClient = HttpClients.createDefault()) {
+
+            get = new HttpGet(processingInstanceConfigService.processingUrl().concat(url));
+            log.info("Inside Try=" + get);
+
+            String auth = processingInstanceConfigService.userName() + ":"
+                    + processingInstanceConfigService.userSecurity();
+
+            byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.US_ASCII));
+            String authHeader = "Basic " + new String(encodedAuth);
+
+            get.setHeader("Authorization", authHeader);
+
+            try (CloseableHttpResponse response = httpClient.execute(get)) {
+
+                if (response != null && response.getStatusLine().getStatusCode() == 200) {
+
+                    HttpEntity entity = response.getEntity();
+
+                    if (entity != null) {
+                        log.info("Content Length : {}", entity.getContentLength());
+                        log.debug("Content Length : {}", entity.getContentLength());
+
+                        // ✅ FIX: read stream while response is OPEN
+                        byte[] bytes = IOUtils.toByteArray(entity.getContent());
+                        log.info("Downloaded bytes size={}", bytes.length);
+
+                        return new ByteArrayInputStream(bytes);
+                    }
+                }
+            }
+
+        } catch (IOException e) {
+            log.error(Arrays.toString(e.getStackTrace()));
+        } finally {
+            if (get != null) {
+                get.releaseConnection();
+            }
+        }
+
+        return null;
+    }
 }
