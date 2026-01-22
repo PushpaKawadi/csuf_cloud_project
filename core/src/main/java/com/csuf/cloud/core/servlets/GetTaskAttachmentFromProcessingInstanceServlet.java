@@ -47,22 +47,32 @@ public class GetTaskAttachmentFromProcessingInstanceServlet extends SlingSafeMet
 	protected void doGet(SlingHttpServletRequest request, SlingHttpServletResponse response)
 			throws ServletException, IOException {
 		try {
-			log.debug("entered Get Task Attachment From Processing Instance Servlet");
+			log.info("entered Get Task Attachment From Processing Instance Servlet");
 			String assetPath = request.getParameter("assetPath");
+			log.info("Pushpa assetPath="+assetPath);
 			assetPath = assetPath.trim().replaceAll("\\s", "%20");
+			log.info("Pushpa assetPath1="+assetPath);
 			if (StringUtils.isNotBlank(assetPath)) {
+				log.info("Inside assetPath1="+assetPath);
 				InputStream assetStream = getTaskAttachmentFromProcessingInstance(assetPath);
+				log.info("Pushpa assetStream="+assetStream);
+				
 				if (null != assetStream) {
+					log.info("Pushpa inside assetStream");
 					String fileName = CSUFUtils.getFileNameFromCRXPath(assetPath);
+					log.info("Pushpa fileName="+fileName);
+					
 					String contentType = StringUtils.isNotBlank(request.getContentType()) ? request.getContentType()
 							: "application/octet-stream";
 					response.setContentType(contentType);
+					log.info("Pushpa contentType="+contentType);
 
 					response.setHeader("Content-Disposition", "attachment; filename="
 							.concat(StringUtils.isNotBlank(fileName) ? fileName : RES_FILE_NAME));
 
 					ServletOutputStream out = response.getOutputStream();
 					out.write(CSUFUtils.toByteArrayFromInputStream(assetStream));
+					log.info("Pushpa End ="+CSUFUtils.toByteArrayFromInputStream(assetStream));
 					out.flush();
 					out.close();
 				} else {
@@ -81,18 +91,25 @@ public class GetTaskAttachmentFromProcessingInstanceServlet extends SlingSafeMet
 	}
 
 	private InputStream getTaskAttachmentFromProcessingInstance(String url) throws IOException {
+		log.info("Inside getTaskAttachmentFromProcessingInstance");
 		HttpGet get = null;
 		try {
+			log.info("Inside getTaskAttachmentFromProcessingInstance Try");
 			CloseableHttpClient httpClient = HttpClients.createDefault();
 			get = new HttpGet(processingInstanceConfigService.processingUrl().concat(url));
+			log.info("Inside Try="+get);
 			String auth = new StringBuffer(processingInstanceConfigService.userName()).append(":")
 					.append(processingInstanceConfigService.userSecurity()).toString();
+			log.info("Inside auth="+auth);
+			
 			byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.US_ASCII));
 			String authHeader = "Basic " + new String(encodedAuth);
 			get.setHeader("AUTHORIZATION", authHeader);
 			CloseableHttpResponse response = httpClient.execute(get);
 			if (null != response && response.getStatusLine().getStatusCode() == 200) {
+				log.info("Inside Resonse="+response);
 				HttpEntity entity = response.getEntity();
+				log.info("Content Length : {}", entity.getContentLength());
 				log.debug("Content Length : {}", entity.getContentLength());
 				return entity.getContent();
 			}
