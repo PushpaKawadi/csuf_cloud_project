@@ -153,7 +153,7 @@ public class CSUFUtils {
 		return url;
 	}
 
-	public static byte[] toByteArrayFromInputStream(InputStream is) throws IOException {
+	/*public static byte[] toByteArrayFromInputStream(InputStream is) throws IOException {
 		log.info("Pushpa Rishabh123 inside toByteArrayFromInputStream");
 		
 		  try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
@@ -172,6 +172,16 @@ public class CSUFUtils {
 
 		        return resultNew;
 		    }		
+	}*/
+	
+	public static byte[] toByteArrayFromInputStream(InputStream is) throws IOException {
+		ByteArrayOutputStream baos = new ByteArrayOutputStream();
+		int reads = is.read();
+		while (reads != -1) {
+			baos.write(reads);
+			reads = is.read();
+		}
+		return baos.toByteArray();
 	}
 
 	public static File copyInputStreamToFile(InputStream inputStream, File file) throws IOException {
