@@ -179,6 +179,8 @@ public class TaskManagementServlet extends SlingAllMethodsServlet {
 			} else if (StringUtils.isNotBlank(afPath) && !isInitialSubmission && isHistorySubmission
 					&& StringUtils.isNotBlank(historyWorkItemId)) {
 				log.info("Pushpa 3");
+				log.info("Canada 3="+afPath.concat(".prefillhistorysubmission.html?wcmmode=disabled&taskId=").concat(workItemId)
+						.concat("&historyWorkItemId=").concat(historyWorkItemId));
 				return afPath.concat(".prefillhistorysubmission.html?wcmmode=disabled&taskId=").concat(workItemId)
 						.concat("&historyWorkItemId=").concat(historyWorkItemId);
 			}

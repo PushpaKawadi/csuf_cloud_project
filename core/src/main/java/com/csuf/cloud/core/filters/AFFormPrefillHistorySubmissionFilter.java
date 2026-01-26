@@ -49,9 +49,12 @@ public class AFFormPrefillHistorySubmissionFilter implements Filter {
 	@Override
 	public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain filterChain)
 			throws IOException, ServletException {
+		log.debug("Anagha inside doFilter");
 
 		String workItemId = request.getParameter("taskId");
 		String historyWorkItemId = request.getParameter("historyWorkItemId");
+		log.debug("Anagha workItemId="+workItemId);
+		log.debug("Anagha historyWorkItemId="+historyWorkItemId);
 
 		Session serviceUserSession = null;
 		ResourceResolver resolver = null;
@@ -60,22 +63,26 @@ public class AFFormPrefillHistorySubmissionFilter implements Filter {
 			final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) request;
 			final SlingHttpServletResponse slingResponse = (SlingHttpServletResponse) response;
 
-			log.debug("AFFormPrefillFilter request for {}, with selector {}",
+			log.info("AFFormPrefillFilter request for {}, with selector {}",
 					slingRequest.getRequestPathInfo().getResourcePath(),
 					slingRequest.getRequestPathInfo().getSelectorString());
 
 			resolver = slingRequest.getResourceResolver();
+			log.debug("Anagha resolver="+resolver);
 			serviceUserSession = resolver.adaptTo(Session.class);
+			log.debug("Anagha serviceUserSession="+serviceUserSession);
 
 			if (StringUtils.isNotBlank(workItemId)) {
+				log.debug("Anagha Inside");
 				String dataXML = inboxService.getResponseFromProcessingInstance(
 						"/bin/getInboxItemDetails?action=HISTORY_WORKITEM_XML&workItemId=".concat(workItemId)
 								.concat("&historyWorkItemId=").concat(historyWorkItemId));
+				log.debug("Anagha dataXML="+dataXML);
 				if (StringUtils.isNotBlank(dataXML)) {
 					slingRequest.setAttribute("data", dataXML);
-					log.debug("history submission workitem payload data successfully set as slingRequest attribute");
+					log.info("history submission workitem payload data successfully set as slingRequest attribute");
 					slingRequest.getRequestDispatcher(slingRequest.getResource()).forward(slingRequest, slingResponse);
-					log.debug("slingRequest forward successful");
+					log.info("slingRequest forward successful");
 				}
 			}
 		} catch (Exception e) {
