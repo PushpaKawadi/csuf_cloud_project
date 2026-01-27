@@ -34,76 +34,89 @@ import com.csuf.cloud.core.services.InboxItemService;
  *
  */
 @Component(service = Filter.class, property = {
-		EngineConstants.SLING_FILTER_SCOPE + "=" + EngineConstants.FILTER_SCOPE_REQUEST,
-		EngineConstants.SLING_FILTER_SELECTORS + "=prefillhistorysubmission" })
+        EngineConstants.SLING_FILTER_SCOPE + "=" + EngineConstants.FILTER_SCOPE_REQUEST,
+        EngineConstants.SLING_FILTER_SELECTORS + "=prefillhistorysubmission" })
 @ServiceDescription("filter incoming requests for rendering Adaptive Form with prefill data for history workitem")
 @ServiceRanking(-700)
 @ServiceVendor("ThoughtFocus")
 public class AFFormPrefillHistorySubmissionFilter implements Filter {
 
-	private final Logger log = LoggerFactory.getLogger(getClass());
+    private final Logger log = LoggerFactory.getLogger(getClass());
 
-	@Reference
-	private InboxItemService inboxService;
+    @Reference
+    private InboxItemService inboxService;
 
-	@Override
-	public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain filterChain)
-			throws IOException, ServletException {
-		log.debug("Anagha inside doFilter");
+    @Override
+    public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain filterChain)
+            throws IOException, ServletException {
+        log.debug("Anagha inside doFilter");
 
-		String workItemId = request.getParameter("taskId");
-		String historyWorkItemId = request.getParameter("historyWorkItemId");
-		log.debug("Anagha workItemId="+workItemId);
-		log.debug("Anagha historyWorkItemId="+historyWorkItemId);
+        String workItemId = request.getParameter("taskId");
+        String historyWorkItemId = request.getParameter("historyWorkItemId");
+        log.debug("Anagha workItemId=" + workItemId);
+        log.debug("Anagha historyWorkItemId=" + historyWorkItemId);
 
-		Session serviceUserSession = null;
-		ResourceResolver resolver = null;
+        Session serviceUserSession = null;
+        ResourceResolver resolver = null;
 
-		try {
-			final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) request;
-			final SlingHttpServletResponse slingResponse = (SlingHttpServletResponse) response;
+        try {
+            final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) request;
+            final SlingHttpServletResponse slingResponse = (SlingHttpServletResponse) response;
 
-			log.info("AFFormPrefillFilter request for {}, with selector {}",
-					slingRequest.getRequestPathInfo().getResourcePath(),
-					slingRequest.getRequestPathInfo().getSelectorString());
+            log.info("AFFormPrefillFilter request for {}, with selector {}",
+                    slingRequest.getRequestPathInfo().getResourcePath(),
+                    slingRequest.getRequestPathInfo().getSelectorString());
 
-			resolver = slingRequest.getResourceResolver();
-			log.debug("Anagha resolver="+resolver);
-			serviceUserSession = resolver.adaptTo(Session.class);
-			log.debug("Anagha serviceUserSession="+serviceUserSession);
+            resolver = slingRequest.getResourceResolver();
+            log.debug("Anagha resolver=" + resolver);
+            serviceUserSession = resolver.adaptTo(Session.class);
+            log.debug("Anagha serviceUserSession=" + serviceUserSession);
 
-			if (StringUtils.isNotBlank(workItemId)) {
-				log.debug("Anagha Inside");
-				String dataXML = inboxService.getResponseFromProcessingInstance(
-						"/bin/getInboxItemDetails?action=HISTORY_WORKITEM_XML&workItemId=".concat(workItemId)
-								.concat("&historyWorkItemId=").concat(historyWorkItemId));
-				log.debug("Anagha dataXML="+dataXML);
-				if (StringUtils.isNotBlank(dataXML)) {
-					slingRequest.setAttribute("data", dataXML);
-					log.info("history submission workitem payload data successfully set as slingRequest attribute");
-					slingRequest.getRequestDispatcher(slingRequest.getResource()).forward(slingRequest, slingResponse);
-					log.info("slingRequest forward successful");
-				}
-			}
-		} catch (Exception e) {
-			log.error(Arrays.toString(e.getStackTrace()));
-		} finally {
-			/*if (serviceUserSession != null) {
-				serviceUserSession.logout();
-			}
-			if (resolver != null && resolver.isLive()) {
-				resolver.close();
-			}*/
-		}
-		filterChain.doFilter(request, response);
-	}
+            if (StringUtils.isNotBlank(workItemId)) {
+                log.debug("Anagha Inside");
+                String dataXML = inboxService.getResponseFromProcessingInstance(
+                        "/bin/getInboxItemDetails?action=HISTORY_WORKITEM_XML&workItemId="
+                                .concat(workItemId)
+                                .concat("&historyWorkItemId=")
+                                .concat(historyWorkItemId));
 
-	@Override
-	public void init(FilterConfig filterConfig) {
-	}
+                log.debug("Anagha dataXML=" + dataXML);
 
-	@Override
-	public void destroy() {
-	}
+                if (StringUtils.isNotBlank(dataXML)) {
+                    slingRequest.setAttribute("data", dataXML);
+                    log.info("history submission workitem payload data successfully set as slingRequest attribute");
 
+                    slingRequest.getRequestDispatcher(slingRequest.getResource())
+                            .forward(slingRequest, slingResponse);
+
+                    log.info("slingRequest forward successful");
+
+                    // ******** FIX #1 ********
+                    // STOP further filter processing to avoid infinite loop
+                    return;
+                }
+            }
+        } catch (Exception e) {
+            log.error(Arrays.toString(e.getStackTrace()));
+        } finally {
+            /*if (serviceUserSession != null) {
+                serviceUserSession.logout();
+            }
+            if (resolver != null && resolver.isLive()) {
+                resolver.close();
+            }*/
+        }
+
+        // ******** FIX #2 ********
+        // Only continue chain if request was NOT forwarded
+        filterChain.doFilter(request, response);
+    }
+
+    @Override
+    public void init(FilterConfig filterConfig) {
+    }
+
+    @Override
+    public void destroy() {
+    }
 }
