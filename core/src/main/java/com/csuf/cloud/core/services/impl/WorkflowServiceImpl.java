@@ -290,7 +290,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 						log.info("Hello wItem=");
 						String workItemTitle = ArgumentParser.getWorkitemTitle(wItem);
 						log.info("Hello workItemTitle="+workItemTitle);
-						if (StringUtils.containsIgnoreCase(title, workflowFilterVO.getModelTitle()) && userid.equals("admin")) {
+						//if (StringUtils.containsIgnoreCase(title, workflowFilterVO.getModelTitle()) && userid.equals("admin")) {
 							log.info("Hello Admin=");
 							
 							wfModels.add(title);
@@ -387,7 +387,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 									responseJson.add(wfInstanceJson);
 								}
 							}
-						}
+						//}
 					}
 				}
 			}
