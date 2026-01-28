@@ -279,23 +279,32 @@ public class WorkflowServiceImpl implements WorkflowService {
 		log.info("userid=" + userid);
 		try {
 			for (Workflow wfInstance : workflows) {
-				log.info("Inside Here");
+				log.info("Hello Here");
 				if (null != wfInstance && StringUtils.isNotBlank(wfInstance.getId()) && !userid.equals("anonymous")) {
-					log.info("Inside Anagha");
+					log.info("Hello Anagha");
 					String title = wfInstance.getWorkflowData().getMetaDataMap().get("workflowTitle", String.class);
-					log.info("Inside title="+title);
+					log.info("Hello title="+title);
 					List<WorkItem> workitems = wfInstance.getWorkItems();
+					log.info("Hello workitems="+workitems.size());
 					for (WorkItem wItem : workitems) {
+						log.info("Hello wItem=");
 						String workItemTitle = ArgumentParser.getWorkitemTitle(wItem);
+						log.info("Hello workItemTitle="+workItemTitle);
 						if (StringUtils.containsIgnoreCase(title, workflowFilterVO.getModelTitle()) && userid.equals("admin")) {
+							log.info("Hello Admin=");
+							
 							wfModels.add(title);
 							String payload = null;
 							String payloadLink = null;
 							WorkflowData data = wfInstance.getWorkflowData();
-
+							log.info("Hello data="+data);
 							// calculate initiator
 							String initiator = wfInstance.getInitiator();
+							log.info("Hello initiator="+initiator);
+
+							
 							if (data.getMetaDataMap().containsKey("userId")) {
+								log.info("Hello getMetaDataMap=");
 								String launcherUser = data.getMetaDataMap().get("userId", String.class);
 								if (initiator != null && !initiator.equals(launcherUser)) {
 									initiator += " (" + launcherUser + ")";
@@ -303,6 +312,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 							}
 							if (data.getPayloadType() != null && (data.getPayloadType().equals("JCR_PATH")
 									|| data.getPayloadType().equals("URL"))) {
+								log.info("Hello getPayloadType=");
 								// use the payload as specified in the workflow instance
 								payload = (String) data.getPayload();
 							} else {
@@ -313,6 +323,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 							String taskDescription = null;
 							String fullName = null;
 							if (StringUtils.isNotBlank(payload)) {
+								log.info("Hello isNotBlank=");
 								InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, payload,
 										"Data.xml");
 								if (null != is) {
@@ -321,7 +332,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 								}
 							}
 							fullName = getName(workflowArray, taskDescription, title);
-
+							log.info("Hello fullName="+fullName);
 							if (StringUtils.containsIgnoreCase(initiator, workflowFilterVO.getInitiator())) {
 								Date startTime = wfInstance.getTimeStarted();
 								Date workflowFilterStartTime = new SimpleDateFormat(START_DATE_FORMAT)
