@@ -73,14 +73,21 @@ $(document).ready(function() {
     });
 
     function getDelegatees() {
-
+	var abc = window.location.origin + "/bin/fullertonProxy";
+	alert("here");
         debugger;
         $.ajax({
             type: "GET",
             contentType: "application/json; charset=utf-8",
             dataType: "json",
-            url: '/bin/getDelegateUsersList?action=DELEGATE_USER_DATA',
+            //url: '/bin/getDelegateUsersList?action=DELEGATE_USER_DATA',
+			url: window.location.origin + "/bin/fullertonProxy",
+			 data: {
+					path: "getDelegateUsersList",
+					action: "DELEGATE_USER_DATA"
+                    },
             success: function(response) {
+				alert("Success");
                 userArray = response;
                 delegatees = response;
                 /* $(".cls-dropdown-delegatee").empty();
