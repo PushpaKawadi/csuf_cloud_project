@@ -268,6 +268,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 	@Override
 	public JsonArray getAllActiveWorkflowInstancesData(SlingHttpServletRequest request, WorkflowSession workflowSession,
 			WorkflowFilterVO workflowFilterVO, String userid) throws WorkflowException, ParseException {
+		log.info("Inside getAllActiveWorkflowInstancesData");
 		JsonArray responseJson = new JsonArray();
 		JsonArray wfModelJson = new JsonArray();
 		Set<String> wfModels = new TreeSet<>();
@@ -275,11 +276,14 @@ public class WorkflowServiceImpl implements WorkflowService {
 		Workflow[] workflows = workflowSession.getWorkflows(states);
 		String[] workflowArray = wfConfig.groupWFList();
 		ResourceResolver resolver = request.getResourceResolver();
-		log.debug("userid=" + userid);
+		log.info("userid=" + userid);
 		try {
 			for (Workflow wfInstance : workflows) {
+				log.info("Inside Here");
 				if (null != wfInstance && StringUtils.isNotBlank(wfInstance.getId()) && !userid.equals("anonymous")) {
+					log.info("Inside Anagha");
 					String title = wfInstance.getWorkflowData().getMetaDataMap().get("workflowTitle", String.class);
+					log.info("Inside title="+title);
 					List<WorkItem> workitems = wfInstance.getWorkItems();
 					for (WorkItem wItem : workitems) {
 						String workItemTitle = ArgumentParser.getWorkitemTitle(wItem);
