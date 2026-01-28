@@ -461,8 +461,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 							String[] userArray = wfConfig.getDelegateGroupList();
 							log.info("Matching the criteria=" + (userid.equals("admin") || wfConfig
 									.getAuthorisedWorkflowAdministrators(title, userid, session, userArray)));
-							if (userid.equals("admin") || wfConfig.getAuthorisedWorkflowAdministrators(title, userid,
-									session, userArray)) {
+							//if (userid.equals("admin") || wfConfig.getAuthorisedWorkflowAdministrators(title, userid,session, userArray)) {
 								String workItemTitle = ArgumentParser.getWorkitemTitle(wItem);
 								// if (StringUtils.containsIgnoreCase(title, workflowFilterVO.getModelTitle()))
 								// {
@@ -553,7 +552,7 @@ public class WorkflowServiceImpl implements WorkflowService {
 
 									}
 								}
-							}
+							//}
 						}
 					}
 

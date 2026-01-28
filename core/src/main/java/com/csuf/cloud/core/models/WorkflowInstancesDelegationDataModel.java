@@ -49,8 +49,11 @@ public class WorkflowInstancesDelegationDataModel {
 
 	@PostConstruct
 	protected void init() {
+		log.info("Nexon");
 		try {
 			String uid = resourceResolver.adaptTo(Session.class).getUserID();
+			log.info("Nexon uid="+uid);
+
 			workflowArray = taskService.getTaskDetailsFromProcessingInstance(
 					"/bin/workflowData?action=GET_ALL_ACTIVE_WORKFLOW_INSTANCES_DATA_FOR_DELEGATE&userId=".concat(uid));
 		} catch (Exception e) {
