@@ -93,22 +93,14 @@ public class CSUFUtils {
 	}
 
 	public static Iterator<Node> searchNodes(QueryBuilder queryBuilder, Session session, String nodeType, String path) {
-		log.info("Pushpa Test inside loop");
 		Map<String, String> predicateMap = new HashMap<>();
 		predicateMap.put("path", path);
-		log.info("Pushpa path="+path);
 		predicateMap.put("type", nodeType);
-		log.info("Pushpa nodeType="+nodeType);
-		//predicateMap.put("p.nodedepth", "1");
+		// predicateMap.put("p.nodedepth", "1");
 		predicateMap.put("p.limit", "-1");
-		log.info("Pushpa predicateMap initoal ="+predicateMap);
 		com.day.cq.search.Query query = queryBuilder.createQuery(PredicateGroup.create(predicateMap), session);
-		log.info("Pushpa predicateMap final ={}",predicateMap);
-		log.info("Pushpa query={}",query);
 		SearchResult result = query.getResult();
-		log.info("Pushpa result="+result);
 		Iterator<Node> itr = result.getNodes();
-		log.info("Pushpa itr="+itr);
 		return itr;
 	}
 
@@ -153,27 +145,6 @@ public class CSUFUtils {
 		return url;
 	}
 
-	/*public static byte[] toByteArrayFromInputStream(InputStream is) throws IOException {
-		log.info("Pushpa Rishabh123 inside toByteArrayFromInputStream");
-		
-		  try (ByteArrayOutputStream baos = new ByteArrayOutputStream()) {
-		        byte[] buffer = new byte[8192]; // 8 KB buffer
-		        int bytesRead;
-
-		        while ((bytesRead = is.read(buffer)) != -1) {
-		    		log.info("Rishabh123 read value {}", bytesRead);
-
-		            baos.write(buffer, 0, bytesRead);
-		        }
-
-		        byte[] resultNew = baos.toByteArray();
-		        log.info("Rishabh123 Read {} bytes from InputStream", resultNew.length);
-				log.info("Rishabh123 Pushpa end method= "+baos.toByteArray());
-
-		        return resultNew;
-		    }		
-	}*/
-	
 	public static byte[] toByteArrayFromInputStream(InputStream is) throws IOException {
 		ByteArrayOutputStream baos = new ByteArrayOutputStream();
 		int reads = is.read();
@@ -231,30 +202,20 @@ public class CSUFUtils {
 		return is;
 	}
 
-/*	public static File getFileFromCRXPath(String filePath) {
-		try {
-			String[] filePathArray = filePath.split("\\.");
-			String tempPath = filePathArray[0];
-			int lastSlashIndex = tempPath.lastIndexOf("/");
-			String fileName = tempPath.substring(lastSlashIndex + 1, tempPath.length());
-            if (fileName == null || fileName.isBlank()) {
-                fileName = "default";
-            }else {
-                fileName =  fileName.replaceAll("[^a-zA-Z0-9-_]", "_");
-            }
+	/*
+	 * public static File getFileFromCRXPath(String filePath) { try { String[]
+	 * filePathArray = filePath.split("\\."); String tempPath = filePathArray[0];
+	 * int lastSlashIndex = tempPath.lastIndexOf("/"); String fileName =
+	 * tempPath.substring(lastSlashIndex + 1, tempPath.length()); if (fileName ==
+	 * null || fileName.isBlank()) { fileName = "default"; }else { fileName =
+	 * fileName.replaceAll("[^a-zA-Z0-9-_]", "_"); }
+	 * 
+	 * String fileExtension = filePathArray[1]; return File.createTempFile(fileName,
+	 * ".".concat(fileExtension)); } catch (IOException e) {
+	 * log.error(ArrayUtils.toString(e.getStackTrace())); } return null; }
+	 */
 
-            String fileExtension = filePathArray[1];
-			return File.createTempFile(fileName, ".".concat(fileExtension));
-		} catch (IOException e) {
-			log.error(ArrayUtils.toString(e.getStackTrace()));
-		}
-		return null;
-	}*/
-
-
-
-
-    /*
+	/*
 	 * public static void main(String[] args) { String imagePath =
 	 * "/content/dam/csuf/CSUF_Mailer_logo.gif"; String[] imagePathArray =
 	 * imagePath.split("\\."); String tempPath = imagePathArray[0]; int
@@ -267,83 +228,59 @@ public class CSUFUtils {
 
 	public static InputStream getDataXMLStreamFromPayloadPath(ResourceResolver resolver, String payloadPath,
 			String dataXMLName) throws RepositoryException {
-		log.info("Apple17 getDataXMLStreamFromPayloadPath--{}", payloadPath );
 		Resource xmlNode = resolver.getResource(payloadPath);
-		log.info("Apple17 getDataXMLStreamFromPayloadPath resolver before xml node rishabh---{}",resolver );
-		log.info("Apple17 getDataXMLStreamFromPayloadPath xmlNode rishabh initial ---{}",xmlNode);
-		log.info("Apple17 getDataXMLStreamFromPayloadPath resolver id before xml node rishabh---{}",resolver.getUserID() );
-		log.info("Apple17 getDataXMLStreamFromPayloadPath xmlNode rishabh2222="+xmlNode.getPath());
-		if(null != xmlNode) {
+		if (null != xmlNode) {
 			Iterator<Resource> xmlFiles = xmlNode.listChildren();
-			log.info("Apple17 getDataXMLStreamFromPayloadPath xmlFiles="+xmlFiles.toString());
 			while (xmlFiles.hasNext()) {
 				Resource attachmentXml = xmlFiles.next();
 				String filePath = attachmentXml.getPath();
 				if (filePath.contains(dataXMLName)) {
 					filePath = attachmentXml.getPath().concat("/jcr:content");
 					Node subNode = resolver.getResource(filePath).adaptTo(Node.class);
-					log.info("Apple17 subNode =" +subNode.getIndex());
-					log.info("Apple17 Stream =" +subNode.getProperty("jcr:data").getBinary().getStream());
-					
 					return subNode.getProperty("jcr:data").getBinary().getStream();
 				}
 			}
 		}
 		return null;
 	}
-	public static InputStream getDataXMLStreamFromPayloadPathNew(
-	        ResourceResolver resolver,
-	        String payloadPath,
-	        String dataXMLName) {
 
-	    log.info("Apple17 getDataXMLStreamFromPayloadPath payloadPath={}", payloadPath);
+	public static InputStream getDataXMLStreamFromPayloadPathNew(ResourceResolver resolver, String payloadPath,
+			String dataXMLName) {
+		Resource xmlNode = resolver.getResource(payloadPath);
+		if (xmlNode == null) {
+			log.error("Payload path not found: {}", payloadPath);
+			return null;
+		}
+		Iterator<Resource> children = xmlNode.listChildren();
+		while (children.hasNext()) {
+			Resource attachmentXml = children.next();
 
-	    Resource xmlNode = resolver.getResource(payloadPath);
-	    if (xmlNode == null) {
-	        log.error("Payload path not found: {}", payloadPath);
-	        return null;
-	    }
+			if (!attachmentXml.getName().equalsIgnoreCase(dataXMLName)) {
+				continue;
+			}
+			Resource contentRes = attachmentXml.getChild("jcr:content");
+			if (contentRes == null) {
+				log.error("jcr:content missing for {}", attachmentXml.getPath());
+				return null;
+			}
+			try {
+				Node node = contentRes.adaptTo(Node.class);
+				if (node == null || !node.hasProperty("jcr:data")) {
+					log.error("jcr:data missing for {}", contentRes.getPath());
+					return null;
+				}
+				Binary binary = node.getProperty("jcr:data").getBinary();
+				byte[] bytes = IOUtils.toByteArray(binary.getStream());
+				return new ByteArrayInputStream(bytes);
 
-	    Iterator<Resource> children = xmlNode.listChildren();
-	    while (children.hasNext()) {
-	        Resource attachmentXml = children.next();
-
-	        if (!attachmentXml.getName().equalsIgnoreCase(dataXMLName)) {
-	            continue;
-	        }
-
-	        Resource contentRes = attachmentXml.getChild("jcr:content");
-	        if (contentRes == null) {
-	            log.error("jcr:content missing for {}", attachmentXml.getPath());
-	            return null;
-	        }
-
-	        try {
-	            Node node = contentRes.adaptTo(Node.class);
-	            if (node == null || !node.hasProperty("jcr:data")) {
-	                log.error("jcr:data missing for {}", contentRes.getPath());
-	                return null;
-	            }
-
-	            Binary binary = node.getProperty("jcr:data").getBinary();
-
-	            // 🔥 DETACH FROM JCR (MOST IMPORTANT FIX)
-	            byte[] bytes = IOUtils.toByteArray(binary.getStream());
-
-	            log.info("Apple17 Data.xml loaded successfully, size={} bytes", bytes.length);
-
-	            return new ByteArrayInputStream(bytes);
-
-	        } catch (Exception e) {
-	            log.error("Error reading Data.xml from {}", attachmentXml.getPath(), e);
-	            return null;
-	        }
-	    }
-
-	    log.error("Data.xml not found under payload path {}", payloadPath);
-	    return null;
+			} catch (Exception e) {
+				log.error("Error reading Data.xml from {}", attachmentXml.getPath(), e);
+				return null;
+			}
+		}
+		log.error("Data.xml not found under payload path {}", payloadPath);
+		return null;
 	}
-
 
 	public static NodeIterator getQueryResult(Session session, String sqlStatement) {
 		try {
@@ -744,12 +681,12 @@ public class CSUFUtils {
 
 	public static boolean modifyWorkflowInitiator(Session session, String workflowInstanceId,
 			String modifiedInitiator) {
-		log.info("Testabc modifyWorkflowInitiator");
+		log.info("modifyWorkflowInitiator");
 		try {
 			if (session.nodeExists(workflowInstanceId)) {
-				log.info("Testabc modifyWorkflowInitiator="+workflowInstanceId);
+				log.info("modifyWorkflowInitiator=" + workflowInstanceId);
 				Node workflowNode = session.getNode(workflowInstanceId);
-				log.info("Testabc workflowNode="+workflowNode);
+				log.info("workflowNode=" + workflowNode);
 				Node workflowMetadataNode = workflowNode.getNode("metaData");
 				if (null != workflowNode && workflowNode.hasProperty("initiator")) {
 					workflowNode.setProperty("initiator", modifiedInitiator);
@@ -992,33 +929,33 @@ public class CSUFUtils {
 		}
 		return false;
 	}
-	
-	public static String getRecentlyCreatedPayloadPath(ResourceResolver resolver, String payloadPath) throws RepositoryException {
-        Resource payloadNode = resolver.getResource(payloadPath);
-        HashMap<Date, String> mapOfPayloadNodes = new HashMap<Date, String>();
-        Iterator<Resource> payloadFiles = payloadNode.listChildren();
-        String filePath = "";
-        while (payloadFiles.hasNext()) {
-            Resource payloadFolder = payloadFiles.next();
-            filePath = payloadFolder.getPath();
-            Node subNode = resolver.getResource(filePath).adaptTo(Node.class);  
-            mapOfPayloadNodes.put(subNode.getProperty("jcr:created").getDate().getTime(), filePath);
-        }
 
-        long minDiff = -1;
-        Date datetime = new Date();
-        String value = null;      
-        for (Map.Entry<Date, String> entry : mapOfPayloadNodes.entrySet()) {
-            long diff = (datetime.getTime() - entry.getKey().getTime());
-            if ((minDiff == -1) || (diff < minDiff)) {
-                minDiff = diff;
-                value = entry.getValue();
-            }
-        }      
-        log.info("value=" + value);
-        return value;
-    }
-	
+	public static String getRecentlyCreatedPayloadPath(ResourceResolver resolver, String payloadPath)
+			throws RepositoryException {
+		Resource payloadNode = resolver.getResource(payloadPath);
+		HashMap<Date, String> mapOfPayloadNodes = new HashMap<Date, String>();
+		Iterator<Resource> payloadFiles = payloadNode.listChildren();
+		String filePath = "";
+		while (payloadFiles.hasNext()) {
+			Resource payloadFolder = payloadFiles.next();
+			filePath = payloadFolder.getPath();
+			Node subNode = resolver.getResource(filePath).adaptTo(Node.class);
+			mapOfPayloadNodes.put(subNode.getProperty("jcr:created").getDate().getTime(), filePath);
+		}
+
+		long minDiff = -1;
+		Date datetime = new Date();
+		String value = null;
+		for (Map.Entry<Date, String> entry : mapOfPayloadNodes.entrySet()) {
+			long diff = (datetime.getTime() - entry.getKey().getTime());
+			if ((minDiff == -1) || (diff < minDiff)) {
+				minDiff = diff;
+				value = entry.getValue();
+			}
+		}
+		return value;
+	}
+
 	public static String getTitanCardData(String requestURL, String requestJSON) {
 		log.info("Inside getTitanCardData method from CSUFUtils");
 		URL url = null;
@@ -1041,7 +978,7 @@ public class CSUFUtils {
 			e.printStackTrace();
 		}
 		con.setDoOutput(true);
-		
+
 		try (OutputStream os = con.getOutputStream()) {
 			os.write(requestJSON.getBytes("utf-8"));
 			os.close();
@@ -1059,29 +996,30 @@ public class CSUFUtils {
 				log.debug("Response from URL=============" + response.toString());
 				return response.toString();
 			}
-		}catch(IOException e1) {
-				log.error("Inside Catch Block");
-			}finally {
-				con.disconnect();
-			}
+		} catch (IOException e1) {
+			log.error("Inside Catch Block");
+		} finally {
+			con.disconnect();
+		}
 		return null;
-		
+
 	}
 
 	public static String getSimpleDateFromatForOnbase(String value) {
-        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-        SimpleDateFormat reqFormat = new SimpleDateFormat("MM/dd/yyyy");
-        try {
-                if (StringUtils.isNotBlank(value)) {
-                        value = reqFormat.format(format.parse(value));
-                } else {
-                        value = StringUtils.EMPTY;
-                }
-        } catch (ParseException e) {
-                e.printStackTrace();
-        }
-        return value;
-}
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat reqFormat = new SimpleDateFormat("MM/dd/yyyy");
+		try {
+			if (StringUtils.isNotBlank(value)) {
+				value = reqFormat.format(format.parse(value));
+			} else {
+				value = StringUtils.EMPTY;
+			}
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+		return value;
+	}
+
 	public static String getAssetManagementData(String requestURL, String encodedCredentials) {
 		log.info("Inside getAssetManagementData method from CSUFUtils");
 		URL url = null;
@@ -1094,34 +1032,35 @@ public class CSUFUtils {
 			con.setRequestProperty("Authorization", "Basic " + encodedCredentials);
 			int responseCode = con.getResponseCode();
 			log.debug("POST Response Code to request from getAssetManagementData :: " + responseCode);
-			
-			if (responseCode == HttpURLConnection.HTTP_OK) {
-                BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
-                String inputLine;
-                StringBuilder response = new StringBuilder();
 
-                while ((inputLine = in.readLine()) != null) {
-                    response.append(inputLine);
-                }
-                in.close();
-                log.debug("Response: " + response.toString());
-                return response.toString();
-            } else {
-            	log.error("Request failed from getAssetManagementData method"+responseCode);
-            }
-			
-		} catch(MalformedURLException e) {
-			log.error("Exception URL in getAssetManagementData method"+Arrays.toString(e.getStackTrace()));
+			if (responseCode == HttpURLConnection.HTTP_OK) {
+				BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+				String inputLine;
+				StringBuilder response = new StringBuilder();
+
+				while ((inputLine = in.readLine()) != null) {
+					response.append(inputLine);
+				}
+				in.close();
+				log.debug("Response: " + response.toString());
+				return response.toString();
+			} else {
+				log.error("Request failed from getAssetManagementData method" + responseCode);
+			}
+
+		} catch (MalformedURLException e) {
+			log.error("Exception URL in getAssetManagementData method" + Arrays.toString(e.getStackTrace()));
 		} catch (ProtocolException e) {
-			log.error("Exception Set Request Paramters in getAssetManagementData method"+Arrays.toString(e.getStackTrace()));
+			log.error("Exception Set Request Paramters in getAssetManagementData method"
+					+ Arrays.toString(e.getStackTrace()));
 		} catch (IOException e) {
-			log.error("Exception in getAssetManagementData method"+Arrays.toString(e.getStackTrace()));
+			log.error("Exception in getAssetManagementData method" + Arrays.toString(e.getStackTrace()));
 		} finally {
 			if (con != null) {
-                con.disconnect();
-            }
+				con.disconnect();
+			}
 		}
-		return null;	
+		return null;
 	}
-	
+
 }

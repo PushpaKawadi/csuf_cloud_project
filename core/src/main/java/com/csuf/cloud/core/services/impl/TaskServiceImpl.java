@@ -20,11 +20,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
-import java.util.stream.Collectors;
 
 import javax.jcr.Session;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
@@ -62,7 +59,6 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import javax.xml.parsers.DocumentBuilderFactory;
 
 
 @Component(service = TaskService.class, immediate = true, property = {
@@ -95,14 +91,11 @@ public class TaskServiceImpl implements TaskService {
 
 	@Override
 	public String saveTask(WorkItem item, ResourceResolver resolver, Session session) throws Exception {
-		log.info("Irvine inside saveTask 1");
 		String taskTitle = item.getNode().getTitle();
 		// String taskDescription = item.getNode().getDescription();
 		String taskDescription = item.getWorkflow().getMetaDataMap().get("extendedDesc", String.class);
-		log.info("Irvine taskDescription : {}", taskDescription);
 		String taskPriority = item.getPriority().toString();
 		String assignee = item.getCurrentAssignee();
-		log.info("Irvine assignee="+assignee);
 		// String workflowModel = item.getWorkflow().getWorkflowModel().getTitle();
 		String workflowModel = null;
 		Object workflowModelTitle = item.getWorkflow().getWorkflowData().getMetaDataMap().get("workflowTitle");
@@ -112,7 +105,6 @@ public class TaskServiceImpl implements TaskService {
 		if (StringUtils.isBlank(workflowModel)) {
 			workflowModel = item.getWorkflow().getWorkflowModel().getTitle();
 		}
-		log.info("Pushpa workflowModel="+workflowModel);
 		String status = item.getStatus().name();
 		Date startDate = item.getTimeStarted();
 		Date dueDate = item.getDueTime();
@@ -120,38 +112,27 @@ public class TaskServiceImpl implements TaskService {
 		String workflowInstanceId = item.getWorkflow().getId();
 		String workitemId = item.getId();
 		int index = workitemId.lastIndexOf('/');
-		log.info("Pushpa index="+index);
 		String workitemNodeId = workitemId.substring(index + 1, workitemId.length());
-		log.info("India workitemNodeId="+workitemNodeId);
-		log.info("India Admin Session="+globalConfigService.getAdminSession());
 		JsonObject json = inboxService
 				.getPreviousStepData((session != null ? session : globalConfigService.getAdminSession()), item);
-		log.info("India json="+json.toString());
 		boolean showActionTaken = ArgumentParser.showActionTaken(item);
 		boolean showComment = ArgumentParser.showComment(item);
 		boolean showResetButton = ArgumentParser.showReset(item);
 		boolean showSaveButton = ArgumentParser.showSave(item);
 		boolean showSubmitButton = ArgumentParser.showSubmit(item);
 		String afPath = ArgumentParser.getAFPath(item);
-		log.info("India afPath="+afPath);
 		if (StringUtils.isBlank(afPath)) {
 			log.error("Fatal Exception: AF_PATH is blank in workitem metadata for workItemId : {}", item.getId());
 		} else if (StringUtils.isNotBlank(afPath) && afPath.contains("/content/dam/formsanddocuments/")) {
 			afPath = afPath.replace("/content/dam/formsanddocuments/", "/content/forms/af/");
-			log.info("After afPath="+afPath);
 		}
 		String actionTaken = StringUtils.EMPTY;
-		log.info("Here 1");
 		String workitemComment = StringUtils.EMPTY;
-		log.info("Here 2");
 		String dataXML = StringUtils.EMPTY;
-		log.info("Here 3");
 		/*if (!json.isJsonNull() && json.isJsonObject()) {
 			if (json.has("actionTaken"))
-				log.info("India first condition");
 				actionTaken = json.get("actionTaken").getAsString();
 			if (json.has("workitemComment")) {
-				log.info("India second condition");
 				workitemComment = json.get("workitemComment").getAsString();
 				if (workitemComment.length() > 4000) {
 					workitemComment = workitemComment.substring(0, MAX_CHARS_ALLOWED_LIMIT);
@@ -161,7 +142,6 @@ public class TaskServiceImpl implements TaskService {
 		}*/
 		
 		String dataXMLName = ArgumentParser.getInputDataXMLPath(item);
-		log.info("India dataXMLName="+dataXMLName);
 		if (StringUtils.isBlank(dataXMLName)) {
 			String combinedName = ArgumentParser.getInputCombinedDataXMLPath(item);
 			if (StringUtils.isNotBlank(combinedName) && combinedName.contains(":")) {
@@ -171,37 +151,24 @@ public class TaskServiceImpl implements TaskService {
 		if (StringUtils.isNotBlank(dataXMLName) && dataXMLName.contains(":")) {
 			dataXMLName = dataXMLName.substring(dataXMLName.lastIndexOf(":") + 1);
 		}
-		log.info("India dataXMLName after rishi=" +dataXMLName);
-		log.info("India Item content path after=" +item.getContentPath());
-		log.info("India resolver after rishi=" +resolver);
 		
 		InputStream is = CSUFUtils.getDataXMLStreamFromPayloadPath(resolver, item.getContentPath(),
 				StringUtils.isNotBlank(dataXMLName) ? dataXMLName : "Data.xml");
-		/*@SuppressWarnings("resource")
-		String result = new BufferedReader(
-		        new InputStreamReader(is, StandardCharsets.UTF_8))
-		        .lines()
-		        .collect(Collectors.joining("\n"));
-		log.info("Adarsh Inputstream {}", result);*/
-		log.info("Orange Result {}", is);
-		
 		if (null != is) {
-			log.info("If loop inside");
 			Document doc = XMLUtils.getDomDocument(is);
 			dataXML = XMLUtils.prettyPrintAsString(doc);
-			log.info("Orange dataXML {}", dataXML);
 			
 			if (StringUtils.isBlank(taskDescription)) {
 				taskDescription = XMLUtils.getExtendedDesc(doc);
-				log.info("iphone task desc =" +taskDescription);
-				log.info("iphone from XML : {}", taskDescription);
-				log.info("iphone actionTaken =" +actionTaken);
+				log.debug("iphone task desc =" +taskDescription);
+				log.debug("iphone from XML : {}", taskDescription);
+				log.debug("iphone actionTaken =" +actionTaken);
 				if (StringUtils.isBlank(actionTaken)) {
-					log.info("initial task, actionTaken should be blank : {}", actionTaken);
+					log.debug("initial task, actionTaken should be blank : {}", actionTaken);
 					String workflowInitiator = XMLUtils.getWorkflowInitiator(doc);
-					log.info("iphone workflowInitiator=" +workflowInitiator);
+					log.debug("workflowInitiator=" +workflowInitiator);
 					if (StringUtils.isNotBlank(workflowInitiator)) {
-						log.info("iphone workflow initiator modified as {} with status {}", workflowInitiator,
+						log.debug("workflow initiator modified as {} with status {}", workflowInitiator,
 								CSUFUtils.modifyWorkflowInitiator(
 										(session != null ? session : globalConfigService.getAdminSession()),
 										workflowInstanceId, workflowInitiator));
@@ -209,56 +176,43 @@ public class TaskServiceImpl implements TaskService {
 				}
 			}
 		} else {
-			log.info("iphone Exception");
+			log.error("Exception");
 			throw new RuntimeException(
 					"Fatal Error, Data.xml could not be retrieved for workItemId : ".concat(item.getId()));
 		}
-		log.info("inside saveTask 3");
+		log.debug("inside saveTask 3");
 		String routes = ArgumentParser.getRoutes(item);
-		log.info("routes : {}", routes);
+		log.debug("routes : {}", routes);
 		String dueDateString = (null != dueDate ? convertDate(dueDate) : null);
 		String endDateString = (null != endDate ? convertDate(endDate) : null);
 		String statement = StringUtils.EMPTY;
-		
-		log.info("inside saveTask 4");
-
+		log.debug("inside saveTask 4");
 		
 	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/saveTaskDeatils";
 	    
 	    JSONObject payload = new JSONObject();
-	    
-		
 		
 	    payload.put("taskTitle", taskTitle);
-	    log.info("Life taskTitle="+taskTitle);
 	    
 	    payload.put("taskPriority", taskPriority);
-	    log.info("Life taskPriority="+taskPriority);
 	    
 	    payload.put("taskDescription", taskDescription);
-	    log.info("Life taskDescription="+taskDescription);
 	    
 	    payload.put("assignee", assignee);
-	    log.info("Life assignee="+assignee);
 	    
 	    payload.put("workflowModel", workflowModel);
-	    log.info("Life workflowModel="+workflowModel);
 
 	    payload.put("status", status);
-	    log.info("Life status="+status);
 	    
 	    /*payload.put("startDate", startDate);
 	    payload.put("dueDate", dueDate);
 	    payload.put("endDate", endDate);*/
 	    
 	    payload.put("workflowInstanceId", workflowInstanceId);
-	    log.info("Life workflowInstanceId="+workflowInstanceId);
 	    
 	    payload.put("workitemId", workitemId);
-	    log.info("Life workitemId="+workitemId);
 	    
 	    payload.put("workitemNodeId", workitemNodeId);
-	    log.info("Life workitemNodeId="+workitemNodeId);
 	    
 	    payload.put("startDate", convertDate(startDate));
 	    
@@ -280,25 +234,23 @@ public class TaskServiceImpl implements TaskService {
 	    payload.put("showSave", showSaveButton);
 	    payload.put("showReset", showResetButton);
 	    
-	    log.info("Life saveTask 5="+payload.toString());
+	    log.debug("saveTask 5="+payload.toString());
 	    
-		log.info("Life saveTask 5");
+		log.debug("saveTask 5");
 
 		try {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpPost post = new HttpPost(dbServiceUrl);
 		post.addHeader("Content-Type", "application/json");
 		post.setEntity(new StringEntity(payload.toString()));
-		log.info("Testing Json:=" +payload.toString());
 		
 		CloseableHttpResponse response = client.execute(post);
-		log.info("Testing DB Service Response: =" + response.getStatusLine());
+		log.debug("Save Task Response: =" + response.getStatusLine());
 		
 		String responseStr = EntityUtils.toString(response.getEntity()).trim();
-		log.info("Testing responseStr =" + responseStr);
 		 
 		workitemNodeId = responseStr;
-		log.info("Testing workitemNodeId =" + responseStr);
+		log.debug("Save Task workitemNodeId =" + responseStr);
 
 		return workitemNodeId;
 		
@@ -591,78 +543,47 @@ public class TaskServiceImpl implements TaskService {
 	}
 
 	public boolean updateTaskStatus(String workItemId, String taskStatus, boolean isUpdateTaskStartDate) {
-
-	    log.info("Pushpa Task workItemId=" + workItemId);
-	    log.info("Pushpa Task taskStatus=" + taskStatus);
-	    log.info("Pushpa Task isUpdateTaskStartDate=" + isUpdateTaskStartDate);
-
 	    boolean data = false;
-
 	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/updateTaskStatus";
-
 	    JSONObject json = new JSONObject();
 	    json.put("workItemId", workItemId);
 	    json.put("taskStatus", taskStatus);
 	    json.put("isUpdateTaskStartDate", isUpdateTaskStartDate);
-
 	    try (CloseableHttpClient client = HttpClients.createDefault()) {
-
 	        HttpPost post = new HttpPost(dbServiceUrl);
 	        post.addHeader("Content-Type", "application/json");
 	        post.setEntity(new StringEntity(json.toString()));
-
 	        try (CloseableHttpResponse response = client.execute(post)) {
-
-	            log.info("Pushpa DB Service Response: {}", response.getStatusLine());
-
+	            log.debug("updateTaskStatus DB Service Response: {}", response.getStatusLine());
 	            String responseStr = EntityUtils.toString(response.getEntity()).trim();
-	            log.info("Pushpa responseStr = {}", responseStr);
-
+	            log.debug("updateTaskStatus responseStr = {}", responseStr);
 	            data = Boolean.parseBoolean(responseStr);
-
-	            log.info("Pushpa value = {}", data);
+	            log.debug("updateTaskStatus value = {}", data);
 	            return data;
 	        }
-
 	    } catch (UnsupportedEncodingException e) {
 	        log.error("Encoding error", e);
 	    } catch (Exception e) {
 	        log.error("Error calling UpdateTaskData servlet", e);
 	    }
-
 	    return false;
 	}
 
 	@Override
 	public boolean updateTaskAssignee(String workItemId, String assignee) {
-		log.info("Pushpa Task workItemId=" + workItemId);
-	    log.info("Pushpa Task taskStatus=" + assignee);
-
 	    boolean data = false;
-
 	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/UpdateTaskAssignee";
-
 	    JSONObject json = new JSONObject();
 	    json.put("workItemId", workItemId);
 	    json.put("assignee", assignee);
-	    
-
 	    try (CloseableHttpClient client = HttpClients.createDefault()) {
-
 	        HttpPost post = new HttpPost(dbServiceUrl);
 	        post.addHeader("Content-Type", "application/json");
 	        post.setEntity(new StringEntity(json.toString()));
-
 	        try (CloseableHttpResponse response = client.execute(post)) {
-
-	            log.info("Pushpa DB Service Response: {}", response.getStatusLine());
-
+	            log.debug("updateTaskAssignee Response: {}", response.getStatusLine());
 	            String responseStr = EntityUtils.toString(response.getEntity()).trim();
-	            log.info("Pushpa responseStr = {}", responseStr);
-
 	            data = Boolean.parseBoolean(responseStr);
-
-	            log.info("Pushpa value = {}", data);
 	            return data;
 	        }
 
@@ -677,7 +598,6 @@ public class TaskServiceImpl implements TaskService {
 	
 @Override
 public String getTaskDataOld(String workItemId) {
-	log.info("Inside Orange getTaskData");
 	String getTaskDataStmt = "select data from task_details where workitem_id = ?";
 	try (Connection connection = jdbcService.getInboxDBConnection();) {
 
@@ -710,32 +630,18 @@ public String getTaskDataOld(String workItemId) {
 
 	@Override
 	public String getTaskData(String workItemId) {
-		log.info("Lego---{}",workItemId);
-		
 		String data ="";
-
-		log.info("Lego="+workItemId);
 	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/TaskDetailsServlet";
-	    boolean taskExists = false;
-	    
 	    JSONObject json = new JSONObject();
 	    json.put("workItemId", workItemId);
-		
 		try {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpPost post = new HttpPost(dbServiceUrl);
 		post.addHeader("Content-Type", "application/json");
 		post.setEntity(new StringEntity(json.toString()));
-		
 		CloseableHttpResponse response = client.execute(post);
-		log.info("Lego DB Service Response: =" + response.getStatusLine());
-		
 		String responseStr = EntityUtils.toString(response.getEntity()).trim();
-		log.info("Lego responseStr =" + responseStr);
-		 
         data = responseStr;
-        log.info("Lego taskExists =" + data);
-		
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}catch (Exception e) {
@@ -743,9 +649,6 @@ public String getTaskDataOld(String workItemId) {
 		}
 	    return data;
 	}
-		
-		
-		
 
 	@Override
 	public String getWorkflowInstanceIdOld(String workItemId) {
@@ -777,10 +680,7 @@ public String getTaskDataOld(String workItemId) {
 	public String getWorkflowInstanceId(String workItemId) {
 		
 		String workflowInstanceId ="";
-
-		log.info("ABC="+workItemId);
 	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/WorkflowInstanceID";
-	    boolean taskExists = false;
 	    
 	    JSONObject json = new JSONObject();
 	    json.put("workItemId", workItemId);
@@ -792,13 +692,8 @@ public String getTaskDataOld(String workItemId) {
 		post.setEntity(new StringEntity(json.toString()));
 		
 		CloseableHttpResponse response = client.execute(post);
-		log.info("Lego DB Service Response: =" + response.getStatusLine());
-		
 		String responseStr = EntityUtils.toString(response.getEntity()).trim();
-		log.info("Lego responseStr =" + responseStr);
-		 
 		workflowInstanceId = responseStr;
-        log.info("Lego taskExists =" + workflowInstanceId);
 		
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -836,29 +731,17 @@ public String getTaskDataOld(String workItemId) {
 
 	private String getCurrentTaskAction(String workItemId) {
 		String current_task_action ="";
-
-		log.info("ABC="+workItemId);
 	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/CurrentTaskAction";
-	    boolean taskExists = false;
-	    
 	    JSONObject json = new JSONObject();
 	    json.put("workItemId", workItemId);
-		
 		try {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpPost post = new HttpPost(dbServiceUrl);
 		post.addHeader("Content-Type", "application/json");
 		post.setEntity(new StringEntity(json.toString()));
-		
 		CloseableHttpResponse response = client.execute(post);
-		log.info("Lego DB Service Response: =" + response.getStatusLine());
-		
 		String responseStr = EntityUtils.toString(response.getEntity()).trim();
-		log.info("Lego responseStr =" + responseStr);
-		 
 		current_task_action = responseStr;
-        log.info("Lego taskExists =" + current_task_action);
-		
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
 		}catch (Exception e) {
@@ -894,30 +777,18 @@ public String getTaskDataOld(String workItemId) {
 
 	@Override
 	public String getAfPath(String workItemId) {
-		
-		log.info("Inside getAfPath");
 		String afPath = "";
-
-		log.info("AFPath Param="+workItemId);
 	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/AFPathServlet";
-	  
 	    JSONObject json = new JSONObject();
 	    json.put("workItemId", workItemId);
-		
 		try {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpPost post = new HttpPost(dbServiceUrl);
 		post.addHeader("Content-Type", "application/json");
 		post.setEntity(new StringEntity(json.toString()));
-		
 		CloseableHttpResponse response = client.execute(post);
-		log.info("Trincy afPath DB Service Response: =" + response.getStatusLine());
-		
 		String responseStr = EntityUtils.toString(response.getEntity()).trim();
-		log.info("Trincy afPath responseStr =" + responseStr);
-		 
 		afPath = responseStr;
-        log.info("Trincy afPath =" + afPath);
 		
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -927,9 +798,6 @@ public String getTaskDataOld(String workItemId) {
 	    return afPath;
 	}
 		
-		
-		
-	
 	@Override
 	public String getAfPathOld(String workItemId) {
 		String getStmt = "select af_path from task_details where workitem_id = ?";
@@ -1045,29 +913,19 @@ public String getTaskDataOld(String workItemId) {
 
 	@Override
 	public String getTaskAssignee(String workItemId) {
-		log.info("Inside getTaskAssignee");
+		log.debug("Inside getTaskAssignee");
 		String assignee = "";
-
-		log.info("getTaskAssignee Param="+workItemId);
 	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/TaskAssignee";
-	  
 	    JSONObject json = new JSONObject();
 	    json.put("workItemId", workItemId);
-		
 		try {
 		CloseableHttpClient client = HttpClients.createDefault();
 		HttpPost post = new HttpPost(dbServiceUrl);
 		post.addHeader("Content-Type", "application/json");
 		post.setEntity(new StringEntity(json.toString()));
-		
 		CloseableHttpResponse response = client.execute(post);
-		log.info("getTaskAssignee Service Response: =" + response.getStatusLine());
-		
 		String responseStr = EntityUtils.toString(response.getEntity()).trim();
-		log.info("getTaskAssignee responseStr =" + responseStr);
-		 
 		assignee = responseStr;
-        log.info("getTaskAssignee =" + assignee);
 		
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
@@ -1171,25 +1029,17 @@ public String getTaskDataOld(String workItemId) {
 
 	@Override
 	public String getTaskDetailsFromProcessingInstance(String url) throws IOException {
-		log.info("Homestead Lego enter getTaskDetailsFromProcessingInstance");
+		log.debug("enter getTaskDetailsFromProcessingInstance");
 		HttpGet get = null;
 		CloseableHttpResponse response = null;
 		try (CloseableHttpClient httpclient = HttpClients.createDefault();) {
-			log.info("Homestead enter httpclient="+httpclient);
 			get = new HttpGet(processingConfig.processingUrl().concat(url));
-			log.info("getTaskDetailsFromProcessingInstance url=" + url);
 			String auth = new StringBuffer(processingConfig.userName()).append(":")
 					.append(processingConfig.userSecurity()).toString();
-			log.info("Homestead=" +  auth);
 			byte[] encodedAuth = Base64.encodeBase64(auth.getBytes(StandardCharsets.US_ASCII));
-			log.info("Homestead=" +  encodedAuth);
 			String authHeader = "Basic " + new String(encodedAuth);
-			log.info("Homestead=" +  authHeader);
 			get.setHeader("AUTHORIZATION", authHeader);
-			
 			response = httpclient.execute(get);
-			log.info("Homestead response=" +  response);
-			
 			if (null != response && response.getStatusLine().getStatusCode() == 200) {
 				return EntityUtils.toString(response.getEntity());
 			}
@@ -1211,13 +1061,11 @@ public String getTaskDataOld(String workItemId) {
 		final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/getMyTasksData";
 		JsonArray resultArray = new JsonArray();
 		JsonArray jsonArray = new JsonArray();
-
-		log.info("Girija GetAllTask - Started at: {}", LocalTime.now());
 		try (CloseableHttpClient client = HttpClients.createDefault()) {
 			HttpPost post = new HttpPost(dbServiceUrl);
 			post.addHeader("Content-Type", "application/json");
 			try (CloseableHttpResponse response = client.execute(post)) {
-				log.info("Girija DB Service Response: {}", response.getStatusLine());
+				log.debug("GetAllTasks Response: {}", response.getStatusLine());
 				BufferedReader reader = new BufferedReader(new InputStreamReader(response.getEntity().getContent()));
 				StringBuilder sb = new StringBuilder();
 				String line;
@@ -1225,9 +1073,7 @@ public String getTaskDataOld(String workItemId) {
 					sb.append(line);
 				}
 				resultArray = JsonParser.parseString(sb.toString()).getAsJsonArray();
-				log.info("Girija DB JSON Parsed Successfully. Count = {}", resultArray.size());
 			}
-
 		} catch (Exception e) {
 			log.error("Error calling DB service: {}", e.getMessage(), e);
 			return jsonArray; // return empty array
@@ -1236,21 +1082,15 @@ public String getTaskDataOld(String workItemId) {
 		try {
 			for (JsonElement element : resultArray) {
 				JsonObject obj = element.getAsJsonObject();
-				log.info("Girija Json: {}", LocalTime.now());
-
 				// Validate assignee
 				String assignee = getSafe(obj, "assignee");
 				boolean isViewTaskAllowed = inboxService.isViewInboxTaskAllowed(currentUserSession, assignee);
-				log.info("Girija isViewTaskAllowed=" +isViewTaskAllowed);
 				/*if (!isViewTaskAllowed) {
 					continue;
 				}*/
 				JsonObject jsonObj = new JsonObject();
-				
 				jsonObj.addProperty("isViewTaskAllowed", "true");
 				jsonObj.addProperty("isAssigneeAGroup", "false");
-				
-				
 				jsonObj.addProperty("isViewTaskDetailsAllowed", "true");
 				jsonObj.addProperty("isCurrentUserAdmin", "false");
 				jsonObj.addProperty("currentUserId", "yjayaram@fullerton.edu");
@@ -1268,43 +1108,32 @@ public String getTaskDataOld(String workItemId) {
 
 				// ----- Standard Fields -----
 				jsonObj.addProperty("task_title", obj.get("task_title").getAsString());
-				
-			
 				jsonObj.addProperty("priority", getSafe(obj, "priority"));
 				jsonObj.addProperty("task_description", getSafe(obj, "task_description"));
 				jsonObj.addProperty("assignee", assignee);
 				jsonObj.addProperty("workflow_model", getSafe(obj, "workflow_model"));
 				jsonObj.addProperty("status", getSafe(obj, "status"));
-				
-				
-
 				// ----- START DATE conversion -----
 				String startDate = getSafe(obj, "start_date");
 				if (StringUtils.isNotBlank(startDate)) {
 					Date formattedDate = CSUFUtils.convertStringToDate(startDate, DATE_FORMAT_DB);
 					if (formattedDate != null) {
 						jsonObj.addProperty("start_date", CSUFUtils.convertDateToString(formattedDate, DATE_FORMAT_US));
-						log.info("Test4=" +CSUFUtils.convertDateToString(formattedDate, DATE_FORMAT_US));
 						
 					}
 				}
 
 				// ----- DUE DATE -----
 				jsonObj.addProperty("DUE_DATE", getSafe(obj, "DUE_DATE"));
-				
-				log.info("Test5=" +getSafe(obj, "DUE_DATE"));
-
 				// ----- Workflow identifiers -----
 				jsonObj.addProperty("workflow_instance_id", getSafe(obj, "workflow_instance_id"));
 				jsonObj.addProperty("workitem_id", getSafe(obj, "workitem_id"));
-				log.info("Test6=" +getSafe(obj, "workitem_id"));
 
 				jsonObj.addProperty("action_taken", (String) null);
 				jsonObj.addProperty("task_submit_comment", (String) null);
 
 				// Routes
 				jsonObj.addProperty("routes_data", getSafe(obj, "routes_data"));
-				log.info("Test7=" +getSafe(obj, "routes_data"));
 
 				// ----- Flags -----
 				if (!processingConfig.dbType().equalsIgnoreCase("ORACLE")) {
@@ -1330,7 +1159,6 @@ public String getTaskDataOld(String workItemId) {
 			log.error("Error processing JSON: {}", e.getMessage(), e);
 		}
 
-		log.info("Coffee Completed processing tasks at {}", jsonArray);
 		return jsonArray;
 	}
 
@@ -1344,16 +1172,11 @@ public String getTaskDataOld(String workItemId) {
 	
 	@Override
 	public boolean isTaskExist(String workItemId) {
-		log.info("Inside Task Exist");
-
 		if (StringUtils.isBlank(workItemId)) {
 	        return false;
 	    }
-
-		log.info("Trincy="+workItemId);
 	    final String dbServiceUrl = "https://myformstst.fullerton.edu/bin/TaskServletNew";
 	    boolean taskExists = false;
-	    
 	    JSONObject json = new JSONObject();
 	    json.put("workItemId", workItemId);
 		json.put("action", "isTaskExists");
@@ -1362,15 +1185,9 @@ public String getTaskDataOld(String workItemId) {
 		HttpPost post = new HttpPost(dbServiceUrl);
 		post.addHeader("Content-Type", "application/json");
 		post.setEntity(new StringEntity(json.toString()));
-		
 		CloseableHttpResponse response = client.execute(post);
-		log.info("Trincy DB Service Response: =" + response.getStatusLine());
-		
 		String responseStr = EntityUtils.toString(response.getEntity()).trim();
-		log.info("Trincy responseStr =" + responseStr);
-		 
         taskExists = Boolean.parseBoolean(responseStr);
-        log.info("Trincy taskExists =" + taskExists);
 		
 		} catch (UnsupportedEncodingException e) {
 			e.printStackTrace();
