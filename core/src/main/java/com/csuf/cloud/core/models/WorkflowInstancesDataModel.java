@@ -41,10 +41,8 @@ public class WorkflowInstancesDataModel {
 	protected void init() {
 		try {
 			String uid = resourceResolver.adaptTo(Session.class).getUserID();
-			log.info("LaRAM uid ="+uid);
 			workflowInstancesArray = taskService.getTaskDetailsFromProcessingInstance(
 					"/bin/workflowData?action=GET_ALL_ACTIVE_WORKFLOW_INSTANCES_DATA&userId=".concat(uid));
-			log.info("LaRAM workflowInstancesArray ="+workflowInstancesArray.length());
 		} catch (Exception e) {
 			log.error(Arrays.toString(e.getStackTrace()));
 		}

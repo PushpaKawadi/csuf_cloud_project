@@ -1,31 +1,19 @@
 package com.csuf.cloud.core.models;
 
 import static org.apache.sling.api.resource.ResourceResolver.PROPERTY_RESOURCE_TYPE;
-
 import java.util.Arrays;
-
 import javax.annotation.PostConstruct;
-import javax.jcr.RepositoryException;
 import javax.jcr.Session;
-
-import org.apache.jackrabbit.api.security.user.Authorizable;
-import org.apache.sling.api.SlingHttpServletRequest;
 import org.apache.sling.api.resource.Resource;
 import org.apache.sling.api.resource.ResourceResolver;
 import org.apache.sling.models.annotations.Default;
 import org.apache.sling.models.annotations.Model;
-import org.apache.sling.models.annotations.Required;
 import org.apache.sling.models.annotations.injectorspecific.InjectionStrategy;
 import org.apache.sling.models.annotations.injectorspecific.OSGiService;
-import org.apache.sling.models.annotations.injectorspecific.Self;
 import org.apache.sling.models.annotations.injectorspecific.SlingObject;
 import org.apache.sling.models.annotations.injectorspecific.ValueMapValue;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.adobe.granite.security.user.UserProperties;
-import com.adobe.granite.security.user.UserPropertiesManager;
-import com.adobe.granite.workflow.WorkflowSession;
 import com.csuf.cloud.core.services.GlobalConfigService;
 import com.csuf.cloud.core.services.TaskService;
 
@@ -49,11 +37,8 @@ public class WorkflowInstancesDelegationDataModel {
 
 	@PostConstruct
 	protected void init() {
-		log.info("Nexon");
 		try {
 			String uid = resourceResolver.adaptTo(Session.class).getUserID();
-			log.info("Nexon uid="+uid);
-
 			workflowArray = taskService.getTaskDetailsFromProcessingInstance(
 					"/bin/workflowData?action=GET_ALL_ACTIVE_WORKFLOW_INSTANCES_DATA_FOR_DELEGATE&userId=".concat(uid));
 		} catch (Exception e) {

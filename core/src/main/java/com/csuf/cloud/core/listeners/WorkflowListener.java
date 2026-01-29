@@ -4,9 +4,7 @@ import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import javax.jcr.Session;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.sling.api.resource.LoginException;
 import org.apache.sling.api.resource.ResourceResolver;
@@ -20,11 +18,9 @@ import org.osgi.service.event.EventHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
-
 import com.adobe.granite.workflow.WorkflowSession;
 import com.adobe.granite.workflow.event.WorkflowEvent;
 import com.adobe.granite.workflow.exec.WorkItem;
-import com.adobe.granite.workflow.exec.Workflow;
 import com.adobe.granite.workflow.model.WorkflowModel;
 import com.csuf.cloud.core.services.GlobalConfigService;
 import com.csuf.cloud.core.services.TaskService;
@@ -66,7 +62,7 @@ public class WorkflowListener implements EventHandler {
 
 	@Override
 	public void handleEvent(Event event) {
-		log.info("Trincy entered WorkflowListener");
+		log.debug("entered WorkflowListener");
 		String topic = event.getTopic();
 		if (!topic.equals(WorkflowEvent.EVENT_TOPIC)) {
 			log.debug("event topic is not a WorkflowEvent, so returning without further processing!");
@@ -78,48 +74,39 @@ public class WorkflowListener implements EventHandler {
 		ResourceResolver resolver = null;
 		Session adminSession = null;
 		try {
-			log.info("Texas Requesting service resolver for subservice '{}'", SUB_SERVICE_NAME);
+			log.debug("Requesting service resolver for subservice '{}'", SUB_SERVICE_NAME);
 
 	        Map<String, Object> params = new HashMap<>();
 	        params.put(ResourceResolverFactory.SUBSERVICE, SUB_SERVICE_NAME);
 
 	        try {
-	        	log.info("Befoe fetching resolver---{}",resolverFactory);
 	            resolver = resolverFactory.getServiceResourceResolver(params);
-	            log.info("Texas initial resolver ---{}",resolver);
 
 	            if (resolver != null) {
-	                log.info("Texas Service resolver obtained successfully: {}", resolver);
+	                log.debug("Service resolver obtained successfully: {}", resolver);
 	            } else {
-	                log.error("Texas Service resolver is null or not live for subservice '{}'", SUB_SERVICE_NAME);
+	                log.debug("Service resolver is null or not live for subservice '{}'", SUB_SERVICE_NAME);
 	            }
 	        } catch (LoginException e) {
-	            log.error("Texas Failed to get service resolver for subservice '{}': {}", SUB_SERVICE_NAME, e.getMessage(), e);
+	            log.error("Failed to get service resolver for subservice '{}': {}", SUB_SERVICE_NAME, e.getMessage(), e);
 	        } catch (Exception e) {
-	            log.error("Texas Unexpected error while getting service resolver: {}", e.getMessage(), e);
+	            log.error("Unexpected error while getting service resolver: {}", e.getMessage(), e);
 	        }
 			//resolver = globalConfigService.getResourceResolver();
-			log.info("Texas resolver==={}",resolver);
 			adminSession = resolver.adaptTo(Session.class);//.getAdminSession();
-			log.info("Texas adminSession===={}",adminSession);
-
-
 			wfSession = resolver.adaptTo(WorkflowSession.class);
 			WorkflowEvent wfevent = (WorkflowEvent) event;
 
-			log.info("Texas wfevent : {}", wfevent.toString());
+			log.debug("wfevent : {}", wfevent.toString());
 
 			instanceId = wfevent.getWorkflowInstanceId();
-			log.info("Hello wfevent instanceId is set to ".concat(instanceId));
+			log.debug("wfevent instanceId is set to ".concat(instanceId));
 			
 			WorkItem item = wfevent.getWorkItem();
-			log.info("Pinky item="+item);
-			log.info("Pinky item subtype="+item.getItemSubType());
-			log.info("Pinky item ID="+item.getId());
-
+			
 			/*Workflow workflowInstance = wfSession.getWorkflow(instanceId);
-			log.info("Pinky wfSession= "+wfSession);
-			log.info("Pinky workflowInstance= "+workflowInstance);*/
+			log.info("wfSession= "+wfSession);
+			log.info("workflowInstance= "+workflowInstance);*/
 			
 
 			// If there is nothing to work on then we will return immediately
@@ -130,36 +117,25 @@ public class WorkflowListener implements EventHandler {
 			}*/
 
 			if (wfevent.getEventType().equalsIgnoreCase(WorkflowEvent.WORKFLOW_RESUMED_EVENT)) {
-				log.info("Resumed");
 				taskService.updateWorkflowInstanceStatus(instanceId, WorkflowStatus.RUNNING.name());
 				return;
 			} else if (wfevent.getEventType().equalsIgnoreCase(WorkflowEvent.WORKFLOW_ABORTED_EVENT)) {
-				log.info("Terminated");
 				taskService.updateWorkflowInstanceStatus(instanceId, WorkflowStatus.TERMINATED.name());
 				return;
 			} else if (wfevent.getEventType().equalsIgnoreCase(WorkflowEvent.WORKFLOW_COMPLETED_EVENT)) {
-				log.info("completed");
 				taskService.updateWorkflowInstanceStatus(instanceId, WorkflowStatus.COMPLETED.name());
 				return;
 			} else if (wfevent.getEventType().equalsIgnoreCase(WorkflowEvent.WORKFLOW_SUSPENDED_EVENT)) {
-				log.info("Suspended");
 				taskService.updateWorkflowInstanceStatus(instanceId, WorkflowStatus.SUSPENDED.name());
 				return;
 			} else if (wfevent.getEventType().equalsIgnoreCase(WorkflowEvent.JOB_FAILED_EVENT)) {
-				log.info("Jobfailed");
 				taskService.updateWorkflowInstanceStatus(instanceId, WorkflowStatus.FAILED.name());
 				return;
 			}
-
-			
-
 			if (null != item && StringUtils.isNotBlank(item.getItemSubType())
 					&& item.getItemSubType().equalsIgnoreCase(ASSIGN_TASK_STEP)) {
 				log.info("Current workItem Id : {} ", item.getId());
 				boolean isTaskExist = taskService.isTaskExist(item.getId());
-				log.info("skywalk isTaskExist : {}", isTaskExist);
-				log.info("skywalk wfevent.getEventType() ="+ wfevent.getEventType());
-				log.info("skywalk item.getId ="+ item.getId());
 				if (!isTaskExist && wfevent.getEventType().equalsIgnoreCase("NodeTransition")
 						&& !item.getId().startsWith("VolatileWorkItem")) {
 					log.debug("Task Does not exist, saving it in database");
