@@ -10,7 +10,6 @@ import java.sql.Timestamp;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.Map;
 
 import javax.jcr.Node;
 import javax.jcr.PathNotFoundException;
@@ -31,7 +30,6 @@ import org.apache.sling.api.resource.ResourceResolver;
 import org.json.JSONObject;
 import org.osgi.framework.Constants;
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -43,8 +41,6 @@ import com.adobe.granite.workflow.WorkflowSession;
 import com.adobe.granite.workflow.exec.WorkItem;
 import com.adobe.granite.workflow.exec.WorkflowProcess;
 import com.adobe.granite.workflow.metadata.MetaDataMap;
-import com.csuf.cloud.core.services.GlobalConfigCSUFService;
-import com.csuf.cloud.core.services.JDBCConnectionHelperService;
 import com.csuf.cloud.core.utils.CSUFUtils;
 import com.csuf.cloud.core.utils.XMLUtils;
 
@@ -54,23 +50,13 @@ public class CSUFSTD682OvertimeDistributedWFHistoryDB implements WorkflowProcess
 
 	private static final Logger log = LoggerFactory.getLogger(CSUFSTD682OvertimeDistributedWFHistoryDB.class);
 
-	/*@Reference
-	private GlobalConfigCSUFService globalConfigCSUFService;
-
-	@Reference
-	private JDBCConnectionHelperService jdbcConnectionService;*/
-
 	@Override
 	public void execute(WorkItem workItem, WorkflowSession workflowSession, MetaDataMap processArguments)
 			throws WorkflowException {
 		log.info("Inside the STD WF History");
-		//Connection conn = null;
 
 		ResourceResolver resolver = workflowSession.adaptTo(ResourceResolver.class);
 		String payloadPath = workItem.getWorkflowData().getPayload().toString();
-
-		/*String dataSourceVal = globalConfigCSUFService.getAEMFormsDatabaseSource();
-		conn = jdbcConnectionService.getDBConn(dataSourceVal);*/
 
 		String paramsValue = ((String) processArguments.get("PROCESS_ARGS", "string")).toString();
 		LinkedHashMap<String, Object> dataMap = null;
@@ -91,25 +77,13 @@ public class CSUFSTD682OvertimeDistributedWFHistoryDB implements WorkflowProcess
 		String processStepValue = "";
 
 		Resource xmlNode = resolver.getResource(payloadPath);
-		log.info("Vista xmlNode=" + xmlNode);
 		Iterator<Resource> xmlFiles = xmlNode.listChildren();
-		log.info("Vista xmlFiles=" + xmlFiles);
-
 		String wfInstanceID = workItem.getWorkflow().getId();
-		log.info("Vista wfInstanceID=" + wfInstanceID);
-
 		workflowModelName = workItem.getWorkflow().getWorkflowModel().getId();
-		log.info("Vista workflowModelName=" + workflowModelName);
 		String workflowID = workItem.getId();
-		log.info("Vista workflowID=" + workflowID);
-
 		String wId = workflowID.replace("VolatileWorkItem_", "/workItems/");
-		log.info("Vista wId=" + wId);
-		
 		String workItemID = "";
-		log.info("Vista Workflow item Id==" + wId);
 		if (paramsValue.equalsIgnoreCase("Before Assign Task")) {
-			log.info("Vista param1 before step=" + paramsValue);
 			String firstStr = wId.substring(0, wId.indexOf('_'));
 			String secString = wId.substring(wId.indexOf('_') + 1, wId.length());
 			String t1 = firstStr.replaceAll("[^0-9]+", "");
@@ -119,11 +93,9 @@ public class CSUFSTD682OvertimeDistributedWFHistoryDB implements WorkflowProcess
 			firstStr = firstStr.replaceAll(t1, String.valueOf(a1));
 			workItemID = wfInstanceID.concat(firstStr).concat("_").concat(secString);
 			processStepValue = "Before Assign Task";
-			log.info("Vista Final workItemID ==" + workItemID);
 		}
 
 		if (paramsValue.equalsIgnoreCase("After Assign Task")) {
-			log.info("param1 after step=" + paramsValue);
 			String firstStr = wId.substring(0, wId.indexOf('_'));
 			String secString = wId.substring(wId.indexOf('_') + 1, wId.length());
 			String t1 = firstStr.replaceAll("[^0-9]+", "");
@@ -136,15 +108,11 @@ public class CSUFSTD682OvertimeDistributedWFHistoryDB implements WorkflowProcess
 		}
 
 		while (xmlFiles.hasNext()) {
-			log.info("Vista Inside While");
-
 			String contentPath = workItem.getContentPath();
-			log.info("Vista contentPath ==" + contentPath);
 			
 			Timestamp workflowStartTime = new java.sql.Timestamp(workItem.getTimeStarted().getTime());
 			Timestamp stepStartTime = new java.sql.Timestamp(System.currentTimeMillis());
 			Resource attachmentXml = xmlFiles.next();
-			log.info("Vista xmlFiles inside ="+attachmentXml);
 			String filePath = attachmentXml.getPath();
 			String workflowInitiator = "";
 			payloadPath = workItem.getWorkflowData().getPayload().toString();
@@ -155,19 +123,15 @@ public class CSUFSTD682OvertimeDistributedWFHistoryDB implements WorkflowProcess
 
 					if (null != inputStream) {
 						Document document = XMLUtils.getDomDocument(inputStream);
-
 						Element afBoundDataElement = XMLUtils.getParentNode(document, "afBoundData");
 						if (null != afBoundDataElement && afBoundDataElement.hasChildNodes()) {
 							caseId = XMLUtils.getChildNodeContent(afBoundDataElement, "caseId");
 							cwid = XMLUtils.getChildNodeContent(afBoundDataElement, "empl_Id");
-							log.info("Vista  cwid ="+cwid);
 						}
-						
 						Element afBoundUnBoundDataElement = XMLUtils.getParentNode(document, "afUnboundData");
 						if (null != afBoundUnBoundDataElement && afBoundUnBoundDataElement.hasChildNodes()) {
 							workflowInitiator = XMLUtils.getChildNodeContent(afBoundUnBoundDataElement,
 									"workflow_initiator");
-							log.info("Vista  workflowInitiator ="+workflowInitiator);
 						}
 						
 					}
@@ -178,10 +142,8 @@ public class CSUFSTD682OvertimeDistributedWFHistoryDB implements WorkflowProcess
 
 			}
 			if (filePath.contains("Data.xml")) {
-				log.info("Vista  Inside FilePath");
 				filePath = attachmentXml.getPath().concat("/jcr:content");
 				Node subNode = resolver.getResource(filePath).adaptTo(Node.class);
-				log.info("Vista  Inside FilePath subNode="+subNode);
 
 				try {
 					is = subNode.getProperty("jcr:data").getBinary().getStream();
@@ -213,7 +175,6 @@ public class CSUFSTD682OvertimeDistributedWFHistoryDB implements WorkflowProcess
 						log.error("IOException from CSUFSTD682OvertimeDistributedWFHistoryDB="
 								+ Arrays.toString(e1.getStackTrace()) + "Error Message=", e1.getMessage());
 					}
-					log.info("Vista  Inside FilePath doc="+doc);
 					org.w3c.dom.NodeList nList = doc.getElementsByTagName("afBoundData");
 					for (int temp = 0; temp < nList.getLength(); temp++) {
 						org.w3c.dom.Node nNode = nList.item(temp);
@@ -221,7 +182,6 @@ public class CSUFSTD682OvertimeDistributedWFHistoryDB implements WorkflowProcess
 							org.w3c.dom.Element eElement = (org.w3c.dom.Element) nNode;
 
 							String stage = eElement.getElementsByTagName("StageIndicator").item(0).getTextContent();
-							log.info("Vista  stage="+stage);
 
 							if (stage.equals("ToTimeKeeper")) {
 								assignee = "TimeKeeper-Office-Reviewers";
@@ -229,8 +189,6 @@ public class CSUFSTD682OvertimeDistributedWFHistoryDB implements WorkflowProcess
 								stepResponse = "Send To Approving Official";
 								comments = eElement.getElementsByTagName("time_keeper_comment").item(0)
 										.getTextContent();
-								
-								log.info("Vista  assignee="+assignee);
 
 							}
 
@@ -320,17 +278,11 @@ public class CSUFSTD682OvertimeDistributedWFHistoryDB implements WorkflowProcess
 				//json.put("DATE_FIELDS", "DATE1");
 				
 				String dbServiceUrl = "https://myformstst.fullerton.edu/bin/WFHistorySave";
-				
-				log.info("Pushpa dbServiceUrl =" +dbServiceUrl);
-				
 				try {
 				CloseableHttpClient client = HttpClients.createDefault();
 				HttpPost post = new HttpPost(dbServiceUrl);
 				post.addHeader("Content-Type", "application/json");
 				post.setEntity(new StringEntity(json.toString()));
-				
-				log.info("Pushpa Json:=" +json.toString());
-				
 
 				CloseableHttpResponse response = client.execute(post);
 				log.info("DB Service Response: =" + response.getStatusLine());

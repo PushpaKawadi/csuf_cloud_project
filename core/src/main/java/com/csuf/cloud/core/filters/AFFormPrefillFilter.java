@@ -49,12 +49,7 @@ public class AFFormPrefillFilter implements Filter {
 	@Override
 	public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain filterChain)
 			throws IOException, ServletException {
-		log.info("National AFFormPrefillFilter");
-		
-
 		String workItemId = request.getParameter("taskId");
-		log.info("National workItemId="+workItemId);
-
 		WorkflowSession wfSession = null;
 		ResourceResolver resolver = null;
 
@@ -62,21 +57,19 @@ public class AFFormPrefillFilter implements Filter {
 			final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) request;
 			final SlingHttpServletResponse slingResponse = (SlingHttpServletResponse) response;
 			
-			log.info("AFFormPrefillFilter request for {}, with selector {}",
+			log.debug("AFFormPrefillFilter request for {}, with selector {}",
 					slingRequest.getRequestPathInfo().getResourcePath(),
 					slingRequest.getRequestPathInfo().getSelectorString());
 
 			resolver = slingRequest.getResourceResolver();
-			log.info("Orange resolver="+resolver);
 			wfSession = resolver.adaptTo(WorkflowSession.class);
-			log.info("Orange wfSession="+wfSession);
 
 			if (StringUtils.isNotBlank(workItemId)) {
 				String dataXML = taskService.getTaskData(workItemId);
 				slingRequest.setAttribute("data", dataXML);
-				log.info("workitem payload data successfully set as slingRequest attribute---{}",dataXML);
+				log.debug("workitem payload data successfully set as slingRequest attribute---{}",dataXML);
 				slingRequest.getRequestDispatcher(slingRequest.getResource()).forward(slingRequest, slingResponse);
-				log.info("slingRequest forward successful");
+				log.debug("slingRequest forward successful");
                 return;
 			}
             filterChain.doFilter(request, response);

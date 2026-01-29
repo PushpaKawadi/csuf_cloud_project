@@ -2,9 +2,7 @@ package com.csuf.cloud.core.database;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
 import java.sql.Date;
-import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -27,7 +25,6 @@ import org.apache.sling.api.resource.ResourceResolver;
 import org.json.JSONObject;
 import org.osgi.framework.Constants;
 import org.osgi.service.component.annotations.Component;
-import org.osgi.service.component.annotations.Reference;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.w3c.dom.Document;
@@ -38,9 +35,6 @@ import com.adobe.granite.workflow.WorkflowSession;
 import com.adobe.granite.workflow.exec.WorkItem;
 import com.adobe.granite.workflow.exec.WorkflowProcess;
 import com.adobe.granite.workflow.metadata.MetaDataMap;
-import com.csuf.cloud.core.services.GlobalConfigCSUFService;
-import com.csuf.cloud.core.services.JDBCConnectionHelperService;
-import com.csuf.cloud.core.utils.DatabaseUtils;
 
 @Component(property = { Constants.SERVICE_DESCRIPTION + "=STD 682 Overtime Distributed DB",
 		Constants.SERVICE_VENDOR + "=Adobe Systems", "process.label" + "=CSUFSTD682OvertimeDistributedDB" })
@@ -48,30 +42,15 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 
 	private static final Logger log = LoggerFactory.getLogger(CSUFSTD682OvertimeDistributedDB.class);
 
-	@Reference
-	private JDBCConnectionHelperService jdbcConnectionService;
-
-	@Reference
-	private GlobalConfigCSUFService globalConfigFilenetService;
 
 	@SuppressWarnings("deprecation")
 	@Override
 	public void execute(WorkItem workItem, WorkflowSession workflowSession, MetaDataMap processArguments)
 			throws WorkflowException {
-		log.info("Pushpa Excecuting Database Cloud");
 		
-		/*Connection conn = null;
-		String tableName = "AEM_STD682_OVERTIME";
-		String formName = "STD 682 Overtime Distributed";*/
 		ResourceResolver resolver = workflowSession.adaptTo(ResourceResolver.class);
 		String payloadPath = workItem.getWorkflowData().getPayload().toString();
 		
-		
-		log.info("Pushpa xmlNode=" + payloadPath);
-
-		
-		
-		//DatabaseUtils dbUtil = new DatabaseUtils();
 		Document doc = null;
 		InputStream is = null;
 		String workflowInstanceID = "";
@@ -159,28 +138,17 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 		LinkedHashMap<String, Object> dataMapFormInfo = null;
 		LinkedHashMap<String, Object> dataMapTest = null;
 		Resource xmlNode = resolver.getResource(payloadPath);
-		log.info("Pushpa xmlNode=" + xmlNode);
 		Iterator<Resource> xmlFiles = xmlNode.listChildren();
-		
-		log.info("Pushpa xmlFiles=" + xmlFiles);
-		
-		
-		//String dataSourceVal = globalConfigFilenetService.getAEMFormsDatabaseSource();
-		//conn = jdbcConnectionService.getDBConn(dataSourceVal);
 
 		//if (conn != null) {
 			while (xmlFiles.hasNext()) {
 				workflowInstanceID = workItem.getWorkflow().getId();
 				Resource attachmentXml = xmlFiles.next();
 				String filePath = attachmentXml.getPath();
-				
-				log.info("Pushpa Filepath=" + filePath);
 
 				if (filePath.contains("Data.xml")) {
 					filePath = attachmentXml.getPath().concat("/jcr:content");
 					Node subNode = resolver.getResource(filePath).adaptTo(Node.class);
-					
-					log.info("Pushpa subNode=" + subNode);
 					
 					try {
 						is = subNode.getProperty("jcr:data").getBinary().getStream();
@@ -224,10 +192,6 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 								
 								chrsId = eElement.getElementsByTagName("chrsId").item(0).getTextContent();
 								
-								
-								log.info("Pushpa emplId=" + emplId);
-								
-
 								employeeLastname = eElement.getElementsByTagName("employee_last_name").item(0)
 										.getTextContent();
 
@@ -367,9 +331,6 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 										.getTextContent();*/
 								dataMapTest = new LinkedHashMap<String, Object>();
 								
-								
-							
-								
 								dataMapTest.put("EMPL_ID", emplId);
 								dataMapTest.put("EMPL_RCD", emplRcd);
 								dataMapTest.put("CHRS_ID", chrsId);
@@ -391,14 +352,6 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 								}
 								dataMapTest.put("DATE1", date1Obj);
 								
-								
-								
-								log.info("Chaitnya dataMapTest1=" + dataMapTest.get("DATE1"));
-								log.info("Chaitnya dataMapTest2=" + dataMapTest.get("DATE1").toString());
-								log.info("Chaitnya dataMapTest3=" + dataMapTest.get("EMPL_ID"));
-
-								
-							
 								/*dataMapFormInfo = new LinkedHashMap<String, Object>();
 								dataMapFormInfo.put("CASE_ID", "");
 								dataMapFormInfo.put("EMPL_ID", emplId);
@@ -592,21 +545,14 @@ public class CSUFSTD682OvertimeDistributedDB implements WorkflowProcess {
 									json.put("DATE_FIELDS", "DATE1");
 									//On-Prem
 									String dbServiceUrl = "https://myformstst.fullerton.edu/bin/dbSaveforCloud";
-									
-									log.info("Pushpa dbServiceUrl =" +dbServiceUrl);
-									
 
 									CloseableHttpClient client = HttpClients.createDefault();
 									HttpPost post = new HttpPost(dbServiceUrl);
 									post.addHeader("Content-Type", "application/json");
 									post.setEntity(new StringEntity(json.toString()));
-									
-									log.info("Pushpa Json:=" +json.toString());
-									
 
 									CloseableHttpResponse response = client.execute(post);
 									log.info("DB Service Response: =" + response.getStatusLine());
-									
 									client.close();
 								//}
 

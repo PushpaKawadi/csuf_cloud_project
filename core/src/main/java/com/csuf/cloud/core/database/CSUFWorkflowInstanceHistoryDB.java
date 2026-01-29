@@ -2,7 +2,6 @@ package com.csuf.cloud.core.database;
 
 import java.io.IOException;
 import java.io.InputStream;
-import java.sql.Connection;
 import java.sql.Timestamp;
 import java.util.LinkedHashMap;
 
@@ -34,7 +33,6 @@ import com.adobe.granite.workflow.metadata.MetaDataMap;
 import com.csuf.cloud.core.services.GlobalConfigCSUFService;
 import com.csuf.cloud.core.services.JDBCConnectionHelperService;
 import com.csuf.cloud.core.utils.CSUFUtils;
-import com.csuf.cloud.core.utils.DatabaseUtils;
 import com.csuf.cloud.core.utils.XMLUtils;
 
 /**
@@ -57,8 +55,6 @@ public class CSUFWorkflowInstanceHistoryDB implements WorkflowProcess {
 	@Override
 	public void execute(WorkItem workItem, WorkflowSession workflowSession, MetaDataMap processArguments)
 			throws WorkflowException {
-		DatabaseUtils DatabaseUtils = new DatabaseUtils();
-		Connection conn = null;
 
 		String paramsValue = ((String) processArguments.get("PROCESS_ARGS", "string")).toString();
 		log.info("params value=======" + paramsValue);
@@ -100,7 +96,6 @@ public class CSUFWorkflowInstanceHistoryDB implements WorkflowProcess {
 		}
 
 		if (param.equalsIgnoreCase("Start of the Workflow Instance")) {
-			log.info("inside start");
 			workflowInstance = workItem.getWorkflow().getId();
 			workflowStartTime = new java.sql.Timestamp(workItem.getTimeStarted().getTime());
 			workflowName = workItem.getWorkflow().getWorkflowModel().getId();
@@ -126,16 +121,11 @@ public class CSUFWorkflowInstanceHistoryDB implements WorkflowProcess {
 			json.put("DATA_MAP", dataMap);
 
 			String dbServiceUrl = "https://myformstst.fullerton.edu/bin/wfInsDBSaveforCloud";
-
-			log.info("Pushpa dbServiceUrl =" + dbServiceUrl);
-
 			try {
 				CloseableHttpClient client = HttpClients.createDefault();
 				HttpPost post = new HttpPost(dbServiceUrl);
 				post.addHeader("Content-Type", "application/json");
 				post.setEntity(new StringEntity(json.toString()));
-
-				log.info("Pushpa Json:=" + json.toString());
 
 				CloseableHttpResponse response = client.execute(post);
 				log.info("DB Service Response: =" + response.getStatusLine());
@@ -145,62 +135,33 @@ public class CSUFWorkflowInstanceHistoryDB implements WorkflowProcess {
 				e.printStackTrace();
 
 			}
-
-			/*
-			 * String dataSourceVal = globalConfigCSUFService.getAEMFormsDatabaseSource();
-			 * conn = jdbcConnectionService.getDBConn(dataSourceVal); if (conn != null) {
-			 * log.info("Connection Successfull");
-			 * DatabaseUtils.insertWFInstanceHistory(conn, dataMap); }
-			 */
-
 		}
 		if (param.equalsIgnoreCase("End of the Workflow Instance")) {
 			workflowCompleteTime = new java.sql.Timestamp(System.currentTimeMillis());
 			workflowStatus = "COMPLETED";
 			workflowInstance = workItem.getWorkflow().getId();
-
 			JSONObject json = new JSONObject();
 			json.put("DB_CONNECTION", "AEMDBDEV");
 			json.put("TABLE_NAME", "AEM_WORKFLOW_INSTANCE_HISTORY");
 			json.put("PROCESS_STEP_VAL", "End of the Workflow Instance");
-
 			dataMap = new LinkedHashMap<String, Object>();
 			dataMap.put("WORKFLOW_INSTANCE_ID", workflowInstance);
-
 			json.put("DATA_MAP", dataMap);
 
 			String dbServiceUrl = "https://myformstst.fullerton.edu/bin/wfInsDBSaveforCloud";
-
-			log.info("Pushpa dbServiceUrl =" + dbServiceUrl);
-
 			try {
 				CloseableHttpClient client = HttpClients.createDefault();
 				HttpPost post = new HttpPost(dbServiceUrl);
 				post.addHeader("Content-Type", "application/json");
 				post.setEntity(new StringEntity(json.toString()));
 
-				log.info("Pushpa Json:=" + json.toString());
-
 				CloseableHttpResponse response = client.execute(post);
-				log.info("DB Service Response: =" + response.getStatusLine());
 
 				client.close();
 			} catch (Exception e) {
 				e.printStackTrace();
 
 			}
-
-			/*
-			 * String dataSourceVal = globalConfigCSUFService.getAEMFormsDatabaseSource();
-			 * log.info("DataSourceVal==========" + dataSourceVal); conn =
-			 * jdbcConnectionService.getDBConn(dataSourceVal); if (conn != null) {
-			 * log.info("Connection Successfull");
-			 * DatabaseUtils.updateWFInstanceHistory(conn, workflowInstance,
-			 * workflowCompleteTime, workflowStatus); }
-			 */
-
 		}
-
 	}
-
 }
