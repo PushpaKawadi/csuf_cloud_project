@@ -79,7 +79,6 @@ public class TaskManagementServlet extends SlingAllMethodsServlet {
 			String currentTaskComment = request.getParameter("currentTaskComment");
 			if (action.equalsIgnoreCase(ActionType.TASK_URL.name())) {
 				String taskURL = getTaskURL(workItemId, historyWorkItemId, isInitialSubmission, isHistorySubmission);
-				log.info("Advil taskURL: {}", taskURL);
 				out.print(taskURL);
 			} else if (action.equalsIgnoreCase(ActionType.UPDATE_TASK_DATA.name())) {
 				doPost(request, response);
@@ -144,23 +143,17 @@ public class TaskManagementServlet extends SlingAllMethodsServlet {
 
 	private String getTaskURL(String workItemId, String historyWorkItemId, boolean isInitialSubmission,
 			boolean isHistorySubmission) throws Exception {
-		log.info("workItemId inside getTaskURL method : {}", workItemId);
-		log.info("historyWorkItemId inside getTaskURL method : {}", historyWorkItemId);
-		log.info("isInitialSubmission inside getTaskURL method : {}", isInitialSubmission);
-		log.info("isHistorySubmission inside getTaskURL method : {}", isHistorySubmission);
+		log.debug("workItemId inside getTaskURL method : {}", workItemId);
+		log.debug("historyWorkItemId inside getTaskURL method : {}", historyWorkItemId);
+		log.debug("isInitialSubmission inside getTaskURL method : {}", isInitialSubmission);
+		log.debug("isHistorySubmission inside getTaskURL method : {}", isHistorySubmission);
 		if (StringUtils.isNotBlank(workItemId)) {
 			String xml = taskService.getTaskData(workItemId);
-			log.info("Advil XML : {}", xml);
 			String afPath = taskService.getAfPath(workItemId);
-			log.info("Advil AfPath : {}", afPath);
 			if (StringUtils.isBlank(afPath)) {
-				log.info("First Inside");
 				if (StringUtils.isNotBlank(xml)) {
-					log.info("Second Inside");
 					Document doc = XMLUtils.parseXmlFile(xml);
-					log.info("Second Inside doc="+doc);
 					Element afParentElement = XMLUtils.getParentNode(doc, "afSubmissionInfo");
-					log.info("Second Inside afParentElement="+afParentElement);
 					if (null != afParentElement && afParentElement.hasChildNodes()) {
 						afPath = XMLUtils.getChildNodeContent(afParentElement, "afPath");
 						if (StringUtils.isNotBlank(afPath) && afPath.contains("/content/dam/formsanddocuments/")) {
@@ -169,18 +162,12 @@ public class TaskManagementServlet extends SlingAllMethodsServlet {
 					}
 				}
 			}
-			log.info("afPath : {}", afPath);
 			if (StringUtils.isNotBlank(afPath) && !isInitialSubmission && !isHistorySubmission) {
-				log.info("Pushpa 1");
 				return afPath.concat(".prefill.html?wcmmode=disabled&taskId=").concat(workItemId);
 			} else if (StringUtils.isNotBlank(afPath) && isInitialSubmission && !isHistorySubmission) {
-				log.info("Pushpa 2");
 				return afPath.concat(".prefillinitialsubmission.html?wcmmode=disabled&taskId=").concat(workItemId);
 			} else if (StringUtils.isNotBlank(afPath) && !isInitialSubmission && isHistorySubmission
 					&& StringUtils.isNotBlank(historyWorkItemId)) {
-				log.info("Pushpa 3");
-				log.info("Canada 3="+afPath.concat(".prefillhistorysubmission.html?wcmmode=disabled&taskId=").concat(workItemId)
-						.concat("&historyWorkItemId=").concat(historyWorkItemId));
 				return afPath.concat(".prefillhistorysubmission.html?wcmmode=disabled&taskId=").concat(workItemId)
 						.concat("&historyWorkItemId=").concat(historyWorkItemId);
 			}

@@ -2,18 +2,14 @@ package com.csuf.cloud.core.servlets;
 
 import java.io.IOException;
 import java.sql.Connection;
-import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
 
 import javax.jcr.Session;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.jackrabbit.api.JackrabbitSession;
 import org.apache.jackrabbit.api.security.user.Authorizable;
@@ -73,26 +69,14 @@ public class GetDelegateUsersServlet extends SlingSafeMethodsServlet {
 	@Override
 	protected void doGet(final SlingHttpServletRequest request, final SlingHttpServletResponse response)
 			throws ServletException, IOException {
-		log.info("Entered GetDelegateUsersServlet Servlet doGet method");
+		log.debug("Entered GetDelegateUsersServlet Servlet doGet method");
 		ResourceResolver resolver = request.getResourceResolver();
-		log.info("GetDelegateUsersServlet resolver="+resolver);
 		Session session = resolver.adaptTo(Session.class);
-		log.info("GetDelegateUsersServlet session="+session);
 		String actionType = request.getParameter("action");
-		log.info("GetDelegateUsersServlet actionType="+actionType);
-
 		String wId = request.getParameter("id");
-		log.info("GetDelegateUsersServlet wId="+wId);
-
 		String witemId = request.getParameter("witemId");
-		log.info("GetDelegateUsersServlet witemId="+witemId);
-
 		String assignee = request.getParameter("assignee");
-		log.info("GetDelegateUsersServlet assignee="+assignee);
-
 		String userId = request.getParameter("userId");
-		log.info("GetDelegateUsersServlet userId="+userId);
-
 		Connection dbConn = null;
 		JSONArray resultArray = new JSONArray();
 		String fallbackEmail = globalConfigUserService.fallbackUserEmailAddress();
