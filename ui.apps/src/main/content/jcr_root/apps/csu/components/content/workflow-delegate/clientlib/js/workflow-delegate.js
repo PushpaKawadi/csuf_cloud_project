@@ -74,7 +74,7 @@ $(document).ready(function() {
 
     function getDelegatees() {
 	var abc = window.location.origin + "/bin/fullertonProxy";
-	alert("here");
+	
         debugger;
         $.ajax({
             type: "GET",
@@ -87,7 +87,7 @@ $(document).ready(function() {
 					action: "DELEGATE_USER_DATA"
                     },
             success: function(response) {
-				alert("Success");
+				//alert("Success");
                 userArray = response;
                 delegatees = response;
                 /* $(".cls-dropdown-delegatee").empty();
