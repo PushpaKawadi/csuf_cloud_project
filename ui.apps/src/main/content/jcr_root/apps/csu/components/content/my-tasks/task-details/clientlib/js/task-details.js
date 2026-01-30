@@ -244,7 +244,7 @@ $(document).ready(function () {
     });
 	
 	$('#task-iframe').on('load', function () {
-		alert("here");
+		//alert("here");
     var iframeWindow = $("#task-iframe")[0].contentWindow;
 
     if (!iframeWindow) {

@@ -4,14 +4,14 @@
  * @param {scope} scope in which code inside function will be executed.
  */
  debugger;
-alert("Start JS");
+
 std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPanel_init0 = function(scope) {
  
 
      debugger;
     with(this) {
         with(scope) {
-              alert(StageIndicator.value);
+              //alert(StageIndicator.value);
 			  /*alert('before STD Servlet unique method')
 			  $.ajax({
 			      type: 'GET',
@@ -50,7 +50,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
                 ManagerSignaturePanel.visible = false;
                 ApprovingOfficialPanel.visible = false;
             } else if (StageIndicator.value == "ToTimeKeeper") {
-				alert("Inside Timekeeper="+StageIndicator.value);
+				//alert("Inside Timekeeper="+StageIndicator.value);
                 gifModal.style.display = "none";
                 StudentInformationPanel.enabled = false;
                 WorkingHoursInformationPanel.enabled = false;
@@ -407,8 +407,8 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
         with(scope) {
             debugger;
             if (StageIndicator.value === null && formSavedStatus.value != "1") {
-				alert("init2 inside StageIndicator="+StageIndicator.value);
-				alert("formSavedStatus="+formSavedStatus.value);
+				//alert("init2 inside StageIndicator="+StageIndicator.value);
+				//alert("formSavedStatus="+formSavedStatus.value);
                 $.ajax({
                     type: 'GET',
                     url: "/bin/getLoggedUserId",
@@ -439,7 +439,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_guideRootPan
                             dataType: 'json',
 							xhrFields: { withCredentials: true },
                             success: function(myresponse) {
-								alert("myresponse="+myresponse);
+								//alert("myresponse="+myresponse);
 
                                 var modal = document.getElementById('myModal');
                                 var span = document.getElementsByClassName("close")[0];
@@ -1526,7 +1526,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_Internationa
     with(this) {
         with(scope) {
             if (this.value == 1) {
-				alert("timekeeper here");
+				//alert("timekeeper here");
                 //RecordsSignature.value = LogUser.value;
                 time_keeper_signature.enabled = false;
 
@@ -1534,7 +1534,7 @@ std_682_overtime_distributed_std_682_overtime_distributed.generated_Internationa
                     var dateString = new Date().toLocaleString("en-US", {
                         timeZone: (Intl.DateTimeFormat().resolvedOptions().timeZone)
                     }).replace(/[^ -~]/g, ' ');
-					alert("dateString = "+dateString);
+					//alert("dateString = "+dateString);
                     var dateObject = new Date(dateString);
                     var curyear = dateObject.getFullYear();
                     //var curyearMonth = dateObject.getMonth() + 1;
