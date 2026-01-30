@@ -81,22 +81,16 @@ public class InboxItemServiceImpl implements InboxItemService {
 	@Override
 	public JsonObject getInboxItemStepDetails(ResourceResolver resourceResolver, WorkflowSession wfSession,
 			String workItemId, String historyItemId) {
-		log.info("Lakme getInboxItemStepDetails");
 		try {
 			Session session = resourceResolver.adaptTo(Session.class);
-			log.info("Lakme session="+session);
 			JsonObject json = new JsonObject();
 			boolean isHistoryView = false, isCompleteView = false, isAssigneeAGroup = false, isDelegate = false;
-			log.info("Lakme wfSession="+wfSession);
 			WorkItem workItem = wfSession.getWorkItem(workItemId);
-			log.info("Lakme workItem="+workItem);
 
 			if (!StringUtils.isEmpty(historyItemId)) {
 				isHistoryView = true;
 			} else if (workItem != null) {
-				log.info("Lakme workItem else");
 				if (workItem.getStatus().equals(Status.COMPLETE)) {
-					log.info("Lakme workItem else="+workItem.getStatus());
 					isCompleteView = true;
 
 					String parentPath = workItem.getId().substring(0, workItemId.lastIndexOf("/"));
@@ -109,20 +103,16 @@ public class InboxItemServiceImpl implements InboxItemService {
 						isDelegate = true;
 					}
 				}
-				log.info("Lakme workItem else");
 				isAssigneeAGroup = CSUFUtils.isAuthorizableAGroup(session, workItem.getCurrentAssignee());
-				log.info("Lakme workItem ="+isAssigneeAGroup);
 				json.addProperty("isassigneeagroup", isAssigneeAGroup);
 			}
 
 			if (workItem != null) {
-				log.info("Lakme workItem123 ="+workItem);
 
 				boolean isCommentAllowed = ArgumentParser.isCommentAllowed(workItem);
 				boolean isAttachmentAllowed = ArgumentParser.isUploadTaskAttachmentAllowed(workItem);
 				FormType type = ArgumentParser.getFormType(workItem);
-				log.info("Lakme type ="+type);
-				
+
 				String formPath = StringUtils.EMPTY;
 				boolean isReadOnlyForm = true;
 
@@ -141,34 +131,14 @@ public class InboxItemServiceImpl implements InboxItemService {
 				}
 
 				json.addProperty("formPath", formPath);
-				log.info("Lakme formPath ="+formPath);
-				
 				json.addProperty("workItemId", workItemId);
-				log.info("Lakme workItemId end ="+formPath);
-				
 				json.addProperty("isreadonlyform", isReadOnlyForm);
-				log.info("Lakme isReadOnlyForm ="+isReadOnlyForm);
-				
 				json.addProperty("formtype", type.name());
-				log.info("Lakme formtype ="+type.name());
-				
 				json.addProperty("isCommentAllowed", isCommentAllowed);
-				log.info("Lakme isCommentAllowed ="+isCommentAllowed);
-
 				json.addProperty("isAttachmentAllowed", isAttachmentAllowed);
-				log.info("Lakme isAttachmentAllowed ="+isAttachmentAllowed);
-				
 				json.addProperty("isCompleteView", isCompleteView);
-				log.info("Lakme isCompleteView ="+isCompleteView);
-				
 				json.addProperty("isHistoryView", isHistoryView);
-				log.info("Lakme isHistoryView ="+isHistoryView);
-				
 				json.addProperty("isDelegateView", isDelegate);
-				log.info("Lakme isDelegateView ="+isDelegate);
-				
-				log.info("Lakme json ="+json.toString());
-				
 				return json;
 			}
 		} catch (Exception e) {
@@ -205,59 +175,48 @@ public class InboxItemServiceImpl implements InboxItemService {
 
 	@Override
 	public JsonArray getTaskAttachments(ResourceResolver resourceResolver, String workItemId) throws Exception {
-		log.info("Vista Entered task attchment = {}", workItemId);
+		log.debug("Entered task attchment = {}", workItemId);
 		JsonArray formsJson = new JsonArray();
 		Iterator<Node> itr = null;
 		Session session = resourceResolver.adaptTo(Session.class);
 		WorkflowSession wfSession = resourceResolver.adaptTo(WorkflowSession.class);
 		WorkItem workItem = wfSession.getWorkItem(workItemId);
-		log.info("Vista Entered task attchment workItem = {}", workItem);
-		//boolean isViewAttachmentNotAllowed = ArgumentParser.isViewAttachmentNotAllowed(workItem);
-		//Hard coded just for testing - use above line later
+		log.debug("Entered task attchment workItem = {}", workItem);
+		// boolean isViewAttachmentNotAllowed =
+		// ArgumentParser.isViewAttachmentNotAllowed(workItem);
+		// Hard coded just for testing - use above line later
 		boolean isViewAttachmentNotAllowed = true;
 		isViewAttachmentNotAllowed = true;
-		
-		log.info("isViewAttachmentNotAllowed = {} for workItem with id = {}", isViewAttachmentNotAllowed,
+
+		log.debug("isViewAttachmentNotAllowed = {} for workItem with id = {}", isViewAttachmentNotAllowed,
 				workItem.getId());
 		if (isViewAttachmentNotAllowed) {
-			log.info("Vista Inside isViewAttachmentNotAllowed");
-			
-			//if (!isViewAttachmentNotAllowed) {
+			// if (!isViewAttachmentNotAllowed) {
 
 			String attachmentsFolderPath = ArgumentParser.getInputFormAttachmentsPath(workItem);
-			log.info("Vista attachmentsFolderPath="+attachmentsFolderPath);
 			if (StringUtils.isBlank(attachmentsFolderPath)) {
 				String combinedName = ArgumentParser.getInputCombinedFormAttachmentsPath(workItem);
-				log.info("Vista combinedName inside getTaskAttachments method : {}", combinedName);
+				log.debug("combinedName inside getTaskAttachments method : {}", combinedName);
 				if (StringUtils.isNotBlank(combinedName) && combinedName.contains(":")) {
 					attachmentsFolderPath = combinedName.substring(combinedName.lastIndexOf(":") + 1);
-					log.info("Vista attachmentsFolderPath1234="+attachmentsFolderPath);
 				}
 			}
 
 			if (StringUtils.isNotBlank(attachmentsFolderPath) && attachmentsFolderPath.contains(":")) {
 				attachmentsFolderPath = attachmentsFolderPath.substring(attachmentsFolderPath.lastIndexOf(":") + 1);
-				log.info("Vista school="+attachmentsFolderPath);
 			}
-			log.info("Vista attachmentsFolderPath inside getTaskAttachments method : {}", attachmentsFolderPath);
 			String payloadPath = workItem.getContentPath();
-			log.info("Vista payloadPath inside getTaskAttachments method : {}", payloadPath);
 
 			if (StringUtils.isNotBlank(payloadPath) && StringUtils.isNotBlank(attachmentsFolderPath)) {
-				log.info("Vista Test : {}", payloadPath);
 				itr = CSUFUtils.searchNodes(queryBuilder, session, "nt:base",
 						payloadPath.concat("/").concat(attachmentsFolderPath));
-				log.info("Vista itr : {}", itr);
 			} else if (StringUtils.isNotBlank(payloadPath)) {
-				log.info("Vista Test11 : {}", payloadPath);
 				itr = CSUFUtils.searchNodes(queryBuilder, session, "nt:file", payloadPath);
-				log.info("Vista itr 123: {}", itr);
 			} else {
-				throw new Exception("Vista payload path is empty inside getTaskAttachments method");
+				throw new Exception("payload path is empty inside getTaskAttachments method");
 			}
-						
+
 			while (itr.hasNext()) {
-				log.info("Vista inside itr");
 				Node node = itr.next();
 				String path = node.getPath();
 				String fileName = node.getName();
@@ -267,7 +226,6 @@ public class InboxItemServiceImpl implements InboxItemService {
 						JsonObject json = new JsonObject();
 						json.addProperty("fileName", fileName);
 						json.addProperty("path", path);
-						log.info("Vista inside getTaskAttachments json : {}", json.toString());
 						formsJson.add(json);
 					}
 				}
@@ -279,21 +237,19 @@ public class InboxItemServiceImpl implements InboxItemService {
 	@Override
 	public JsonArray getTaskAttachmentsFromWorkflowInstanceId(ResourceResolver resourceResolver,
 			String workflowInstanceId, String attachmentFolderName) throws Exception {
-		log.info("Inside getTaskAttachmentsFromWorkflowInstanceId method");
+		log.debug("Inside getTaskAttachmentsFromWorkflowInstanceId method");
 		Iterator<Node> itr = null;
 		JsonArray formsJson = new JsonArray();
 		Session session = resourceResolver.adaptTo(Session.class);
 		WorkflowSession wfSession = resourceResolver.adaptTo(WorkflowSession.class);
 		String payloadPath = wfSession.getWorkflow(workflowInstanceId).getWorkflowData().getPayload().toString();
-		log.info("payloadPath inside getTaskAttachmentsFromWorkflowInstanceId method : {}", payloadPath);
+		log.debug("payloadPath inside getTaskAttachmentsFromWorkflowInstanceId method : {}", payloadPath);
 		if (StringUtils.isNotBlank(payloadPath)) {
 			// itr = CSUFUtils.searchNodes(queryBuilder, session, "nt:file",
 			// payloadPath.concat("/Attachments"));
 			itr = CSUFUtils.searchNodes(queryBuilder, session, "nt:file",
 					payloadPath.concat("/".concat(attachmentFolderName)));
-			log.info("California itr: {}", itr);
 			while (itr.hasNext()) {
-				log.info("Inside Iterator method");
 				Node node = itr.next();
 				String path = node.getPath();
 				String fileName = node.getName();
@@ -303,7 +259,6 @@ public class InboxItemServiceImpl implements InboxItemService {
 						JsonObject json = new JsonObject();
 						json.addProperty("fileName", fileName);
 						json.addProperty("path", path);
-						log.info("Inside Iterator json="+json.toString());
 						formsJson.add(json);
 					}
 				}
@@ -424,14 +379,11 @@ public class InboxItemServiceImpl implements InboxItemService {
 
 	@Override
 	public JsonObject getPreviousStepData(Session serviceUserSession, WorkItem workItem) throws Exception {
-		log.info("India getPreviousStepData");
 		JsonObject json = null;
 		try {
 			if (workItem != null) {
-				log.info("India getPreviousStepData workItem="+workItem);
 				json = new JsonObject();
 				String historyNodePath = workItem.getMetaDataMap().get("historyEntryPath").toString();
-				log.info("India historyNodePath="+historyNodePath);
 				if (serviceUserSession.nodeExists(historyNodePath)) {
 					Node historyNode = serviceUserSession.getNode(historyNodePath);
 					if ((historyNode != null) && (serviceUserSession.nodeExists(historyNodePath + "/" + "workItem"))) {

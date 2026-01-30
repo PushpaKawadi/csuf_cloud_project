@@ -56,30 +56,19 @@ public class XMLUtils {
 	
 	public static Document getDomDocumentNew(InputStream is)
 	        throws SAXException, IOException, ParserConfigurationException {
-
-		log.info("insode getDomDocumentNew risagg--{}", is);
 	    if (is == null) {
 	        throw new IllegalArgumentException("InputStream is null");
 	    }
-
 	    byte[] xmlBytes = IOUtils.toByteArray(is);
-	    log.info("insode xmlBytes risagg--{}", xmlBytes);
-
 	    if (xmlBytes.length == 0) {
 	        throw new IOException("InputStream is empty");
 	    }
-	    
-	    log.info("insode xmlBytes length risagg--{}", xmlBytes.length);
-
 	    try (ByteArrayInputStream bais = new ByteArrayInputStream(xmlBytes)) {
-	    	 log.info("insode bais risagg--{}", bais);
 	        DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();
 	        dbFactory.setNamespaceAware(true);
 	        DocumentBuilder dBuilder = dbFactory.newDocumentBuilder();
 	        Document doc = dBuilder.parse(bais);
-	        log.info("insode doc risagg --{}", doc);
 	        doc.getDocumentElement().normalize();
-	        log.info("insode doc normslize risagg --{}", doc.getBaseURI());
 	        return doc;
 	    }
 	}

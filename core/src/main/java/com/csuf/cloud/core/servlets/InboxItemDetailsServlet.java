@@ -80,16 +80,13 @@ public class InboxItemDetailsServlet extends SlingSafeMethodsServlet {
 	@Override
 	protected void doGet(final SlingHttpServletRequest request, final SlingHttpServletResponse response)
 			throws ServletException, IOException {
-		log.info("India entered InboxItemDetailsServlet doGet method");
+		log.debug("entered InboxItemDetailsServlet doGet method");
 		JsonObject json = null;
 		JsonArray jsonArray = null;
 		PrintWriter out = response.getWriter();
 		ResourceResolver resourceResolver = request.getResourceResolver();
-		log.info("Lakme India="+resourceResolver);
 		Session serviceUserSession = resourceResolver.adaptTo(Session.class);
-		log.info("Lakme serviceUserSession="+serviceUserSession);
 		WorkflowSession wfSession = resourceResolver.adaptTo(WorkflowSession.class);
-		log.info("Lakme wfSession="+wfSession);
 		String action = request.getParameter("action");
 		String workItemId = request.getParameter("workItemId");
 		String historyWorkItemId = request.getParameter("historyWorkItemId");
@@ -102,13 +99,11 @@ public class InboxItemDetailsServlet extends SlingSafeMethodsServlet {
 		TagManager tagManager = jcrTagManagerFactory.getTagManager(resourceResolver);
 
 		// String tagGroupConfig = COBRA_TAG_ID.concat("~").concat(WELLNESS_GROUP);
-		
-		log.info("Lakme India ="+(String) request.getAttribute("fd.dashboard.tm.historyitemid"));
 
 		try {
 			String historyItemId = (String) request.getAttribute("fd.dashboard.tm.historyitemid");
 			if (StringUtils.isNotBlank(workItemId) && action.equalsIgnoreCase(ActionType.PREVIOUS_STEP_DATA.name())) {
-				log.info("entry with workItemId : {} at {}", workItemId, LocalTime.now());
+				log.debug("entry with workItemId : {} at {}", workItemId, LocalTime.now());
 				try {
 					workItem = wfSession.getWorkItem(workItemId);
 				} catch (WorkflowException e) {
@@ -121,8 +116,6 @@ public class InboxItemDetailsServlet extends SlingSafeMethodsServlet {
 				out.print(json);
 			} else if (StringUtils.isNotBlank(workItemId)
 					&& action.equalsIgnoreCase(ActionType.TASK_ATTACHMENTS.name())) {
-				log.info("California TASK_ATTACHMENTS resourceResolver="+resourceResolver);
-				log.info("California TASK_ATTACHMENTS workItemId="+workItemId);
 				jsonArray = inboxService.getTaskAttachments(resourceResolver, workItemId);
 				out.print(jsonArray);
 			} else if (StringUtils.isNotBlank(workItemId)

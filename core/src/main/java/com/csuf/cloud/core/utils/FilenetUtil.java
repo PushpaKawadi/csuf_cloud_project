@@ -1,47 +1,26 @@
 package com.csuf.cloud.core.utils;
 
 import java.io.BufferedReader;
-
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.PrintWriter;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.Timestamp;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.jcr.Session;
-import javax.servlet.ServletException;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.apache.commons.lang3.StringUtils;
-import org.apache.sling.api.SlingHttpServletRequest;
-import org.apache.sling.api.SlingHttpServletResponse;
-import org.apache.sling.api.request.RequestParameter;
-import org.apache.sling.api.resource.ResourceResolver;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 import org.osgi.service.component.annotations.Reference;
-import org.w3c.dom.Element;
-
-import com.adobe.granite.workflow.WorkflowSession;
-import com.adobe.granite.workflow.exec.WorkItem;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import com.csuf.cloud.core.services.EmailService;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
-import com.csuf.cloud.core.services.EmailService;
-import com.csuf.cloud.core.vo.EmailServiceVO;
-import com.csuf.cloud.core.vo.WorkflowVO;
 
 //import jdk.internal.org.jline.utils.Log;
 
