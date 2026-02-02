@@ -7,7 +7,6 @@ import java.util.Arrays;
 import java.util.Map;
 import javax.servlet.Servlet;
 import javax.servlet.ServletException;
-
 import org.apache.commons.codec.binary.Base64;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.http.HttpEntity;
