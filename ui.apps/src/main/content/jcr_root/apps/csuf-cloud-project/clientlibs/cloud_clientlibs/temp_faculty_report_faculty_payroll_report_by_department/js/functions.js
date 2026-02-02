@@ -96,11 +96,19 @@ temp_faculty_report_faculty_payroll_report_by_department.generated_guideRootPane
                    workflow_initiator.value = userValue;
                 }
                 $.ajax({
-                    type: 'GET',
+                    /*type: 'GET',
                     url: "/bin/getTempFacultyDeptData",
                     data: {
                         user_id: userValue
-                    },
+                    },*/
+					
+					url: window.location.origin + "/bin/fullertonProxy",
+                            type: 'GET',
+							 data: {
+								path: "getTempFacultyDeptData",
+								user_id: "jluzzi"
+								
+                            },
                     dataType: 'json',
 
                     success: function(deptIdResult) {
