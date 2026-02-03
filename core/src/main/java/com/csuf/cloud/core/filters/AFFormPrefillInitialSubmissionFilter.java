@@ -94,12 +94,12 @@ public class AFFormPrefillInitialSubmissionFilter implements Filter {
         } catch (Exception e) {
             log.error(Arrays.toString(e.getStackTrace()));
         } finally {
-            if (serviceUserSession != null) {
+            /*if (serviceUserSession != null) {
                 serviceUserSession.logout();
             }
             if (resolver != null && resolver.isLive()) {
                 resolver.close();
-            }
+            }*/
         }
 
         // Only executed when request was NOT forwarded
