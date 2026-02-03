@@ -229,7 +229,13 @@ temp_faculty_report_faculty_payroll_report_by_department.generated_JobCode_init0
             if(StageIndicator.value !== null && FormSavedStatus.value !== "1"){
 $.ajax({
     type: 'GET',
-    url: "/bin/getTempFacultyJobcode",
+   // url: "/bin/getTempFacultyJobcode",
+	
+	url: window.location.origin + "/bin/fullertonProxy",
+	type: 'GET',
+	 data: {
+		path: "getTempFacultyJobcode"
+	 },
 
     dataType: 'json',
 
