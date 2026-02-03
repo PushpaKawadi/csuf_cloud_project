@@ -1233,8 +1233,8 @@ temp_faculty_report_faculty_payroll_report_by_department.generated_submit1597053
 if(DeptHidden.value == Department.value && JobCodeHidden.value == JobCode.value && FromDateHidden.value == FromDate.value && ThroughDateHidden.value== ThroughDate.value){
  /* DeanEmail.value = "yjayaram@fullerton.edu";
   DeptCooEmail.value = "yjayaram@fullerton.edu"; */
-   DeanEmail.value = "pushpa.kawadi@thoughtfocus.com;
-  DeptCooEmail.value = "pushpa.kawadi@thoughtfocus.com; 
+   DeanEmail.value = "pushpa.kawadi@thoughtfocus.com";
+  DeptCooEmail.value = "pushpa.kawadi@thoughtfocus.com"; 
   EmailSubject1.value = "Faculty Payroll Report - Pending Approval - Unit "+ ReportingUnit.value+"/Dept "+(Department.value).substring(0,5);
   EmailSubject2.value = "Faculty Payroll Report - Return for Review - Unit "+ ReportingUnit.value+"/Dept "+(Department.value).substring(0,5);
   EmailSubject3.value = "Faculty Payroll Report - Pending Action - Unit "+ ReportingUnit.value+"/Dept "+(Department.value).substring(0,5);
