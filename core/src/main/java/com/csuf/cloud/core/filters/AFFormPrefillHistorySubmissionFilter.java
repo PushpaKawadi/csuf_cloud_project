@@ -89,12 +89,12 @@ public class AFFormPrefillHistorySubmissionFilter implements Filter {
         } catch (Exception e) {
             log.error(Arrays.toString(e.getStackTrace()));
         } finally {
-            /*if (serviceUserSession != null) {
+            if (serviceUserSession != null) {
                 serviceUserSession.logout();
             }
             if (resolver != null && resolver.isLive()) {
                 resolver.close();
-            }*/
+            }
         }
         // Only continue chain if request was NOT forwarded
         filterChain.doFilter(request, response);
