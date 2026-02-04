@@ -135,7 +135,13 @@ temp_faculty_report_faculty_payroll_report_by_department.generated_guideRootPane
 						} 
                             $.ajax({
                                 type: 'GET',
-                                url: "/bin/getTempFacultyJobcode",
+                                //url: "/bin/getTempFacultyJobcode",
+								
+								url: window.location.origin + "/bin/fullertonProxy",
+								type: 'GET',
+								 data: {
+									path: "getTempFacultyJobcode"
+								 },
 
                                 dataType: 'json',
 

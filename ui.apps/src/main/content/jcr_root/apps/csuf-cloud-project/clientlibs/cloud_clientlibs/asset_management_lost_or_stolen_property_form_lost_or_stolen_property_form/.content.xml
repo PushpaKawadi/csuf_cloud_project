@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:ClientLibraryFolder"
+    categories="[af.generated.asset_management_lost_or_stolen_property_form_lost_or_stolen_property_form]"
+    dependencies="[csu.LostOrStolenPropertyForm,csu.ErrorModal]"/>

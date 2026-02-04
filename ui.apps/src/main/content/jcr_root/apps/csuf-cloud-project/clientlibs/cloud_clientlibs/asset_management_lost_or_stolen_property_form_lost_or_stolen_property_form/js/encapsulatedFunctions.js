@@ -1,0 +1,3 @@
+
+//Do not change this file.
+var asset_management_lost_or_stolen_property_form_lost_or_stolen_property_form = window.asset_management_lost_or_stolen_property_form_lost_or_stolen_property_form = window.asset_management_lost_or_stolen_property_form_lost_or_stolen_property_form || {};
