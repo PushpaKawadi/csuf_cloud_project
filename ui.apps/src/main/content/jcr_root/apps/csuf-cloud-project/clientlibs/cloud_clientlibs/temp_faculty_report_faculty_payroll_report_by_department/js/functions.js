@@ -1051,10 +1051,12 @@ temp_faculty_report_faculty_payroll_report_by_department.generated_OPRName_init0
     with(this) {
         with(scope) {
             $.ajax({
-
-                type: 'GET',
-
-                url: "/bin/getLoggedInUserDetailsFromDB",
+                //url: "/bin/getLoggedInUserDetailsFromDB",
+				url: window.location.origin + "/bin/fullertonProxy",
+				type: 'GET',
+				 data: {
+					path: "getLoggedInUserDetailsFromDB"
+				 },
                 dataType: 'json',
                 success: function(myresopnse) {
                     var userValue = myresopnse[0].FULL_NAME;
@@ -1081,7 +1083,11 @@ temp_faculty_report_faculty_payroll_report_by_department.generated_CaseId_init0 
 if (StageIndicator.value === null) {
 	$.ajax({
 		type: 'GET',
-		url: "/bin/getCaseID",
+		//url: "/bin/getCaseID",
+		url: window.location.origin + "/bin/fullertonProxy",
+		 data: {
+			path: "getCaseID"
+		 },
 
 		dataType: 'json',
 		success: function (myresponse) {
