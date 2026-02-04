@@ -1,0 +1,3 @@
+
+//Do not change this file.
+var domestic_partner_dependent_certification_domestic_partner_domestic_certification = window.domestic_partner_dependent_certification_domestic_partner_domestic_certification = window.domestic_partner_dependent_certification_domestic_partner_domestic_certification || {};

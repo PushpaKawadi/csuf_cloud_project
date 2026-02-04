@@ -1,0 +1,3 @@
+
+//Do not change this file.
+var designation_as_university_cash_collection_point_designation_as_university_cash_collection_point = window.designation_as_university_cash_collection_point_designation_as_university_cash_collection_point = window.designation_as_university_cash_collection_point_designation_as_university_cash_collection_point || {};
