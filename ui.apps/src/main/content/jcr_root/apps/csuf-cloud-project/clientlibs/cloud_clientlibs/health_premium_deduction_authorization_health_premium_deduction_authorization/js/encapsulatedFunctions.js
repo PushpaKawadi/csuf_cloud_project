@@ -1,0 +1,3 @@
+
+//Do not change this file.
+var health_premium_deduction_authorization_health_premium_deduction_authorization = window.health_premium_deduction_authorization_health_premium_deduction_authorization = window.health_premium_deduction_authorization_health_premium_deduction_authorization || {};

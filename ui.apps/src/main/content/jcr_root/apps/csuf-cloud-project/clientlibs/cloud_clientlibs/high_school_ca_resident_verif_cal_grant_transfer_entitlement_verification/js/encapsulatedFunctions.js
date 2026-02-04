@@ -1,0 +1,3 @@
+
+//Do not change this file.
+var high_school_ca_resident_verif_cal_grant_transfer_entitlement_verification = window.high_school_ca_resident_verif_cal_grant_transfer_entitlement_verification = window.high_school_ca_resident_verif_cal_grant_transfer_entitlement_verification || {};
