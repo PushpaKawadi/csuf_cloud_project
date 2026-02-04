@@ -1,0 +1,3 @@
+
+//Do not change this file.
+var faculty_early_retirement_program_faculty_early_retirement_program_request = window.faculty_early_retirement_program_faculty_early_retirement_program_request = window.faculty_early_retirement_program_faculty_early_retirement_program_request || {};

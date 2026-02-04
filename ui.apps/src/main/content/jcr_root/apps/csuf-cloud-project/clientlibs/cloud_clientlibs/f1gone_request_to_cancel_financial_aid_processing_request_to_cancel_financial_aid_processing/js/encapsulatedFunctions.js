@@ -1,0 +1,3 @@
+
+//Do not change this file.
+var f1gone_request_to_cancel_financial_aid_processing_request_to_cancel_financial_aid_processing = window.f1gone_request_to_cancel_financial_aid_processing_request_to_cancel_financial_aid_processing = window.f1gone_request_to_cancel_financial_aid_processing_request_to_cancel_financial_aid_processing || {};
