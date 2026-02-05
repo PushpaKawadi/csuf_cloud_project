@@ -1,0 +1,3 @@
+
+//Do not change this file.
+var property_management_request_for_property_survey_property_management_request_for_property_survey = window.property_management_request_for_property_survey_property_management_request_for_property_survey = window.property_management_request_for_property_survey_property_management_request_for_property_survey || {};

@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jcr:root xmlns:cq="http://www.day.com/jcr/cq/1.0" xmlns:jcr="http://www.jcp.org/jcr/1.0"
+    jcr:primaryType="cq:ClientLibraryFolder"
+    categories="[af.generated.request_for_invoice_and_interagency_financial_transaction_request_for_invoice_and_interagency_financial_transaction_form]"
+    dependencies="[csuf.RequestForInvoiceAndIFT,csu.ErrorModal]"/>

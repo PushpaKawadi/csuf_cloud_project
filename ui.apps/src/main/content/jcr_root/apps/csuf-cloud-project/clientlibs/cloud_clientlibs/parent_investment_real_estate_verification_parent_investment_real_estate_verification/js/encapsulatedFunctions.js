@@ -1,0 +1,3 @@
+
+//Do not change this file.
+var parent_investment_real_estate_verification_parent_investment_real_estate_verification = window.parent_investment_real_estate_verification_parent_investment_real_estate_verification = window.parent_investment_real_estate_verification_parent_investment_real_estate_verification || {};
