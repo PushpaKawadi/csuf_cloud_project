@@ -1,0 +1,3 @@
+
+//Do not change this file.
+var verification_of_independent_status_verification_of_independent_status = window.verification_of_independent_status_verification_of_independent_status = window.verification_of_independent_status_verification_of_independent_status || {};
