@@ -87,7 +87,6 @@ public class ResourceDuplicationModel {
 	public List<Resource> createComponents(Resource resource, int compCount, String nodeType, String nodePath,
 			String resourceName) throws PersistenceException {
 		List<Resource> resourceList = new ArrayList<>();
-		ResourceResolver resourceResolver = resource.getResourceResolver();
 		Map<String, Object> componentProperties = new HashMap<>();
 		componentProperties.put(nodeType, nodePath);
 		Resource childResource = null;
@@ -96,6 +95,7 @@ public class ResourceDuplicationModel {
 			childResource = resource.getChild(childResourceName);
 
 			if (childResource == null) {
+                ResourceResolver resourceResolver = resource.getResourceResolver();
 				childResource = resourceResolver.create(resource, childResourceName, componentProperties);
                 logger.info("child resource second duplicate model--{}",childResource.getPath());
                 resourceResolver.commit();
