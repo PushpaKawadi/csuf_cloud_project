@@ -49,7 +49,7 @@ public class AFFormPrefillHistorySubmissionFilter implements Filter {
     @Override
     public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain filterChain)
             throws IOException, ServletException {
-        log.debug("inside AFFormPrefillHistorySubmissionFilter doFilter");
+        log.info("inside AFFormPrefillHistorySubmissionFilter doFilter");
 
         String workItemId = request.getParameter("taskId");
         String historyWorkItemId = request.getParameter("historyWorkItemId");

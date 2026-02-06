@@ -24,7 +24,7 @@ import org.slf4j.LoggerFactory;
 		ResourceDuplicationModel.class }, defaultInjectionStrategy = DefaultInjectionStrategy.OPTIONAL)
 public class ResourceDuplicationModel {
 
-	Logger logger = LoggerFactory.getLogger(this.getClass());
+	Logger logger = LoggerFactory.getLogger(ResourceDuplicationModel.class);
 
 	@SlingObject
 	private SlingHttpServletRequest request;
@@ -58,6 +58,7 @@ public class ResourceDuplicationModel {
 				try {
 					duplicatedResourceList = this.createComponents(request.getResource(), repeatCount, NODE_TYPE,
 							resourcePath, resourceName);
+                    logger.info("duplicatedResourceList--{}--{}",duplicatedResourceList,duplicatedResourceList.size());
 				} catch (PersistenceException e) {
 					e.printStackTrace();
 				}
@@ -78,6 +79,7 @@ public class ResourceDuplicationModel {
 			childResource = resourceResolver.create(resource, childResourceName, componentProperties);
 			resourceResolver.commit();
 		}
+        logger.info("child resource duplicate model--{}",childResource.getPath());
 
 		return childResource;
 	}
@@ -95,10 +97,12 @@ public class ResourceDuplicationModel {
 
 			if (childResource == null) {
 				childResource = resourceResolver.create(resource, childResourceName, componentProperties);
-				resourceResolver.commit();
+                logger.info("child resource second duplicate model--{}",childResource.getPath());
+                resourceResolver.commit();
 			}
 			resourceList.add(childResource);
 		}
+        logger.info("resourceList duplicate model--{}",resourceList);
 		return resourceList;
 	}
 

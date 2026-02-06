@@ -45,6 +45,7 @@ public class AFFormForcedLoginFilter implements Filter {
 	public void doFilter(final ServletRequest request, final ServletResponse response, final FilterChain filterChain)
 			throws IOException, ServletException {
 
+        log.info("Insoide AFFormForcedLoginFilter class");
 		ResourceResolver resolver = null;
 		Session session = null;
 
