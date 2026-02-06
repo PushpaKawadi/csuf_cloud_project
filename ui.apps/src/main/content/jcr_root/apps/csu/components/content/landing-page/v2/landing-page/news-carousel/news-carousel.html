@@ -10,9 +10,11 @@
         </div>
         <div class="col-md-9">
             <div id="mixedSlider-1" class="mixedSlider">
+                <sly data-sly-set.listData="${resourceModel.duplicatedResourceList}"></sly>
+                list data---${listData} !!!!
                 <div id="collapseContentDiv" class="MS-content hide" data-sly-test="${resourceModel.duplicatedResourceList}" data-sly-list.news="${resourceModel.duplicatedResourceList}">
                     <div id="topSlider-${newsList.count}" class="item topSlider col-4">
-                        <div class="topSliderInner" data-sly-resource="${news.path @ resourceType=news.resourceType}">                            
+                        <div class="topSliderInner" data-sly-resource="${news.path @ resourceType='csu/components/content/landing-page/v2/landing-page/news'}">
                         </div>
                     </div>
                 </div>
