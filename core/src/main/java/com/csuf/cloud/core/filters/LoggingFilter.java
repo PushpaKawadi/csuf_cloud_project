@@ -50,8 +50,9 @@ public class LoggingFilter implements Filter {
     public void doFilter(final ServletRequest request, final ServletResponse response,
                          final FilterChain filterChain) throws IOException, ServletException {
 
+        logger.info("Inside looging  filter first class");
         final SlingHttpServletRequest slingRequest = (SlingHttpServletRequest) request;
-        logger.info("request for {}, with selector {}", slingRequest
+        logger.debug("request for {}, with selector {}", slingRequest
                 .getRequestPathInfo().getResourcePath(), slingRequest
                 .getRequestPathInfo().getSelectorString());
 
