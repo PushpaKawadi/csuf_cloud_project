@@ -10,9 +10,12 @@
         </div>
         <div class="col-md-9">
             <div id="mixedSlider-1" class="mixedSlider">
-                <sly data-sly-set.listData="${resourceModel.duplicatedResourceList}"></sly>
-                Duplicate--${resourceModel.duplicatedResourceList}
-                list data---${listData} !!!!
+
+                <div id="collapseContentDiv" class="MS-content hide" data-sly-test="${resourceModel.duplicatedResourceList}" data-sly-list.news="${resourceModel.duplicatedResourceList}">
+                    <div id="topSlider-${newsList.count}" class="item topSlider col-4">
+
+                    </div>
+                </div>
 
                 <div class="MS-controls">
                     <button class="MS-leftx" style="right: 25px;font-size:25px;"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
