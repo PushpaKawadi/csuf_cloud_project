@@ -13,9 +13,8 @@
 
                 <div id="collapseContentDiv" class="MS-content hide" data-sly-test="${resourceModel.duplicatedResourceList}" data-sly-list.news="${resourceModel.duplicatedResourceList}">
                     <div id="topSlider-${newsList.count}" class="item topSlider col-4">
-                        <sly data-sly-set.newsNode="news${newsList.count}"></sly>
-                        <div class="topSliderInner" data-sly-resource="${newsNode @ resourceType='csu/components/content/landing-page/v2/landing-page/news'}">
-                        </div>
+                        <!-- <div class="topSliderInner" data-sly-resource="${news.path @ resourceType='csu/components/content/landing-page/v2/landing-page/news'}">
+                        </div> -->
                     </div>
                 </div>
 
